@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Button } from 'antd';
-import './DishDetailHeader.scss'
+// import './DishDetailHeader.scss'
 
 export default class DishDetailHeader extends Component {
     render() {

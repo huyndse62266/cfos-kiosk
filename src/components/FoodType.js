@@ -51,7 +51,7 @@ export default class FoodType extends Component {
                     <div className="col-lg-2" style={{textAlign:'center', margin:'auto'}}>
                         <div>
                             <h4>{this.props.name}</h4>
-                            <button type="button" className="btn p-0" onClick={this.checkIsExpand} id="myBtn">Xem thêm <i className="fa fa-angle-down" aria-hidden="true"></i></button>
+                            <button type="button" className="btn p-0" onClick={this.checkIsExpand} id="myBtn">{this.state.isExpand === true ? 'Thu gọn' : ' Xem thêm'} <i className="fa fa-angle-down" aria-hidden="true"></i></button>
                         </div>
                     </div>
                     <div className="col-lg-10 py-3">

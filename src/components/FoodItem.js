@@ -82,7 +82,7 @@ export default class FoodItem extends Component {
                     </div>
                 </div>
                 <Modal
-                    title={<span><DishDetailHeader/></span> }
+                    title={<span><DishDetail/></span> }
                     visible={this.state.visible}
                     onOk={this.handleOk}
                     onCancel={this.handleCancel}
@@ -92,7 +92,7 @@ export default class FoodItem extends Component {
                     footer={null}
                     centered
                     >
-                    <DishDetail/>
+                    {/* <DishDetail/> */}
                 </Modal>
             </div>
         )

@@ -39,7 +39,7 @@ export default class MainPage extends Component {
                 <div className="col-lg-12 py-1">
                     <div className="d-flex">
                         <div className="" style={{width:"85%"}}>
-                            <PopularScreen/>
+                            <PromotionScreen/>
                         </div>
                         <div className="ml-4"  style={{width:"15%"}}>
                             <Button type="primary" onClick={this.showModal}>
