@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStar } from '@fortawesome/free-solid-svg-icons'
 import { Avatar, Button, Typography,Modal  } from 'antd';
 
-import DishDetail from '../views/DishDetail/DishDetail'
+import DishDetail from '../pages/DishDetail/DishDetail'
 import DishDetailHeader from '../components/DishDetail/DishDetailHeader';
 
 import restaurantLogo from '../images/khai-niem-nha-hang.jpg';
@@ -34,14 +34,14 @@ export default class FoodItem extends Component {
         });
       };
     render() {
+        var { food } = this.props;
         return (
-            <div className="container ml-3 bg-light " style={{ width:'23%'}}>
+            <div className="container ml-3 my-2 bg-light " style={{ width:'23%'}}>
                 <div className="row d-flex flex-row py-2">
                     <div className="col-lg-1 p-0 ">
                         <Avatar style={{ backgroundColor: '#87d068' }} icon="user" size="small"/>
                     </div>
                     <div className="col-lg-8 px-2 ">
-                        {/* <a style={{fontSize:'12px'}}>Nhà hàng Lorem Ipsum</a> */}
                         <Text style={{fontSize:'12px'}}>Nhà hàng Lorem Ipsum</Text>
                     </div>
                     <div className="col-lg-3 p-0 ">
@@ -57,7 +57,7 @@ export default class FoodItem extends Component {
                     </div>
                     <div className="row p-0">
                         <div className="col-lg-12 p-0">
-                            <a className="font-weight-bold text-left d-inline-block text-truncate px-2" style={{fontSize: '15px', maxWidth: '90%'}}>Lorem ipsum dolor sit ame consect adipis ame ipsum dolor</a>  
+                            <a className="font-weight-bold text-left d-inline-block text-truncate px-2" style={{fontSize: '15px', maxWidth: '90%'}}>{food.foodName}</a>  
                         </div>
                     </div>
                     <div className="row d-flex flex-row p-2">
@@ -75,9 +75,7 @@ export default class FoodItem extends Component {
                         </div>
                         <div className="col-lg-4 ">
                             <Button style={{backgroundColor: '#4A4A4A', color: 'white'}} onClick={this.showModal}>+Add</Button>
-                            {/* <button type="button" className="btn btn-dark px-2 py-1" style={{fontSize:'14px'}}>
-                                +Add
-                            </button> */}
+
                         </div>
                     </div>
                 </div>

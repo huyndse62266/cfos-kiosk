@@ -84,7 +84,7 @@ export default class MiniCart extends Component {
                         </div>  
                     </span>
                 </div>
-                <div class="row ">
+                <div className="row ">
                     <div className="d-flex justify-content-end align-items-center col-lg-5 px-1">
                         <div className="float-left">
                             <div>

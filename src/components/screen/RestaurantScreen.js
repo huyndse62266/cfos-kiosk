@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-
+import FoodType from './../FoodType'
 export default class RestaurantScreen extends Component {
     render() {
         return (
