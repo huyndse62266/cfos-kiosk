@@ -8,6 +8,8 @@ import TopBar from '../../components/TopBar'
 import ViewBasket from '../Basket/ViewBasket'
 import PopularScreen from '../../components/screen/PopularScreen';
 import PromotionScreen from '../../components/screen/PromotionScreen';
+import { BrowserRouter as Router, Route, Link, NavLink } from "react-router-dom";
+
 export default class MainPage extends Component {
     state = { visible: false };
 
@@ -34,7 +36,9 @@ export default class MainPage extends Component {
         return (
             <div className="container-fluid w-100 p-0">
                 <div style={{width:"88%"}}>
-                    <TopBar/>
+                    <Router>
+                        <TopBar/>
+                    </Router>
                 </div>
                 <div className="col-lg-12 py-1">
                     <div className="d-flex">
