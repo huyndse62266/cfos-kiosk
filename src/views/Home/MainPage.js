@@ -8,7 +8,7 @@ import TopBar from '../../components/TopBar'
 import ViewBasket from '../Basket/ViewBasket'
 import PopularScreen from '../../components/screen/PopularScreen';
 import PromotionScreen from '../../components/screen/PromotionScreen';
-import { BrowserRouter as Router, Route, Link, NavLink } from "react-router-dom";
+import { BrowserRouter as Router} from "react-router-dom";
 
 export default class MainPage extends Component {
     state = { visible: false };
@@ -68,7 +68,7 @@ export default class MainPage extends Component {
                 </Modal>
             </div>
 
-            
+
         )
     }
 }

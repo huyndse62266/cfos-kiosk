@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import FoodType from './../FoodType'
+import RightNavBar from '../RightNavBar'
 
 
 export default class PopularScreen extends Component {
@@ -11,6 +12,7 @@ export default class PopularScreen extends Component {
                 <FoodType name="Cơm"/>
                 <FoodType name="Trà sữa"/>
                 <FoodType name="Gà rán"/>
+                <RightNavBar/>
             </div>
         )
     }

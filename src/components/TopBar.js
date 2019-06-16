@@ -11,6 +11,7 @@ import PromotionScreen  from './screen/PromotionScreen';
 import DrinkScreen from './screen/DrinkScreen';
 import DishScreen from './screen/DishScreen';
 import RestaurantScreen from './screen/RestaurantScreen';
+import PopularScreen from './screen/PopularScreen';
 
 export default class TopBar extends Component {
     state = {
@@ -36,7 +37,8 @@ export default class TopBar extends Component {
                 </Menu.Item>
                 <Menu.Item key="promotion">
                     <div className="px-5 py-2" style={{fontSize: '20px'}}>
-                        <Link to="/promotion"> <FontAwesomeIcon icon={faPercentage} />
+                        <Link to="/promotion">
+                            <FontAwesomeIcon icon={faPercentage} />
                             Promotion</Link>
                     </div>
                 </Menu.Item>
@@ -64,7 +66,7 @@ export default class TopBar extends Component {
                 </Menu.Item>
             </Menu>
 
-                <Route path="/" exact></Route>
+                <Route path="/" exact component={PopularScreen}></Route>
                 <Route path="/promotion" exact component={PromotionScreen}></Route>
                 <Route path="/meal" exact component={DishScreen}></Route>
                 <Route path="/drink" exact component={DrinkScreen}></Route>

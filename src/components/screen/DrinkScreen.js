@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import FoodType from '../FoodType'
+import RightNavBar from "../RightNavBar";
 
 export default class DrinkScreen extends Component {
     render() {
@@ -8,6 +9,7 @@ export default class DrinkScreen extends Component {
                 <FoodType name="Nước Ngọt"/>
                 <FoodType name="Trà sữa"/>
                 <FoodType name="Sinh Tố"/>
+                <RightNavBar/>
             </div>
         )
     }
