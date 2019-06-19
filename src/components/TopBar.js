@@ -11,6 +11,7 @@ import PromotionScreen  from './screen/PromotionScreen';
 import DrinkScreen from './screen/DrinkScreen';
 import DishScreen from './screen/DishScreen';
 import RestaurantScreen from './screen/RestaurantScreen';
+import PopularScreen from './screen/PopularScreen';
 export default class TopBar extends Component {
     state = {
         current: 'mail',
@@ -24,46 +25,46 @@ export default class TopBar extends Component {
       };
     render() {
         return (
-<div>
-            <Menu onClick={this.handleClick} selectedKeys={[this.state.current]} mode="horizontal" inlineIndent='50'>
-                <Menu.Item key="popular">
-                    <div className="px-5 py-2" style={{fontSize: '20px'}}>
-                        <Link to="/">
-                            <FontAwesomeIcon icon={faStar} />
-                            Popular</Link>
-                    </div>
-                </Menu.Item>
-                <Menu.Item key="promotion">
-                    <div className="px-5 py-2" style={{fontSize: '20px'}}>
-                        <Link to="/promotion"> <FontAwesomeIcon icon={faPercentage} />
-                            Promotion</Link>
-                    </div>
-                </Menu.Item>
-                <Menu.Item key="meal">
-                    <div className="px-5 py-2" style={{fontSize: '20px'}}>
-                        <Link to="/meal">
-                            <FontAwesomeIcon icon={faConciergeBell} />
-                            Meal</Link>
-                    </div>
-                </Menu.Item>
-                <Menu.Item key="drink">
-                    <div className="px-5 py-2" style={{fontSize: '20px'}}>
-                        <Link to="/drink">
-                            <FontAwesomeIcon icon={faMugHot} />
-                            Drink
-                        </Link>
-                    </div>
-                </Menu.Item>
-                <Menu.Item key="restaurant">
-                    <div className="px-5 py-2" style={{fontSize: '20px'}}>
-                        <Link to="/restaurant">
-                            <FontAwesomeIcon icon={faUtensils} />Restaurant
-                            </Link>
-                    </div>
-                </Menu.Item>
-            </Menu>
+            <div>
+                <Menu onClick={this.handleClick} selectedKeys={[this.state.current]} mode="horizontal" inlineIndent='50'>
+                    <Menu.Item key="popular">
+                        <div className="px-5 py-2" style={{fontSize: '20px'}}>
+                            <Link to="/">
+                                <FontAwesomeIcon icon={faStar}/>
+                                <span className="px-1">Popular</span></Link>
+                        </div>
+                    </Menu.Item>
+                    <Menu.Item key="promotion">
+                        <div className="px-5 py-2" style={{fontSize: '20px'}}>
+                            <Link to="/promotion">
+                                <FontAwesomeIcon icon={faPercentage} />
+                                <span className="px-1">Promotion</span></Link>
+                        </div>
+                    </Menu.Item>
+                    <Menu.Item key="meal">
+                        <div className="px-5 py-2" style={{fontSize: '20px'}}>
+                            <Link to="/meal">
+                                <FontAwesomeIcon icon={faConciergeBell} />
+                                <span className="px-1">Meal</span></Link>
+                        </div>
+                    </Menu.Item>
+                    <Menu.Item key="drink">
+                        <div className="px-5 py-2" style={{fontSize: '20px'}}>
+                            <Link to="/drink">
+                                <FontAwesomeIcon icon={faMugHot} />
+                                <span className="px-1">Drink</span></Link>
+                        </div>
+                    </Menu.Item>
+                    <Menu.Item key="restaurant">
+                        <div className="px-5 py-2" style={{fontSize: '20px'}}>
+                            <Link to="/restaurant">
+                                <FontAwesomeIcon icon={faUtensils} />
+                                <span className="px-1">Restaurant</span></Link>
+                        </div>
+                    </Menu.Item>
+                </Menu>
 
-                <Route path="/" exact></Route>
+                <Route path="/" exact component={PopularScreen}></Route>
                 <Route path="/promotion" exact component={PromotionScreen}></Route>
                 <Route path="/meal" exact component={DishScreen}></Route>
                 <Route path="/drink" exact component={DrinkScreen}></Route>

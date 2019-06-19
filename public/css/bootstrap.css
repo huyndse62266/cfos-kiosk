@@ -7364,7 +7364,9 @@ button.bg-dark:focus {
   -webkit-clip-path: none;
   clip-path: none;
 }
-
+.w-15 {
+  width: 15% !important;
+}
 .w-25 {
   width: 25% !important;
 }
@@ -7375,6 +7377,9 @@ button.bg-dark:focus {
 
 .w-75 {
   width: 75% !important;
+}
+.w-85 {
+  width: 85% !important;
 }
 
 .w-100 {

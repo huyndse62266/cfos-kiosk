@@ -53,7 +53,7 @@ export default class FoodItem extends Component {
                 </div>
                 <div className="rounded-lg p-0">
                     <div className="row p-0">
-                        <img src={restaurantLogo} className="img-thumbnail" alt="Cinque Terre" style={{height:"125px", width: '100%'}}/>
+                        <img src={food.foodImage} className="img-thumbnail" alt="Cinque Terre" style={{height:"125px", width: '100%'}}/>
                     </div>
                     <div className="row p-0">
                         <div className="col-lg-12 p-0">
@@ -61,9 +61,9 @@ export default class FoodItem extends Component {
                         </div>
                     </div>
                     <div className="row d-flex flex-row p-2">
-                        <div className="col-lg-8 bg-dagger ">
+                        <div className="col-lg-6 bg-dagger ">
                             <div className="row py-1">
-                                <a className="font-weight-bold" style={{fontSize:'12px'}}>42.000 đ</a> 
+                                <a className="font-weight-bold" style={{fontSize:'12px'}}>{food.price} đ</a> 
                             </div>
                             <div className="row" style={{fontSize:'12px', color:'orange'}}>
                                 <FontAwesomeIcon icon={faStar} />
@@ -73,24 +73,23 @@ export default class FoodItem extends Component {
                                 <FontAwesomeIcon icon={faStar} />
                             </div>
                         </div>
-                        <div className="col-lg-4 ">
+                        <div className="col-lg-6 p-0 text-right">
                             <Button style={{backgroundColor: '#4A4A4A', color: 'white'}} onClick={this.showModal}>+Add</Button>
 
                         </div>
                     </div>
                 </div>
                 <Modal
-                    title={<span><DishDetail/></span> }
                     visible={this.state.visible}
                     onOk={this.handleOk}
                     onCancel={this.handleCancel}
                     closable="true"
                     width="80%"
-                    bodyStyle={{padding:0, height: '700px'}}
+                    bodyStyle={{padding:0, height: '750px'}}
                     footer={null}
                     centered
                     >
-                    {/* <DishDetail/> */}
+                    <DishDetail food={food}/>
                 </Modal>
             </div>
         )

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import DishStatus from '../../components/DishStatus/DishStatus'
-import './CheckDishStatus.scss'
+import './Order.scss'
 
 export default class CheckDishStatus extends Component {
     render() {

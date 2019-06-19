@@ -28,7 +28,7 @@ export default class DishDetail extends Component {
         this.setState({ show: !this.state.show });
     }
     render() {
-        
+        var {food} = this.props
         return (
             <div className="container-fluid" style={{height: "80%"}}>
                 <div className="row py-2">
@@ -37,16 +37,19 @@ export default class DishDetail extends Component {
                         <div className="image-container-scroll col-lg-4">
                             <div className="image-wrapper-scroll">
                                 <div className="h-25 m-2">
-                                    <img src={restaurantLogo} className="img-thumbnail" alt="Cinque Terre" style={{height:"100%", width: '100%'}}/>
+                                    <img src={food.foodImage} className="img-thumbnail" alt="Cinque Terre" style={{height:"100%", width: '100%'}}/>
                                 </div>
                                 <div className="h-25 m-2">
-                                    <img src={restaurantLogo} className="img-thumbnail" alt="Cinque Terre" style={{height:"100%", width: '100%'}}/>
+                                    <img src={food.foodImage} className="img-thumbnail" alt="Cinque Terre" style={{height:"100%", width: '100%'}}/>
                                 </div>
                                 <div className="h-25 m-2">
-                                    <img src={restaurantLogo} className="img-thumbnail" alt="Cinque Terre" style={{height:"100%", width: '100%'}}/>
+                                    <img src={food.foodImage} className="img-thumbnail" alt="Cinque Terre" style={{height:"100%", width: '100%'}}/>
                                 </div>
                                 <div className="h-25 m-2">
-                                    <img src={restaurantLogo} className="img-thumbnail" alt="Cinque Terre" style={{height:"100%", width: '100%'}}/>
+                                    <img src={food.foodImage} className="img-thumbnail" alt="Cinque Terre" style={{height:"100%", width: '100%'}}/>
+                                </div>
+                                <div className="h-25 m-2">
+                                    <img src={food.foodImage} className="img-thumbnail" alt="Cinque Terre" style={{height:"100%", width: '100%'}}/>
                                 </div>
                                 
                             </div>
@@ -68,7 +71,7 @@ export default class DishDetail extends Component {
                                     {/* start div food info */}
                                     <div class="d-flex flex-column px-3">
                                         <div className="row">
-                                            <h4 className="text-left">Lorem ipsum dolor sit ame consect adipis ame</h4>
+                                            <h4 className="text-left">{food.foodName}</h4>
                                         </div>
                                         <div className="row py-2">
                                             <FontAwesomeIcon icon={faStar} style={{color: 'orange'}}/>
@@ -78,10 +81,10 @@ export default class DishDetail extends Component {
                                             <FontAwesomeIcon icon={faStar} style={{color: 'orange'}}/>
                                         </div>
                                         <div className="row py-1">
-                                            <h6 className="font-weight-bold">84.000 đ</h6>
+                                            <h6 className="font-weight-bold">{food.price} đ</h6>
                                         </div>
                                         <div className="row border-top py-2">
-                                            <a className="text-left" style={{fontSize: '14px'}}>Lorem ipsum dolor sit amet consectetuer adipiscing elit. Aenean commodo ligula eget dolor</a>
+                                            <a className="text-left" style={{fontSize: '14px'}}>{food.foodDescription}</a>
                                         </div>
                                     </div>
                                     {/* end  div food info */}

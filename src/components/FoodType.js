@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import FoodItem from './FoodItem'
+import apiCaller from '../utils/ApiCaller'
+import {Col, Row} from 'antd'
 import { actFetchFoodsRequest } from '../action';
 import { connect } from 'react-redux';
 
@@ -8,14 +10,20 @@ class FoodType extends Component {
     constructor(){
         super();
         this.state ={
-            isExpand: false
+            isExpand: false,
+            foods : []
         }
         this.readMore = this.readMore.bind(this);
         this.checkIsExpand = this.checkIsExpand.bind(this);
     }
 
-    componentDidMount(){
-        this.props.fetchAllFood(this.props.category.id);
+    componentWillMount(){
+        apiCaller(`category/${this.props.category.id}/foods`,'GET',null).then(res => {
+            this.setState({
+                foods: res.data
+            })
+        })
+
     }
 
     checkIsExpand(){
@@ -27,46 +35,32 @@ class FoodType extends Component {
 
     showAllFoods(foods){
         var result = null;
-        console.log('===========');
-        console.log(foods)
-        console.log('===========');
         if(foods.length > 0){
             result = foods.map((food, index) => {
-                return (<FoodItem key={index} food={food} index={index}/>)
+                if(index < 4)
+                    return (<FoodItem key={index} food={food} index={index}/>)
             })
         }
         return result;
     }
 
-    readMore() {
+    readMore(foods) {
         if (this.state.isExpand) {
-            return (
-                <span id="more">
-                    <div className="row">
-                        <FoodItem/>
-                        <FoodItem/>
-                        <FoodItem/>
-                        <FoodItem/>
-                    </div>
-                    <div className="row">
-                        <FoodItem/>
-                        <FoodItem/>
-                        <FoodItem/>
-                        <FoodItem/>
-                    </div>
-                    <div className="row">
-                        <FoodItem/>
-                        <FoodItem/>
-                        <FoodItem/>
-                        <FoodItem/>
-                    </div>
-                </span>
-            )
+     
+            
+            return foods.map((food, index) => {
+                if(index > 3)
+                    return (
+                        <FoodItem key={index} food={food} index={index}/>
+)
+            })
+            
         }
     }
     render() {
-        var { category,foods } = this.props;
-        console.log(category.id)
+        var { category } = this.props;
+        var { foods } = this.state;
+        console.log(this.state.foods)
         return (
             <div>
                 <div className="col-lg-12 d-flex flex-row p-0">
@@ -77,30 +71,31 @@ class FoodType extends Component {
                         </div>
                     </div>
                     <div className="col-lg-10">
+                        
                         <div className="row float-left">
                             {this.showAllFoods(foods)}
+                            <span id="more" className="w-100 float d-flex flex-row">
+                                {this.readMore(foods)}
+                            </span>
+                            
                         </div>
-                        <span id="dots">
-                        
-                        </span>
-                        {this.readMore()}
                     </div>
                 </div>    
             </div>
         )
     }
 }
-const mapStateToProps = state => {
-    return {
-        foods: state.foods
-    }
-}
+// const mapStateToProps = state => {
+//     return {
+//         foods: state.foods
+//     }
+// }
 
-const mapDispatchToProps = (dispatch, props) => {
-    return {
-        fetchAllFood : (id) => {
-            dispatch(actFetchFoodsRequest(id));
-        }
-    }
-}
-export default connect(mapStateToProps, mapDispatchToProps)(FoodType);
+// const mapDispatchToProps = (dispatch, props) => {
+//     return {
+//         fetchAllFood : (id) => {
+//             dispatch(actFetchFoodsRequest(id));
+//         }
+//     }
+// }
+export default connect(null, null)(FoodType);

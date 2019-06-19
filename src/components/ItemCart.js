@@ -31,23 +31,15 @@ export default class ItemCart extends Component {
                 </div>
                 <div className="row px-3 py-1">
                     <div class="col-lg-4">
-                        {/* <button type="button" className="btn px-4">
-                            <i className="fa fa-trash"></i>
-                        </button> */}
+
                         <Button style={{backgroundColor: '#D2D2D2'}}><FontAwesomeIcon icon={faTrash} /></Button>
                     </div>
                     <div class="col-lg-8 d-flex flex-row px-3 py-1">
                          <Button style={{backgroundColor: '#D2D2D2'}} onClick={this.DecreaseItem} ><FontAwesomeIcon icon={faMinus} /></Button>
-                        {/* <button type="button" onClick={this.DecreaseItem} className="btn">
-                            <i class="fa fa-minus"></i>
-                        </button> */}
                         <div className="px-3 py-1">
                             { this.state.show ? <h2 style={{fontSize:'1rem'}}>{ this.state.clicks }</h2> : '' }
                         </div>
                         <Button style={{backgroundColor: '#D2D2D2'}} onClick={this.IncrementItem} ><FontAwesomeIcon icon={faPlus} /></Button>
-                        {/* <button type="button" onClick={this.IncrementItem} className="btn">
-                            <i className="fa fa-plus"></i>
-                        </button> */}
                     </div>
                     <div className="row px-4 py-1">
                         <h5>84.000 đ</h5>

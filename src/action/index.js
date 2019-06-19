@@ -8,12 +8,7 @@ export const actFetchCategories = (categories) => {
     }
 }
 
-export const actFetchFoods = (foods) =>{
-    return {
-        type: Types.FETCH_FOOD,
-        foods
-    }
-}
+
 
 export const actFetchCategoriesRequest = () => {
     return dispatch => {
@@ -31,3 +26,10 @@ export const actFetchFoodsRequest = (id) => {
     };
 }
 
+
+export const actFetchFoods = (foods) =>{
+    return {
+        type: Types.FETCH_FOOD,
+        foods
+    }
+}

@@ -1,13 +1,15 @@
 import React, { Component } from 'react'
 import FoodType from './../FoodType'
 import {actFetchCategoriesRequest} from '../../action/index'
+import RightNavBar from '../RightNavBar'
+import MiniCart from '../Cart/MiniCart'
 import { connect } from 'react-redux';
 
 
  class PopularScreen extends Component {
 
 
-    componentDidMount(){
+    componentWillMount(){
         this.props.fetchAllCategory();
     }
 
@@ -16,8 +18,14 @@ import { connect } from 'react-redux';
     render() {
         var { categories } = this.props;
         return (
-            <div className="container-fluid d-flex flex-column w-100 p-0"> 
-                {this.showAllCategory(categories)}
+            <div className="container-fluid d-flex flex-row w-100 p-0"> 
+                <div class="col-lg-10">
+                    {this.showAllCategory(categories)}
+                </div>
+                <div class="col-lg-2 p-0">
+                    <MiniCart/>
+                </div>
+                
             </div>
         )
     }
