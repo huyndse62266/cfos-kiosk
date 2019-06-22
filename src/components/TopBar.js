@@ -5,8 +5,8 @@ import { faStar } from '@fortawesome/free-solid-svg-icons'
 import { faPercentage } from '@fortawesome/free-solid-svg-icons'
 import { faMugHot } from '@fortawesome/free-solid-svg-icons'
 import { faConciergeBell } from '@fortawesome/free-solid-svg-icons'
-import { Menu, Icon } from 'antd';
-import {Route, Link, NavLink } from "react-router-dom";
+import { Menu } from 'antd';
+import {Route, Link } from "react-router-dom";
 import PromotionScreen  from './screen/PromotionScreen';
 import DrinkScreen from './screen/DrinkScreen';
 import DishScreen from './screen/DishScreen';
@@ -18,7 +18,6 @@ export default class TopBar extends Component {
       };
     
       handleClick = e => {
-        console.log('click ', e);
         this.setState({
           current: e.key,
         });
@@ -65,10 +64,10 @@ export default class TopBar extends Component {
                 </Menu>
 
                 <Route path="/" exact component={PopularScreen}></Route>
-                <Route path="/promotion" exact component={PromotionScreen}></Route>
-                <Route path="/meal" exact component={DishScreen}></Route>
-                <Route path="/drink" exact component={DrinkScreen}></Route>
-                <Route path="/restaurant" exact component={RestaurantScreen}></Route>
+                <Route path="/promotion"  component={PromotionScreen}></Route>
+                <Route path="/meal"  component={DishScreen}></Route>
+                <Route path="/drink"  component={DrinkScreen}></Route>
+                <Route path="/restaurant"  component={RestaurantScreen}></Route>
             </div>
         )
     }

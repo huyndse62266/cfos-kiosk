@@ -1,11 +1,12 @@
 .trash-button{
     z-index: 2;
     position:'absolute';
-    bottom: 90px;
-    left: 170px;
+    top: 30px;
+    left: 85%;
     width: 20px;
     height: 20px;
-    background-color: #4A4A4A;
+    background-color: red;
+    color: white;
     padding: 0 !important
 }
 .image-1{
@@ -15,4 +16,12 @@
 .border-custom{
     border-radius: 10px;
     background-color: #fff;
+}
+
+.purchase-button-1{
+    width: 100%;
+    height: 50px;
+    background-color: cyan;
+    color: white;
+    font-weight: bold
 }

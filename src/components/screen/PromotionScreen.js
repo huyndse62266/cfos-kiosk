@@ -1,15 +1,16 @@
 import React, { Component } from 'react'
-import FoodType from './../FoodType'
-import {actFetchCategoriesRequest} from '../../action/index'
-import RightNavBar from '../RightNavBar'
+import FoodType from '../Food/FoodType'
+import { Row, Col } from 'antd';
 import { connect } from 'react-redux';
+
+import {actFetchCategoriesRequest} from '../../action/index'
 import ImageSwiper from '../ImageSwiper/ImageSwiper'
 import MiniCart from '../Cart/MiniCart'
 
 
 
 class PromotionScreen extends Component {
-    componentWillMount(){
+    componentDidMount(){
         this.props.fetchAllCategory();
     }
 
@@ -19,7 +20,7 @@ class PromotionScreen extends Component {
         var result = null;
         if(categories.length > 0){
             result = categories.map((category, index) => {
-                return (<FoodType key={index} category={category} index={index}/>)
+                return (<FoodType key={index} category={category} index={index} type={'promotion'}/>)
             })
         }
         return result;
@@ -27,27 +28,26 @@ class PromotionScreen extends Component {
     render() {
         var { categories } = this.props;
         return (
-            <div className="col-lg-12 py-1">
-                <div className="d-flex">
-                    <div className="container-fluid d-flex flex-column w-100 p-0">
-                        <div className="row">
-                            <div className="col-lg-12 align-middle w-100  justify-content-end align-items-center"
-                                style={{height: '400px'}}>
-                                <div className="col-lg-8 mx-auto"><ImageSwiper/></div>
-                            </div>
-                        </div>
-                        <div className="row">
-                            <div class="col-lg-10">
-                                {this.showAllCategory(categories)}
-                            </div>
-                            <div class="col-lg-2 p-0">
-                                <MiniCart/>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
+            <div className="container-fluid d-flex flex-row w-100 p-0"> 
+               
+                <Row>
+                    <Col span={20}>
+                        <Row>
+                            <Col span={10} offset={4}>
+                                <ImageSwiper/>
+                            </Col>
+                        </Row>
+                        <Row>
+                            {this.showAllCategory(categories)}
+                        </Row>
+                    </Col>
+                    <Col span={4} className="px-3 py-0">
+                        <Row style={{position: 'fixed'}} >
+                            <MiniCart />
+                        </Row>
+                    </Col>
+                </Row>
+            </div> 
         )
     }
 }

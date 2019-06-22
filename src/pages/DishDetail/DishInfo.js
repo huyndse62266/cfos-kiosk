@@ -1,29 +1,31 @@
 import React, { Component } from 'react'
-import { Avatar, Button } from 'antd';
+import { Avatar, Button,Row,Col } from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faStar, faTag, faMinus, faPlus } from '@fortawesome/free-solid-svg-icons'
-
+import { faStar, faTag, faMinus, faPlus, faSyncAlt } from '@fortawesome/free-solid-svg-icons'
+import ScrollArea from 'react-scrollbar';
+import { connect } from 'react-redux'
+import { addQuantity,subQuantity } from '../../action/index';
 import Foodingredients from '../../components/DishDetail/Foodingredients'
 import MoreOption from '../../components/DishDetail/MoreOption'
 
 import 'antd/dist/antd.css';
 import './DishInfo.scss'
-import restaurantLogo from '../../images/khai-niem-nha-hang.jpg'
 
-export default class DishDetail extends Component {
+
+class DishDetail extends Component {
     constructor(props) {
         super(props);
         this.state = {
-          clicks: 0,
+          clicks: this.props.food.quantity,
           show: true
         };
     }
-    IncrementItem = () => {
-        this.setState({ clicks: this.state.clicks + 1 });
+    IncrementItem = (id) => {
+        this.props.addQuantity(id);
     }
-    DecreaseItem = () => {
-        this.setState({ clicks: this.state.clicks - 1 });
-    }
+    DecreaseItem = (id) => {
+        this.props.subQuantity(id);
+    }   
     ToggleClick = () => {
         this.setState({ show: !this.state.show });
     }
@@ -31,133 +33,135 @@ export default class DishDetail extends Component {
         var {food} = this.props
         return (
             <div className="container-fluid" style={{height: "80%"}}>
-                <div className="row py-2">
-                    <div className="row border-bottom">
-                        {/* Cot hinh anh */}
-                        <div className="image-container-scroll col-lg-4">
-                            <div className="image-wrapper-scroll">
-                                <div className="h-25 m-2">
-                                    <img src={food.foodImage} className="img-thumbnail" alt="Cinque Terre" style={{height:"100%", width: '100%'}}/>
-                                </div>
-                                <div className="h-25 m-2">
-                                    <img src={food.foodImage} className="img-thumbnail" alt="Cinque Terre" style={{height:"100%", width: '100%'}}/>
-                                </div>
-                                <div className="h-25 m-2">
-                                    <img src={food.foodImage} className="img-thumbnail" alt="Cinque Terre" style={{height:"100%", width: '100%'}}/>
-                                </div>
-                                <div className="h-25 m-2">
-                                    <img src={food.foodImage} className="img-thumbnail" alt="Cinque Terre" style={{height:"100%", width: '100%'}}/>
-                                </div>
-                                <div className="h-25 m-2">
-                                    <img src={food.foodImage} className="img-thumbnail" alt="Cinque Terre" style={{height:"100%", width: '100%'}}/>
-                                </div>
-                                
-                            </div>
-                        </div>
-
-                        <div className="col-lg-8 pr-4">
-                            <div className="row d-flex flex-row ">
-                                <div class="col-lg-6">
-                                    {/* start div store info */}
-                                    <div className="d-flex flex-row py-2">
-                                        <div className="col-lg-1 px-1">
-                                            <Avatar style={{ backgroundColor: '#87d068' }} icon="user" size="small"/>
-                                        </div>
-                                        <div className="col-lg-11 px-2 py-0 ">
-                                            <a>Nhà hàng Lorem Ipsum</a>
-                                        </div>
+                <Row>
+                    <Col span={8}>
+                        <ScrollArea speed={0.8}
+                            verticalScrollbarStyle={{display:'none'}}
+                            className="area"
+                            contentClassName="content"
+                            horizontal={false} style={{height: '650px'}}>
+                        <Row className="d-flex flex-column pr-3">
+                            <Col span={24}>
+                                <img src={food.foodImage} className="img-thumbnail" alt="Cinque Terre" style={{height:"50%", width: '100%'}}/>
+                            </Col>
+                            <Col span={24}>
+                                <img src={food.foodImage} className="img-thumbnail" alt="Cinque Terre" style={{height:"50%", width: '100%'}}/>
+                            </Col> 
+                            <Col span={24}>
+                                <img src={food.foodImage} className="img-thumbnail" alt="Cinque Terre" style={{height:"50%", width: '100%'}}/>
+                            </Col> 
+                            <Col span={24}>
+                                <img src={food.foodImage} className="img-thumbnail" alt="Cinque Terre" style={{height:"50%", width: '100%'}}/>
+                            </Col>                  
+                        </Row>
+                        </ScrollArea>
+                    </Col>
+                    <Col span={16}>
+                        <Row>
+                            <Col span={12} className="px-3">
+                                <Row>
+                                    <Col span={3} offset={1}>
+                                        <Avatar style={{ backgroundColor: '#87d068' }} icon="user" size="small"/>
+                                    </Col>
+                                    <Col span={20}>
+                                        <a>Nhà hàng Lorem Ipsum</a>
+                                    </Col>
+                                </Row>
+                                <Row className="pt-3">
+                                    <h4 className="text-left">{food.foodName}</h4>
+                                </Row>
+                                <Row className="pt-2">
+                                    <FontAwesomeIcon icon={faStar} style={{color: 'orange'}}/>
+                                    <FontAwesomeIcon icon={faStar} style={{color: 'orange'}}/>
+                                    <FontAwesomeIcon icon={faStar} style={{color: 'orange'}}/>
+                                    <FontAwesomeIcon icon={faStar} style={{color: 'orange'}}/>
+                                    <FontAwesomeIcon icon={faStar} style={{color: 'orange'}}/>
+                                </Row>
+                                <Row className="pt-2">
+                                    <h5 className="font-weight-bold">{food.price} đ</h5>
+                                </Row>
+                                <Row className="border-top py-2">
+                                    <a className="text-left" style={{fontSize: '14px'}}>{food.foodDescription}</a>
+                                </Row>
+                                <Row className="border-top py-3">
+                                    <Col span={2}>
+                                        <FontAwesomeIcon icon={faTag} style={{color: 'green',fontSize:'24px'}} />
+                                    </Col>
+                                    <Col span={22}>
+                                        <h6 className="text-left px-3">20% Discount all dishes</h6>
+                                    </Col>                                   
+                                </Row>
+                                <Row>
+                                    <h5>Amount</h5>
+                                </Row>
+                                <Row className="d-flex flex-row py-2">
+                                    <Button style={{backgroundColor: '#D2D2D2'}} onClick={()=>{this.DecreaseItem(food.id)}} ><FontAwesomeIcon icon={faMinus} /></Button>
+                                    <div className="px-3 py-1">
+                                        { this.state.show ? <h2 style={{fontSize:'1rem'}}>{ this.state.clicks }</h2> : '' }
                                     </div>
-                                    {/* end  div store info */}
-                                    {/* start div food info */}
-                                    <div class="d-flex flex-column px-3">
-                                        <div className="row">
-                                            <h4 className="text-left">{food.foodName}</h4>
-                                        </div>
-                                        <div className="row py-2">
-                                            <FontAwesomeIcon icon={faStar} style={{color: 'orange'}}/>
-                                            <FontAwesomeIcon icon={faStar} style={{color: 'orange'}}/>
-                                            <FontAwesomeIcon icon={faStar} style={{color: 'orange'}}/>
-                                            <FontAwesomeIcon icon={faStar} style={{color: 'orange'}}/>
-                                            <FontAwesomeIcon icon={faStar} style={{color: 'orange'}}/>
-                                        </div>
-                                        <div className="row py-1">
-                                            <h6 className="font-weight-bold">{food.price} đ</h6>
-                                        </div>
-                                        <div className="row border-top py-2">
-                                            <a className="text-left" style={{fontSize: '14px'}}>{food.foodDescription}</a>
-                                        </div>
-                                    </div>
-                                    {/* end  div food info */}
-                                    {/* start div promotion info */}
-                                    <div className="row px-3 py-2 border-top">
-                                        <div className="col-lg-1 px-1">
-                                            <FontAwesomeIcon icon={faTag} style={{color: 'green',fontSize:'24px'}} />
-                                        </div>
-                                        <div className="col-lg-11 p-0">
-                                            <h6 className="text-left px-3">20% Discount all dishes</h6>
-                                        </div>
-                                    </div>
-                                    {/* end  div promotion info */}
-                                    {/* start div add quantity */}
-                                    <div className="d-flex flex-column border-top px-3">
-                                        <div className="row py-3">
-                                            <h5>Amount</h5>
-                                        </div>
-                                        <div className="row p-0">
-                                            <Button style={{backgroundColor: '#D2D2D2'}} onClick={this.DecreaseItem} ><FontAwesomeIcon icon={faMinus} /></Button>
-                                            {/* <button type="button" onClick={this.DecreaseItem} className="btn">
-                                                <i class="fa fa-minus"></i>
-                                            </button> */}
-                                            <div className="px-3 py-1">
-                                                { this.state.show ? <h2 style={{fontSize:'1rem'}}>{ this.state.clicks }</h2> : '' }
-                                            </div>
-                                            <Button style={{backgroundColor: '#D2D2D2'}} onClick={this.IncrementItem} ><FontAwesomeIcon icon={faPlus} /></Button>
-                                            {/* <button type="button" onClick={this.IncrementItem} className="btn">
-                                                <i className="fa fa-plus"></i>
-                                            </button> */}
-                                        </div>
-                                    </div>
-                                    {/* end div add quantity */}
-                                </div>
-                                <div class="col-lg-6 ">
-                                    <Foodingredients/>
-                                    <div className="d-flex flex-column px-3">
-                                        <div className="row">
-                                            <h6>More options</h6>
-                                        </div>
+                                    <Button style={{backgroundColor: '#D2D2D2'}} onClick={()=>{this.IncrementItem(food.id)}} ><FontAwesomeIcon icon={faPlus} /></Button>
+                                </Row>
+                            </Col>
+                            <Col span={12}>
+                                <ScrollArea speed={0.8}
+                                verticalScrollbarStyle={{display:'none'}}
+                                className="area"
+                                contentClassName="content"
+                                horizontal={false} style={{height: '530px'}}>
+                                    <Row>
+                                        <Foodingredients/>
+                                    </Row>
+                                    <Row>
+                                        <h6 className="py-2">More options</h6>
+                                    </Row>
+                                    <Row className="px-3">
                                         <MoreOption name="Cheese slice" price="15"/>
                                         <MoreOption name="Salad" price="10"/>            
-                                        <MoreOption name="Bacon" price="5"/>        
-                                    </div>
-                                    <div className="row d-flex float-right p-3">
-                                        <button type="button " className="btn font-weight-bold py-1"  style={{backgroundColor:'#D2D2D2'}}>
-                                            <i class="fa fa-refresh" aria-hidden="true"></i> Reset to default
-                                        </button>
-                                    </div>
-                                </div>   
-                            </div>
-                            <div className="row border-top d-flex justify-content-end align-items-center py-3">
-                                <div class="col-lg-2 mx-auto">
-                                </div>
-                                <div class="col-lg-5 p-0 mx-auto" >
-                                    <h3 className=""><small>Provisional:</small> 95 000 đ</h3>
-                                </div>
-                                <div class="col-lg-5 mx-auto">
-                                    <Button className="button">
-                                        Add to Basket
+                                        <MoreOption name="Bacon" price="5"/>       
+                                        <MoreOption name="Bacon" price="5"/>       
+                                        <MoreOption name="Bacon" price="5"/>       
+                                        <MoreOption name="Bacon" price="5"/>       
+                                        <MoreOption name="Bacon" price="5"/>       
+                                        <MoreOption name="Bacon" price="5"/>       
+                                        <MoreOption name="Bacon" price="5"/>       
+                                    </Row>      
+                                </ScrollArea>
+                                <Row className="py-3 float-right">
+                                    <Button style={{backgroundColor: '#D2D2D2'}} >
+                                        <FontAwesomeIcon icon={faSyncAlt}/> Reset to default
                                     </Button>
-                                </div>
-                            </div>
-                        </div>
+                                </Row>
+                            </Col>
+                        </Row>
+                        <Row type="flex" justify="end" className="border-top py-3">
+                            <Col span={14} className="px-2">
+                                <h3 className="font-weight-bold text-right px-4 pt-2 mb-0"><small>Provisional:</small> 95 000 đ</h3>
+                            </Col>
+                            <Col span={10}>
+                                <Button className="button">
+                                    Add to Basket
+                                </Button>
+                            </Col>
+                        </Row>
+                    </Col>
 
-                    </div>
-                    <div>
-
-                    </div>
                     
-                </div>
+                </Row>
             </div>
         )
     }
 }
 
+
+const mapDispatchToProps = (dispatch)=>{
+    return{
+        addQuantity: (id)=>{
+            dispatch(addQuantity(id))
+        },
+        subQuantity:(id) =>{
+            dispatch(subQuantity(id))
+        }
+        
+    }
+}
+export default connect(null,mapDispatchToProps)(DishDetail)

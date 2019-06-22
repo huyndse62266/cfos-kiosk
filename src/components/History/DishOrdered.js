@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-import {Row,Col} from 'antd'
-import FoodItem from '../FoodItem'
+import {Row} from 'antd'
+import FoodItem from '../Food/FoodItem'
 import './History.scss'
 import restaurantLogo from '../../images/khai-niem-nha-hang.jpg'
-import { Scrollbars } from 'react-custom-scrollbars';
-import ScrollBarHorizontal from '../ScrollBar/ScrollBarHorizontal'
+// import { Scrollbars } from 'react-custom-scrollbars';
+// import ScrollBarHorizontal from '../ScrollBar/ScrollBarHorizontal'
 export default class DishOrdered extends Component {
     render() {
         var food = {

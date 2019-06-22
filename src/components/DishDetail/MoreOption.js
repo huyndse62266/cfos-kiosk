@@ -23,8 +23,8 @@ export default class MoreOption extends Component {
         return (
             <div className="row border-top py-1">
                 <div className="col-lg-6">
-                    <div className="row">
-                        <a className="font-weight-bold">{this.props.name}</a>
+                    <div className="row font-weight-bold">
+                        {this.props.name}
                     </div>
                     <div className="row">
                         +{this.props.price}.000 đ

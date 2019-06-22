@@ -1,26 +1,32 @@
 import React, { Component } from 'react'
-import FoodType from './../FoodType'
-import {actFetchCategoriesRequest} from '../../action/index'
-import RightNavBar from '../RightNavBar'
+import FoodType from '../Food/FoodType'
+import {actFetchParentCategoriesRequest} from '../../action/index'
 import MiniCart from '../Cart/MiniCart'
 import { connect } from 'react-redux';
+import { Row, Col } from 'antd';
 
 class DishScreen extends Component {
 
-    componentWillMount(){
-        this.props.fetchAllCategory();
+    componentDidMount(){
+        this.props.fetchAllCategory('1');
     }
 
     render() {
         var { categories } = this.props;
         return (
             <div className="container-fluid d-flex flex-row w-100 p-0"> 
-                <div class="col-lg-10">
-                    {this.showAllCategory(categories)}
-                </div>
-                <div class="col-lg-2 p-0">
-                    <MiniCart/>
-                </div>
+                <Row>
+                    <Col span={20}>
+                        {this.showAllCategory(categories)}
+                    </Col>
+                    <Col span={4} >
+                        <Row  className="w-100">
+                            <Col span={20} offset={2}>
+                                <MiniCart />
+                            </Col>
+                        </Row>
+                    </Col>
+                </Row>
                 
             </div>
         )
@@ -30,7 +36,7 @@ class DishScreen extends Component {
         var result = null;
         if(categories.length > 0){
             result = categories.map((category, index) => {
-                return (<FoodType key={index} category={category} index={index}/>)
+                return (<FoodType key={index} category={category} index={index} type={'popular'}/>)
             })
         }
         return result;
@@ -46,8 +52,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = (dispatch, props) => {
     return {
-        fetchAllCategory : () => {
-            dispatch(actFetchCategoriesRequest());
+        fetchAllCategory : (id) => {
+            dispatch(actFetchParentCategoriesRequest(id));
         }
     }
 }

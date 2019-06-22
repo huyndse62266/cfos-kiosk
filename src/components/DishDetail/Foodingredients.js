@@ -1,52 +1,49 @@
 import React, { Component } from 'react'
+import {Row,Col} from 'antd'
 import './Foodingredients.scss'
 export default class Foodingredients extends Component {
     render() {
         return (
             <div>
-                <div className="row px-3 py-1">
-                    <h5 className="font-weight-bold">Dish's Ingredient</h5>
-                </div>
-                <div className="row">
-                    <div class="col-lg-12">
-                        <div class="row my-3">
-                            <div class="col-lg-6">
-                                <div className="text-center rounded food-info-active">
-                                    <a>Dolor</a>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div className="text-center rounded food-info-inactive">
-                                    <a>Dolor</a>
-                                </div>
-                            </div>
+                <Row>
+                    <h5 className="font-weight-bold px-3 py-1">Dish's Ingredient</h5>
+                </Row>
+                <Row>
+                    <Col span={12} className="px-3 py-2">
+                        <div className="text-center rounded food-info-active">
+                            Dolor
                         </div>
-                        <div class="row my-3">
-                            <div class="col-lg-6">
-                            <div className="text-center rounded food-info-active">
-                                    <a>Dolor</a>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                            <div className="text-center rounded food-info-active">
-                                    <a>Dolor</a>
-                                </div>
-                            </div>
+                    </Col>
+                    <Col span={12} className="px-3 py-2">
+                        <div className="text-center rounded food-info-inactive">
+                            Dolor
                         </div>
-                        <div class="row my-3">
-                            <div class="col-lg-6">
-                            <div className="text-center rounded food-info-inactive">
-                                    <a>Dolor</a>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div className="text-center rounded food-info-inactive">
-                                    <a>Dolor</a>
-                                </div>
-                            </div>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col span={12} className="px-3 py-2">
+                        <div className="text-center rounded food-info-active">
+                            Dolor
                         </div>
-                    </div>
-                </div>
+                    </Col>
+                    <Col span={12} className="px-3 py-2">
+                        <div className="text-center rounded food-info-active">
+                            Dolor
+                        </div>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col span={12} className="px-3 py-2">
+                        <div className="text-center rounded food-info-inactive">
+                            Dolor
+                        </div>
+                    </Col>
+                    <Col span={12} className="px-3 py-2">
+                        <div className="text-center rounded food-info-inactive">
+                            Dolor
+                        </div>
+                    </Col>
+                </Row>
             </div>
         )
     }

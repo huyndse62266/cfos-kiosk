@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import {Row,Col} from 'antd'
-import FoodItem from '../FoodItem'
+import {Row} from 'antd'
+import FoodItem from '../Food/FoodItem'
 import './History.scss'
 import restaurantLogo from '../../images/khai-niem-nha-hang.jpg'
 export default class PopularDishes extends Component {

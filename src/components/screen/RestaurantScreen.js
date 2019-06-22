@@ -1,25 +1,31 @@
 import React, { Component } from 'react'
-import FoodType from './../FoodType'
+import FoodType from '../Food/FoodType'
 import {actFetchCategoriesRequest} from '../../action/index'
-import RightNavBar from '../RightNavBar'
 import { connect } from 'react-redux';
 import MiniCart from '../Cart/MiniCart'
+import { Row, Col } from 'antd';
 
 class RestaurantScreen extends Component {
-    componentWillMount(){
+    componentDidMount(){
         this.props.fetchAllCategory();
     }
 
     render() {
         var { categories } = this.props;
         return (
-            <div className="container-fluid d-flex flex-row w-100 p-0"> 
-                <div className="col-lg-10">
-                    {this.showAllCategory(categories)}
-                </div>
-                <div className="col-lg-2 p-0">
-                    <MiniCart/>
-                </div>
+            <div className="w-100"> 
+                <Row>
+                    <Col span={20}>
+                        {this.showAllCategory(categories)}
+                    </Col>
+                    <Col span={4} >
+                        <Row  className="w-100">
+                            <Col span={20} offset={2}>
+                                <MiniCart />
+                            </Col>
+                        </Row>
+                    </Col>
+                </Row>
                 
             </div>
         )

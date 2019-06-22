@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Tabs } from 'antd';
-import { Button } from 'antd';
 import './DishInfo.scss'
 import DishInfo from './DishInfo'
 import DishFeedback from './DishFeedback'

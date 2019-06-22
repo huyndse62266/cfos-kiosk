@@ -49,7 +49,7 @@ export default class DishFeedback extends Component {
                                             <img src={restaurantLogo} alt="Cinque Terre" className="w-100 h-100 rounded-circle"/>
                                         </div>
                                         <div className="col-lg-11 p-0  text-left">
-                                            <a className="text-left">Nhà hàng Lorem Ipsum</a>
+                                            Nhà hàng Lorem Ipsum
                                         </div>
                                     </div>
                                     <div className="d-flex flex-column px-3">
@@ -74,20 +74,10 @@ export default class DishFeedback extends Component {
                                                 
                                             </div>
                                             <div className="row py-1">
-                                                <a>4.0/5 Rating</a>
+                                                4.0/5 Rating
                                             </div>
                                         </div>
-                                    </div>
-                                    {/* <div className="row" >
-                                        <i className="fa fa-star pr-1" style={{fontSize:'12px',color:'orange'}}></i>
-                                        <i className="fa fa-star pr-1" style={{fontSize:'12px',color:'orange'}}></i>
-                                        <i className="fa fa-star pr-1" style={{fontSize:'12px',color:'orange'}}></i>
-                                        <i className="fa fa-star pr-1" style={{fontSize:'12px',color:'orange'}}></i>
-                                        <i className="fa fa-star-o pr-1" style={{fontSize:'12px'}}></i>
-                                    </div>
-                                    <div className="row">
-                                                <a>4.0/5 Rating</a>
-                                            </div> */}
+                                    </div>                                
                                 </div>
                             </div>
                             <div className="row border-top border-bottom py-2">
@@ -105,7 +95,7 @@ export default class DishFeedback extends Component {
                                         <i className="fa fa-star pr-1" style={{fontSize:'12px',color:'orange'}}></i>
                                         <i className="fa fa-star pr-1" style={{fontSize:'12px',color:'orange'}}></i>
                                     </div>
-                                    <a>Good, excellent foods</a>                                  
+                                    Good, excellent foods                              
                                 </div>
                                 <div className="d-flow flow-row text-left p-2 my-2">
                                     <div className="d-flow flow-column">
@@ -115,7 +105,7 @@ export default class DishFeedback extends Component {
                                         <i className="fa fa-star pr-1" style={{fontSize:'12px',color:'orange'}}></i>
                                         <i className="fa fa-star-o pr-1" style={{fontSize:'12px'}}></i>
                                     </div>
-                                    <a>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor</a>                                  
+                                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor                                
                                 </div>   
                                 <div className="d-flow flow-row text-left p-2 my-2">
                                     <div className="d-flow flow-column">
@@ -125,7 +115,7 @@ export default class DishFeedback extends Component {
                                         <i className="fa fa-star pr-1" style={{fontSize:'12px',color:'orange'}}></i>
                                         <i className="fa fa-star-o pr-1" style={{fontSize:'12px'}}></i>
                                     </div>
-                                    <a>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes</a>                                  
+                                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes                                  
                                 </div>   
                                 <div className="d-flow flow-row text-left p-2 my-2">
                                     <div className="d-flow flow-column">
@@ -135,7 +125,7 @@ export default class DishFeedback extends Component {
                                         <i className="fa fa-star pr-1" style={{fontSize:'12px',color:'orange'}}></i>
                                         <i className="fa fa-star-o pr-1" style={{fontSize:'12px'}}></i>
                                     </div>
-                                    <a>Good, excellent foods</a>                                  
+                                    Good, excellent foods                       
                                 </div>      
                             </div>    
                         </div>

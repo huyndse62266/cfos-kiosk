@@ -1,15 +1,16 @@
 import React, { Component } from 'react'
-import FoodType from './../FoodType'
-import {actFetchCategoriesRequest} from '../../action/index'
-import RightNavBar from '../RightNavBar'
-import MiniCart from '../Cart/MiniCart'
+import FoodType from '../Food/FoodType'
+import { Row, Col} from 'antd';
 import { connect } from 'react-redux';
+import {actFetchCategoriesRequest} from '../../action/index'
+import MiniCart from '../Cart/MiniCart'
+
 
 
  class PopularScreen extends Component {
 
 
-    componentWillMount(){
+    componentDidMount(){
         this.props.fetchAllCategory();
     }
 
@@ -19,13 +20,18 @@ import { connect } from 'react-redux';
         var { categories } = this.props;
         return (
             <div className="container-fluid d-flex flex-row w-100 p-0"> 
-                <div class="col-lg-10">
-                    {this.showAllCategory(categories)}
-                </div>
-                <div class="col-lg-2 p-0">
-                    <MiniCart/>
-                </div>
-                
+                <Row>
+                    <Col span={20}>
+                        {this.showAllCategory(categories)}
+                    </Col>
+                    <Col span={4} >
+                        <Row  className="w-100">
+                            <Col span={20} offset={2}>
+                                <MiniCart />
+                            </Col>
+                        </Row>
+                    </Col>
+                </Row>
             </div>
         )
     }
@@ -34,7 +40,7 @@ import { connect } from 'react-redux';
         var result = null;
         if(categories.length > 0){
             result = categories.map((category, index) => {
-                return (<FoodType key={index} category={category} index={index}/>)
+                return (<FoodType key={index} category={category} index={index} type={'popular'}/>)
             })
         }
         return result;
