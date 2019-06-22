@@ -21,7 +21,7 @@ export default class MoreOption extends Component {
     }
     render() {
         return (
-            <div className="row border-top py-1">
+            <div className="row border-top px-2 py-1">
                 <div className="col-lg-6">
                     <div className="row font-weight-bold">
                         {this.props.name}

@@ -94,7 +94,7 @@ class ItemCart extends Component {
                     onCancel={this.handleCancel}
                     closable="true"
                     width="80%"
-                    bodyStyle={{padding:0, height: '750px'}}
+                    bodyStyle={{padding:0, height: '850px'}}
                     footer={null}
                     centered
                     >

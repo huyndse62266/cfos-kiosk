@@ -37,9 +37,13 @@ export const actFetchFoodsRequest = (id) => {
 
 
 
-// export const actCheckoutRequest = () =>{
-//     return disp
-// }
+export const actCheckoutRequest = () =>{
+    return dispatch =>{
+        return dispatch => {
+            
+        }
+    }
+}
 
 
 export const actFetchFoods = (foods) =>{

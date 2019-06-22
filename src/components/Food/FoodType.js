@@ -84,19 +84,19 @@ class FoodType extends Component {
         var { category } = this.props;
         var { foods } = this.state;
         return (
-            <Row>
+            <Row type="flex" justify="space-around" align="middle">
                 <Col span={3}className="text-center h-100" style={{margin:'auto', textAlign: 'center'}}>
                     <div>
-                    <h4>{category.categoryName}</h4>
-                    <button type="button" className="btn p-0 btn-light" onClick={this.checkIsExpand} id="myBtn">{this.state.isExpand === true ? 'Thu gọn' : ' Xem thêm'} <FontAwesomeIcon icon={faAngleDown} /></button>
+                        <h4>{category.categoryName}</h4>
+                        <button type="button" className="btn p-0 btn-light" onClick={this.checkIsExpand} id="myBtn">{this.state.isExpand === true ? 'Thu gọn' : ' Xem thêm'} <FontAwesomeIcon icon={faAngleDown} /></button>
                     </div>
                 </Col>
                 <Col span={21} className="d-flex flex-column">
-                    <Row>
+                    <Row >
                         {this.showAllFoods(foods)}
                     </Row>
                     <span id="more">
-                        <Row>
+                        <Row type="flex" justify="start">
                             {this.readMore(foods)}
                         </Row>
                     </span>
@@ -106,17 +106,6 @@ class FoodType extends Component {
         )
     }
 }
-// const mapStateToProps = state => {
-//     return {
-//         foods: state.foods
-//     }
-// }
 
-// const mapDispatchToProps = (dispatch, props) => {
-//     return {
-//         fetchAllFood : (id) => {
-//             dispatch(actFetchFoodsRequest(id));
-//         }
-//     }
-// }
+
 export default connect(null, null)(FoodType);

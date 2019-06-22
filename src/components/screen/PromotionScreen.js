@@ -28,12 +28,11 @@ class PromotionScreen extends Component {
     render() {
         var { categories } = this.props;
         return (
-            <div className="container-fluid d-flex flex-row w-100 p-0"> 
-               
+            <div className="container-fluid d-flex flex-row w-100 p-0">  
                 <Row>
                     <Col span={20}>
                         <Row>
-                            <Col span={10} offset={4}>
+                            <Col span={10} offset={7}>
                                 <ImageSwiper/>
                             </Col>
                         </Row>
@@ -41,9 +40,11 @@ class PromotionScreen extends Component {
                             {this.showAllCategory(categories)}
                         </Row>
                     </Col>
-                    <Col span={4} className="px-3 py-0">
-                        <Row style={{position: 'fixed'}} >
-                            <MiniCart />
+                    <Col span={4} >
+                        <Row  className="w-100">
+                            <Col span={20} offset={2}>
+                                <MiniCart />
+                            </Col>
                         </Row>
                     </Col>
                 </Row>

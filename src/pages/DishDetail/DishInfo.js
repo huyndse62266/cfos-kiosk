@@ -39,20 +39,21 @@ class DishDetail extends Component {
                             verticalScrollbarStyle={{display:'none'}}
                             className="area"
                             contentClassName="content"
-                            horizontal={false} style={{height: '650px'}}>
+                            horizontal={false} style={{height: '630px'}}>
                         <Row className="d-flex flex-column pr-3">
-                            <Col span={24}>
-                                <img src={food.foodImage} className="img-thumbnail" alt="Cinque Terre" style={{height:"50%", width: '100%'}}/>
+                            <Col span={18} offset={3}>
+                                <img src={food.foodImage} className="img-thumbnail" alt="Cinque Terre" style={{height:"40%", width: '100%'}}/>
                             </Col>
-                            <Col span={24}>
-                                <img src={food.foodImage} className="img-thumbnail" alt="Cinque Terre" style={{height:"50%", width: '100%'}}/>
-                            </Col> 
-                            <Col span={24}>
-                                <img src={food.foodImage} className="img-thumbnail" alt="Cinque Terre" style={{height:"50%", width: '100%'}}/>
-                            </Col> 
-                            <Col span={24}>
-                                <img src={food.foodImage} className="img-thumbnail" alt="Cinque Terre" style={{height:"50%", width: '100%'}}/>
-                            </Col>                  
+                            <Col span={18} offset={3}>
+                                <img src={food.foodImage} className="img-thumbnail" alt="Cinque Terre" style={{height:"40%", width: '100%'}}/>
+                            </Col>
+                            <Col span={18} offset={3}>
+                                <img src={food.foodImage} className="img-thumbnail" alt="Cinque Terre" style={{height:"40%", width: '100%'}}/>
+                            </Col>
+                            <Col span={18} offset={3}>
+                                <img src={food.foodImage} className="img-thumbnail" alt="Cinque Terre" style={{height:"40%", width: '100%'}}/>
+                            </Col>
+                        
                         </Row>
                         </ScrollArea>
                     </Col>
@@ -95,11 +96,11 @@ class DishDetail extends Component {
                                     <h5>Amount</h5>
                                 </Row>
                                 <Row className="d-flex flex-row py-2">
-                                    <Button style={{backgroundColor: '#D2D2D2'}} onClick={()=>{this.DecreaseItem(food.id)}} ><FontAwesomeIcon icon={faMinus} /></Button>
+                                    <Button style={{backgroundColor: '#D2D2D2'}} onClick={()=>{this.DecreaseItem(food.foodId)}} ><FontAwesomeIcon icon={faMinus} /></Button>
                                     <div className="px-3 py-1">
-                                        { this.state.show ? <h2 style={{fontSize:'1rem'}}>{ this.state.clicks }</h2> : '' }
+                                        { this.state.show ? <h2 style={{fontSize:'1rem'}}>{ food.cartQuantity }</h2> : '' }
                                     </div>
-                                    <Button style={{backgroundColor: '#D2D2D2'}} onClick={()=>{this.IncrementItem(food.id)}} ><FontAwesomeIcon icon={faPlus} /></Button>
+                                    <Button style={{backgroundColor: '#D2D2D2'}} onClick={()=>{this.IncrementItem(food.foodId)}} ><FontAwesomeIcon icon={faPlus} /></Button>
                                 </Row>
                             </Col>
                             <Col span={12}>
@@ -107,14 +108,14 @@ class DishDetail extends Component {
                                 verticalScrollbarStyle={{display:'none'}}
                                 className="area"
                                 contentClassName="content"
-                                horizontal={false} style={{height: '530px'}}>
+                                horizontal={false} style={{height: '630px'}}>
                                     <Row>
                                         <Foodingredients/>
                                     </Row>
                                     <Row>
-                                        <h6 className="py-2">More options</h6>
+                                        <h6 className="px-3 py-2">More options</h6>
                                     </Row>
-                                    <Row className="px-3">
+                                    <Row className="px-4">
                                         <MoreOption name="Cheese slice" price="15"/>
                                         <MoreOption name="Salad" price="10"/>            
                                         <MoreOption name="Bacon" price="5"/>       

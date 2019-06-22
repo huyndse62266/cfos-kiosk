@@ -70,14 +70,9 @@ class MiniCart extends Component {
                         <h6 className="float-right font-weight-bold"><NumberFormat value={this.props.pricetotal} displayType={'text'} thousandSeparator={'.'} decimalSeparator={','}/> đ</h6>
                     </Col>
                 </Row>
-                {/* <div className="row px-5">
-                    <button className="btn btn-custom-3  font-weight-bold" data-toggle="modal" data-target="#exampleModalLong">
-                        Purchase
-                    </button>
-                </div> */}
                 <Row>
                     <Col span={18} offset={3}>
-                        <Button onClick={this.showModal} className="purchase-button-1">
+                        <Button  className="purchase-button-1">
                             Purchase
                         </Button>
                     </Col>   
@@ -89,7 +84,7 @@ class MiniCart extends Component {
                     onCancel={this.handleCancel}
                     closable="true"
                     width="95%"
-                    bodyStyle={{padding: 0}}
+                    bodyStyle={{padding: 0, height: '100%'}}
                     footer={<Row type="flex" justify="end">
                     <Col span={12} className="py-1">
                       <Col span={4} className="py-3">        

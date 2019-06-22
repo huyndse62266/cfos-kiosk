@@ -30,7 +30,7 @@ class ViewBasket extends Component {
           this.props.items.map((food, index) => {
             
             return (
-                <Col span={6} className="px-4 py-2"><ItemCart key={index} food={food} index={index}/></Col>)
+                <Col span={4} className="px-4 py-2"><ItemCart key={index} food={food} index={index}/></Col>)
                 
         })
       ):(
@@ -44,7 +44,7 @@ class ViewBasket extends Component {
             verticalScrollbarStyle={{display:'none'}}
             className="area"
             contentClassName="content"
-            horizontal={false} style={{height: '600px'}}>
+            horizontal={false} style={{height: '800px'}}>
           <Row>
             {addedItems}
           </Row>
