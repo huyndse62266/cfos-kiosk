@@ -11,7 +11,10 @@ import ViewBasket from '../../pages/Basket/ViewBasket'
 import './Cart.scss'
 
 class MiniCart extends Component {
-    state = { visible: false };
+    state = {
+        visible: false,
+        items: this.props.items
+    };
 
     showModal = () => {
         this.setState({
@@ -31,17 +34,16 @@ class MiniCart extends Component {
         });
     };
     render() {
-  
-            let addedItems =  this.props.items.length ?
+        let addedItems =  this.props.items.length ?
             (
                 this.props.items.map((item,index) =>{
-                    return <CartItemMini food={item} key={index}  index={index}/>
+                    console.log(item.cartQuantity)
+                    return <CartItemMini food={item} key={index}  index={index} cartQuantity={item.cartQuantity}/>
                 })
             ):(
                 <span></span>
             );
         return (
-            
             <div className="container bg-light p-0 h-100 ">
             
                 <Row>
@@ -121,7 +123,7 @@ const mapStateToProps = (state)=>{
     return{
         items: state.cart.addedItems,
         pricetotal: state.cart.total,
-        
+
     }
 }
 

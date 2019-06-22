@@ -52,8 +52,8 @@ class ItemCart extends Component {
 
 
     render() {
-        var {food} = this.props;
-        console.log(food)
+        var {food,cartQuantity} = this.props;
+        console.log(food.quantity)
         return (
             <div className="container-fluid p-0" style={{backgroundColor: '#E6E6E6', borderRadius: 10}}>
         
@@ -73,7 +73,7 @@ class ItemCart extends Component {
                         <Col span={16} className="d-flex flex-row pl-3">
                             <Button style={{backgroundColor: '#D2D2D2'}} onClick={()=>{this.DecreaseItem(food.foodId)}} ><FontAwesomeIcon icon={faMinus} /></Button>
                             <div className="px-4 py-1">
-                                { this.state.show ? <h2 style={{fontSize:'1rem'}}>{ food.cartQuantity }</h2> : '' }
+                                { this.state.show ? <h2 style={{fontSize:'1rem'}}>{ cartQuantity }</h2> : '' }
                             </div>
                             <Button style={{backgroundColor: '#D2D2D2'}} onClick={()=>{this.IncrementItem(food.foodId)}} ><FontAwesomeIcon icon={faPlus} /></Button>
                         </Col>

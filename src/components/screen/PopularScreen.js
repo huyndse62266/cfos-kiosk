@@ -50,7 +50,7 @@ import MiniCart from '../Cart/MiniCart'
 
 const mapStateToProps = state => {
     return {
-        categories: state.categories
+            categories: state.categories
     }
 }
 

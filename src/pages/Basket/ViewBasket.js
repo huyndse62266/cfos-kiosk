@@ -30,7 +30,9 @@ class ViewBasket extends Component {
           this.props.items.map((food, index) => {
             
             return (
-                <Col span={4} className="px-4 py-2"><ItemCart key={index} food={food} index={index}/></Col>)
+                <Col span={4} className="px-4 py-2">
+                    <ItemCart key={index} food={food} index={index} cartQuantity={food.cartQuantity}/>
+                </Col>)
                 
         })
       ):(
