@@ -1,5 +1,7 @@
 export const FETCH_CATEGORY = 'FETCH_CATEGORY';
 
+export const FETCH_STORE = 'FETCH_STORE';
+
 export const FETCH_FOOD = 'FETCH_FOOD';
 
 export const FETCH_CART = 'FETCH_CART';

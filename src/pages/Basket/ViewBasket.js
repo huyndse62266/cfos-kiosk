@@ -36,7 +36,11 @@ class ViewBasket extends Component {
                 
         })
       ):(
-          <span></span>
+          <Row type="flex" justify="space-around" align="middle" style={{height:'800px', width: '100%'}}>
+              <Col span={24} className="text-center" >
+                <h1>Cart Empty</h1>
+              </Col>
+          </Row>
       )
 
         console.log(addedItems)

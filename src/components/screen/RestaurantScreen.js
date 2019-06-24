@@ -1,22 +1,23 @@
 import React, { Component } from 'react'
-import FoodType from '../Food/FoodType'
-import {actFetchCategoriesRequest} from '../../action/index'
+import StoreMenu from '../Food/StoreMenu'
+import {actFetchCategoriesRequest, actFetchStoreCategoriesRequest} from '../../action/index'
 import { connect } from 'react-redux';
 import MiniCart from '../Cart/MiniCart'
 import { Row, Col } from 'antd';
 
 class RestaurantScreen extends Component {
     componentDidMount(){
-        this.props.fetchAllCategory();
+        this.props.fetchAllStore('1');
     }
 
     render() {
-        var { categories } = this.props;
+        var { stores } = this.props;
+        console.log(stores)
         return (
             <div className="w-100"> 
                 <Row>
                     <Col span={20}>
-                        {this.showAllCategory(categories)}
+                        {this.showAllCategory(stores)}
                     </Col>
                     <Col span={4} >
                         <Row  className="w-100">
@@ -31,11 +32,11 @@ class RestaurantScreen extends Component {
         )
     }
     
-    showAllCategory(categories){
+    showAllCategory(stores){
         var result = null;
-        if(categories.length > 0){
-            result = categories.map((category, index) => {
-                return (<FoodType key={index} category={category} index={index}/>)
+        if(stores.length > 0){
+            result = stores.map((store, index) => {
+                return (<StoreMenu key={index} storeInfo={store} index={index}/>)
             })
         }
         return result;
@@ -45,14 +46,15 @@ class RestaurantScreen extends Component {
 
 const mapStateToProps = state => {
     return {
-        categories: state.categories
+        stores: state.stores
     }
 }
 
 const mapDispatchToProps = (dispatch, props) => {
     return {
-        fetchAllCategory : () => {
-            dispatch(actFetchCategoriesRequest());
+        fetchAllStore : (id) => {
+            console.log(id)
+            dispatch(actFetchStoreCategoriesRequest(id));
         }
     }
 }

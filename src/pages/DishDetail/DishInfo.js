@@ -29,6 +29,11 @@ class DishDetail extends Component {
     ToggleClick = () => {
         this.setState({ show: !this.state.show });
     }
+    renderPromotionTag = (rate) =>{
+        if(rate > 0)
+            return(<h5 className="text-left px-3">{rate}% Discount all dishes</h5>)
+    }
+
     render() {
         var {food} = this.props
         return (
@@ -89,7 +94,7 @@ class DishDetail extends Component {
                                         <FontAwesomeIcon icon={faTag} style={{color: 'green',fontSize:'24px'}} />
                                     </Col>
                                     <Col span={22}>
-                                        <h6 className="text-left px-3">20% Discount all dishes</h6>
+                                        {this.renderPromotionTag(food.promotion)}
                                     </Col>                                   
                                 </Row>
                                 <Row>

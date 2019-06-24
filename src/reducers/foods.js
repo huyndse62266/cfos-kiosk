@@ -3,11 +3,10 @@ import * as Types from '../constants/ActionTypes';
 var initialState = [];
 
 
-const foods = (state = initialState, action) => {
-    switch (action.type) {
+const foods = (state = initialState, {type, action}) => {
+    switch (type) {
         case Types.FETCH_FOOD:
-            state = action.foods;
-            return [...state];
+            return  action;
         default: return [...state];
     }
 };

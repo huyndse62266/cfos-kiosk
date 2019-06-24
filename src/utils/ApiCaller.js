@@ -5,7 +5,10 @@ export default function callApi(endpoint, method = 'GET', body){
     return axios({
         method: method,
         url: `${Config.API_URL}/${endpoint}`,
-        data: body
+        data: body,
+        headers:{
+            'Content-Type': 'application/json'
+        }
     }).catch(err => {
         console.log(err);
     });

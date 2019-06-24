@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React, { Component, useRef }  from 'react'
+import ReactToPrint from 'react-to-print';
 import { Modal, Button, Row,Col } from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faShoppingCart, faAngleLeft } from '@fortawesome/free-solid-svg-icons'
@@ -8,6 +9,7 @@ import NumberFormat from 'react-number-format';
 import restaurantLogo from '../../images/khai-niem-nha-hang.jpg'
 import CartItemMini from './CartItemMini'
 import ViewBasket from '../../pages/Basket/ViewBasket'
+import { actCheckoutRequest } from '../../action';
 import './Cart.scss'
 
 class MiniCart extends Component {
@@ -33,7 +35,17 @@ class MiniCart extends Component {
             visible: false,
         });
     };
+    checkoutClick = (cart,total) =>{
+        if(cart.length > 0){
+            this.props.checkout(cart,total);
+        }
+        
+    }
+
+    
+
     render() {
+        
         let addedItems =  this.props.items.length ?
             (
                 this.props.items.map((item,index) =>{
@@ -43,7 +55,18 @@ class MiniCart extends Component {
             ):(
                 <span></span>
             );
+        let contentReceipt = this.props.items.length ?
+        (
+            this.props.items.map((item,index) =>{
+                console.log(item.cartQuantity)
+                return <h6>{item.foodName}:{item.cartQuantity}</h6>
+            })
+        ):(
+            <span></span>
+        );
+          
         return (
+            
             <div className="container bg-light p-0 h-100 ">
             
                 <Row>
@@ -70,13 +93,21 @@ class MiniCart extends Component {
                     </Col>
                     <Col span={12} >
                         <h6 className="float-right font-weight-bold"><NumberFormat value={this.props.pricetotal} displayType={'text'} thousandSeparator={'.'} decimalSeparator={','}/> đ</h6>
+                    
                     </Col>
                 </Row>
                 <Row>
                     <Col span={18} offset={3}>
-                        <Button  className="purchase-button-1">
-                            Purchase
-                        </Button>
+                        <ReactToPrint
+                        trigger={() => <Button  className="purchase-button-1">Purchase</Button>}
+                        content={() => this.componentRef}
+                        copyStyles={false}
+                        pageStyle={{height:'200px'}}
+                        />
+                        <div ref={el => (this.componentRef = el)}>
+                            {contentReceipt}
+                        </div>
+                      
                     </Col>   
                 </Row>
                 <Modal
@@ -96,12 +127,13 @@ class MiniCart extends Component {
                           <h2><NumberFormat value={this.props.pricetotal} displayType={'text'} thousandSeparator={'.'} decimalSeparator={','}/> đ</h2>
                       </Col>
                       <Col span={8} className="py-2">
+                          
                           <Button className="w-75 h-100 text-center bg-success">
                             <div className="py-3" style={{color: 'white', fontWeight: 'bold'}}>Purchase</div>
                           </Button>  
                       </Col>
                       <Col span={5} className="py-2">
-                          <Button className="w-75 h-100 text-center bg-danger" onClick={()=>{this.handleCancel()}}>
+                            <Button className="w-75 h-100 text-center bg-danger" onClick={()=>{this.handleCancel()}}>
                             <div  className="py-3" style={{color: 'white', fontWeight: 'bold'}}>
                               Cancel
                             </div>
@@ -127,4 +159,13 @@ const mapStateToProps = (state)=>{
     }
 }
 
-export default connect(mapStateToProps,null)(MiniCart);
+const mapDispatchToProps= (dispatch)=>{
+    return{
+        checkout: (cart,total)=>{
+            console.log('bbb')
+            dispatch(actCheckoutRequest(cart,total))
+        }
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(MiniCart);

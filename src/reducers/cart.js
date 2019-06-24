@@ -2,8 +2,7 @@ import * as Types from './../constants/ActionTypes';
 
 const initState = {
     addedItems:[],
-    total: 0,
-    findItem: null
+    total: 0
 }
 
 
@@ -84,6 +83,11 @@ const cart = (state = initState,action) => {
             return {
                 findItem: addedItem
             }
+    }
+    if(action.type === Types.CHECKOUT){
+        return{
+            state : undefined
+        }
     }
 
 

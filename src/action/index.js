@@ -1,15 +1,6 @@
 import * as Types from '../constants/ActionTypes';
 import callApi from '../utils/ApiCaller';
 
-export const actFetchCategories = (categories) => {
-    return {
-        type : Types.FETCH_CATEGORY,
-        categories
-    }
-}
-
-
-
 export const actFetchCategoriesRequest = () => {
     return dispatch => {
         return callApi(`categories/`,'GET',null).then(res =>{
@@ -25,6 +16,15 @@ export const actFetchParentCategoriesRequest = (id) => {
         })
     };
 }
+export const actFetchStoreCategoriesRequest = (id) => {
+    return dispatch => {
+        return callApi(`stores/${id}`,'GET',null).then(res =>{
+            dispatch(actFetchStores(res.data));
+        })
+    };
+}
+
+
 
 export const actFetchFoodsRequest = (id) => {
     return dispatch => {
@@ -37,11 +37,41 @@ export const actFetchFoodsRequest = (id) => {
 
 
 
-export const actCheckoutRequest = () =>{
-    return dispatch =>{
-        return dispatch => {
-            
+export const actCheckoutRequest = (cartItems, total) =>{
+    var result = null;
+
+    var orderDetail = cartItems.map((cartItem) =>{
+        return{
+            foodId: cartItem.foodId,
+            quantity: cartItem.cartQuantity,
+            storeID: cartItem.storeVM.storeId,
+            totalPrice: cartItem.price * cartItem.cartQuantity,
         }
+    })
+    var order ={
+        "customerId": null,
+        "orderDetails": orderDetail,
+        "totalOrder": total
+    }
+    console.log(JSON.stringify(order))
+    return dispatch =>{
+        return callApi(`orders/orders/submit-order`,'POST',JSON.stringify(order)).then(res =>{
+            dispatch(actFetchFoods(res.data));
+        })
+    }
+}
+
+export const actFetchCategories = (categories) => {
+    return {
+        type : Types.FETCH_CATEGORY,
+        categories
+    }
+}
+
+export const actFetchStores = (stores) => {
+    return {
+        type : Types.FETCH_STORE,
+        stores
     }
 }
 
@@ -49,7 +79,7 @@ export const actCheckoutRequest = () =>{
 export const actFetchFoods = (foods) =>{
     return {
         type: Types.FETCH_FOOD,
-        foods
+        action : foods
     }
 }
 
@@ -87,3 +117,8 @@ export const subQuantity = (id) =>{
     }
 }
 
+export const checkout = () =>{
+    return {
+        type: Types.CHECKOUT
+    }
+}

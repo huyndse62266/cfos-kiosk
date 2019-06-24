@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faStar } from '@fortawesome/free-solid-svg-icons'
+import { faStar, faStarHalfAlt } from '@fortawesome/free-solid-svg-icons'
 import { faStar  as faStaro} from '@fortawesome/free-regular-svg-icons'
 import { Avatar, Button, Typography,Card, Row, Col  } from 'antd';
 import { connect } from 'react-redux'
@@ -16,46 +16,51 @@ class FoodItem extends Component {
     state = { visible: false };
 
     showModal = () => {
-      this.setState({
-        visible: true,
-      });
+        this.setState({
+            visible: true,
+        });
     };
 
     handleOk = e => {
         this.setState({
-          visible: false,
+            visible: false,
         });
-      };
-    
-      handleCancel = e => {
+    };
+
+    handleCancel = e => {
         this.setState({
-          visible: false,
+            visible: false,
         });
-      };
+    };
 
-      addToCartClick = (food) =>{
-          this.props.addToCart(food);
-      }
-      renderPromotionTag = (rate) =>{
+    addToCartClick = (food) =>{
+        this.props.addToCart(food);
+    }
+    renderPromotionTag = (rate) =>{
        
-          if(rate > 0)
+        if(rate > 0)
             return(<div className="text-center rounded py-1" style={{backgroundColor:'#32CCBC', color:'white'}}>
-            <a className="font-weight-bold">-{rate}%</a>
+                <a className="font-weight-bold">-{rate}%</a>
         </div>)
-      }
+    }
 
-      showRating(rating){
-          var result = [];
-          for(var i = 1; i <= rating; i++){
-              result.push(<FontAwesomeIcon icon={faStar} />)
-          }
-          for(var i = 1; i <= (5-rating); i++){
+    showRating(rating){
+        var result = [];
+        var integerRating = Math.floor(rating)
+        for(var i = 1; i <= integerRating; i++){
+            result.push(<FontAwesomeIcon icon={faStar} />)
+        }
+        if(rating - Math.floor(rating) > 0){
+            result.push(<FontAwesomeIcon icon={faStarHalfAlt} />)
+        }
+        for(var i = 1; i <= (5-rating); i++){
             result.push(<FontAwesomeIcon icon={faStaro} />)
         }
-          return result        
+        return result        
       }
     render() {
         var { food } = this.props;
+        console.log(food.foodName)
         return (
             <div className="container bg-light px-0 ">
                 <Card title={<span>

@@ -4,14 +4,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
 import NumberFormat from 'react-number-format'; 
 import { connect } from 'react-redux'
-import {removeCart} from '../../action/index';
+import { removeCart } from '../../action/index';
 import './Cart.scss'
 class CartItem extends Component {
     removeItem = (id) =>{
         this.props.removeItem(id);     
     }
     render() {
-        var {food,cartQuantity} = this.props;
+        var {food} = this.props;
         return (
             <div className="border-custom mb-3">
                 <Row >
@@ -31,7 +31,7 @@ class CartItem extends Component {
                         <Col span={16}>
                             <p className="font-weight-bold"><NumberFormat value={food.price} displayType={'text'} thousandSeparator={'.'} decimalSeparator={','}/>  đ</p>
                         </Col>
-                        <Col span={8}><p className="float-right">x{cartQuantity}</p></Col>
+                        <Col span={8}><p className="float-right">x{food.cartQuantity}</p></Col>
                     </div>
                 </Row>
             </div>

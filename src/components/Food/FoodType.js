@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import FoodItem from './FoodItem'
 import apiCaller from '../../utils/ApiCaller'
-import {Col, Row} from 'antd'
+import {Col, Row,Button} from 'antd'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faAngleDown } from '@fortawesome/free-solid-svg-icons'
+import { faAngleUp,faAngleDown } from '@fortawesome/free-solid-svg-icons'
 import { connect } from 'react-redux';
-
+import './Menu.scss'
 class FoodType extends Component {
 
     constructor(){
@@ -18,7 +18,7 @@ class FoodType extends Component {
         this.checkIsExpand = this.checkIsExpand.bind(this);
     }
 
-    componentDidMount(){
+    componentWillMount(){
         
         if(this.props.type === 'promotion'){
             apiCaller(`category/${this.props.category.categoryId}/foods/promotion`,'GET',null).then(res => {
@@ -88,7 +88,7 @@ class FoodType extends Component {
                 <Col span={3}className="text-center h-100" style={{margin:'auto', textAlign: 'center'}}>
                     <div>
                         <h4>{category.categoryName}</h4>
-                        <button type="button" className="btn p-0 btn-light" onClick={this.checkIsExpand} id="myBtn">{this.state.isExpand === true ? 'Thu gọn' : ' Xem thêm'} <FontAwesomeIcon icon={faAngleDown} /></button>
+                        <Button type="link" onClick={this.checkIsExpand}>{this.state.isExpand === true ? <div>Thu gọn <FontAwesomeIcon icon={faAngleUp} /></div> : <div>Xem thêm <FontAwesomeIcon icon={faAngleDown} /></div> } </Button>
                     </div>
                 </Col>
                 <Col span={21} className="d-flex flex-column">

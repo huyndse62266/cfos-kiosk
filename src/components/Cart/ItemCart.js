@@ -70,7 +70,7 @@ class ItemCart extends Component {
                                 <FontAwesomeIcon icon={faTrash} />
                             </Button>
                         </Col>
-                        <Col span={16} className="d-flex flex-row pl-3">
+                        <Col span={16} className="d-flex flex-row">
                             <Button style={{backgroundColor: '#D2D2D2'}} onClick={()=>{this.DecreaseItem(food.foodId)}} ><FontAwesomeIcon icon={faMinus} /></Button>
                             <div className="px-4 py-1">
                                 { this.state.show ? <h2 style={{fontSize:'1rem'}}>{ cartQuantity }</h2> : '' }
