@@ -12,6 +12,7 @@ import DrinkScreen from './screen/DrinkScreen';
 import DishScreen from './screen/DishScreen';
 import RestaurantScreen from './screen/RestaurantScreen';
 import PopularScreen from './screen/PopularScreen';
+import ChoosePayment from '../pages/Payment/ChoosePayment'
 export default class TopBar extends Component {
     state = {
         current: 'mail',
@@ -28,7 +29,7 @@ export default class TopBar extends Component {
                 <Menu onClick={this.handleClick} selectedKeys={[this.state.current]} mode="horizontal" inlineIndent='50'>
                     <Menu.Item key="popular">
                         <div className="px-5 py-2" style={{fontSize: '20px'}}>
-                            <Link to="/">
+                            <Link to="/popular">
                                 <FontAwesomeIcon icon={faStar}/>
                                 <span className="px-1">Popular</span></Link>
                         </div>
@@ -63,11 +64,12 @@ export default class TopBar extends Component {
                     </Menu.Item>
                 </Menu>
 
-                <Route path="/" exact component={PopularScreen}></Route>
+                <Route path="/popular" exact component={PopularScreen}></Route>
                 <Route path="/promotion"  component={PromotionScreen}></Route>
                 <Route path="/meal"  component={DishScreen}></Route>
                 <Route path="/drink"  component={DrinkScreen}></Route>
                 <Route path="/restaurant"  component={RestaurantScreen}></Route>
+                <Route path="/payment" exact component={({history}) => <ChoosePayment history={history}/>}></Route> 
             </div>
         )
     }

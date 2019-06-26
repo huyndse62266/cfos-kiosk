@@ -35,6 +35,14 @@ export const actFetchFoodsRequest = (id) => {
     };
 }
 
+export const actFetchOrderRequest = (id) => {
+    return dispatch => {
+        return callApi(`orders/${id}`,'GET',null).then(res =>{
+            console.log(res.data)
+            dispatch(fetchOrder(res.data));
+        })
+    };
+}
 
 
 export const actCheckoutRequest = (cartItems, total) =>{
@@ -56,7 +64,7 @@ export const actCheckoutRequest = (cartItems, total) =>{
     console.log(JSON.stringify(order))
     return dispatch =>{
         return callApi(`orders/orders/submit-order`,'POST',JSON.stringify(order)).then(res =>{
-            dispatch(actFetchFoods(res.data));
+            dispatch(fetchOrder(res.data));
         })
     }
 }
@@ -120,5 +128,13 @@ export const subQuantity = (id) =>{
 export const checkout = () =>{
     return {
         type: Types.CHECKOUT
+    }
+}
+
+export const fetchOrder = (orders) =>{
+    console.log(orders)
+    return {
+        type: Types.FETCH_ORDER,
+        orders
     }
 }

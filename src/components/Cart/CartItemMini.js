@@ -11,13 +11,14 @@ class CartItem extends Component {
         this.props.removeItem(id);     
     }
     render() {
-        var {food} = this.props;
+        var {food, type} = this.props;
         return (
             <div className="border-custom mb-3">
                 <Row >
-                    <Button className="trash-button" onClick={()=>{this.removeItem(food.foodId)}}>
+                    {!type ? <Button className="trash-button" onClick={()=>{this.removeItem(food.foodId)}}>
                         <FontAwesomeIcon icon={faTrash} />
-                    </Button>
+                    </Button> : <span></span>}
+                    
                     <img src={food.foodImage} className="img-thumbnail pb-0" alt="Cinque Terre"  style={{height:"150px", width: '100%'}}/>
                     
                 </Row>

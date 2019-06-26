@@ -19,7 +19,7 @@ export default class DishDetail extends Component {
                     <DishInfo food={this.props.food}/>
                 </TabPane>
                 <TabPane tab={<div className="button-2">Dish Feedback</div>} key="2" active title-item-class="w-50">
-                   <DishFeedback/>
+                   <DishFeedback food={this.props.food}/>
                 </TabPane>              
             </Tabs>
         )

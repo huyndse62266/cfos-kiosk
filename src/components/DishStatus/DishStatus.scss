@@ -13,7 +13,6 @@
 .check-icon{
     color:#2CC200 !important;
     font-size: 20px;
-    margin-left: 20px;
 }
 
 .status-waiting{
@@ -27,4 +26,27 @@
 img{
     width: 100%;
     height: 100%;
+}
+
+.quantity-col{
+    height: 80px;
+    position: relative
+  }
+  .quantity-col h4{
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.dish-status{
+    height: 80px;
+    position: relative
+  }
+  .dish-status h4{
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }

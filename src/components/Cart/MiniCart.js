@@ -6,7 +6,8 @@ import { faShoppingCart, faAngleLeft } from '@fortawesome/free-solid-svg-icons'
 import { connect } from 'react-redux'
 import ScrollArea from 'react-scrollbar';
 import NumberFormat from 'react-number-format';
-import restaurantLogo from '../../images/khai-niem-nha-hang.jpg'
+import { BrowserRouter as Router,Route, Link} from "react-router-dom";
+import ChoosePayment from '../../pages/Payment/ChoosePayment'
 import CartItemMini from './CartItemMini'
 import ViewBasket from '../../pages/Basket/ViewBasket'
 import { actCheckoutRequest } from '../../action';
@@ -98,7 +99,7 @@ class MiniCart extends Component {
                 </Row>
                 <Row>
                     <Col span={18} offset={3}>
-                        <ReactToPrint
+                        {/* <ReactToPrint
                         trigger={() => <Button  className="purchase-button-1">Purchase</Button>}
                         content={() => this.componentRef}
                         copyStyles={false}
@@ -106,8 +107,11 @@ class MiniCart extends Component {
                         />
                         <div ref={el => (this.componentRef = el)}>
                             {contentReceipt}
-                        </div>
-                      
+                        </div> */}
+                       
+                            <Link to="/payment"><Button  className="purchase-button-1">Purchase</Button></Link>
+                   
+                       
                     </Col>   
                 </Row>
                 <Modal

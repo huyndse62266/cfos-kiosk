@@ -4,6 +4,8 @@ export const FETCH_STORE = 'FETCH_STORE';
 
 export const FETCH_FOOD = 'FETCH_FOOD';
 
+export const FETCH_ORDER = 'FETCH_ORDER';
+
 export const FETCH_CART = 'FETCH_CART';
 
 export const ADD_TO_CART = "ADD_TO_CART";

@@ -1,24 +1,53 @@
 import React, { Component } from 'react'
 import DishStatus from '../../components/DishStatus/DishStatus'
+import Numberpad from '../../components/History/Numberpad'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faArrowLeft} from '@fortawesome/free-solid-svg-icons'
 import './Order.scss'
+import { Row,Col,Button } from 'antd';
+import { connect } from 'react-redux'
 
-export default class CheckDishStatus extends Component {
+class CheckOrder extends Component {
+    state = {
+        orders: this.props.orders
+    };
     render() {
+        var {orders} = this.props;
+        var {orderDetailReponseVMList} = orders;
         return (
-            <div className="container-fluid d-flex flex-row p-0">
-                <div className="col-lg-8 py-4">
-                    <h3 className="text-left">Your order status</h3>
-                    <div className="border-custom px-3" >
-                        <h4 className="text-left pt-3">Order Number: 456</h4>
-                        <DishStatus orderStaus={true}/>
-                        <DishStatus orderStaus={false}/>
-                        <DishStatus orderStaus={false}/>
-                    </div>
-                </div>
-                <div className="col-lg-4 bg-success">
-                    a
-                </div>
-            </div>
+            <Row >
+                <Col span={12} offset={3} className="py-5">
+                    <Row className="py-4">
+                        <Col span={2}>
+                            <Button className="arrow-button" style={{fontSize: '20px'}}>
+                                <FontAwesomeIcon icon={faArrowLeft} />
+                            </Button>
+                        </Col>
+                        <Col span={22} className="py-2">
+                            <h3 className="text-left p-0">Your order status</h3>
+                        </Col>
+                    </Row>
+                    {!orderDetailReponseVMList ? <div/> : 
+                        <Row className="order-status-wrapper px-4 ">
+                        <h4 className="text-left pt-3">Order Number: {orders.orderNumber}</h4>
+                        {!orderDetailReponseVMList ? <div/> : 
+                        orderDetailReponseVMList.map((orderDetail, index) => <DishStatus orderDetail={orderDetail}/> ) }
+                    </Row> }
+                    
+                </Col>
+                <Col span={6} className="px-3 bg-light ml-5">
+                    <Numberpad/>
+                </Col>
+            </Row>
         )
     }
 }
+
+const mapStateToProps = (state)=>{
+    return{
+        orders: state.orders
+    }
+}
+
+
+export default connect(mapStateToProps,null)(CheckOrder);

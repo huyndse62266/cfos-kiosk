@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {Row,Col} from 'antd'
+import {Row,Col,Button} from 'antd'
 
 export default class TypePayment extends Component {
     render() {
@@ -19,7 +19,7 @@ export default class TypePayment extends Component {
                                 <h3>Global Cart</h3>
                             </Row>
                             <Row>
-                                <div className="d-flex flex-row py-3">
+                                {/* <div className="d-flex flex-row py-3">
                                     <div className="px-4 py-3 mx-1 bg-dark rounded" style={{color:'white', fontSize:'20px'}}>
                                         Card
                                     </div>
@@ -29,7 +29,22 @@ export default class TypePayment extends Component {
                                     <div className="px-4 py-3 mx-1 bg-dark rounded" style={{color:'white', fontSize:'20px'}}>
                                         Card
                                     </div>
-                                </div>
+                                </div> */}
+                                <Col span={6} className="px-2">
+                                    <Button type="primary flex" className="card-button">
+                                        <span className="py-3 h-100">Cart</span>
+                                    </Button>
+                                </Col>
+                                <Col span={6} className="px-2">
+                                    <Button type="primary" className="w-75 py-4  text-center">
+                                   
+                                    </Button>
+                                </Col>
+                                <Col span={6} className="px-2">
+                                    <Button type="primary" className="w-75 py-4  text-center">
+                                   
+                                    </Button>
+                                </Col>         
                             </Row>
                             <Row>
                                 <h6>Lorem ipsum dolor sit amet, consectetuer adipisicing elit. Aenea commodo ligula eget dolor. Aenea massa. Cum sociis natoque </h6>

@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import {Row,Col} from 'antd'
 import CartPayment from '../../components/Cart/CartPayment'
-import TypePayment from '../../components/TypePayment'
+import TypePayment from '../../components/Cart/TypePayment'
+import './Payment.scss';
 export default class ChoosePayment extends Component {
     render() {
         return (
@@ -10,8 +11,8 @@ export default class ChoosePayment extends Component {
                     <Col span={16}>
                         <TypePayment/>
                     </Col>
-                    <Col span={8}>
-                        <CartPayment/>
+                    <Col span={8} className="cart-payment-div">
+                        <CartPayment />
                     </Col>
                 </Row>
             </div>

@@ -53,6 +53,7 @@ class ItemCart extends Component {
 
     render() {
         var {food,cartQuantity} = this.props;
+        console.log(food)
         console.log(food.quantity)
         return (
             <div className="container-fluid p-0" style={{backgroundColor: '#E6E6E6', borderRadius: 10}}>
