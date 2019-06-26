@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import {Row,Col,Button} from 'antd'
 import { connect } from 'react-redux'
 import { actCheckoutRequest } from '../../action';
+import ReactToPrint from 'react-to-print';
 import './Cart.scss'
 
 
@@ -14,6 +15,16 @@ class TypePayment extends Component {
     }
     render() {
         var {items,pricetotal} = this.props;
+        let contentReceipt = this.props.items.length ?
+        (
+            this.props.items.map((item,index) =>{
+                console.log(item.cartQuantity)
+                return <h6>{item.foodName}:{item.cartQuantity}</h6>
+            })
+        ):(
+            <span></span>
+        );
+        console.log(contentReceipt);
         return (
             <div>
                 <Row>
@@ -86,20 +97,18 @@ class TypePayment extends Component {
                 </Row>
                 <Row className="my-2">
                     <Col span={14} offset={5}>
-                        <Button  className="cash-button bg-light" onClick={()=>{this.checkoutClick(items,pricetotal)}}>
-                            {/* <div className="bg-info"> */}
-                                <h3 >On Cash</h3>
-                                <h6>Lorem ipsum dolor sit amet, consectetuer adipisicing elit. Aenea<br/> commodo ligula eget dolor. Aenea massa. Cum sociis natoque </h6>
-                            {/* </div> */}
-                        </Button>
-                        {/* <div className="bg-light rounded px-4 py-3">
-                            <Row>
-                                <h3>On Cash</h3>
-                            </Row>
-                            <Row>
-                                <h6>Lorem ipsum dolor sit amet, consectetuer adipisicing elit. Aenea commodo ligula eget dolor. Aenea massa. Cum sociis natoque </h6>
-                            </Row>
-                        </div> */}
+                        
+                        <ReactToPrint
+                        trigger={() => <Button  className="cash-button bg-light" onClick={()=>{this.checkoutClick(items,pricetotal)}}>
+                            <h3 >On Cash</h3>
+                            <h6>Lorem ipsum dolor sit amet, consectetuer adipisicing elit. Aenea<br/> commodo ligula eget dolor. Aenea massa. Cum sociis natoque </h6></Button>}
+                        content={() => this.componentRef}
+                        copyStyles={false}
+                        // pageStyle={{height:'200px'}}
+                        />
+                        <div ref={el => (this.componentRef = el)}>
+                            {contentReceipt}
+                        </div> *     
                     </Col>
                 </Row>
             </div>

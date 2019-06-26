@@ -5,6 +5,7 @@ import TypePayment from '../../components/Cart/TypePayment'
 import './Payment.scss';
 export default class ChoosePayment extends Component {
     render() {
+        console.log('asdas')
         return (
             <div>
                 <Row>

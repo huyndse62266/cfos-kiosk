@@ -65,11 +65,11 @@ export default class TopBar extends Component {
                 </Menu>
 
                 <Route path="/popular" exact component={PopularScreen}></Route>
-                <Route path="/promotion"  component={PromotionScreen}></Route>
-                <Route path="/meal"  component={DishScreen}></Route>
-                <Route path="/drink"  component={DrinkScreen}></Route>
-                <Route path="/restaurant"  component={RestaurantScreen}></Route>
-                <Route path="/payment" exact component={({history}) => <ChoosePayment history={history}/>}></Route> 
+                <Route path="/promotion"  exact component={PromotionScreen}></Route>
+                <Route path="/meal" exact component={DishScreen}></Route>
+                <Route path="/drink" exact component={DrinkScreen}></Route>
+                <Route path="/restaurant" exact component={RestaurantScreen}></Route>
+                
             </div>
         )
     }
