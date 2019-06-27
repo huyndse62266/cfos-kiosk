@@ -116,6 +116,10 @@ class StoreMenu extends Component {
     }
 
     findByCategory = (id) =>{
+        var a = this.state.foods.filter((food) =>{
+            return food.categoryId == id;
+        })
+        console.log(a);
         this.props.fetchFoodByCategories(id);
     }
 
@@ -125,8 +129,6 @@ class StoreMenu extends Component {
     render() {
         var { storeInfo, myFoods } = this.props;
         var { foods} = this.state;
-
-        console.log(foods)
         return (
             <Row >
                 <Col span={3}className="text-center h-100" style={{margin:'auto', textAlign: 'center'}}>

@@ -91,7 +91,7 @@ class FoodType extends Component {
                         <Button type="link" onClick={this.checkIsExpand}>{this.state.isExpand === true ? <div>Thu gọn <FontAwesomeIcon icon={faAngleUp} /></div> : <div>Xem thêm <FontAwesomeIcon icon={faAngleDown} /></div> } </Button>
                     </div>
                 </Col>
-                <Col span={21} className="d-flex flex-column">
+                <Col span={21} className="d-flex flex-column" style={{backgroundColor: 'white'}}>
                     <Row >
                         {this.showAllFoods(foods)}
                     </Row>

@@ -18,21 +18,21 @@ import MiniCart from '../Cart/MiniCart'
     
     render() {
         var { categories } = this.props;
+        const {match} = this.props;
+        console.log(match);
         return (
-            <div className="container-fluid d-flex flex-row w-100 p-0"> 
-                <Row>
-                    <Col span={20}>
-                        {this.showAllCategory(categories)}
-                    </Col>
-                    <Col span={4} >
-                        <Row  className="w-100">
-                            <Col span={20} offset={2}>
-                                <MiniCart />
-                            </Col>
-                        </Row>
-                    </Col>
-                </Row>
-            </div>
+            <Row className="py-2">
+                <Col span={20}>
+                    {this.showAllCategory(categories)}
+                </Col>
+                <Col span={4} >
+                    <Row  className="w-100">
+                        <Col span={20} offset={2} style={{position:'fixed',width:'15%', right:0}}>
+                            <MiniCart />
+                        </Col>
+                    </Row>
+                </Col>
+            </Row>
         )
     }
 

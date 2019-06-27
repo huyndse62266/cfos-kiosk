@@ -29,16 +29,16 @@ class TypePayment extends Component {
             <div>
                 <Row>
                     <Col span={24}>
-                        <div className="text-center py-5" >
-                            <h1>Choose your payment methods</h1>
+                        <div className="text-left p-5" >
+                            <h1 className="px-5">Choose your payment methods</h1>
                         </div>
                     </Col>
                 </Row>
-                <Row className="my-2">
-                    <Col span={14} offset={5}>
-                        <div className="bg-light rounded px-4 py-3">
+                <Row className="my-3">
+                    <Col span={16} offset={2}>
+                        <div className="payment-type-wrapper">
                             <Row>
-                                <h3>Global Cart</h3>
+                                <h3>Global Card</h3>
                             </Row>
                             <Row>
                                 {/* <div className="d-flex flex-row py-3">
@@ -70,15 +70,15 @@ class TypePayment extends Component {
 
      
                             </Row>
-                            <Row>
-                                <h6 className="py-2">Lorem ipsum dolor sit amet, consectetuer adipisicing elit. Aenea commodo ligula eget dolor. Aenea massa. Cum sociis natoque </h6>
+                            <Row className="payment-type-detail">
+                                <h6>Lorem ipsum dolor sit amet, consectetuer adipisicing elit. Aenea commodo ligula eget dolor. Aenea massa. Cum sociis natoque </h6>
                             </Row>
                         </div>
                     </Col>
                 </Row>
-                <Row className="my-2">
-                    <Col span={14} offset={5} >
-                        <div className="bg-light rounded px-4 py-3">
+                <Row className="my-3">
+                    <Col span={16} offset={2} >
+                        <div className="payment-type-wrapper">
                             <Row>
                                 <h3>Membership</h3>
                             </Row>
@@ -95,20 +95,25 @@ class TypePayment extends Component {
                         </div>
                     </Col>
                 </Row>
-                <Row className="my-2">
-                    <Col span={14} offset={5}>
+                <Row className="my-3">
+                    <Col span={16} offset={2}>
                         
                         <ReactToPrint
-                        trigger={() => <Button  className="cash-button bg-light" onClick={()=>{this.checkoutClick(items,pricetotal)}}>
+                        trigger={() => <Button  className="cash-button" onClick={()=>{this.checkoutClick(items,pricetotal)}}>
+                        {/* <div className="bg-info"> */}
                             <h3 >On Cash</h3>
-                            <h6>Lorem ipsum dolor sit amet, consectetuer adipisicing elit. Aenea<br/> commodo ligula eget dolor. Aenea massa. Cum sociis natoque </h6></Button>}
+                            <h6>Lorem ipsum dolor sit amet, consectetuer adipisicing elit. Aenea<br/> commodo ligula eget dolor. Aenea massa. Cum sociis natoque </h6>
+                        {/* </div> */}
+                    </Button>}
                         content={() => this.componentRef}
                         copyStyles={false}
-                        // pageStyle={{height:'200px'}}
+                        pageStyle={{height:'200px'}}
                         />
                         <div ref={el => (this.componentRef = el)}>
+                            {/* <div style={{display:'none'}}>
                             {contentReceipt}
-                        </div> *     
+                            </div> */}
+                        </div>     
                     </Col>
                 </Row>
             </div>

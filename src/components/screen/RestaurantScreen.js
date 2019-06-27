@@ -12,7 +12,6 @@ class RestaurantScreen extends Component {
 
     render() {
         var { stores } = this.props;
-        console.log(stores)
         return (
             <div className="w-100"> 
                 <Row>
@@ -21,7 +20,7 @@ class RestaurantScreen extends Component {
                     </Col>
                     <Col span={4} >
                         <Row  className="w-100">
-                            <Col span={20} offset={2}>
+                            <Col span={20} offset={2} style={{position:'fixed',width:'15%', right:0}}>
                                 <MiniCart />
                             </Col>
                         </Row>
@@ -53,7 +52,6 @@ const mapStateToProps = state => {
 const mapDispatchToProps = (dispatch, props) => {
     return {
         fetchAllStore : (id) => {
-            console.log(id)
             dispatch(actFetchStoreCategoriesRequest(id));
         }
     }

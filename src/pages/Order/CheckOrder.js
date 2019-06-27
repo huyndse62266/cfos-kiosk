@@ -11,6 +11,12 @@ class CheckOrder extends Component {
     state = {
         orders: this.props.orders
     };
+
+    goBackPage = () =>{
+        var { history } = this.props
+        history.goBack()
+    }
+
     render() {
         var {orders} = this.props;
         var {orderDetailReponseVMList} = orders;
@@ -19,7 +25,7 @@ class CheckOrder extends Component {
                 <Col span={12} offset={3} className="py-5">
                     <Row className="py-4">
                         <Col span={2}>
-                            <Button className="arrow-button" style={{fontSize: '20px'}}>
+                            <Button className="arrow-button" style={{fontSize: '20px'}} onClick={()=>{this.goBackPage()}}>
                                 <FontAwesomeIcon icon={faArrowLeft} />
                             </Button>
                         </Col>

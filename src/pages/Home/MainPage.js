@@ -28,7 +28,7 @@ export default class MainPage extends Component {
               </Link>
             </Col>
             <Col span={12} className="text-left p-5">
-              <Link to="/popular">
+              <Link to="/menu">
                 <Button className="button-order" >
                   Touch to place your order
                 </Button>
