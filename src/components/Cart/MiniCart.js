@@ -50,7 +50,6 @@ class MiniCart extends Component {
         let addedItems =  this.props.items.length ?
             (
                 this.props.items.map((item,index) =>{
-                    console.log(item.cartQuantity)
                     return <CartItemMini food={item} key={index}  index={index} cartQuantity={item.cartQuantity}/>
                 })
             ):(
@@ -59,7 +58,6 @@ class MiniCart extends Component {
         let contentReceipt = this.props.items.length ?
         (
             this.props.items.map((item,index) =>{
-                console.log(item.cartQuantity)
                 return <h6>{item.foodName}:{item.cartQuantity}</h6>
             })
         ):(

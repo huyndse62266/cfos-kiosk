@@ -13,7 +13,8 @@ class StoreMenu extends Component {
         super();
         this.state ={
             isExpand: false,
-            foods : []
+            foods : [],
+            foodFilter : [],
         }
         this.readMore = this.readMore.bind(this);
         this.checkIsExpand = this.checkIsExpand.bind(this);
@@ -90,7 +91,7 @@ class StoreMenu extends Component {
         if (this.state.isExpand) {
             return (<Row>
                 <Col span={12} offset={6}>
-                    <Button className="store-category" onClick={()=>{this.findAll(this.props.storeInfo.storeId)}}>All</Button>
+                    <Button className="store-category" onClick={()=>{this.findAll()}}>All</Button>
                     {/* <div className="bg-light rounded px-2 py-2 my-1 font-weight-bold">
                         All
                     </div> */}
@@ -116,19 +117,25 @@ class StoreMenu extends Component {
     }
 
     findByCategory = (id) =>{
-        var a = this.state.foods.filter((food) =>{
-            return food.categoryId == id;
+        var { foods} = this.state;
+        let a = foods.filter((food) =>{
+            return food.fcSubCategoryId == id;
         })
-        console.log(a);
-        this.props.fetchFoodByCategories(id);
+        this.setState({
+            foodFilter: a
+        })
+        // this.props.fetchFoodByCategories(id);
     }
 
-    findAll = (id) =>{
-        this.props.fetchAllFood(id);
+    findAll = () =>{
+        var { foods} = this.state;
+        this.setState({
+            foodFilter: foods
+        })
     }
     render() {
         var { storeInfo, myFoods } = this.props;
-        var { foods} = this.state;
+        var { foods, foodFilter} = this.state;
         return (
             <Row >
                 <Col span={3}className="text-center h-100" style={{margin:'auto', textAlign: 'center'}}>
@@ -148,11 +155,11 @@ class StoreMenu extends Component {
                         <FoodItem key={index} food={food} index={index}/>
                     </Col> )
                     } */}
-                        {this.showAllFoods(foods,myFoods)}
+                        {this.showAllFoods(foods,foodFilter)}
                     </Row>
                     <span id="more">
                         <Row type="flex" justify="start">
-                            {this.readMore(foods,myFoods)}
+                            {this.readMore(foods,foodFilter)}
                         </Row>
                     </span>
                     

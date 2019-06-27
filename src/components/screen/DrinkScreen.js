@@ -13,7 +13,7 @@ class DrinkScreen extends Component {
     render() {
         var { categories } = this.props;
         const {match} = this.props;
-        console.log(match);
+
         return (
             <div className="container-fluid d-flex flex-row w-100 p-0"> 
                 <Row>
@@ -35,7 +35,6 @@ class DrinkScreen extends Component {
     
     showAllCategory(categories){
         var result = null;
-        console.log(categories)
         if(categories.length > 0){
             result = categories.map((category, index) => {
                 return (<FoodType key={index} category={category} index={index} type={'drink'}/>)
