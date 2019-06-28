@@ -1,19 +1,63 @@
-.button-check{
-    width: 40%;
-    height: 75px;
-    border-radius: 5px;
-    background-color: limegreen;
-    font-size: 20px;
-    color: white;
-    font-weight: 500
-}
-.button-order{
-    width: 40%;
-    height: 75px;
-    border-radius: 5px;
-    background-color: mediumturquoise;
-    font-size: 20px;
-    color: white;
-    font-weight: 500
+
+@media all and (max-width: 1920px) {
+    .button-check{
+        width: 40%;
+        height: 75px;
+        border-radius: 5px;
+        background-color: limegreen;
+        font-size: 20px;
+        color: white;
+        font-weight: 500
+    }
+    .button-order{
+        width: 40%;
+        height: 75px;
+        border-radius: 5px;
+        background-color: mediumturquoise;
+        font-size: 20px;
+        color: white;
+        font-weight: 500
+    }
 }
 
+@media all and (max-width: 1440px) {
+    .button-check{
+        width: 40%;
+        height: 60px;
+        border-radius: 5px;
+        background-color: limegreen;
+        font-size: 13px;
+        color: white;
+        font-weight: 500
+    }
+    .button-order{
+        width: 40%;
+        height: 60px;
+        border-radius: 5px;
+        background-color: mediumturquoise;
+        font-size: 13px;
+        color: white;
+        font-weight: 500
+    }
+}
+
+@media all and (max-width: 1024px) {
+    .button-check{
+        width: 40%;
+        height: 50px;
+        border-radius: 5px;
+        background-color: limegreen;
+        font-size: 11px;
+        color: white;
+        font-weight: 500
+    }
+    .button-order{
+        width: 40%;
+        height: 50px;
+        border-radius: 5px;
+        background-color: mediumturquoise;
+        font-size: 11px;
+        color: white;
+        font-weight: 500
+    }
+}

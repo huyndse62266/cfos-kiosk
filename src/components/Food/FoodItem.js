@@ -38,8 +38,8 @@ class FoodItem extends Component {
     renderPromotionTag = (rate) =>{
        
         if(rate > 0)
-            return(<div className="text-center rounded py-1" style={{backgroundColor:'#32CCBC', color:'white'}}>
-                <a className="font-weight-bold">-{rate}%</a>
+            return(<div className="promotion-tag-wrapper">
+                <a>-{rate}%</a>
         </div>)
     }
 
@@ -63,7 +63,7 @@ class FoodItem extends Component {
             <div className="py-2">
                 <Row className="py-2">
                     <Col span={3}><Avatar style={{ backgroundColor: '#87d068' }} icon="user" size="small"/></Col>
-                    <Col span={16}><Text style={{fontSize:'12px'}}>{food.storeVM.storeName}</Text></Col>
+                    <Col span={16} ><a className="restaurant-title">{food.storeVM.storeName}</a></Col>
                     <Col span={5}>
                         {this.renderPromotionTag(food.promotion)}
                     </Col>
@@ -84,7 +84,7 @@ class FoodItem extends Component {
                                 {this.showRating(food.rate)}
                             </Row>
                         </Col>
-                        <Col span={8} className="h-100">
+                        <Col span={8}>
                             <Button className="button-add" onClick={()=>{this.addToCartClick(food)}}>Add</Button>
                         </Col>
                     </Row>

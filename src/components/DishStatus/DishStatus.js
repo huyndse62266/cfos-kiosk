@@ -16,7 +16,6 @@ export default class DishStatus extends Component {
 
     render() {
         var {orderDetail} = this.props;
-        console.log(orderDetail)
         let myDiv = null;
         if(this.state.isReady){
             myDiv = <div className="col-lg-3 d-flex px-4 justify-content-end align-items-center">            

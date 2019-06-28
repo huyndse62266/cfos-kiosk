@@ -61,7 +61,7 @@ export const actCheckoutRequest = (cartItems, total) =>{
     }
     return dispatch =>{
         return callApi(`orders/orders/submit-order`,'POST',JSON.stringify(order)).then(res =>{
-            dispatch(fetchOrder(res.data));
+            dispatch(checkout(res.data));
         })
     }
 }
@@ -122,9 +122,10 @@ export const subQuantity = (id) =>{
     }
 }
 
-export const checkout = () =>{
+export const checkout = (id) =>{
     return {
-        type: Types.CHECKOUT
+        type: Types.CHECKOUT,
+        id
     }
 }
 

@@ -1,15 +1,13 @@
 import React, { Component } from 'react'
 import { Layout } from 'antd';
-import {Route, Link,BrowserRouter as Router,Switch } from "react-router-dom"
-import TopBar from '../../components/TopBar.js';
+import {Route,Switch } from "react-router-dom"
+import TopBar from '../../components/Header/TopBar';
 import PopularScreen from '../../components/screen/PopularScreen';
 import PromotionScreen from '../../components/screen/PromotionScreen';
 import DishScreen from '../../components/screen/DishScreen';
 import DrinkScreen from '../../components/screen/DrinkScreen';
 import RestaurantScreen from '../../components/screen/RestaurantScreen';
-import MiniCart from '../../components/Cart/MiniCart'
-
-const { Header, Footer, Sider, Content } = Layout;
+const { Header, Content } = Layout;
 export default class MenuPage extends Component {
     
     render() {
@@ -17,23 +15,20 @@ export default class MenuPage extends Component {
         console.log(match);
         return (
             <Layout>
-                <Header className="text-left">
-                    <TopBar/>
+                <Header style={{padding: 0, backgroundColor: 'white'}}>
+                   <TopBar/>
                 </Header>
-            <Layout>
-                <Content>
+                <Content style={{backgroundColor:'white'}}>
                     <Switch>
-                        <Route exact path={match.path}  component={PopularScreen}></Route>
-                        <Route  path={match.path + '/popular'}  component={PopularScreen}></Route>
-                        <Route  path={match.path + '/promotion'}   component={PromotionScreen}></Route>
-                        <Route  path={match.path + '/meal'}   component={DishScreen}></Route>
-                        <Route  path={match.path + '/drink'}   component={DrinkScreen}></Route>
-                        <Route  path={match.path + '/combo'}   component={RestaurantScreen}></Route>
-                        <Route  path={match.path + '/restaurant'}   component={RestaurantScreen}></Route>
+                        <Route exact path={match.path}  component={({history}) => <PopularScreen history={history}/>}></Route>
+                        <Route  path={match.path + '/popular'} component={({history}) => <PopularScreen history={history}/>}></Route>
+                        <Route  path={match.path + '/promotion'} component={({history}) => <PromotionScreen history={history}/>} ></Route>
+                        <Route  path={match.path + '/meal'}  component={({history}) => <DishScreen history={history}/>}></Route>
+                        <Route  path={match.path + '/drink'}  component={({history}) => <DrinkScreen history={history}/>}></Route>
+                        <Route  path={match.path + '/combo'} component={({history}) => <RestaurantScreen history={history}/>}></Route>
+                        <Route  path={match.path + '/restaurant'}  component={({history}) => <RestaurantScreen history={history}/>}></Route>
                     </Switch>
                 </Content>
-                {/* <Sider><MiniCart /></Sider> */}
-            </Layout>
           </Layout>
         )
     }

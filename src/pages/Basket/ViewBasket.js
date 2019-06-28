@@ -42,8 +42,6 @@ class ViewBasket extends Component {
               </Col>
           </Row>
       )
-
-        console.log(addedItems)
     return (
       <div className="container-fluid"> 
         <ScrollArea speed={0.8}

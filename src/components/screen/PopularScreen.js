@@ -18,8 +18,6 @@ import MiniCart from '../Cart/MiniCart'
     
     render() {
         var { categories } = this.props;
-        const {match} = this.props;
-        console.log(match);
         return (
             <Row className="py-2">
                 <Col span={20}>

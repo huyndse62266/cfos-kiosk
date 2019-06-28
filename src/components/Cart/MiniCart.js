@@ -1,13 +1,11 @@
-import React, { Component, useRef }  from 'react'
-import ReactToPrint from 'react-to-print';
+import React, { Component }  from 'react'
 import { Modal, Button, Row,Col } from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faShoppingCart, faAngleLeft } from '@fortawesome/free-solid-svg-icons'
 import { connect } from 'react-redux'
 import ScrollArea from 'react-scrollbar';
 import NumberFormat from 'react-number-format';
-import { BrowserRouter as Router,Route, Link} from "react-router-dom";
-import ChoosePayment from '../../pages/Payment/ChoosePayment'
+import { Link} from "react-router-dom";
 import CartItemMini from './CartItemMini'
 import ViewBasket from '../../pages/Basket/ViewBasket'
 import { actCheckoutRequest } from '../../action';
@@ -55,18 +53,10 @@ class MiniCart extends Component {
             ):(
                 <span></span>
             );
-        let contentReceipt = this.props.items.length ?
-        (
-            this.props.items.map((item,index) =>{
-                return <h6>{item.foodName}:{item.cartQuantity}</h6>
-            })
-        ):(
-            <span></span>
-        );
           
         return (
             
-            <div className="container bg-light p-0 h-100 ">
+            <div className="mini-cart-wrapper" >
             
                 <Row>
                     <Button type="primary" onClick={this.showModal} className="ml-3 px-0" style={{zIndex: 2, width: '30px',
@@ -81,7 +71,7 @@ class MiniCart extends Component {
                     verticalScrollbarStyle={{display:'none'}}
                     className="area"
                     contentClassName="content"
-                    horizontal={false} style={{height: '550px'}}>
+                    horizontal={false} style={{height: '60%'}}>
                     <Row>
                         {addedItems}
                     </Row>
@@ -97,15 +87,6 @@ class MiniCart extends Component {
                 </Row>
                 <Row>
                     <Col span={18} offset={3}>
-                        {/* <ReactToPrint
-                        trigger={() => <Button  className="purchase-button-1">Purchase</Button>}
-                        content={() => this.componentRef}
-                        copyStyles={false}
-                        pageStyle={{height:'200px'}}
-                        />
-                        <div ref={el => (this.componentRef = el)}>
-                            {contentReceipt}
-                        </div> */}
                        
                             <Link to="/payment"><Button  className="purchase-button-1">Purchase</Button></Link>
                    

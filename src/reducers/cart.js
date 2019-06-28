@@ -1,8 +1,8 @@
 import * as Types from './../constants/ActionTypes';
-
 const initState = {
     addedItems:[],
-    total: 0
+    total: 0,
+    orderID: 0,
 }
 
 
@@ -80,8 +80,13 @@ const cart = (state = initState,action) => {
             }
     }
     if(action.type === Types.CHECKOUT){
+        let newCart = state.addedItems.filter(item => item.foodId === 0)
+        console.log(newCart)
         return{
-            state : undefined
+           ...state,
+           addedItems: newCart,
+           total: 0,
+           orderID: action.id
         }
     }
 

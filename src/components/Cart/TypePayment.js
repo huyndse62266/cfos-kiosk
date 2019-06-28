@@ -3,6 +3,7 @@ import {Row,Col,Button} from 'antd'
 import { connect } from 'react-redux'
 import { actCheckoutRequest } from '../../action';
 import ReactToPrint from 'react-to-print';
+import ReceiptTemplate from '../ReceiptTemplate'
 import './Cart.scss'
 
 
@@ -13,18 +14,10 @@ class TypePayment extends Component {
         }
         
     }
+    
     render() {
-        var {items,pricetotal} = this.props;
-        let contentReceipt = this.props.items.length ?
-        (
-            this.props.items.map((item,index) =>{
-                console.log(item.cartQuantity)
-                return <h6>{item.foodName}:{item.cartQuantity}</h6>
-            })
-        ):(
-            <span></span>
-        );
-        console.log(contentReceipt);
+        var {items,pricetotal, orderID} = this.props;
+        console.log(orderID)    
         return (
             <div>
                 <Row>
@@ -41,17 +34,6 @@ class TypePayment extends Component {
                                 <h3>Global Card</h3>
                             </Row>
                             <Row>
-                                {/* <div className="d-flex flex-row py-3">
-                                    <div className="px-4 py-3 mx-1 bg-dark rounded" style={{color:'white', fontSize:'20px'}}>
-                                        Card
-                                    </div>
-                                    <div className="px-4 py-3 mx-1 bg-dark rounded" style={{color:'white', fontSize:'20px'}}>
-                                        Card
-                                    </div>
-                                    <div className="px-4 py-3 mx-1 bg-dark rounded" style={{color:'white', fontSize:'20px'}}>
-                                        Card
-                                    </div>
-                                </div> */}
                                 <Col span={6} className="px-3">
                                     <Button  className="card-button bg-danger">
                                         <span className="py-3 h-100">Card</span>
@@ -97,23 +79,21 @@ class TypePayment extends Component {
                 </Row>
                 <Row className="my-3">
                     <Col span={16} offset={2}>
-                        
                         <ReactToPrint
-                        trigger={() => <Button  className="cash-button" onClick={()=>{this.checkoutClick(items,pricetotal)}}>
-                        {/* <div className="bg-info"> */}
-                            <h3 >On Cash</h3>
-                            <h6>Lorem ipsum dolor sit amet, consectetuer adipisicing elit. Aenea<br/> commodo ligula eget dolor. Aenea massa. Cum sociis natoque </h6>
-                        {/* </div> */}
-                    </Button>}
+                        trigger={() => <Button  className="cash-button">
+                            <div><h3 >On Cash</h3>
+                            <h6>Lorem ipsum dolor sit amet, consectetuer adipisicing elit. Aenea<br/> commodo ligula eget dolor. Aenea massa. Cum sociis natoque </h6></div>
+                        </Button>}
                         content={() => this.componentRef}
-                        copyStyles={false}
-                        pageStyle={{height:'200px'}}
+                        onBeforePrint={() => this.checkoutClick(items,pricetotal)}
+                        copyStyles
                         />
-                        <div ref={el => (this.componentRef = el)}>
-                            {/* <div style={{display:'none'}}>
-                            {contentReceipt}
-                            </div> */}
-                        </div>     
+                        <div style={{display:'none'}}>
+                            <ReceiptTemplate items={items} totalPrice={pricetotal} orderID={orderID} ref={el => (this.componentRef = el)} /> 
+                        </div>
+                          
+                        
+                        
                     </Col>
                 </Row>
             </div>
@@ -121,11 +101,13 @@ class TypePayment extends Component {
     }
 }
 
+
+
 const mapStateToProps = (state)=>{
     return{
         items: state.cart.addedItems,
         pricetotal: state.cart.total,
-
+        orderID: state.cart.orderID
     }
 }
 

@@ -84,7 +84,7 @@ class FoodType extends Component {
         var { category } = this.props;
         var { foods } = this.state;
         return (
-            <Row type="flex" justify="space-around" align="middle">
+            <Row type="flex" justify="space-around" align="middle" style={{backgroundColor: '#f5f5f5'}}>
                 <Col span={3}className="text-center h-100" style={{margin:'auto', textAlign: 'center'}}>
                     <div>
                         <h4>{category.categoryName}</h4>

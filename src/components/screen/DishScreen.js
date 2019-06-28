@@ -34,7 +34,6 @@ class DishScreen extends Component {
     
     showAllCategory(categories){
         var result = null;
-        console.log(categories)
         if(categories.length > 0){
             result = categories.map((category, index) => {
                 return (<FoodType key={index} category={category} index={index} type={'popular'}/>)

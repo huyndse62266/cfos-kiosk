@@ -12,8 +12,6 @@ class DrinkScreen extends Component {
 
     render() {
         var { categories } = this.props;
-        const {match} = this.props;
-
         return (
             <div className="container-fluid d-flex flex-row w-100 p-0"> 
                 <Row>

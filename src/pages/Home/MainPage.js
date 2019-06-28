@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
 import {Row,Col,Button} from 'antd'
-import {Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import 'antd/dist/antd.css';
-import TopBar from '../../components/TopBar'
-import CheckOrder from '../Order/CheckOrder'
-import { BrowserRouter as Router} from "react-router-dom";
+
+
 import './Main.scss'
 export default class MainPage extends Component {
 
@@ -15,7 +14,7 @@ export default class MainPage extends Component {
         <div>
           <Row>
             <Col span={18} offset={3}>
-              <img src={'https://cdn.pixabay.com/photo/2017/08/20/07/12/lisbon-2660748_960_720.jpg'}/>  
+              <img src={'https://cdn.pixabay.com/photo/2017/08/20/07/12/lisbon-2660748_960_720.jpg'} alt=""/>  
             </Col>
           </Row>
           <Row className="py-4">

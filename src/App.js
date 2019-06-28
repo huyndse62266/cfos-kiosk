@@ -4,13 +4,7 @@ import {Route, BrowserRouter as Router,Switch } from "react-router-dom";
 import MainScreen from './pages/Home/MainPage'
 import ChoosePayment from './pages/Payment/ChoosePayment'
 import CheckOrder from './pages/Order/CheckOrder'
-import TopBar from './components/TopBar'
 import MenuPage from './pages/Menu/MenuPage'
-import PopularScreen from './components/screen/PopularScreen'
-import PromotionScreen from './components/screen/PromotionScreen'
-import DishScreen from './components/screen/DishScreen'
-import DrinkScreen from './components/screen/DrinkScreen'
-import RestaurantScreen from './components/screen/RestaurantScreen'
 function App() {
   return (
     <Router>
@@ -22,7 +16,7 @@ function App() {
       </Switch>
     </Router>
     
-  //  <CheckOrder/>
+  // <ReceiptTemplate/>
   );
 }
 

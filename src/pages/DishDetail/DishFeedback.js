@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
-import { Avatar, Button,Row,Col } from 'antd';
+import { Avatar,Row,Col } from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import NumberFormat from 'react-number-format';
 import { faStar, faStarHalfAlt } from '@fortawesome/free-solid-svg-icons'
 import { faStar  as faStaro} from '@fortawesome/free-regular-svg-icons'
 import ScrollArea from 'react-scrollbar';
-import restaurantLogo from '../../images/khai-niem-nha-hang.jpg'
 
 export default class DishFeedback extends Component {
     constructor(props) {

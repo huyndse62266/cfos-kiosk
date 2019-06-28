@@ -6,7 +6,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleDown, faAngleUp } from '@fortawesome/free-solid-svg-icons'
 import { connect } from 'react-redux';
 import './Menu.scss'
-import { actFetchFoodsRequest } from '../../action';
 class StoreMenu extends Component {
 
     constructor(){
@@ -92,9 +91,7 @@ class StoreMenu extends Component {
             return (<Row>
                 <Col span={12} offset={6}>
                     <Button className="store-category" onClick={()=>{this.findAll()}}>All</Button>
-                    {/* <div className="bg-light rounded px-2 py-2 my-1 font-weight-bold">
-                        All
-                    </div> */}
+
                 </Col>
             </Row>)
         }
@@ -124,7 +121,6 @@ class StoreMenu extends Component {
         this.setState({
             foodFilter: a
         })
-        // this.props.fetchFoodByCategories(id);
     }
 
     findAll = () =>{
@@ -145,7 +141,6 @@ class StoreMenu extends Component {
                         {this.buttonMoreDetail(storeInfo.categoryVMList)}
                         
                         <Button type="link" onClick={this.checkIsExpand}>{this.state.isExpand === true ? <div>Thu gọn <FontAwesomeIcon icon={faAngleUp} /></div> : <div>Xem thêm <FontAwesomeIcon icon={faAngleDown} /></div> } </Button>
-                        {/* {this.renderShowMoreButton()} */}
                     </div>
                 </Col>
                 <Col span={21} className="d-flex flex-column">
@@ -175,15 +170,5 @@ const mapStateToProps = (state)=>{
     }
 }
 
-const mapDispatchToProps = (dispatch)=>{
-    return{
-        fetchFoodByCategories: (id) =>{
-            dispatch(actFetchFoodsRequest(id))
-        },
-        fetchAllFood: (id) =>{
-            dispatch(actFetchFoodsRequest(id))
-        }
-        
-    }
-}
-export default connect(mapStateToProps, mapDispatchToProps)(StoreMenu);
+
+export default connect(mapStateToProps, null)(StoreMenu);
