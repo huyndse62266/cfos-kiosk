@@ -13,3 +13,40 @@
     border-bottom-left-radius: 20px;
     background-color: #d9d9d9
 }
+.ant-menu.ant-menu-dark .ant-menu-item-selected.customclass {
+    background-color: green; /*Overriden property*/
+  }
+
+
+@media all and (max-width: 1920px) {
+    
+    .menu-item{
+        padding: 0.5rem 0rem;
+        width: 16.67%;
+        font-size: 20px;
+        text-align: center;
+        color:#d9f7be
+    }
+}
+
+@media all and (max-width: 1440px) {
+    .menu-item{
+        padding: 0.4rem 0rem;
+        font-size: 18px;
+    }
+}
+
+@media all and (max-width: 1280px) {
+    .menu-item{
+        padding: 0.3rem 0rem;
+        font-size: 18px;
+    }
+}
+
+@media all and (max-width: 1024px) {
+    .menu-item{
+        padding: 0.2rem 0rem;
+        font-size: 18px;
+    }
+}
+

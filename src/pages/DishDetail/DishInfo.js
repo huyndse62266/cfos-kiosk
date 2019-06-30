@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStar, faTag, faMinus, faPlus, faSyncAlt } from '@fortawesome/free-solid-svg-icons'
 import ScrollArea from 'react-scrollbar';
 import { connect } from 'react-redux'
-import { addQuantity,subQuantity } from '../../action/index';
+import { addQuantity,subQuantity } from '../../action/cart';
 import Foodingredients from '../../components/DishDetail/Foodingredients'
 import MoreOption from '../../components/DishDetail/MoreOption'
 
@@ -70,7 +70,7 @@ class DishDetail extends Component {
                                         <Avatar style={{ backgroundColor: '#87d068' }} icon="user" size="small"/>
                                     </Col>
                                     <Col span={20}>
-                                        <a>Nhà hàng Lorem Ipsum</a>
+                                        <span>Nhà hàng Lorem Ipsum</span>
                                     </Col>
                                 </Row>
                                 <Row className="pt-3">
@@ -87,7 +87,7 @@ class DishDetail extends Component {
                                     <h5 className="font-weight-bold">{food.price} đ</h5>
                                 </Row>
                                 <Row className="border-top py-2">
-                                    <a className="text-left" style={{fontSize: '14px'}}>{food.foodDescription}</a>
+                                    <span className="text-left" style={{fontSize: '14px'}}>{food.foodDescription}</span>
                                 </Row>
                                 <Row className="border-top py-3">
                                     <Col span={2}>

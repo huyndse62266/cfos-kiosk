@@ -8,7 +8,7 @@ import NumberFormat from 'react-number-format';
 import { Link} from "react-router-dom";
 import CartItemMini from './CartItemMini'
 import ViewBasket from '../../pages/Basket/ViewBasket'
-import { actCheckoutRequest } from '../../action';
+
 import './Cart.scss'
 
 class MiniCart extends Component {
@@ -34,14 +34,7 @@ class MiniCart extends Component {
             visible: false,
         });
     };
-    checkoutClick = (cart,total) =>{
-        if(cart.length > 0){
-            this.props.checkout(cart,total);
-        }
-        
-    }
 
-    
 
     render() {
         
@@ -64,7 +57,7 @@ class MiniCart extends Component {
                         <FontAwesomeIcon icon={faAngleLeft} style={{fontSize: '30px', textAlign:'center'}}/>
                     </Button>
                     <Col span={24} className="px-4 py-3 text-center" >
-                        <FontAwesomeIcon icon={faShoppingCart} style={{fontSize:'20px'}}/><a className="font-weight-bold" style={{fontSize:'15px'}}> Your Basket</a>
+                        <FontAwesomeIcon icon={faShoppingCart} style={{fontSize:'20px'}}/><span className="font-weight-bold" style={{fontSize:'15px'}}> Your Basket</span>
                     </Col>
                 </Row>
                 <ScrollArea speed={0.8}
@@ -76,7 +69,7 @@ class MiniCart extends Component {
                         {addedItems}
                     </Row>
                 </ScrollArea>
-                <Row className="p-3">
+                <Row className="total-price-wrapper p-3">
                     <Col span={12} className="float-left">
                         <h6>Tổng tiền: </h6>
                     </Col>
@@ -94,34 +87,28 @@ class MiniCart extends Component {
                     </Col>   
                 </Row>
                 <Modal
-                    title={<span><FontAwesomeIcon icon={faShoppingCart}/> View Basket</span>}
+                    title={<h5><FontAwesomeIcon icon={faShoppingCart}/> View Basket</h5>}
                     visible={this.state.visible}
                     onOk={this.handleOk}
                     onCancel={this.handleCancel}
-                    closable="true"
+                    closable
                     width="95%"
                     bodyStyle={{padding: 0, height: '100%'}}
                     footer={<Row type="flex" justify="end">
-                    <Col span={12} className="py-1">
+                    <Col span={8} className="py-1 text-right">
                       <Col span={4} className="py-3">        
                           <h2>Total: </h2>
                       </Col>
                       <Col span={7} className="py-3">
                           <h2><NumberFormat value={this.props.pricetotal} displayType={'text'} thousandSeparator={'.'} decimalSeparator={','}/> đ</h2>
                       </Col>
-                      <Col span={8} className="py-2">
+                      <Col span={13} className="py-2">
                           
-                          <Button className="w-75 h-100 text-center bg-success">
-                            <div className="py-3" style={{color: 'white', fontWeight: 'bold'}}>Purchase</div>
-                          </Button>  
+                        <Button className="w-75 h-100 text-center bg-success">
+                            <Link to="/payment"><div className="py-3" style={{color: 'white', fontWeight: 'bold'}}>Purchase</div></Link>  
+                        </Button>  
                       </Col>
-                      <Col span={5} className="py-2">
-                            <Button className="w-75 h-100 text-center bg-danger" onClick={()=>{this.handleCancel()}}>
-                            <div  className="py-3" style={{color: 'white', fontWeight: 'bold'}}>
-                              Cancel
-                            </div>
-                          </Button>  
-                      </Col>      
+                      
                     </Col>
                   </Row>  }
                     centered
@@ -142,13 +129,6 @@ const mapStateToProps = (state)=>{
     }
 }
 
-const mapDispatchToProps= (dispatch)=>{
-    return{
-        checkout: (cart,total)=>{
-            console.log('bbb')
-            dispatch(actCheckoutRequest(cart,total))
-        }
-    }
-}
 
-export default connect(mapStateToProps,mapDispatchToProps)(MiniCart);
+
+export default connect(mapStateToProps,null)(MiniCart);

@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 import FoodType from '../Food/FoodType'
-import {actFetchParentCategoriesRequest} from '../../action/index'
+import {actFetchParentCategoriesRequest} from '../../action/category'
 import MiniCart from '../Cart/MiniCart'
 import { connect } from 'react-redux';
 import { Row, Col } from 'antd';
 
 class DrinkScreen extends Component {
     componentDidMount(){
-        this.props.fetchAllCategory('6');
+        this.props.fetchAllCategory('Đồ uống');
     }
 
     render() {

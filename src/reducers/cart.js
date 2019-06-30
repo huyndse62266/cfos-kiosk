@@ -89,6 +89,14 @@ const cart = (state = initState,action) => {
            orderID: action.id
         }
     }
+    if(action.type === Types.RESTORE_CART){
+        let newCart = state.addedItems.filter(item => item.foodId === 0)
+        return{
+           ...state,
+           addedItems: newCart,
+           total: 0,
+        }
+    }
 
 
 

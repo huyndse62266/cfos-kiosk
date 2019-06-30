@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import FoodType from '../Food/FoodType'
-import {actFetchParentCategoriesRequest} from '../../action/index'
+import {actFetchParentCategoriesRequest} from '../../action/category'
 import MiniCart from '../Cart/MiniCart'
 import { connect } from 'react-redux';
 import { Row, Col } from 'antd';
@@ -8,7 +8,7 @@ import { Row, Col } from 'antd';
 class DishScreen extends Component {
 
     componentDidMount(){
-        this.props.fetchAllCategory('1');
+        this.props.fetchAllCategory('Đồ ăn');
     }
 
     render() {

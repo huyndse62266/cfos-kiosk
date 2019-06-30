@@ -3,7 +3,7 @@ import FoodType from '../Food/FoodType'
 import { Row, Col } from 'antd';
 import { connect } from 'react-redux';
 
-import {actFetchCategoriesRequest} from '../../action/index'
+import {actFetchCategoriesRequest} from '../../action/category'
 import ImageSwiper from '../ImageSwiper/ImageSwiper'
 import MiniCart from '../Cart/MiniCart'
 

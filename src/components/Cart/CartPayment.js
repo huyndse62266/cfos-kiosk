@@ -34,7 +34,7 @@ class CartPayment extends Component {
                     <Col span={24}>
                         <div className="text-center py-4" >
                             <FontAwesomeIcon icon={faShoppingBasket} style={{fontSize: '24px'}}/>
-                            <a className="font-weight-bold" style={{fontSize: '18px'}}> Your Orders</a>
+                            <span className="font-weight-bold" style={{fontSize: '18px'}}> Your Orders</span>
                         </div>
                     </Col>
                 </Row>
@@ -47,23 +47,6 @@ class CartPayment extends Component {
                         {addedItems}
                     </Row>
                 </ScrollArea>
-                {/* <Row gutter={48}>
-                    <Col span={12}>
-                        <CartItemMini/> 
-                    </Col>
-                    <Col span={12}>
-                        <CartItemMini/> 
-                    </Col>
-                    <Col span={12}>
-                        <CartItemMini/> 
-                    </Col>
-                    <Col span={12}>
-                        <CartItemMini/> 
-                    </Col>
-                    <Col span={12}>
-                        <CartItemMini/> 
-                    </Col>
-                </Row> */}
                 <Row>
                     <h3 className="text-right py-2">Total:  <NumberFormat value={this.props.pricetotal} displayType={'text'} thousandSeparator={'.'} decimalSeparator={','}/>  đ</h3>
                 </Row>

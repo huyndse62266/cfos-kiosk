@@ -1,14 +1,4 @@
-.trash-button{
-    z-index: 2;
-    position:'absolute';
-    top: 30px;
-    left: 88%;
-    width: 20px;
-    height: 20px;
-    background-color: red;
-    color: white;
-    padding: 0 !important
-}
+
 .image-1{
 
 }
@@ -55,12 +45,41 @@
     margin-bottom: 0 !important;
 }
 
+.close-button-item-cart-wrapper{
+    padding-left:5%;
+    padding-right: 20%
+}
 
+// .display-quantity-div{
+//     padding: 14% 50%
+// }
 @media all and (max-width: 1920px) {
     .mini-cart-wrapper{
         height: 1080px;
         background-color: #f5f5f5;
     }
+    .trash-button{
+        z-index: 2;
+        position:'absolute';
+        top: 30px;
+        left: 88%;
+        width: 20px;
+        height: 20px;
+        background-color: red;
+        color: white;
+        padding: 0 !important
+    }
+    .total-price-wrapper{
+        font-size: 16px;
+    }
+
+    .customize-order-button{
+        background-color: #40a9ff;
+        color: white;
+        width: 100%;
+        font-size: 14px
+    }
+
 }
 
 @media all and (max-width: 1440px) {
@@ -68,7 +87,28 @@
         height: 960px;
         background-color: #f5f5f5;
     }
-    
+    .trash-button{
+        z-index: 2;
+        position:'absolute';
+        top: 30px;
+        left: 85%;
+        width: 20px;
+        height: 20px;
+        background-color: red;
+        color: white;
+        padding: 0 !important
+    }
+    .total-price-wrapper h6{
+        font-size: 14px;
+    }
+   
+    .customize-order-button{
+        background-color: #40a9ff;
+        color: white;
+        width: 100%;
+        font-size: 11px
+    }
+
 }
 
 @media all and (max-width: 1280px) {
@@ -76,11 +116,39 @@
         height: 720px;
         background-color: #f5f5f5;
     }
+    .trash-button{
+        z-index: 2;
+        position:'absolute';
+        top: 30px;
+        left: 82%;
+        width: 20px;
+        height: 20px;
+        background-color: red;
+        color: white;
+        padding: 0 !important
+    }
+    .total-price-wrapper h6{
+        font-size: 12px;
+    }
+    
+    .customize-order-button{
+        background-color: #40a9ff;
+        color: white;
+        width: 100%;
+        font-size: 9px
+    }
+
 }
 
 @media all and (max-width: 1024px) {
     .mini-cart-wrapper{
         height: 500px;
         background-color: #f5f5f5;
+    }
+    .total-price-wrapper h6{
+        font-size: 12px;
+    }
+    .close-button-item-cart-wrapper{
+        padding: 0.2rem 0.5rem;
     }
 }

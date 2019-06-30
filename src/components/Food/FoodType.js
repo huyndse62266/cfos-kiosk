@@ -14,7 +14,6 @@ class FoodType extends Component {
             isExpand: false,
             foods : []
         }
-        this.readMore = this.readMore.bind(this);
         this.checkIsExpand = this.checkIsExpand.bind(this);
     }
 
@@ -50,36 +49,7 @@ class FoodType extends Component {
     
     }
 
-    showAllFoods(foods){
-        var result = null;
-        if(foods.length > 0){
-            result = foods.map((food, index) => {
-                if(index < 4)
-                return (
-                    <Col span={6} className="px-4">
-                        <FoodItem key={index} food={food} index={index}/>
-                    </Col> 
-                )
-            })
-        }
-        return result;
-    }
 
-    readMore(foods) {
-        if (this.state.isExpand) {
-     
-            
-            return foods.map((food, index) => {
-                if(index > 3)
-                    return (
-                        <Col span={6} className="px-4">
-                            <FoodItem key={index} food={food} index={index}/>
-                        </Col> 
-                    )
-            })
-            
-        }
-    }
     render() {
         var { category } = this.props;
         var { foods } = this.state;
@@ -93,11 +63,26 @@ class FoodType extends Component {
                 </Col>
                 <Col span={21} className="d-flex flex-column" style={{backgroundColor: 'white'}}>
                     <Row >
-                        {this.showAllFoods(foods)}
+                        {/* {this.showAllFoods(foods)} */}
+                        {foods ? foods.map((food, index) => {
+                            if(index < 4)
+                                return (
+                                    <Col span={6} className="px-4">
+                                        <FoodItem key={index} food={food} index={index}/>
+                                    </Col> 
+                                )
+                            }) : <span></span>}
                     </Row>
                     <span id="more">
                         <Row type="flex" justify="start">
-                            {this.readMore(foods)}
+                            {this.state.isExpand ? foods.map((food, index) => {
+                            if(index > 3)
+                                return (
+                                    <Col span={6} className="px-4">
+                                        <FoodItem key={index} food={food} index={index}/>
+                                    </Col> 
+                                )
+                            }): <span></span>}
                         </Row>
                     </span>
                     

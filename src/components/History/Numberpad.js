@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheck, faBackspace} from '@fortawesome/free-solid-svg-icons'
 import { connect } from 'react-redux'
 import './History.scss'
-import {actFetchOrderRequest} from '../../action/index'
+import {actFetchOrderRequest} from '../../action/orders'
 class Numberpad extends Component {
 
     constructor(){

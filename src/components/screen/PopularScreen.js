@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 import FoodType from '../Food/FoodType'
 import { Row, Col} from 'antd';
 import { connect } from 'react-redux';
-import {actFetchCategoriesRequest} from '../../action/index'
+import {actFetchCategoriesRequest} from '../../action/category'
 import MiniCart from '../Cart/MiniCart'
-
+import './Screen.scss'
 
 
  class PopularScreen extends Component {
@@ -19,13 +19,13 @@ import MiniCart from '../Cart/MiniCart'
     render() {
         var { categories } = this.props;
         return (
-            <Row className="py-2">
-                <Col span={20}>
+            <Row className="py-5">
+                <Col span={21}>
                     {this.showAllCategory(categories)}
                 </Col>
-                <Col span={4} >
-                    <Row  className="w-100">
-                        <Col span={20} offset={2} style={{position:'fixed',width:'15%', right:0}}>
+                <Col span={3} >
+                    <Row >
+                        <Col span={20} offset={2} style={{position:'fixed',width:'12%', right:0}}>
                             <MiniCart />
                         </Col>
                     </Row>
@@ -38,7 +38,7 @@ import MiniCart from '../Cart/MiniCart'
         var result = null;
         if(categories.length > 0){
             result = categories.map((category, index) => {
-                return (<FoodType key={index} category={category} index={index} type={'popular'}/>)
+                return (<FoodType key={category.categoryId} category={category} index={index} type={'popular'}/>)
             })
         }
         return result;

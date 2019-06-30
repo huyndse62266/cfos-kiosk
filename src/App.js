@@ -5,6 +5,7 @@ import MainScreen from './pages/Home/MainPage'
 import ChoosePayment from './pages/Payment/ChoosePayment'
 import CheckOrder from './pages/Order/CheckOrder'
 import MenuPage from './pages/Menu/MenuPage'
+
 function App() {
   return (
     <Router>
@@ -17,6 +18,7 @@ function App() {
     </Router>
     
   // <ReceiptTemplate/>
+
   );
 }
 

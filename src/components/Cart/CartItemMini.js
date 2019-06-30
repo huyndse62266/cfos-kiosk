@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
 import NumberFormat from 'react-number-format'; 
 import { connect } from 'react-redux'
-import { removeCart } from '../../action/index';
+import { removeCart } from '../../action/cart';
 import './Cart.scss'
 class CartItem extends Component {
     removeItem = (id) =>{

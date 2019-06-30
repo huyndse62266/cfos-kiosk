@@ -20,8 +20,10 @@ class StoreMenu extends Component {
     }
 
     componentDidMount(){
+        console.log(this.props.storeInfo.storeId)
         apiCaller(`store/${this.props.storeInfo.storeId}/foods/`,'GET',null).then(res => {
-            this.setState({
+            console.log(res.data)
+            this.setState({              
                 foods: res.data
             })
         })
@@ -35,30 +37,11 @@ class StoreMenu extends Component {
     }
 
     showAllFoods(foods,myFoods){
-        var result = <div/>;
-        
-            if(myFoods.length > 0){
-                result = myFoods.map((food, index) => {
-                    if(index < 4)
-                    return (
-                        <Col span={6} className="px-4">
-                            <FoodItem key={index} food={food} index={index}/>
-                        </Col> 
-                    )
-                })
-            }else{
-                result = foods.map((food, index) => {
-                    if(index < 4)
-                    return (
-                        <Col span={6} className="px-4">
-                            <FoodItem key={index} food={food} index={index}/>
-                        </Col> 
-                    )
-                })
-            }
+       
+            
         
        
-        return result;
+    
     }
 
     readMore(foods,myFoods) {
@@ -98,6 +81,7 @@ class StoreMenu extends Component {
         
     }
     buttonMoreDetail(categories){
+        console.log(categories)
         if (this.state.isExpand) {
             
             return categories.map((category, index) => {
@@ -114,10 +98,9 @@ class StoreMenu extends Component {
     }
 
     findByCategory = (id) =>{
+        console.log(id)
         var { foods} = this.state;
-        let a = foods.filter((food) =>{
-            return food.fcSubCategoryId == id;
-        })
+        let a = foods.filter(food => food.storeCategoryId === id)
         this.setState({
             foodFilter: a
         })
@@ -132,6 +115,7 @@ class StoreMenu extends Component {
     render() {
         var { storeInfo, myFoods } = this.props;
         var { foods, foodFilter} = this.state;
+        console.log(foodFilter)
         return (
             <Row >
                 <Col span={3}className="text-center h-100" style={{margin:'auto', textAlign: 'center'}}>
@@ -150,7 +134,22 @@ class StoreMenu extends Component {
                         <FoodItem key={index} food={food} index={index}/>
                     </Col> )
                     } */}
-                        {this.showAllFoods(foods,foodFilter)}
+                        {/* {this.showAllFoods(foods,foodFilter)} */}
+                        {!myFoods ? myFoods.map((food, index) => {
+                            if(index < 4)
+                            return (
+                                <Col span={6} className="px-4">
+                                    <FoodItem key={index} food={food} index={index}/>
+                                </Col> 
+                            )
+                        }):foods.map((food, index) => {
+                            if(index < 4)
+                            return (
+                                <Col span={6} className="px-4">
+                                    <FoodItem key={index} food={food} index={index}/>
+                                </Col> 
+                            )
+                        })}
                     </Row>
                     <span id="more">
                         <Row type="flex" justify="start">

@@ -9,7 +9,5 @@ export default function callApi(endpoint, method = 'GET', body){
         headers:{
             'Content-Type': 'application/json'
         }
-    }).catch(err => {
-        console.log(err);
     });
 };

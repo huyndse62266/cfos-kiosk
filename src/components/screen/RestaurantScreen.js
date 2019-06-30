@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import StoreMenu from '../Food/StoreMenu'
-import {actFetchCategoriesRequest, actFetchStoreCategoriesRequest} from '../../action/index'
+import { actFetchStoreCategoriesRequest } from '../../action/store'
 import { connect } from 'react-redux';
 import MiniCart from '../Cart/MiniCart'
 import { Row, Col } from 'antd';

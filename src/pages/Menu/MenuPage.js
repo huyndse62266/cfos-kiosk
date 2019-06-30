@@ -15,10 +15,10 @@ export default class MenuPage extends Component {
         console.log(match);
         return (
             <Layout>
-                <Header style={{padding: 0, backgroundColor: 'white'}}>
+                <Header style={{padding: 0, backgroundColor: 'white', position: 'fixed', zIndex: 1, width: '100%', lineHeight: 0}}>
                    <TopBar/>
                 </Header>
-                <Content style={{backgroundColor:'white'}}>
+                <Content style={{backgroundColor:'white'}} className="py-3">
                     <Switch>
                         <Route exact path={match.path}  component={({history}) => <PopularScreen history={history}/>}></Route>
                         <Route  path={match.path + '/popular'} component={({history}) => <PopularScreen history={history}/>}></Route>
@@ -27,7 +27,7 @@ export default class MenuPage extends Component {
                         <Route  path={match.path + '/drink'}  component={({history}) => <DrinkScreen history={history}/>}></Route>
                         <Route  path={match.path + '/combo'} component={({history}) => <RestaurantScreen history={history}/>}></Route>
                         <Route  path={match.path + '/restaurant'}  component={({history}) => <RestaurantScreen history={history}/>}></Route>
-                    </Switch>
+                    </Switch>   
                 </Content>
           </Layout>
         )

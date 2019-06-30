@@ -19,3 +19,5 @@ export const SUB_QUANTITY = "SUB_QUANTITY";
 export const UPDATE_ITEM_CART = "UPDATE_ITEM_CART";
 
 export const CHECKOUT = "CHECKOUT"
+
+export const RESTORE_CART = "RESTORE_CART";

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import {Row,Col,Button} from 'antd'
 import { connect } from 'react-redux'
-import { actCheckoutRequest } from '../../action';
+import { actCheckoutRequest } from '../../action/cart';
 import ReactToPrint from 'react-to-print';
 import ReceiptTemplate from '../ReceiptTemplate'
 import './Cart.scss'
@@ -115,7 +115,6 @@ const mapStateToProps = (state)=>{
 const mapDispatchToProps= (dispatch)=>{
     return{
         checkout: (cart,total)=>{
-            console.log('bbb')
             dispatch(actCheckoutRequest(cart,total))
         }
     }
