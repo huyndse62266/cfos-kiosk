@@ -13,10 +13,11 @@ function callback(key) {
 export default class DishDetail extends Component {
     render() {
         var {selected} = this.props;
+        console.log(this.props.cartQuantity)
         return (
             <Tabs defaultActiveKey={selected} onChange={callback} size={'default'}>
                 <TabPane tab={<div className="button-tab">Dish Detail</div>} key="1" size="large">
-                    <DishInfo food={this.props.food}/>
+                    <DishInfo food={this.props.food} cartQuantity={this.props.cartQuantity}/>
                 </TabPane>
                 <TabPane tab={<div className="button-tab">Dish Feedback</div>} key="2" active title-item-class="w-50">
                    <DishFeedback food={this.props.food}/>

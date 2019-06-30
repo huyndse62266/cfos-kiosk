@@ -83,7 +83,7 @@ export default class DishFeedback extends Component {
                                         <h4 className="text-left">{food.foodName}</h4>
                                     </Row>
                                     <Row>
-                                    <h6 className="font-weight-bold"><NumberFormat value={food.price} displayType={'text'} thousandSeparator={'.'} decimalSeparator={','}/> đ</h6>
+                                    <h6 className="font-weight-bold"><NumberFormat value={food.price} displayType={'text'} thousandSeparator={','} /> đ</h6>
                                     </Row>
                                 </Col>
                                 <Col span={12} type="flex" justify="space-around" align="middle">

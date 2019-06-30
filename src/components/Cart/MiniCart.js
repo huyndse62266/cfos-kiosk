@@ -74,7 +74,7 @@ class MiniCart extends Component {
                         <h6>Tổng tiền: </h6>
                     </Col>
                     <Col span={12} >
-                        <h6 className="float-right font-weight-bold"><NumberFormat value={this.props.pricetotal} displayType={'text'} thousandSeparator={'.'} decimalSeparator={','}/> đ</h6>
+                        <h6 className="float-right font-weight-bold"><NumberFormat value={this.props.pricetotal} displayType={'text'} thousandSeparator={','}/> đ</h6>
                     
                     </Col>
                 </Row>
@@ -100,7 +100,7 @@ class MiniCart extends Component {
                           <h2>Total: </h2>
                       </Col>
                       <Col span={7} className="py-3">
-                          <h2><NumberFormat value={this.props.pricetotal} displayType={'text'} thousandSeparator={'.'} decimalSeparator={','}/> đ</h2>
+                          <h2><NumberFormat value={this.props.pricetotal} displayType={'text'} thousandSeparator={','}/> đ</h2>
                       </Col>
                       <Col span={13} className="py-2">
                           

@@ -30,7 +30,7 @@ class CartItem extends Component {
                 <Row>
                     <div className="px-2 py-1">
                         <Col span={16}>
-                            <p className="font-weight-bold"><NumberFormat value={food.price} displayType={'text'} thousandSeparator={'.'} decimalSeparator={','}/>  đ</p>
+                            <p className="font-weight-bold"><NumberFormat value={food.price} displayType={'text'} thousandSeparator={','}/>  đ</p>
                         </Col>
                         <Col span={8}><p className="float-right">x{food.cartQuantity}</p></Col>
                     </div>

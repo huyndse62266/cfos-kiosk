@@ -28,19 +28,20 @@ export const actCheckoutRequest = (cartItems, total) =>{
 
 
 
-export const addToCart = (food) =>{
+export const addToCart = (food,quantity) =>{
     return {
         type: Types.ADD_TO_CART,
-        food
+        food,
+        quantity
     }
 }
 
-export const updateCart = (id) =>{
-    return {
-        type: Types.UPDATE_ITEM_CART,
-        id
-    }
-}
+// export const updateCart = (id) =>{
+//     return {
+//         type: Types.UPDATE_ITEM_CART,
+//         id
+//     }
+// }
 
 export const removeCart = (id) =>{
     return {
@@ -72,5 +73,20 @@ export const checkout = (id) =>{
 export const restoreCart = () =>{
     return{
         type: Types.RESTORE_CART
+    }
+}
+
+export const updateItemCart = (id,quantity) =>{
+    return{
+        type: Types.UPDATE_ITEM_CART,
+        id,
+        quantity
+    }
+}
+
+export const findCart = (id) =>{
+    return{
+        type: Types.FIND_CART,
+        id
     }
 }

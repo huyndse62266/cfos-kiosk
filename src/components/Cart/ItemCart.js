@@ -64,34 +64,34 @@ class ItemCart extends Component {
                         <h5 className="font-weight-bold text-left px-3 py-2 text-truncate">{food.foodName}</h5>
                     </Row>
                     <Row  type="flex" justify="space-around" align="middle"> 
-                        <Col span={10} className="text-center">
-                            <Button className="bg-danger" onClick={()=>{this.removeItem(food.foodId)}}>
+                        <Col span={10} className="trash-button-item-cart">
+                            <Button className="bg-danger w-75" onClick={()=>{this.removeItem(food.foodId)}}>
                                 <FontAwesomeIcon icon={faTrash} style={{color: 'white'}} />
                             </Button>
                         </Col>
                         <Col span={14} className="d-flex flex-row inc-dec-button-wrapper">
                            
-                            <Row>
-                                <Col span={8}>
-                                    <Button style={{backgroundColor: '#d9d9d9'}} onClick={()=>{this.DecreaseItem(food.foodId)}} ><FontAwesomeIcon icon={faMinus} /></Button>
+                            <Row className="w-100">
+                                <Col span={6}>
+                                    <Button className="w-100 " style={{backgroundColor: '#d9d9d9'}} onClick={()=>{this.DecreaseItem(food.foodId)}} ><FontAwesomeIcon icon={faMinus} /></Button>
                                 </Col>
-                                <Col span={8} className="h-100">
-                                    <div className="px-3 py-1">
+                                <Col span={10} className="h-100 " >
+                                    <div className="display-quantity">
                                         { this.state.show ? <span>{ cartQuantity }</span> : '' }
                                     </div>
                                 </Col>
-                                <Col span={8}>
-                                    <Button style={{backgroundColor: '#d9d9d9'}}  onClick={()=>{this.IncrementItem(food.foodId)}} ><FontAwesomeIcon icon={faPlus} /></Button> 
+                                <Col span={6}>
+                                    <Button className="w-100" style={{backgroundColor: '#d9d9d9'}}  onClick={()=>{this.IncrementItem(food.foodId)}} ><FontAwesomeIcon icon={faPlus} /></Button> 
                                 </Col>
                             </Row>
                         </Col>
                     </Row>
-                    <Row className="text-left py-2">
-                        <h5  className="font-weight-bold text-left px-3"><NumberFormat value={food.price*cartQuantity} displayType={'text'} thousandSeparator={'.'} decimalSeparator={','}/> đ</h5>
+                    <Row className="text-left pt-2">
+                        <h5 className="font-weight-bold text-left px-3"><NumberFormat value={food.price*cartQuantity} displayType={'text'} thousandSeparator={','}/> đ</h5>
                 
                     </Row>
                     <Row className="px-2">
-                        <Col span={16} offset={4}>
+                        <Col span={22} offset={1}>
                             <div className="pb-2 w-100">
                                   <Button  className="customize-order-button" onClick={this.showModal}>Customize Order</Button>
                             </div>
@@ -108,7 +108,7 @@ class ItemCart extends Component {
                     footer={null}
                     centered
                     >
-                    <DishDetail food={food} selected = {'1'}/>
+                    <DishDetail food={food} cartQuantity={cartQuantity} selected = {'1'} type={'update'}/>
                 </Modal>
             </div>
 

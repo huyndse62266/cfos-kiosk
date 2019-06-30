@@ -50,9 +50,14 @@
     padding-right: 20%
 }
 
-// .display-quantity-div{
-//     padding: 14% 50%
-// }
+.display-quantity{
+    padding: 6% 0%;
+    text-align: center;
+    font-weight: bold
+}
+.trash-button-item-cart{
+    padding: 0% 5%
+}
 @media all and (max-width: 1920px) {
     .mini-cart-wrapper{
         height: 1080px;

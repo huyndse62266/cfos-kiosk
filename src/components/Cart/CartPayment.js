@@ -48,7 +48,7 @@ class CartPayment extends Component {
                     </Row>
                 </ScrollArea>
                 <Row>
-                    <h3 className="text-right py-2">Total:  <NumberFormat value={this.props.pricetotal} displayType={'text'} thousandSeparator={'.'} decimalSeparator={','}/>  đ</h3>
+                    <h3 className="text-right py-2">Total:  <NumberFormat value={this.props.pricetotal} displayType={'text'} thousandSeparator={','} />  đ</h3>
                 </Row>
 
             </div>

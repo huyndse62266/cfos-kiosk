@@ -21,3 +21,7 @@ export const UPDATE_ITEM_CART = "UPDATE_ITEM_CART";
 export const CHECKOUT = "CHECKOUT"
 
 export const RESTORE_CART = "RESTORE_CART";
+
+export const UPDATE_CART = "UPDATE_CART";
+
+export const FIND_CART = "FIND_CART";

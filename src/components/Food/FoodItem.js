@@ -35,13 +35,7 @@ class FoodItem extends Component {
     addToCartClick = (food) =>{
         this.props.addToCart(food);
     }
-    renderPromotionTag = (rate) =>{
-       
-        if(rate > 0)
-            return(<div className="promotion-tag-wrapper">
-                <span>-{rate}%</span>
-        </div>)
-    }
+    
 
     showRating(rating){
         var result = [];
@@ -66,7 +60,7 @@ class FoodItem extends Component {
                     <Col span={3}><Avatar style={{ backgroundColor: '#87d068' }} icon="user" size="small"/></Col>
                     <Col span={16} ><span className="restaurant-title">{food.storeVM.storeName}</span></Col>
                     <Col span={5}>
-                        {this.renderPromotionTag(food.promotion)}
+                        {food.promotion > 0 ? <div className="promotion-tag-wrapper"><span>-{food.promotion }%</span></div>:<div className="promotion-tag-wrapper d-none"><span>-{food.promotion }%</span></div> }
                     </Col>
                 </Row>
                 <Row>
@@ -79,7 +73,7 @@ class FoodItem extends Component {
                     <Row className="py-2">
                         <Col span={16} className="px-2">
                             <Row><span className="font-weight-bold" style={{fontSize:'12px'}}>
-                            <NumberFormat value={food.price} displayType={'text'} thousandSeparator={'.'} decimalSeparator={','}/> đ</span> 
+                            <NumberFormat value={food.price} displayType={'text'} thousandSeparator={','}/> đ</span> 
                             </Row>
                             <Row>
                                 <span style={{color:'orange'}} onClick={()=>{this.showModal()}}>{this.showRating(food.rate)}</span>
@@ -112,7 +106,7 @@ class FoodItem extends Component {
 const mapDispatchToProps= (dispatch)=>{
     return{
         addToCart: (food)=>{
-            dispatch(addToCart(food))
+            dispatch(addToCart(food,1))
         }
     }
 }

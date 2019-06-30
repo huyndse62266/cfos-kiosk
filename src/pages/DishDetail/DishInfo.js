@@ -3,8 +3,9 @@ import { Avatar, Button,Row,Col } from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStar, faTag, faMinus, faPlus, faSyncAlt } from '@fortawesome/free-solid-svg-icons'
 import ScrollArea from 'react-scrollbar';
+import NumberFormat from 'react-number-format';
 import { connect } from 'react-redux'
-import { addQuantity,subQuantity } from '../../action/cart';
+import { addToCart, updateItemCart, findCart } from '../../action/cart';
 import Foodingredients from '../../components/DishDetail/Foodingredients'
 import MoreOption from '../../components/DishDetail/MoreOption'
 
@@ -12,20 +13,29 @@ import 'antd/dist/antd.css';
 import './DishInfo.scss'
 
 
-class DishDetail extends Component {
+class DishInfoUpdate extends Component {
     constructor(props) {
         super(props);
         this.state = {
-          clicks: this.props.food.quantity,
-          show: true
+          clicks: 0,
+          show: true,
+          isEmpty: true
         };
     }
-    IncrementItem = (id) => {
-        this.props.addQuantity(id);
+    IncrementItem = () => {
+        this.setState({ clicks: this.state.clicks + 1 });
     }
-    DecreaseItem = (id) => {
-        this.props.subQuantity(id);
-    }   
+    DecreaseItem = () => {
+        if(this.state.clicks > 0){
+            this.setState({ clicks: this.state.clicks - 1 })
+        };
+    }
+    addtoCartRequest = (id,cart) => {
+        this.props.addtoCart(id,cart);
+    }
+    updateItemCartRequest = (id,cart) => {
+        this.props.updateCart(id,cart);
+    }
     ToggleClick = () => {
         this.setState({ show: !this.state.show });
     }
@@ -33,9 +43,24 @@ class DishDetail extends Component {
         if(rate > 0)
             return(<h5 className="text-left px-3">{rate}% Discount all dishes</h5>)
     }
+    
+    componentWillMount(){
+        if(this.props.cartQuantity !== 0){
+            this.setState({
+                clicks: this.props.cartQuantity,
+                isEmpty: false
+            })
+        }else{
+            this.setState({
+                clicks: 0
+            })
+        }
+    }
+
+  
 
     render() {
-        var {food} = this.props
+        var {food,cartQuantity} = this.props
         return (
             <div className="container-fluid" style={{height: "80%"}}>
                 <Row>
@@ -101,11 +126,11 @@ class DishDetail extends Component {
                                     <h5>Amount</h5>
                                 </Row>
                                 <Row className="d-flex flex-row py-2">
-                                    <Button style={{backgroundColor: '#D2D2D2'}} onClick={()=>{this.DecreaseItem(food.foodId)}} ><FontAwesomeIcon icon={faMinus} /></Button>
+                                    <Button style={{backgroundColor: '#D2D2D2'}} onClick={this.DecreaseItem} ><FontAwesomeIcon icon={faMinus} /></Button>
                                     <div className="px-3 py-1">
-                                        { this.state.show ? <h2 style={{fontSize:'1rem'}}>{ food.cartQuantity }</h2> : '' }
+                                        { this.state.show ? <h2 style={{fontSize:'1rem'}}>{this.state.clicks }</h2> : '' }
                                     </div>
-                                    <Button style={{backgroundColor: '#D2D2D2'}} onClick={()=>{this.IncrementItem(food.foodId)}} ><FontAwesomeIcon icon={faPlus} /></Button>
+                                    <Button style={{backgroundColor: '#D2D2D2'}} onClick={this.IncrementItem} ><FontAwesomeIcon icon={faPlus} /></Button>
                                 </Row>
                             </Col>
                             <Col span={12}>
@@ -141,12 +166,20 @@ class DishDetail extends Component {
                         </Row>
                         <Row type="flex" justify="end" className="border-top py-3">
                             <Col span={14} className="px-2">
-                                <h3 className="font-weight-bold text-right px-4 pt-2 mb-0"><small>Provisional:</small> 95 000 đ</h3>
+                                <Row type="flex" justify="end" className="font-weight-bold text-right px-4 pt-2 mb-0">
+                                    <Col span={8}> <h3 className="font-weight-bold text-right"><small>Provisional:</small></h3></Col>
+                                    <Col span={9}><h3 className="font-weight-bold text-right"><NumberFormat value={food.price * this.state.clicks} displayType={'text'} thousandSeparator={','} /> đ</h3></Col>
+                                </Row>
                             </Col>
                             <Col span={10}>
-                                <Button className="button">
+                                {cartQuantity === 0 ? 
+                                <Button className="button" onClick={()=>{this.addtoCartRequest(food,this.state.clicks)}}>
                                     Add to Basket
-                                </Button>
+                                </Button> :
+                                <Button className="button" onClick={()=>{this.updateItemCartRequest(food.foodId,this.state.clicks)}}>
+                                    Update my Basket
+                                </Button> }
+                                
                             </Col>
                         </Row>
                     </Col>
@@ -157,17 +190,25 @@ class DishDetail extends Component {
         )
     }
 }
+const mapStateToProps = (state)=>{
+    return{     
+        item: state.cart.findItem,
+    }
+}
 
 
 const mapDispatchToProps = (dispatch)=>{
     return{
-        addQuantity: (id)=>{
-            dispatch(addQuantity(id))
+        findCart: (id) => {
+            dispatch(findCart(id))
         },
-        subQuantity:(id) =>{
-            dispatch(subQuantity(id))
+        addtoCart: (id,quantity)=>{
+            dispatch(addToCart(id,quantity))
+        },
+        updateCart: (id,quantity)=>{
+            dispatch(updateItemCart(id,quantity))
         }
         
     }
 }
-export default connect(null,mapDispatchToProps)(DishDetail)
+export default connect(mapStateToProps,mapDispatchToProps)(DishInfoUpdate)
