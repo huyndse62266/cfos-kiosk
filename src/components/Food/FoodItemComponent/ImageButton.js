@@ -3,6 +3,7 @@ import { Modal, Button } from 'antd';
 import DishDetail from '../../../pages/DishDetail/DishDetail'
 import {findCart} from '../../../action/cart'
 import { connect } from 'react-redux'
+import './ImageButton.scss'
 class ImageButton extends Component {
     state = {
         visible: false,
@@ -34,8 +35,8 @@ class ImageButton extends Component {
         return (
             
             <div>
-                <Button onClick={()=>{this.showModal(food.foodId)}} className="p-0" style={{height: '175px'}}>
-                    <img src={food.foodImage} className="img-thumbnail" alt="Cinque Terre" style={{height:"100%", width: '100%'}}/>
+                <Button onClick={()=>{this.showModal(food.foodId)}} className="p-0" style={{height: '175px',width:'100%'}}>
+                    <img src={food.foodImage} alt="Cinque Terre" style={{height:"100%", width: '100%'}}/>
                 </Button>
 
                 <Modal

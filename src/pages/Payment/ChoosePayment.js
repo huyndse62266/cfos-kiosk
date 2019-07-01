@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import {Row,Col,Button} from 'antd'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeft} from '@fortawesome/free-solid-svg-icons'
-import CartPayment from '../../components/Cart/CartPayment'
-import TypePayment from '../../components/Cart/TypePayment'
+import OverviewBasket from '../../components/Payment/OverviewBasket'
+import PaymentType from '../../components/Payment/PaymentType'
 import './Payment.scss';
 export default class ChoosePayment extends Component {
     goBackPage = () =>{
@@ -20,10 +20,10 @@ export default class ChoosePayment extends Component {
                         </Button>
                     </Col>
                     <Col span={11}>
-                        <TypePayment/>
+                        <PaymentType/>
                     </Col>
                     <Col span={8} className="cart-payment-div">
-                        <CartPayment />
+                        <OverviewBasket />
                     </Col>
                 </Row>
             </div>

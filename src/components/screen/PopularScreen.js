@@ -3,7 +3,7 @@ import FoodType from '../Food/FoodType'
 import { Row, Col} from 'antd';
 import { connect } from 'react-redux';
 import {actFetchCategoriesRequest} from '../../action/category'
-import MiniCart from '../Cart/MiniCart'
+import PreviewCart from '../Cart/PreviewCart/PreviewCart'
 import './Screen.scss'
 
 
@@ -26,7 +26,7 @@ import './Screen.scss'
                 <Col span={3} >
                     <Row >
                         <Col span={20} offset={2} style={{position:'fixed',width:'12%', right:0}}>
-                            <MiniCart />
+                            <PreviewCart />
                         </Col>
                     </Row>
                 </Col>

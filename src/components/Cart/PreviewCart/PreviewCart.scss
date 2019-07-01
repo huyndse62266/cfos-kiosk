@@ -1,13 +1,7 @@
-
-.image-1{
-
-}
-
 .border-custom{
-    border-radius: 10px;
+    border-radius: 2px;
     background-color: #fff;
 }
-
 .purchase-button-1{
     width: 100%;
     height: 50px;
@@ -15,49 +9,26 @@
     color: white;
     font-weight: bold
 }
+.img-button-wrapper{
+    height: 150px;
+}
 
-.card-button{
+.img{
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    margin-top: -11%;
     width: 100%;
-    height: 50px;
-    color: white;
-    font-weight: bold
 }
-.cash-button{
-    width: 100%;
-    height: 130px;
-    text-align: left;
-    padding-top: 0.5rem;
-    padding-left: 2rem;
-    border-radius: 10px;
-    background-color: #E6E6E6
-    // padding-bottom: 0
-}
-
-.payment-type-wrapper{
-    border-radius: 10px;
-    padding: 1.5rem 2rem;
-    background-color: #E6E6E6
-}
-.payment-type-detail{
-    padding-top: 0.5rem;
-}
-.payment-type-detail h6{
-    margin-bottom: 0 !important;
-}
-
-.close-button-item-cart-wrapper{
-    padding-left:5%;
-    padding-right: 20%
-}
-
-.display-quantity{
-    padding: 6% 0%;
-    text-align: center;
-    font-weight: bold
-}
-.trash-button-item-cart{
-    padding: 0% 5%
-}
+.ant-modal-header{
+    padding: 11px 24px !important;
+  }
+  .ant-modal-close-x{
+    background-color: red;
+    border-radius: 5px;
+    font-size: 30px !important;
+    color:white;
+    height: 100%;
+  }
 @media all and (max-width: 1920px) {
     .mini-cart-wrapper{
         height: 1080px;
@@ -66,7 +37,7 @@
     .trash-button{
         z-index: 2;
         position:'absolute';
-        top: 30px;
+        top: 5px;
         left: 88%;
         width: 20px;
         height: 20px;
@@ -77,14 +48,6 @@
     .total-price-wrapper{
         font-size: 16px;
     }
-
-    .customize-order-button{
-        background-color: #40a9ff;
-        color: white;
-        width: 100%;
-        font-size: 14px
-    }
-
 }
 
 @media all and (max-width: 1440px) {
@@ -106,13 +69,7 @@
     .total-price-wrapper h6{
         font-size: 14px;
     }
-   
-    .customize-order-button{
-        background-color: #40a9ff;
-        color: white;
-        width: 100%;
-        font-size: 11px
-    }
+
 
 }
 
@@ -136,12 +93,6 @@
         font-size: 12px;
     }
     
-    .customize-order-button{
-        background-color: #40a9ff;
-        color: white;
-        width: 100%;
-        font-size: 9px
-    }
 
 }
 

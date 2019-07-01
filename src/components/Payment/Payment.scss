@@ -1,0 +1,27 @@
+.payment-type-wrapper{
+    border-radius: 10px;
+    padding: 1.5rem 2rem;
+    background-color: #E6E6E6
+}
+.card-button{
+    width: 100%;
+    height: 50px;
+    color: white;
+    font-weight: bold
+}
+.cash-button{
+    width: 100%;
+    height: 130px;
+    text-align: left;
+    padding-top: 0.5rem;
+    padding-left: 2rem;
+    border-radius: 10px;
+    background-color: #E6E6E6
+    // padding-bottom: 0
+}
+.payment-type-detail{
+    padding-top: 0.5rem;
+}
+.payment-type-detail h6{
+    margin-bottom: 0 !important;
+}

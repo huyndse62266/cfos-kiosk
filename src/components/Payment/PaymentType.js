@@ -2,12 +2,13 @@ import React, { Component } from 'react'
 import {Row,Col,Button} from 'antd'
 import { connect } from 'react-redux'
 import { actCheckoutRequest } from '../../action/cart';
+import { Link, Redirect  } from "react-router-dom";
 import ReactToPrint from 'react-to-print';
-import ReceiptTemplate from '../ReceiptTemplate'
-import './Cart.scss'
+import ReceiptTemplate from '../Receipt/ReceiptTemplate'
+import './Payment.scss'
 
 
-class TypePayment extends Component {
+class PaymentType extends Component {
     checkoutClick = (cart,total) =>{
         if(cart.length > 0){
             this.props.checkout(cart,total);
@@ -86,14 +87,12 @@ class TypePayment extends Component {
                         </Button>}
                         content={() => this.componentRef}
                         onBeforePrint={() => this.checkoutClick(items,pricetotal)}
+                        onAfterPrint={<Redirect to='/complete' />}
                         copyStyles
                         />
                         <div style={{display:'none'}}>
                             <ReceiptTemplate items={items} totalPrice={pricetotal} orderID={orderID} ref={el => (this.componentRef = el)} /> 
                         </div>
-                          
-                        
-                        
                     </Col>
                 </Row>
             </div>
@@ -120,4 +119,4 @@ const mapDispatchToProps= (dispatch)=>{
     }
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(TypePayment);
+export default connect(mapStateToProps,mapDispatchToProps)(PaymentType);

@@ -6,12 +6,12 @@ import { connect } from 'react-redux'
 import ScrollArea from 'react-scrollbar';
 import NumberFormat from 'react-number-format';
 import { Link} from "react-router-dom";
-import CartItemMini from './CartItemMini'
-import ViewBasket from '../../pages/Basket/ViewBasket'
+import CartItemSimple from './CartItemSimple'
+import ViewBasket from '../../../pages/Basket/ViewBasket'
 
-import './Cart.scss'
+import './PreviewCart.scss'
 
-class MiniCart extends Component {
+class PreviewCart extends Component {
     state = {
         visible: false,
         items: this.props.items
@@ -41,7 +41,7 @@ class MiniCart extends Component {
         let addedItems =  this.props.items.length ?
             (
                 this.props.items.map((item,index) =>{
-                    return <CartItemMini food={item} key={index}  index={index} cartQuantity={item.cartQuantity}/>
+                    return <CartItemSimple food={item} key={index}  index={index} cartQuantity={item.cartQuantity}/>
                 })
             ):(
                 <span></span>
@@ -65,7 +65,7 @@ class MiniCart extends Component {
                     className="area"
                     contentClassName="content"
                     horizontal={false} style={{height: '60%'}}>
-                    <Row>
+                    <Row className="px-3 py-2">
                         {addedItems}
                     </Row>
                 </ScrollArea>
@@ -131,4 +131,4 @@ const mapStateToProps = (state)=>{
 
 
 
-export default connect(mapStateToProps,null)(MiniCart);
+export default connect(mapStateToProps,null)(PreviewCart);

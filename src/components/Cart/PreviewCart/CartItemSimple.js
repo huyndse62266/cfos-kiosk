@@ -4,26 +4,26 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
 import NumberFormat from 'react-number-format'; 
 import { connect } from 'react-redux'
-import { removeCart } from '../../action/cart';
-import './Cart.scss'
-class CartItem extends Component {
+import { removeCart } from '../../../action/cart';
+import './PreviewCart.scss'
+class CartItemSimple extends Component {
     removeItem = (id) =>{
         this.props.removeItem(id);     
     }
     render() {
         var {food, type} = this.props;
         return (
-            <div className="border-custom mb-3">
-                <Row >
+            <div className="border-custom mb-4">
+                <Row className="img-button-wrapper">
                     {!type ? <Button className="trash-button" onClick={()=>{this.removeItem(food.foodId)}}>
                         <FontAwesomeIcon icon={faTrash} />
                     </Button> : <span></span>}
                     
-                    <img src={food.foodImage} className="img-thumbnail pb-0" alt="Cinque Terre"  style={{height:"150px", width: '100%'}}/>
+                    <img src={food.foodImage} className="img" alt="Cinque Terre"/>
                     
                 </Row>
                 <Row>
-                    <div className="px-2 text-left font-weight-bold text-left">
+                    <div className="px-2 text-left font-weight-bold">
                         {food.foodName}
                     </div>
                 </Row>
@@ -46,4 +46,4 @@ const mapDispatchToProps = (dispatch)=>{
         }
     }
 }
-export default connect(null,mapDispatchToProps)(CartItem)
+export default connect(null,mapDispatchToProps)(CartItemSimple)

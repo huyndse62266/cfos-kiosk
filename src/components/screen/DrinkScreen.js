@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import FoodType from '../Food/FoodType'
 import {actFetchParentCategoriesRequest} from '../../action/category'
-import MiniCart from '../Cart/MiniCart'
+import PreviewCart from '../Cart/PreviewCart/PreviewCart'
 import { connect } from 'react-redux';
 import { Row, Col } from 'antd';
 
@@ -21,7 +21,7 @@ class DrinkScreen extends Component {
                     <Col span={4} >
                         <Row  className="w-100">
                             <Col span={20} offset={2} style={{position:'fixed',width:'15%', right:0}}>
-                                <MiniCart />
+                                <PreviewCart />
                             </Col>
                         </Row>
                     </Col>

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import StoreMenu from '../Food/StoreMenu'
 import { actFetchStoreCategoriesRequest } from '../../action/store'
 import { connect } from 'react-redux';
-import MiniCart from '../Cart/MiniCart'
+import PreviewCart from '../Cart/PreviewCart/PreviewCart'
 import { Row, Col } from 'antd';
 
 class RestaurantScreen extends Component {
@@ -21,7 +21,7 @@ class RestaurantScreen extends Component {
                     <Col span={4} >
                         <Row  className="w-100">
                             <Col span={20} offset={2} style={{position:'fixed',width:'15%', right:0}}>
-                                <MiniCart />
+                                <PreviewCart />
                             </Col>
                         </Row>
                     </Col>

@@ -5,9 +5,9 @@ import { connect } from 'react-redux'
 import NumberFormat from 'react-number-format'; 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faShoppingBasket } from '@fortawesome/free-solid-svg-icons'
-import CartItemMini from './CartItemMini'
-import './Cart.scss'
-class CartPayment extends Component {
+import CartItemSimple from '../Cart/PreviewCart/CartItemSimple'
+import './Payment.scss'
+class OverviewBasket extends Component {
     
     render() {
         let addedItems =  this.props.items.length ?
@@ -17,7 +17,7 @@ class CartPayment extends Component {
             
             return (
                 <Col span={12} className="px-2 py-1">
-                    <CartItemMini key={index} food={food} index={index} cartQuantity={food.cartQuantity} type={'done'}/>
+                    <CartItemSimple key={index} food={food} index={index} cartQuantity={food.cartQuantity} type={'done'}/>
                 </Col>)
                 
         })
@@ -29,7 +29,7 @@ class CartPayment extends Component {
           </Row>
       )
         return (
-            <div className="container-fluid px-4 py-0    bg-light">
+            <div className="container-fluid px-4 py-0 bg-light">
                 <Row>
                     <Col span={24}>
                         <div className="text-center py-4" >
@@ -63,4 +63,4 @@ const mapStateToProps = (state)=>{
     }
   }
   
-  export default connect(mapStateToProps)(CartPayment)
+  export default connect(mapStateToProps)(OverviewBasket)

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import {Row, Col} from 'antd'
 import DishOrdered from '../../components/History/DishOrdered'
 import PopularDishes from '../../components/History/PopularDishes'
-import MiniCart from '../../components/Cart/MiniCart'
+import PreviewCart from '../../components/Cart/PreviewCart/PreviewCart'
 export default class DishRecommend extends Component {
     render() {
         return (
@@ -13,7 +13,7 @@ export default class DishRecommend extends Component {
                         <PopularDishes/>
                     </Col>
                     <Col span={6} style={{paddingLeft: '6rem',paddingRight: '3rem'}}>
-                    <MiniCart/>
+                    <PreviewCart/>
                     </Col>
                 </Row>
             </div>

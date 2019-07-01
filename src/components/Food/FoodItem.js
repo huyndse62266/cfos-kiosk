@@ -81,7 +81,8 @@ class FoodItem extends Component {
                             </Row>
                         </Col>
                         <Col span={8}>
-                            <Button className="button-add" onClick={()=>{this.addToCartClick(food)}}>Add</Button>
+                            <button type="button" className="btn btn-success w-75" onClick={()=>{this.addToCartClick(food)}}>Add</button>
+                            {/* <Button className="button-add" onClick={()=>{this.addToCartClick(food)}}>Add</Button> */}
                         </Col>
                     </Row>
                 </div>

@@ -23,8 +23,12 @@
     height: 35px;
     margin-left: 10%;
 }
-
-
+[ant-click-animating-without-extra-node]:after {
+	animation: 0s !important;
+}
+.ant-btn.ant-btn-background-ghost::after {
+    border: none !important;
+    }
 @media all and (max-width: 1920px) {
     .restaurant-title{
         font-size: 15px;

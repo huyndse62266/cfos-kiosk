@@ -3,7 +3,7 @@ import {Col, Row, Button} from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheck } from '@fortawesome/free-solid-svg-icons'
 import './Order.scss'
-export default class OrderSuccess extends Component {
+export default class CompleteOrder extends Component {
     render() {
         return (
             <div className="order-config-container">

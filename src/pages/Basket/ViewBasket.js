@@ -3,7 +3,7 @@ import {Row,Col} from 'antd';
 import ScrollArea from 'react-scrollbar';
 
 import { connect } from 'react-redux'
-import ItemCart from "../../components/Cart/ItemCart";
+import BasketItem  from "../../components/Cart/ViewBasket/BasketItem";
 
 class ViewBasket extends Component {
   constructor(props) {
@@ -31,7 +31,7 @@ class ViewBasket extends Component {
             
             return (
                 <Col span={4} className="px-3 py-2">
-                    <ItemCart key={index} food={food} index={index} cartQuantity={food.cartQuantity}/>
+                    <BasketItem key={index} food={food} index={index} cartQuantity={food.cartQuantity}/>
                 </Col>)
                 
         })

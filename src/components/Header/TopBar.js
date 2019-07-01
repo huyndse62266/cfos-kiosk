@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {  faUtensils, faStar, faPercentage, faConciergeBell,faMugHot, faThumbsUp,faArrowLeft,faUser,faSync } from '@fortawesome/free-solid-svg-icons'
 import { Menu,Row,Col,Button } from 'antd';
 import { connect } from 'react-redux'
-import { Link  } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { restoreCart } from '../../action/cart';
 import './Header.scss'
 

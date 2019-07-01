@@ -4,10 +4,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash, faMinus, faPlus } from '@fortawesome/free-solid-svg-icons'
 import { connect } from 'react-redux'
 import NumberFormat from 'react-number-format';
-import { addQuantity,subQuantity, removeCart } from '../../action/cart';
-import DishDetail from '../../pages/DishDetail/DishDetail'
-import './Cart.scss'
-class ItemCart extends Component {
+import { addQuantity,subQuantity, removeCart } from '../../../action/cart';
+import DishDetail from '../../../pages/DishDetail/DishDetail'
+import './BasketItem.scss'
+class BasketItem extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -54,7 +54,7 @@ class ItemCart extends Component {
     render() {
         var {food,cartQuantity} = this.props;
         return (
-            <div className="container-fluid p-0" style={{backgroundColor: '#E6E6E6', borderRadius: 10}}>
+            <div className="p-0" style={{backgroundColor: '#E6E6E6', borderRadius: 10}}>
         
                 <Card bodyStyle={{padding: 0}}>
                     <Row >
@@ -69,7 +69,7 @@ class ItemCart extends Component {
                                 <FontAwesomeIcon icon={faTrash} style={{color: 'white'}} />
                             </Button>
                         </Col>
-                        <Col span={14} className="d-flex flex-row inc-dec-button-wrapper">
+                        <Col span={14} className="d-flex flex-row">
                            
                             <Row className="w-100">
                                 <Col span={6}>
@@ -131,4 +131,4 @@ const mapDispatchToProps = (dispatch)=>{
         
     }
 }
-export default connect(null,mapDispatchToProps)(ItemCart)
+export default connect(null,mapDispatchToProps)(BasketItem)

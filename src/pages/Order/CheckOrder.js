@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import DishStatus from '../../components/DishStatus/DishStatus'
-import Numberpad from '../../components/History/Numberpad'
+import Numberpad from '../../components/History/NumberPad/Numberpad'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeft} from '@fortawesome/free-solid-svg-icons'
 import './Order.scss'

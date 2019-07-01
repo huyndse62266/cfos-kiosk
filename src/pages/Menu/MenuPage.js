@@ -2,11 +2,11 @@ import React, { Component } from 'react'
 import { Layout } from 'antd';
 import {Route,Switch } from "react-router-dom"
 import TopBar from '../../components/Header/TopBar';
-import PopularScreen from '../../components/screen/PopularScreen';
-import PromotionScreen from '../../components/screen/PromotionScreen';
-import DishScreen from '../../components/screen/DishScreen';
-import DrinkScreen from '../../components/screen/DrinkScreen';
-import RestaurantScreen from '../../components/screen/RestaurantScreen';
+import PopularScreen from '../../components/Screen/PopularScreen';
+import PromotionScreen from '../../components/Screen/PromotionScreen';
+import DishScreen from '../../components/Screen/DishScreen';
+import DrinkScreen from '../../components/Screen/DrinkScreen';
+import RestaurantScreen from '../../components/Screen/RestaurantScreen';
 const { Header, Content } = Layout;
 export default class MenuPage extends Component {
     

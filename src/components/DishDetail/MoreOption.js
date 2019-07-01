@@ -32,16 +32,11 @@ export default class MoreOption extends Component {
                 </div>
                 <div className="col-lg-6 d-flex flex-row py-2 px-3">
                     <Button style={{backgroundColor: '#D2D2D2'}} onClick={this.DecreaseItem} ><FontAwesomeIcon icon={faMinus} /></Button>
-                    {/* <button type="button" onClick={this.DecreaseItem} className="btn">
-                        <i class="fa fa-minus"></i>
-                    </button> */}
+
                     <div className="px-3 py-1">
                         { this.state.show ? <h2 style={{fontSize:'1rem'}}>{ this.state.clicks }</h2> : '' }
                     </div>
                     <Button style={{backgroundColor: '#D2D2D2'}} onClick={this.IncrementItem} ><FontAwesomeIcon icon={faPlus} /></Button>
-                    {/* <button type="button" onClick={this.IncrementItem} className="btn">
-                        <i className="fa fa-plus"></i>
-                    </button> */}
                 </div>
             </div>
         )
