@@ -20,9 +20,7 @@ class StoreMenu extends Component {
     }
 
     componentDidMount(){
-        console.log(this.props.storeInfo.storeId)
         apiCaller(`store/${this.props.storeInfo.storeId}/foods/`,'GET',null).then(res => {
-            console.log(res.data)
             this.setState({              
                 foods: res.data
             })
@@ -81,7 +79,6 @@ class StoreMenu extends Component {
         
     }
     buttonMoreDetail(categories){
-        console.log(categories)
         if (this.state.isExpand) {
             
             return categories.map((category, index) => {
@@ -98,7 +95,6 @@ class StoreMenu extends Component {
     }
 
     findByCategory = (id) =>{
-        console.log(id)
         var { foods} = this.state;
         let a = foods.filter(food => food.storeCategoryId === id)
         this.setState({
@@ -115,7 +111,6 @@ class StoreMenu extends Component {
     render() {
         var { storeInfo, myFoods } = this.props;
         var { foods, foodFilter} = this.state;
-        console.log(foodFilter)
         return (
             <Row >
                 <Col span={3}className="text-center h-100" style={{margin:'auto', textAlign: 'center'}}>

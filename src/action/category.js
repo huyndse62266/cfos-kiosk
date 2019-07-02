@@ -10,7 +10,6 @@ export const actFetchCategoriesRequest = () => {
 }
 
 export const actFetchParentCategoriesRequest = (id) => {
-    console.log(id)
     return dispatch => {
         return callApi(`categories/parent?name=${id}`,'GET',null).then(res =>{
             dispatch(actFetchCategories(res.data));

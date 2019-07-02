@@ -8,10 +8,10 @@ export default class ReceiptTemplate extends Component {
             orderNumber: this.props.orderID
         })
     }
-
+    
     render() {
         var {items, totalPrice, orderID} = this.props;
-        console.log(orderID)
+        console.log(this.props.orderID)
         var count = 0;
         return (
             <div>
@@ -30,7 +30,7 @@ export default class ReceiptTemplate extends Component {
                     <h3>Phiếu thanh toán</h3>
                 </Row>
                 <Row>
-                <h6 className="px-4 py-2">Order ID: {this.state.orderNumber}</h6>
+                <h6 className="px-4 py-2">Order ID: {this.props.orderID}</h6>
                 </Row>
                 <table>
                     <thead>
@@ -44,7 +44,6 @@ export default class ReceiptTemplate extends Component {
                     <tbody>
                         {items.map((item,index) =>{
                             count += item.cartQuantity;
-                            console.log(count)
                             return <tr>
                             <td><h6 style={{fontSize:'10px'}}>{item.foodName}</h6></td>
                             <td className="text-center"><h6 style={{fontSize:'10px'}}>{item.cartQuantity}</h6></td>

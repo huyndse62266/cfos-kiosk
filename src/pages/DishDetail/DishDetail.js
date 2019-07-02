@@ -5,17 +5,13 @@ import DishInfo from './DishInfo'
 import DishFeedback from './DishFeedback'
 const { TabPane } = Tabs;
 
-function callback(key) {
-  console.log(key);
-}
 
 
 export default class DishDetail extends Component {
     render() {
         var {selected} = this.props;
-        console.log(this.props.cartQuantity)
         return (
-            <Tabs defaultActiveKey={selected} onChange={callback} size={'default'}>
+            <Tabs defaultActiveKey={selected} size={'default'}>
                 <TabPane tab={<div className="button-tab">Dish Detail</div>} key="1" size="large">
                     <DishInfo food={this.props.food} cartQuantity={this.props.cartQuantity}/>
                 </TabPane>

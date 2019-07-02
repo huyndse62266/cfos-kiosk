@@ -40,9 +40,7 @@ export default class DishFeedback extends Component {
     }
     render() {
         var {food} = this.props;
-        console.log(food)
         var {feedbackVMS} = this.props.food;
-        console.log(feedbackVMS);
         return (
             <Row>
                 <Col span={8}>

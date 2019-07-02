@@ -1,10 +1,18 @@
 import React, { Component } from 'react'
 import {Col, Row, Button} from 'antd';
+import { connect } from 'react-redux'
+import { Link } from "react-router-dom";
+import ReactToPrint from 'react-to-print';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheck } from '@fortawesome/free-solid-svg-icons'
+import ReceiptTemplate from '../../components/Receipt/ReceiptTemplate'
 import './Order.scss'
-export default class CompleteOrder extends Component {
+
+class CompleteOrder extends Component {
+
+    
     render() {
+        
         return (
             <div className="order-config-container">
                 <Row>
@@ -24,7 +32,7 @@ export default class CompleteOrder extends Component {
                 <Row>
                     <Col span={4} offset={10}>
                         <div className="w-100 py-3 order-id-div text-center">
-                            <span className="order-id-text py-0">Order Number: 782</span>
+                            <span className="order-id-text py-0">Order Number: {this.props.orderID}</span>
                         </div>
                     </Col>
                 </Row>
@@ -38,7 +46,7 @@ export default class CompleteOrder extends Component {
                 <Row>
                     <Col span={4} offset={10}>
                         <div className="w-100 py-3">
-                                <Button type="primary" size="large" className="w-100 px-5 button-custom">Go to home</Button>
+                            <Link to="/menu"><Button type="primary" size="large" className="w-100 px-5 button-custom">Go to home</Button></Link>                       
                         </div>
                     </Col>
                 </Row>
@@ -47,3 +55,14 @@ export default class CompleteOrder extends Component {
         )
     }
 }
+const mapStateToProps = (state)=>{
+    return{
+        items: state.cart.addedItems,
+        pricetotal: state.cart.total,
+        orderID: state.cart.orderID
+    }
+}
+
+
+
+export default connect(mapStateToProps,null)(CompleteOrder);

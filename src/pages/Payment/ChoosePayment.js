@@ -13,7 +13,7 @@ export default class ChoosePayment extends Component {
     render() {
         return (
             <div>
-                <Row>
+                <Row className="choose-payment-container">
                     <Col span={5} className="text-right py-5">
                         <Button className="arrow-button" style={{fontSize: '20px'}} onClick={()=>{this.goBackPage()}}>
                             <FontAwesomeIcon icon={faArrowLeft} />

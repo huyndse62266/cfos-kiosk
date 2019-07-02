@@ -1,24 +1,59 @@
 import React, { Component } from 'react'
-import {Row,Col,Button} from 'antd'
+import {Row,Col,Button,Alert } from 'antd'
 import { connect } from 'react-redux'
-import { actCheckoutRequest } from '../../action/cart';
-import { Link, Redirect  } from "react-router-dom";
+import { actCheckoutRequest,restoreCart } from '../../action/cart';
+import { Link } from 'react-router-dom'
 import ReactToPrint from 'react-to-print';
 import ReceiptTemplate from '../Receipt/ReceiptTemplate'
+import apiCaller from '../../utils/ApiCaller'
 import './Payment.scss'
 
-
+const onClose = e => {
+    console.log(e, 'I was closed.');
+};
 class PaymentType extends Component {
-    checkoutClick = (cart,total) =>{
-        if(cart.length > 0){
-            this.props.checkout(cart,total);
+    constructor(props){
+        super(props);
+        this.state ={
+            orderID: 0
         }
-        
     }
     
+    checkoutClick = (cart,total) =>{
+        if(cart.length > 0){
+            var orderDetail = cart.map((cartItem) =>{
+                return{
+                    foodId: cartItem.foodId,
+                    quantity: cartItem.cartQuantity,
+                    storeID: cartItem.storeVM.storeId,
+                    totalPrice: cartItem.price * cartItem.cartQuantity,
+                }
+            })
+            var order ={
+                "customerId": null,
+                "orderDetails": orderDetail,
+                "totalOrder": total
+            }
+            apiCaller(`orders/orders/submit-order`,'POST',JSON.stringify(order)).then(res =>{
+                this.setState({
+                    orderID: res.data
+                })
+            }).catch(error => {
+                return <Alert
+                message="Error"
+                description={error.response.data.message}
+                type="error"
+                closable
+                onClose={onClose}
+              />
+            })
+            console.log(this.state.orderID) 
+        }
+
+    }
+ 
     render() {
-        var {items,pricetotal, orderID} = this.props;
-        console.log(orderID)    
+        var {items,pricetotal, orderID} = this.props; 
         return (
             <div>
                 <Row>
@@ -50,7 +85,7 @@ class PaymentType extends Component {
                                         <span className="py-3 h-100">Card</span>
                                     </Button>
                                 </Col>
-
+                                
      
                             </Row>
                             <Row className="payment-type-detail">
@@ -87,7 +122,6 @@ class PaymentType extends Component {
                         </Button>}
                         content={() => this.componentRef}
                         onBeforePrint={() => this.checkoutClick(items,pricetotal)}
-                        onAfterPrint={<Redirect to='/complete' />}
                         copyStyles
                         />
                         <div style={{display:'none'}}>
@@ -113,8 +147,8 @@ const mapStateToProps = (state)=>{
 
 const mapDispatchToProps= (dispatch)=>{
     return{
-        checkout: (cart,total)=>{
-            dispatch(actCheckoutRequest(cart,total))
+        restoreMyCart: ()=>{
+            dispatch(restoreCart())
         }
     }
 }

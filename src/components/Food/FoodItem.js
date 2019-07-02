@@ -72,7 +72,7 @@ class FoodItem extends Component {
                     </Row>
                     <Row className="py-2">
                         <Col span={16} className="px-2">
-                            <Row><span className="font-weight-bold" style={{fontSize:'12px'}}>
+                            <Row><span className="font-weight-bold" style={{fontSize:'15px'}}>
                             <NumberFormat value={food.price} displayType={'text'} thousandSeparator={','}/> đ</span> 
                             </Row>
                             <Row>
@@ -81,7 +81,7 @@ class FoodItem extends Component {
                             </Row>
                         </Col>
                         <Col span={8}>
-                            <button type="button" className="btn btn-success w-75" onClick={()=>{this.addToCartClick(food)}}>Add</button>
+                            <button type="button" className="btn button-add" onClick={()=>{this.addToCartClick(food)}}>Add</button>
                             {/* <Button className="button-add" onClick={()=>{this.addToCartClick(food)}}>Add</Button> */}
                         </Col>
                     </Row>

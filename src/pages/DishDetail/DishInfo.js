@@ -109,7 +109,7 @@ class DishInfoUpdate extends Component {
                                     <FontAwesomeIcon icon={faStar} style={{color: 'orange'}}/>
                                 </Row>
                                 <Row className="pt-2">
-                                    <h5 className="font-weight-bold">{food.price} đ</h5>
+                                    <h5 className="font-weight-bold"> <NumberFormat value={food.price} displayType={'text'} thousandSeparator={','}/> đ</h5>
                                 </Row>
                                 <Row className="border-top py-2">
                                     <span className="text-left" style={{fontSize: '14px'}}>{food.foodDescription}</span>
@@ -203,6 +203,7 @@ const mapDispatchToProps = (dispatch)=>{
             dispatch(findCart(id))
         },
         addtoCart: (id,quantity)=>{
+            console.log(id,quantity)
             dispatch(addToCart(id,quantity))
         },
         updateCart: (id,quantity)=>{

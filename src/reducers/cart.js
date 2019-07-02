@@ -18,11 +18,10 @@ const cart = (state = initState,action) => {
             return{
                 ...state,
                 total: state.total  + addedItem.price,
-                
             }
         }else{
             addedItem.cartQuantity = quantity;
-            let newTotal = state.total + addedItem.price
+            let newTotal = state.total + addedItem.price*quantity
             return{
                 ...state,
                 addedItems: [...state.addedItems, addedItem],
@@ -76,19 +75,27 @@ const cart = (state = initState,action) => {
     if(action.type ===Types.UPDATE_ITEM_CART){
         let addedItem = state.addedItems.find(item => item.foodId === id)
         let oldQuantity = addedItem.cartQuantity
-        console.log(oldQuantity)
-       
         if(addedItem)
             addedItem.cartQuantity = quantity;
-            let newTotal = state.total + addedItem.price * (quantity - oldQuantity);
-            return{
-                ...state,
-                total: newTotal
-            }   
+            if(quantity == 0){
+                let newTotal = state.total - addedItem.price * oldQuantity;
+                let newItems = state.addedItems.filter(item => item.foodId !== id)
+                return{
+                    ...state,
+                    addedItems: newItems,
+                    total: newTotal
+                }   
+            }else{
+                let newTotal = state.total + addedItem.price * (quantity - oldQuantity);
+                return{
+                    ...state,
+                    total: newTotal
+                }   
+            }
+            
     }
     if(action.type === Types.CHECKOUT){
         let newCart = state.addedItems.filter(item => item.foodId === 0)
-        console.log(newCart)
         return{
            ...state,
            addedItems: newCart,

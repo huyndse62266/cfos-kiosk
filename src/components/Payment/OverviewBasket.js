@@ -10,24 +10,13 @@ import './Payment.scss'
 class OverviewBasket extends Component {
     
     render() {
-        let addedItems =  this.props.items.length ?
-      (
-        
-          this.props.items.map((food, index) => {
+        let addedItems =  this.props.items.map((food, index) => {
             
             return (
                 <Col span={12} className="px-2 py-1">
                     <CartItemSimple key={index} food={food} index={index} cartQuantity={food.cartQuantity} type={'done'}/>
-                </Col>)
-                
-        })
-      ):(
-          <Row type="flex" justify="space-around" align="middle" style={{height:'800px', width: '100%'}}>
-              <Col span={24} className="text-center" >
-                <h1>Cart Empty</h1>
-              </Col>
-          </Row>
-      )
+                </Col>)})
+ 
         return (
             <div className="container-fluid px-4 py-0 bg-light">
                 <Row>
@@ -38,7 +27,7 @@ class OverviewBasket extends Component {
                         </div>
                     </Col>
                 </Row>
-                <ScrollArea speed={0.8}
+                {this.props.items.length>0?<ScrollArea speed={0.8}
                     verticalScrollbarStyle={{display:'none'}}
                     className="area"
                     contentClassName="content"
@@ -46,7 +35,13 @@ class OverviewBasket extends Component {
                     <Row>
                         {addedItems}
                     </Row>
-                </ScrollArea>
+                </ScrollArea>:<Row style={{height:'600px'}} type="flex" justify="space-around" align="middle">
+                    <Col span={24} className="text-center">
+                        <h1>Empty</h1>
+                    </Col>
+                </Row>}
+                
+                
                 <Row>
                     <h3 className="text-right py-2">Total:  <NumberFormat value={this.props.pricetotal} displayType={'text'} thousandSeparator={','} />  đ</h3>
                 </Row>
