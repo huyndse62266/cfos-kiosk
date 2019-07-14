@@ -1,18 +1,24 @@
+.dish-detai-wrapper{
+    padding: 1% 0%;
+    
+}
 .status-finish{
     color: #2CC200 !important;
-    font-size: 28px !important;
+    font-size: 24px !important;
     font-weight: bold !important;
     width: 100%;
+    font-family: 'Roboto';
 }
 .status-finish-description{
-    font-size: 13px;
+    font-size: 18px;
     font-weight: bold !important;
     width: 100%;
+    font-family: 'Roboto';
 
 }
-.check-icon{
+.done-icon{
     color:#2CC200 !important;
-    font-size: 20px;
+    font-size: 25px;
 }
 
 .status-waiting{
@@ -28,10 +34,12 @@ img{
     height: 100%;
 }
 
-.quantity-col{
-    height: 80px;
-    position: relative
-  }
+.order-detail-quantity{
+    border: 1px solid;
+    border-radius: 10px;
+    width: 75%;
+    padding: 9% 0%;
+}
   .quantity-col h4{
     margin: 0;
     position: absolute;
@@ -40,13 +48,20 @@ img{
     transform: translate(-50%, -50%);
 }
 .dish-status{
-    height: 80px;
-    position: relative
+    /* height: 80px; */
+    display: flex;
+    justify-content: center; /* align horizontal */
+    align-items: center;
+    font-size: 20px
   }
   .dish-status h4{
     margin: 0;
-    position: absolute;
+    /* position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%); */
+}
+.image-order-detail{
+    border-radius: 10px;
+    height: 120px;
 }

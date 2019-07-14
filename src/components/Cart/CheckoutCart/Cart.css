@@ -1,0 +1,48 @@
+.img-style{
+    height: 120px;
+    border-radius: 10px;
+    z-index: 1;
+    top: 0
+}
+
+.store-name{
+    font-size: 16px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+    color: #212121;
+}
+.food-name{
+    font-size: 20px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold
+}
+.option-name{
+    font-size: 20px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+    color: #212121
+}
+.cart-item-info-wrapper{
+    padding: 10% 2% 5% 2%
+}
+.display-quantity-checkout{
+    z-index: 10;
+    border: 1px solid;
+    width: 20%;
+    padding: 2% 5%;
+    top: 30px;
+    border-radius: 10px;
+    background-color: white;
+    font-size: 16px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold
+}
+.display-quantity-checkout-wrapper{
+    z-index: 2;
+    top: 20px;
+    right: 15px;
+}
+.cart-checkout-container{
+    padding: 0% 2%;
+    border-bottom: 1px solid lightgray
+}

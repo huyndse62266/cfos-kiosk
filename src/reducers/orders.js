@@ -9,7 +9,8 @@ const orders = (state = initialState, action) => {
         case Types.FETCH_ORDER:
             state = action.orders;
             return {...state};
-            
+        case Types.ADD_ORDER:
+            return action
         default: return {...state};
     }
 };

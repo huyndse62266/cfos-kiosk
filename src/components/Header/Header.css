@@ -1,0 +1,115 @@
+.user-button{
+    width: 90%;
+    height: 50px;
+    font-size: 25px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    background-color: #d9d9d9
+}
+.cancel-button{
+    width: 90%;
+    height: 50px;
+    font-size: 17px;
+    border-bottom-left-radius: 20px;
+    background-color: #d9d9d9
+}
+.ant-menu.ant-menu-dark .ant-menu-item-selected.customclass {
+    background-color: green; /*Overriden property*/
+  }
+
+.menu-border{
+    padding: 0% 1%;
+    border-radius: 5px;
+}
+
+.back-button{
+    color: black;
+    width: 75%;
+    height: 100%;
+    padding: 10% 0%;
+    border: 0
+}
+
+.back-button-title{
+    padding: 0% 5%;
+    text-decoration: underline
+}
+.empty-cart{
+    margin-top: 5%;
+    height: 75%;
+    width: 98%;
+    text-align: center;
+    background-color: white;
+    font-size: 18px;
+    padding: 5% 0%;
+    border-radius: 5px;
+    font-weight: 700;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+}
+.cart-header{
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    background-color: white;
+    border-radius: 5px;
+    font-weight: 700;
+    padding: 5% 0%;
+}
+
+.ant-menu-item-selected{
+    background-color: #FF331C !important;
+    color:white !important;
+    border-radius: 10px 
+}
+.ant-menu-item-selected a{
+    color:white !important;
+}
+.ant-menu-submenu-selected{
+    border-bottom: 2px solid #FF331C !important;
+    color:white !important
+}
+.menu-icon{
+    padding-left: 14%
+}
+.menu-title{
+    padding: 0% 5%;
+    font-size: 22px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
+}
+ 
+/* .ant-modal-close {
+    right: 0 !important;
+} */
+@media all and (max-width: 1920px) {
+    
+    .menu-item{
+        padding: 0.5rem 0rem;
+        width: 16.67%;
+        font-size: 20px;
+        text-align: center;
+        color:#d9f7be
+    }
+}
+
+@media all and (max-width: 1440px) {
+    .menu-item{
+        padding: 0.4rem 0rem;
+        font-size: 18px;
+    }
+}
+
+@media all and (max-width: 1280px) {
+    .menu-item{
+        padding: 0.3rem 0rem;
+        font-size: 18px;
+    }
+}
+
+@media all and (max-width: 1024px) {
+    .menu-item{
+        padding: 0.2rem 0rem;
+        font-size: 18px;
+    }
+}
+

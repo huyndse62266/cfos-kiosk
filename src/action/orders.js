@@ -15,3 +15,10 @@ export const fetchOrder = (orders) =>{
         orders
     }
 }
+
+export const addOrder = (orderNumber) =>{
+    return {
+        type: Types.ADD_ORDER,
+        orderNumber
+    }
+}

@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCheck} from '@fortawesome/free-solid-svg-icons'
+import { faMapMarkerAlt,faUtensils} from '@fortawesome/free-solid-svg-icons'
 import {Row,Col,Avatar} from 'antd'
-import './DishStatus.scss'
+import './DishStatus.css'
 
 export default class DishStatus extends Component {
 
@@ -17,29 +17,31 @@ export default class DishStatus extends Component {
         var {orderDetail} = this.props;
         return (
 
-            <Row className="p-0 py-3">
-                <Col span={4}>
-                    <img src={orderDetail.foodVM.foodImage} className="img-thumbnail" alt="Cinque Terre"/>
+            <Row className="dish-detai-wrapper" type="flex" justify="start">
+                <Col span={2} className="text-center my-auto">
+                    <div className="order-detail-quantity opensan-24-semibold">
+                        <span >x{orderDetail.quantity}</span>
+                    </div>
                 </Col>
-                <Col span={10} className="col-lg-5 p-2 px-3  text-left">
-                    <Row className="py-2">
-                        <h4 className="font-weight-bold">{orderDetail.foodVM.foodName}</h4>
+                <Col span={5}>
+                    <img src={orderDetail.foodVM.imageVMS[0].image} className="image-order-detail" alt="Cinque Terre"/>
+                </Col>
+                <Col span={8} className="text-left my-auto" offset={1}>
+                    <Row type="flex" justify="start" align="bottom">
+                        <Col span={2} style={{fontSize:'20px'}}><FontAwesomeIcon icon={faMapMarkerAlt}/></Col>
+                        <Col span={16}><h6>{orderDetail.storeVM.storeName}</h6></Col>
                     </Row>
-                    <Row className="py-2">
-                        <Col span={3}><Avatar style={{ backgroundColor: '#87d068' }} icon="user" size="small"/></Col>
-                        <Col span={16}><h6>Nhà hàng Lorem Ipsum</h6></Col>
-                    </Row>
-                </Col>
-                <Col span={2} className="quantity-col">
-                    <h4 className="my-auto">x{orderDetail.quantity}</h4>
-                </Col>
+                    <Row>
+                        <h4 className="opensan-24-bold">{orderDetail.foodVM.foodName}</h4>
+                    </Row>                  
+                </Col>               
                 <Col span={8} className="dish-status text-right">
-                    {orderDetail.oderDetailStatus==='WAITING'?<h4 className="status-waiting">Cooking ...</h4>:<Row type="flex" justify="space-around" align="middle">
+                    {orderDetail.oderDetailStatus==='WAITING'?<h4 className="status-waiting">Cooking ...</h4>:<Row type="flex" className="w-100">
                         <Col span={20}>
-                            <span className="status-finish p-0">Finish</span><br/>
-                            <span className="status-finish-description">Waiting for pick up</span>
+                            <span className="status-finish p-0">Hoàn thành</span><br/>
+                            <span className="status-finish-description">Đang chờ lấy</span>
                         </Col>
-                        <Col span={4} className="check-icon"><FontAwesomeIcon icon={faCheck}/></Col>
+                        <Col span={4} className="done-icon"><FontAwesomeIcon icon={faUtensils}/></Col>
                     </Row>}
                     
                 </Col>

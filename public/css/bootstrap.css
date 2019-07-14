@@ -8917,6 +8917,7 @@ a.text-dark:hover, a.text-dark:focus {
   visibility: hidden !important;
 }
 
+
 @media print {
   *,
   *::before,
@@ -8956,12 +8957,12 @@ a.text-dark:hover, a.text-dark:focus {
     page-break-after: avoid;
   }
  
-  /* body {
-    min-width: 992px !important;
+  body {
+    max-width: 300px !important;
   }
   .container {
-    min-width: 992px !important;
-  } */
+    max-width: 300px !important;
+  }
   .navbar {
     display: none;
   }

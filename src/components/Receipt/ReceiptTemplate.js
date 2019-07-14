@@ -1,26 +1,19 @@
 import React, { Component } from 'react'
 import { Row, Col } from 'antd';
+import $ from 'jquery'
 export default class ReceiptTemplate extends Component {
 
-    constructor(props){
-        super(props);
-        this.state = ({
-            orderNumber: this.props.orderID
-        })
-    }
-    
     render() {
-        var {items, totalPrice, orderID} = this.props;
-        console.log(this.props.orderID)
+        var {items, totalPrice, orderNumber} = this.props;
         var count = 0;
         return (
             <div>
                 <Row className="text-center">
-                    <h3>Food House</h3>
+                    <h3 style={{fontFamily: 'Times New Roman'}}>Food House</h3>
                 </Row>
                 <Row >
                 <Col span={22} offset={1}>
-                    <h6 style={{ fontSize: "12px", fontWeight: 'bold' }}>
+                    <h6 style={{ fontSize: "12px", fontWeight: 'bold',fontFamily: 'Times New Roman' }}>
                         Address: Đường D1, Khu Công Nghệ Cao, Phường Tân Phú, Quận 9, Hồ
                     Chí Minh 715650
                     </h6>
@@ -30,7 +23,7 @@ export default class ReceiptTemplate extends Component {
                     <h3>Phiếu thanh toán</h3>
                 </Row>
                 <Row>
-                <h6 className="px-4 py-2">Order ID: {this.props.orderID}</h6>
+                <h6 className="px-4 py-2">Order ID: {this.props.orderNumber}</h6>
                 </Row>
                 <table>
                     <thead>

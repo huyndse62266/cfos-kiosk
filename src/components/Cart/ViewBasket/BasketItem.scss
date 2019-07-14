@@ -1,18 +1,84 @@
+.basket-item-wrapper{
+    border: 1px solid;
+    border-radius: 8px;
+    padding: 0% 5% 5% 5%;
+
+}
 .trash-button-item-cart{
     padding: 0% 5%
 }
 .display-quantity{
-    padding: 6% 0%;
+    padding: 9% 0%;
     text-align: center;
-    font-weight: bold
+    font-weight: bold;
+    background-color: #ff7a45;
+    height: 100%;
+    color:white
 }
+.basket-header{
+    // z-index: 2;
+   margin: 0 3%;
+   top: 20%
+}
+.food-name-basket{
+    z-index: 2;
+    bottom: 20%;
+    margin: 0 5%
+}
+.food-name-basket h6 {
+    color: white
+}
+.customer-wrapper {
+    border-top: 1px solid
+}
+.info-basket{
+    height:180px;
+}
+.edit-basket{
+    padding-top: 13%;
+    padding-bottom: 5%;
+}
+.custom-title{
+    padding: 5% 0%;
+    font-weight: 700
+}
+.image-basket{
+    width: 100%;
+    height: 180px;
+    border-radius: 10px;
+}
+.remove-basket-button{
+    height: 85%;
+    font-size: 15px;
+}
+.dec-button-basket{
+    width: 100%;
+    height: 30px;
+    color:white;
+    background-color: #ff7a45;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    padding: 0% 5%;
+}
+.inc-button-basket{
+    width: 100%;
+    height: 30px;
+    background-color: #ff7a45;
+    color:white;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    padding: 0% 5%
+}
+
 
 @media all and (max-width: 1920px) {
     .customize-order-button{
-        background-color: #40a9ff;
-        color: white;
+        border: 1px solid #d4380d;
+        color: #d4380d;
         width: 100%;
-        font-size: 14px
+        height: 40px;
+        font-size: 15px;
+        font-weight: bold
     }
 
 }

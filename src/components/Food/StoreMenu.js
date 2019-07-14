@@ -15,14 +15,14 @@ class StoreMenu extends Component {
             foods : [],
             foodFilter : [],
         }
-        this.readMore = this.readMore.bind(this);
         this.checkIsExpand = this.checkIsExpand.bind(this);
     }
 
-    componentDidMount(){
+    componentWillMount(){
         apiCaller(`store/${this.props.storeInfo.storeId}/foods/`,'GET',null).then(res => {
             this.setState({              
-                foods: res.data
+                foods: res.data,
+                foodFilter : res.data
             })
         })
     }
@@ -34,43 +34,10 @@ class StoreMenu extends Component {
     
     }
 
-    showAllFoods(foods,myFoods){
-       
-            
-        
-       
-    
-    }
-
-    readMore(foods,myFoods) {
-        if (this.state.isExpand) {
-            if(myFoods.length > 0){
-                return myFoods.map((food, index) => {
-                    if(index > 3)
-                        return (
-                            <Col span={6} className="px-4">
-                                <FoodItem key={index} food={food} index={index} />
-                            </Col> 
-                        )
-                })
-            }else{
-                return foods.map((food, index) => {
-                    if(index > 3)
-                        return (
-                            <Col span={6} className="px-4">
-                                <FoodItem key={index} food={food} index={index} />
-                            </Col> 
-                        )
-                })
-            }
-                
-            
-        }
-    }
     buttonMore(){
         if (this.state.isExpand) {
             return (<Row>
-                <Col span={12} offset={6}>
+                <Col span={14} offset={5}>
                     <Button className="store-category" onClick={()=>{this.findAll()}}>All</Button>
 
                 </Col>
@@ -84,8 +51,8 @@ class StoreMenu extends Component {
             return categories.map((category, index) => {
                 return (
                     <Row>
-                        <Col span={12} offset={6}>
-                            <Button className="store-category" onClick={()=>{this.findByCategory(category.categoryId)}}>{category.categoryName}</Button>
+                        <Col span={14} offset={5}>
+                            <Button className="store-category opensan-20-bold" onClick={()=>{this.findByCategory(category.categoryId)}}>{category.categoryName}</Button>
                         </Col>
                     </Row>
                 )
@@ -95,8 +62,10 @@ class StoreMenu extends Component {
     }
 
     findByCategory = (id) =>{
+        console.log(id  )
         var { foods} = this.state;
         let a = foods.filter(food => food.storeCategoryId === id)
+        console.log(a)
         this.setState({
             foodFilter: a
         })
@@ -104,63 +73,103 @@ class StoreMenu extends Component {
 
     findAll = () =>{
         var { foods} = this.state;
+        let a = foods.filter(food => food.storeCategoryId === 0)
         this.setState({
-            foodFilter: foods
+            foodFilter: this.state.foods
         })
     }
     render() {
-        var { storeInfo, myFoods } = this.props;
+        var { storeInfo } = this.props;
         var { foods, foodFilter} = this.state;
         return (
-            <Row >
-                <Col span={3}className="text-center h-100" style={{margin:'auto', textAlign: 'center'}}>
+            <div>
+                {!this.props.items.length > 0 ?<Row type="flex" justify="start">
+                <Col className="text-center h-100" style={{ width: '10.4%'}}>
                     <div style={{marginTop:'40%'}}>
-                        <h4>{storeInfo.storeName}</h4>
+                        <h4 className="opensan-28-extrabold">{storeInfo.storeName}</h4>
                         {this.buttonMore()}
                         {this.buttonMoreDetail(storeInfo.categoryVMList)}
                         
-                        <Button type="link" onClick={this.checkIsExpand}>{this.state.isExpand === true ? <div>Thu gọn <FontAwesomeIcon icon={faAngleUp} /></div> : <div>Xem thêm <FontAwesomeIcon icon={faAngleDown} /></div> } </Button>
+                        <button type="button" className="btn opensan-16-semibold bg-light" onClick={this.checkIsExpand}>{this.state.isExpand === true ? <div>Thu gọn <FontAwesomeIcon icon={faAngleUp} /></div> : <div>Xem thêm <FontAwesomeIcon icon={faAngleDown} /></div> } </button>
                     </div>
                 </Col>
-                <Col span={21} className="d-flex flex-column">
-                    <Row >
-                        {/* {!foods ? <div/> : 
-                        foods.map((food, index) => <Col span={6} className="px-4">
-                        <FoodItem key={index} food={food} index={index}/>
-                    </Col> )
-                    } */}
-                        {/* {this.showAllFoods(foods,foodFilter)} */}
-                        {!myFoods ? myFoods.map((food, index) => {
-                            if(index < 4)
-                            return (
-                                <Col span={6} className="px-4">
-                                    <FoodItem key={index} food={food} index={index}/>
-                                </Col> 
-                            )
-                        }):foods.map((food, index) => {
-                            if(index < 4)
-                            return (
-                                <Col span={6} className="px-4">
-                                    <FoodItem key={index} food={food} index={index}/>
-                                </Col> 
-                            )
-                        })}
+                <Col span={21} className="d-flex flex-column" style={{margin:'auto', textAlign: 'center', width: '89.6%'}}>
+                    <Row type="flex" justify="start">
+                        {this.state.foodFilter.length > 0 ? foodFilter.map((food, index) => {
+                            if(index < 5){
+                                console.log(food)
+                                return (
+                                    <Col style={{width:'20%'}} className="px-4">
+                                        <FoodItem key={index} food={food} index={index}/>
+                                    </Col> 
+                                )
+                            }
+                            
+                        }):<span></span>}
                     </Row>
                     <span id="more">
                         <Row type="flex" justify="start">
-                            {this.readMore(foods,foodFilter)}
+                            {this.state.isExpand ? foodFilter.map((food, index) => {
+                            if(index > 4)
+                                return (
+                                    <Col style={{width:'20%'}}  className="px-4">
+                                        <FoodItem key={index} food={food} index={index}/>
+                                    </Col> 
+                                )
+                            }): <span></span>}
                         </Row>
                     </span>
                     
                 </Col>
-            </Row>
+            </Row>:
+            <Row type="flex" justify="start">
+                <Col className="text-center h-100" style={{margin:'auto', textAlign: 'center', width: '10.4%'}}>
+                    <div style={{marginTop:'40%'}}>
+                        <h4 className="opensan-28-extrabold">{storeInfo.storeName}</h4>
+                        {this.buttonMore()}
+                        {this.buttonMoreDetail(storeInfo.categoryVMList)}
+                        
+                        <button type="button" className="btn opensan-16-semibold bg-light" onClick={this.checkIsExpand}>{this.state.isExpand === true ? <div>Thu gọn <FontAwesomeIcon icon={faAngleUp} /></div> : <div>Xem thêm <FontAwesomeIcon icon={faAngleDown} /></div> } </button>
+                    </div>
+                </Col>
+                <Col span={21} className="d-flex flex-column" style={{margin:'auto', textAlign: 'center', width: '89.6%'}}>
+                    <Row type="flex" justify="start">
+                        {this.state.foodFilter.length > 0 ? foodFilter.map((food, index) => {
+                            if(index < 4){
+                                return (
+                                    <Col span={6} className="px-4">
+                                        <FoodItem key={index} food={food} index={index}/>
+                                    </Col> 
+                                )
+                            }
+                            
+                        }):<span></span>}
+                    </Row>
+                    <span id="more">
+                        <Row type="flex" justify="start">
+                            {this.state.isExpand ? foodFilter.map((food, index) => {
+                            if(index > 3)
+                                return (
+                                    <Col span={6} className="px-4">
+                                        <FoodItem key={index} food={food} index={index}/>
+                                    </Col> 
+                                )
+                            }): <span></span>}
+                        </Row>
+                    </span>
+                    
+                </Col>
+            </Row>}
+            </div>
+            
         )
     }
 }
 
 const mapStateToProps = (state)=>{
     return{
-        myFoods: state.foods
+        myFoods: state.foods,
+        items: state.cart.addedItems,
     }
 }
 

@@ -8291,12 +8291,12 @@ a.text-dark:hover {
     page-break-after: avoid;
   }
 
-  /* body {
-    min-width: 992px !important;
+  body {
+    max-width: 300px !important;
   }
   .container {
-    min-width: 992px !important;
-  } */
+    max-width: 300px !important;
+  }
   .navbar {
     display: none;
   }

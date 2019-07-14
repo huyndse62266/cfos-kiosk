@@ -1,11 +1,10 @@
 .store-category{
-    background-color: #02B1D0;
-    color:white;
+    color: #30394D;
     font-weight: bold;
     width: 100%;
     text-align: center;
-    margin-top: 5%;
-    margin-right: 5%;
+    margin-top: 10%;
+    margin-right: 10%;
     padding-left: 0;
     padding-right: 0;
 }
@@ -17,18 +16,19 @@
     border-radius: 0px 0px 5px 5px;
 }
 .button-add{
-    background-color: #28C76F;
+    background-color: #ff7a45;
     color:white;
-    width: 80%;
+    width: 90%;
     height: 35px;
     margin-left: 10%;
 }
-[ant-click-animating-without-extra-node]:after {
-	animation: 0s !important;
+.food-name-style{
+    font-size: 21px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 600;
+    max-width: 95%;
+    padding-top: 2%
 }
-.ant-btn.ant-btn-background-ghost::after {
-    border: none !important;
-    }
 @media all and (max-width: 1920px) {
     .restaurant-title{
         font-size: 15px;
@@ -36,15 +36,15 @@
         font-family: Arial;
         padding: 0px 0px;
     }
-    .promotion-tag-wrapper{
-        border-radius: 6px;
-        padding: 7% 10%;
-        background-color: #32CCBC;
-        text-align: center;
-        color: white;
-        font-weight: 600;
-        font-size: 15px;
-    }
+    // .promotion-tag-wrapper{
+    //     border-radius: 6px;
+    //     padding: 7% 10%;
+    //     background-color: #32CCBC;
+    //     text-align: center;
+    //     color: white;
+    //     font-weight: 600;
+    //     font-size: 15px;
+    // }
 }
 
 @media all and (max-width: 1440px) {

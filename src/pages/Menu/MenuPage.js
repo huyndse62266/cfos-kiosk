@@ -12,10 +12,9 @@ export default class MenuPage extends Component {
     
     render() {
         const {match} = this.props;
-        console.log(match);
-        return (
+        return (    
             <Layout>
-                <Header style={{padding: 0, backgroundColor: 'white', position: 'fixed', zIndex: 1, width: '100%', lineHeight: 0}}>
+                <Header style={{padding: 0, backgroundColor: 'white', position: 'fixed', zIndex: 50, width: '100%', lineHeight: 0}}>
                    <TopBar/>
                 </Header>
                 <Content style={{backgroundColor:'white'}} className="py-3">

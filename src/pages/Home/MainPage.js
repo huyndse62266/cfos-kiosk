@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import {Row,Col,Button} from 'antd'
 import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSearch, faDrumstickBite, faLongArrowAltRight } from '@fortawesome/free-solid-svg-icons'
 import 'antd/dist/antd.css';
 
 
@@ -11,33 +13,29 @@ export default class MainPage extends Component {
 
     render() {
         return (
-        <div>
-          <Row>
-            <Col span={18} offset={3}>
-              <img src={'https://cdn.pixabay.com/photo/2017/08/20/07/12/lisbon-2660748_960_720.jpg'} alt=""/>  
-            </Col>
-          </Row>
-          <Row className="py-4">
-            <Col span={12} className="text-right p-5">
-              
-              <Link to="/check-order">
-                <Button className="button-check">
-                  Check your dishes status
-                </Button>
-              </Link>
-            </Col>
-            <Col span={12} className="text-left p-5">
-              <Link to="/menu">
-                <Button className="button-order" >
-                  Touch to place your order
-                </Button>
-              </Link>
-            </Col>
+        <body>
+          <div className="home-container">
+            <Row className="group-button">
+              <Col span={12} className="text-right p-5">
+  
+                <Link to="/check-order">
+                  <button type="button" className="btn button-check">
+                    <FontAwesomeIcon icon={faSearch}/><span className="px-3">Kiểm tra tình trạng order</span>
+                  </button>
+                </Link>
+              </Col>
+              <Col span={12} className="text-left p-5">
+                <Link to="/menu">
+                  <button type="button" className="btn button-order" >
+                    <FontAwesomeIcon icon={faDrumstickBite}/><span className="px-3">Chạm để đặt món ăn</span><FontAwesomeIcon icon={faLongArrowAltRight}/>
+                  </button>
+                </Link>
+              </Col>
+            </Row>
             
-          </Row>
-          
-          
-        </div>
+            
+          </div>
+        </body>
             
         )
     }

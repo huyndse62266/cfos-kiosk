@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {Col,Row, Button} from 'antd';
-import './Payment.scss';
+import './Payment.css';
 import qrImage from '../../images/QRCode.JPG'
 export default class ComplePayment extends Component {
     render() {

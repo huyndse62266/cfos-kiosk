@@ -5,46 +5,50 @@ import { connect } from 'react-redux'
 import NumberFormat from 'react-number-format'; 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faShoppingBasket } from '@fortawesome/free-solid-svg-icons'
-import CartItemSimple from '../Cart/PreviewCart/CartItemSimple'
-import './Payment.scss'
+import Cart from '../Cart/CheckoutCart/Cart'
+import './Payment.css'
 class OverviewBasket extends Component {
     
     render() {
         let addedItems =  this.props.items.map((food, index) => {
             
             return (
-                <Col span={12} className="px-2 py-1">
-                    <CartItemSimple key={index} food={food} index={index} cartQuantity={food.cartQuantity} type={'done'}/>
+                <Col span={24} className="px-2 py-1">
+                    <Cart key={index} food={food} index={index} cartQuantity={food.cartQuantity} type={'done'}/>
                 </Col>)})
  
         return (
-            <div className="container-fluid px-4 py-0 bg-light">
-                <Row>
-                    <Col span={24}>
-                        <div className="text-center py-4" >
-                            <FontAwesomeIcon icon={faShoppingBasket} style={{fontSize: '24px'}}/>
-                            <span className="font-weight-bold" style={{fontSize: '18px'}}> Your Orders</span>
-                        </div>
+            <div className="px-4 py-0 bg-light h-100">
+                <Row className="overview-basket-title" type="flex" justify="start">
+                    <Col span={4} className="basket-icon-wrapper">
+                        <FontAwesomeIcon icon={faShoppingBasket} style={{fontSize: '40px'}}/>     
+                    </Col>
+                    <Col span={20}>
+                        <p className="your-basket-title">Giỏ của bạn</p>
+                        <p className="number-basket-item">({this.props.items.length} món)</p>
                     </Col>
                 </Row>
                 {this.props.items.length>0?<ScrollArea speed={0.8}
                     verticalScrollbarStyle={{display:'none'}}
                     className="area"
                     contentClassName="content"
-                    horizontal={false} style={{height: '600px'}}>
+                    horizontal={false} style={{height: '70%'}}>
                     <Row>
                         {addedItems}
                     </Row>
-                </ScrollArea>:<Row style={{height:'600px'}} type="flex" justify="space-around" align="middle">
+                </ScrollArea>:<Row style={{height:'100%'}} type="flex" justify="space-around" align="middle">
                     <Col span={24} className="text-center">
                         <h1>Empty</h1>
                     </Col>
                 </Row>}
                 
-                
                 <Row>
-                    <h3 className="text-right py-2">Total:  <NumberFormat value={this.props.pricetotal} displayType={'text'} thousandSeparator={','} />  đ</h3>
-                </Row>
+                    <Col span={12} offset={6}>
+                        <button type="button" className="btn edit-button">
+                            Chỉnh sửa
+                        </button>
+                    </Col>
+                </Row> 
 
             </div>
         )

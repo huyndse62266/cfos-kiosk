@@ -37,7 +37,7 @@ class PreviewCart extends Component {
 
 
     render() {
-        
+
         let addedItems =  this.props.items.length ?
             (
                 this.props.items.map((item,index) =>{
@@ -50,71 +50,25 @@ class PreviewCart extends Component {
         return (
             
             <div className="mini-cart-wrapper" >
-            
-                <Row>
-                    <Button type="primary" onClick={this.showModal} className="ml-3 px-0" style={{zIndex: 2, width: '30px',
-                        height:'30px',position:'absolute',right: '94%', top: '10px'}}>
-                        <FontAwesomeIcon icon={faAngleLeft} style={{fontSize: '30px', textAlign:'center'}}/>
-                    </Button>
-                    <Col span={24} className="px-4 py-3 text-center" >
-                        <FontAwesomeIcon icon={faShoppingCart} style={{fontSize:'20px'}}/><span className="font-weight-bold" style={{fontSize:'15px'}}> Your Basket</span>
-                    </Col>
-                </Row>
                 <ScrollArea speed={0.8}
                     verticalScrollbarStyle={{display:'none'}}
                     className="area"
                     contentClassName="content"
-                    horizontal={false} style={{height: '60%'}}>
+                    horizontal={false} style={{height: '70%'}}>
                     <Row className="py-2">
                         {addedItems}
                     </Row>
                 </ScrollArea>
-                <Row className="total-price-wrapper p-3">
-                    <Col span={12} className="float-left">
-                        <h6>Tổng tiền: </h6>
-                    </Col>
-                    <Col span={12} >
-                        <h6 className="float-right font-weight-bold"><NumberFormat value={this.props.pricetotal} displayType={'text'} thousandSeparator={','}/> đ</h6>
-                    
-                    </Col>
-                </Row>
-                <Row>
+                <Row className="py-4">
                     <Col span={18} offset={3}>
-                       
-                            <Link to="/payment"><Button  className="purchase-button-1">Purchase</Button></Link>
-                   
-                       
+                        <Link to="/payment"><Button  className="purchase-button-1">Thanh toán</Button></Link>
+
                     </Col>   
                 </Row>
-                <Modal
-                    title={<h5><FontAwesomeIcon icon={faShoppingCart}/> View Basket</h5>}
-                    visible={this.state.visible}
-                    onOk={this.handleOk}
-                    onCancel={this.handleCancel}
-                    closable
-                    width="95%"
-                    bodyStyle={{padding: 0, height: '100%'}}
-                    footer={<Row type="flex" justify="end">
-                    <Col span={8} className="py-1 text-right">
-                      <Col span={4} className="py-3">        
-                          <h2>Total: </h2>
-                      </Col>
-                      <Col span={7} className="py-3">
-                          <h2><NumberFormat value={this.props.pricetotal} displayType={'text'} thousandSeparator={','}/> đ</h2>
-                      </Col>
-                      <Col span={13} className="py-2">
-                          
-                        <Button className="w-75 h-100 text-center bg-success">
-                            <Link to="/payment"><div className="py-3" style={{color: 'white', fontWeight: 'bold'}}>Purchase</div></Link>  
-                        </Button>  
-                      </Col>
-                      
-                    </Col>
-                  </Row>  }
-                    centered
-                >
-                    <ViewBasket/>
-                </Modal>
+                <Row>
+                    <h4 className="text-center font-weight-bold"><NumberFormat value={this.props.pricetotal} displayType={'text'} thousandSeparator={','}/> đ</h4>
+                </Row>
+                
                 
             </div>
         )

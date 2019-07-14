@@ -1,62 +1,64 @@
 import React, { Component } from 'react'
-import FoodType from '../Food/FoodType'
 import { Row, Col} from 'antd';
-import { connect } from 'react-redux';
-import {actFetchCategoriesRequest} from '../../action/category'
+import { connect } from 'react-redux'
+import FoodType from '../Food/FoodType'
 import PreviewCart from '../Cart/PreviewCart/PreviewCart'
+import apiCaller from '../../utils/ApiCaller'
 import './Screen.scss'
 
+class PopularScreen extends Component {
 
- class PopularScreen extends Component {
 
-
-    componentDidMount(){
-        this.props.fetchAllCategory();
+    constructor(){
+        super();
+        this.state ={
+            categories : []
+        }
+       
     }
 
+    componentWillMount(){
+        apiCaller(`categories/`,'GET',null).then(res => {
+            this.setState({
+                categories: res.data
+            })     
+        })
+    }
     
     
     render() {
-        var { categories } = this.props;
         return (
-            <Row className="py-5">
-                <Col span={21}>
-                    {this.showAllCategory(categories)}
+            
+            <Row className="py-5" type="flex" justify="start">
+                {this.props.items.length > 0 ?
+                <div> 
+                    <Col style={{width: '83%'}}>
+                        {this.state.categories.map((category,index) =>{
+                            return (<FoodType key={index} category={category} index={index} type={'popular'}/>)
+                        })}
+                    </Col>
+                    <Col style={{width: '17%', position:'fixed', top: '6%', right: 0}}>
+                        <PreviewCart />
+                    </Col>
+                </div>:
+                <Col span={24}>
+                    {this.state.categories.map((category,index) =>{
+                        return (<FoodType key={index} category={category} index={index} type={'popular'}/>)
+                    })}
                 </Col>
-                <Col span={3} >
-                    <Row >
-                        <Col span={20} offset={2} style={{position:'fixed',width:'12%', right:0}}>
-                            <PreviewCart />
-                        </Col>
-                    </Row>
-                </Col>
+                }
+               
             </Row>
         )
     }
-
-    showAllCategory(categories){
-        var result = null;
-        if(categories.length > 0){
-            result = categories.map((category, index) => {
-                return (<FoodType key={category.categoryId} category={category} index={index} type={'popular'}/>)
-            })
-        }
-        return result;
-    }
 }
 
 
-const mapStateToProps = state => {
-    return {
-            categories: state.categories
+const mapStateToProps = (state)=>{
+    return{
+        items: state.cart.addedItems,
     }
 }
 
-const mapDispatchToProps = (dispatch, props) => {
-    return {
-        fetchAllCategory : () => {
-            dispatch(actFetchCategoriesRequest());
-        }
-    }
-}
-export default connect(mapStateToProps, mapDispatchToProps)(PopularScreen);
+export default connect(mapStateToProps,null)(PopularScreen);
+

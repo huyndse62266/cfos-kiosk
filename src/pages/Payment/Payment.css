@@ -42,5 +42,37 @@
     padding-right: 7rem
 }
 .choose-payment-container{
-    padding: 4% 0%;
+    height: 100vh;
+}
+.payment-type-container{
+    display: flex;
+    justify-content: center; /* align horizontal */
+    align-items: center;
+    height: 100%;
+    padding-left: 2%
+}
+.back-page-wrapper{
+    padding: 3% 5%
+}
+.arrow-button{
+    font-size: 28px;
+    padding: 5% 20%;
+    border-radius: 10px;
+    border: 1px solid gray
+}
+.payment-process{
+    text-align: center;
+    padding: 6% 0%;
+    font-size: 24px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 600;
+}
+.cancel-membership-button{
+    width: 100%;
+    font-size: 24px;
+    font-family: 'Open Sans', sans-serif;
+    display: flex;
+    justify-content: center; /* align horizontal */
+    align-items: center;
+    margin-top: 60%;
 }

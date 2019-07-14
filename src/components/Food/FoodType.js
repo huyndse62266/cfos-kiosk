@@ -25,13 +25,7 @@ class FoodType extends Component {
                     foods: res.data
                 })
             })
-        }else if(this.props.type === 'popular'){
-            apiCaller(`category/${this.props.category.categoryId}/foods`,'GET',null).then(res => {
-                this.setState({
-                    foods: res.data
-                })
-            })
-        }else if(this.props.type === 'dishes' || this.props.type === 'drink'){
+        }else{ 
             apiCaller(`category/${this.props.category.categoryId}/foods`,'GET',null).then(res => {
                 this.setState({
                     foods: res.data
@@ -54,16 +48,57 @@ class FoodType extends Component {
         var { category } = this.props;
         var { foods } = this.state;
         return (
-            <Row type="flex" justify="space-around" align="middle" style={{backgroundColor: '#f5f5f5'}}>
-                <Col span={3}className="text-center h-100" style={{margin:'auto', textAlign: 'center'}}>
+            <div>
+
+            
+            {!this.props.items.length > 0 ? 
+            <Row type="flex" justify="start">
+                <Col className="text-center h-100 bg-white" style={{margin:'auto', textAlign: 'center', width: '10.4%'}}>
                     <div>
-                        <h4>{category.categoryName}</h4>
-                        <Button type="link" onClick={this.checkIsExpand}>{this.state.isExpand === true ? <div>Thu gọn <FontAwesomeIcon icon={faAngleUp} /></div> : <div>Xem thêm <FontAwesomeIcon icon={faAngleDown} /></div> } </Button>
+                        <h4 className="opensan-28-extrabold">{category.categoryName}</h4>
+                        <button type="button" className="btn opensan-16-semibold bg-light" onClick={this.checkIsExpand}>{this.state.isExpand === true ? <div>Thu gọn <FontAwesomeIcon icon={faAngleUp} /></div> : <div>Xem thêm <FontAwesomeIcon icon={faAngleDown} /></div> } </button>
                     </div>
                 </Col>
-                <Col span={21} className="d-flex flex-column" style={{backgroundColor: 'white'}}>
-                    <Row >
-                        {/* {this.showAllFoods(foods)} */}
+                
+                <Col className="d-flex flex-column bg-light" style={{margin:'auto', textAlign: 'center', width: '89.6%'}}>
+                    <Row type="flex" justify="start">
+                 
+                        {foods ? foods.map((food, index) => {
+                            if(index < 5)
+                                return (
+                                    <Col style={{width:'20%'}} className="px-4">
+                                        <FoodItem key={index} food={food} index={index}/>
+                                    </Col> 
+                                )
+                            }) : <span></span>}
+                    </Row>
+                    <span id="more">
+                        <Row type="flex" justify="start">
+                            {this.state.isExpand ? foods.map((food, index) => {
+                            if(index > 4)
+                                return (
+                                    <Col style={{width:'20%'}}  className="px-4">
+                                        <FoodItem key={index} food={food} index={index}/>
+                                    </Col> 
+                                )
+                            }): <span></span>}
+                        </Row>
+                    </span>
+                    
+                </Col>
+            </Row>
+            :
+            <Row type="flex" justify="space-around" align="middle">
+                <Col span={3}className="text-center h-100 bg-white" style={{margin:'auto', textAlign: 'center'}}>
+                    <div>
+                        <h4 className="opensan-28-extrabold">{category.categoryName}</h4>
+                        <button type="button" className="btn opensan-16-semibold bg-light" onClick={this.checkIsExpand}>{this.state.isExpand === true ? <div>Thu gọn <FontAwesomeIcon icon={faAngleUp} /></div> : <div>Xem thêm <FontAwesomeIcon icon={faAngleDown} /></div> } </button>
+                    </div>
+                </Col>
+                
+                <Col span={21} className="d-flex flex-column bg-light">
+                    <Row type="flex" justify="start">
+                     
                         {foods ? foods.map((food, index) => {
                             if(index < 4)
                                 return (
@@ -87,10 +122,17 @@ class FoodType extends Component {
                     </span>
                     
                 </Col>
-            </Row>
+            </Row>}
+            </div>
         )
     }
 }
 
+const mapStateToProps = (state)=>{
+    return{
+        items: state.cart.addedItems,
+    }
+}
 
-export default connect(null, null)(FoodType);
+
+export default connect(mapStateToProps, null)(FoodType);

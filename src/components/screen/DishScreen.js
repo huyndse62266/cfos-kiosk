@@ -1,60 +1,74 @@
 import React, { Component } from 'react'
-import FoodType from '../Food/FoodType'
-import {actFetchParentCategoriesRequest} from '../../action/category'
-import PreviewCart from '../Cart/PreviewCart/PreviewCart'
-import { connect } from 'react-redux';
 import { Row, Col } from 'antd';
+import { connect } from 'react-redux'
+import FoodType from '../Food/FoodType'
+import PreviewCart from '../Cart/PreviewCart/PreviewCart'
+import apiCaller from '../../utils/ApiCaller'
 
 class DishScreen extends Component {
 
-    componentDidMount(){
-        this.props.fetchAllCategory('Đồ ăn');
+    constructor(){
+        super();
+        this.state ={
+            categories : []
+        }
+       
+    }
+
+    componentWillMount(){
+        apiCaller(`categories/parent?name=Đồ ăn`,'GET',null).then(res => {
+            this.setState({
+                categories: res.data
+            })      
+        })
     }
 
     render() {
-        var { categories } = this.props;
         return (
-            <div className="container-fluid d-flex flex-row w-100 p-0"> 
-                <Row>
-                    <Col span={20}>
-                        {this.showAllCategory(categories)}
+            // <Row className="py-5">
+            //     <Col span={20}>
+            //         {this.state.categories.map((category,index) =>{
+            //             return (<FoodType key={index} category={category} index={index} type={'dishes'}/>)
+            //         })}
+            //     </Col>
+            //     <Col span={4} >
+            //         <Row  className="w-100">
+            //             <Col span={20} offset={2} style={{position:'fixed',width:'15%', right:0}}>
+            //                 <PreviewCart />
+            //             </Col>
+            //         </Row>
+            //     </Col>
+            // </Row>
+            <Row className="py-5" type="flex" justify="start">
+                {this.props.items.length > 0 ?
+                <div> 
+                    <Col style={{width: '83%'}}>
+                        {this.state.categories.map((category,index) =>{
+                            return (<FoodType key={index} category={category} index={index} type={'dishes'}/>)
+                        })}
                     </Col>
-                    <Col span={4} >
-                        <Row  className="w-100">
-                            <Col span={20} offset={2} style={{position:'fixed',width:'15%', right:0}}>
-                                <PreviewCart />
-                            </Col>
-                        </Row>
+                    <Col style={{width: '17%', position:'fixed', top: '6%', right: 0}}>
+                        <PreviewCart />
                     </Col>
-                </Row>
-                
-            </div>
+                </div>:
+                <Col span={24}>
+                    {this.state.categories.map((category,index) =>{
+                        return (<FoodType key={index} category={category} index={index} type={'dishes'}/>)
+                    })}
+                </Col>
+                }
+            
+            </Row>
         )
     }
     
-    showAllCategory(categories){
-        var result = null;
-        if(categories.length > 0){
-            result = categories.map((category, index) => {
-                return (<FoodType key={index} category={category} index={index} type={'popular'}/>)
-            })
-        }
-        return result;
+}
+
+const mapStateToProps = (state)=>{
+    return{
+        items: state.cart.addedItems,
     }
 }
 
+export default connect(mapStateToProps,null)(DishScreen);
 
-const mapStateToProps = state => {
-    return {
-        categories: state.categories
-    }
-}
-
-const mapDispatchToProps = (dispatch, props) => {
-    return {
-        fetchAllCategory : (id) => {
-            dispatch(actFetchParentCategoriesRequest(id));
-        }
-    }
-}
-export default connect(mapStateToProps, mapDispatchToProps)(DishScreen);

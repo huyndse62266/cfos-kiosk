@@ -1,68 +1,62 @@
 import React, { Component } from 'react'
+import { Row, Col} from 'antd';
+import { connect } from 'react-redux'
 import FoodType from '../Food/FoodType'
-import { Row, Col } from 'antd';
-import { connect } from 'react-redux';
-
-import {actFetchCategoriesRequest} from '../../action/category'
-import ImageSwiper from '../ImageSwiper/ImageSwiper'
 import PreviewCart from '../Cart/PreviewCart/PreviewCart'
+import apiCaller from '../../utils/ApiCaller'
 
 
 
-class PromotionScreen extends Component {
-    componentDidMount(){
-        this.props.fetchAllCategory();
+ class PromotionScreen extends Component {
+    constructor(){
+        super();
+        this.state ={
+            categories : []
+        }
+       
     }
 
-    
-    
-    showAllCategory(categories){
-        var result = null;
-        if(categories.length > 0){
-            result = categories.map((category, index) => {
-                return (<FoodType key={index} category={category} index={index} type={'promotion'}/>)
+    componentWillMount(){
+        apiCaller(`categories/`,'GET',null).then(res => {
+            this.setState({
+                categories: res.data
             })
-        }
-        return result;
+        })
     }
+
+    
+
     render() {
-        var { categories } = this.props;
-        return (
-            <div className="container-fluid d-flex flex-row w-100 p-0">  
-                <Row>
-                    <Col span={20}>
-                        <Row>
-                            <Col span={10} offset={7}>
-                                <ImageSwiper/>
-                            </Col>
-                        </Row>
-                        <Row>
-                            {this.showAllCategory(categories)}
-                        </Row>
+        return(
+            <Row className="py-5" type="flex" justify="start">
+                {this.props.items.length > 0 ?
+                <div> 
+                    <Col style={{width: '83%'}}>
+                        {this.state.categories.map((category,index) =>{
+                            return (<FoodType key={index} category={category} index={index} type={'promotion'}/>)
+                        })}
                     </Col>
-                    <Col span={4} >
-                        <Row  className="w-100">
-                            <Col span={20} offset={2} style={{position:'fixed',width:'15%', right:0}}>
-                                <PreviewCart />
-                            </Col>
-                        </Row>
+                    <Col style={{width: '17%', position:'fixed', top: '6%', right: 0}}>
+                        <PreviewCart />
                     </Col>
-                </Row>
-            </div> 
+                </div>:
+                <Col span={24}>
+                    {this.state.categories.map((category,index) =>{
+                        return (<FoodType key={index} category={category} index={index} type={'promotion'}  />)
+                    })}
+                </Col>
+                }
+         </Row>
         )
-    }
-}
-const mapStateToProps = state => {
-    return {
-        categories: state.categories
+        
     }
 }
 
-const mapDispatchToProps = (dispatch, props) => {
-    return {
-        fetchAllCategory : () => {
-            dispatch(actFetchCategoriesRequest());
-        }
+
+const mapStateToProps = (state)=>{
+    return{
+        items: state.cart.addedItems,
     }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(PromotionScreen);
+
+export default connect(mapStateToProps,null)(PromotionScreen);

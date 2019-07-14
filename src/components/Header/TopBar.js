@@ -1,15 +1,17 @@
 import React, { Component } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {  faUtensils, faStar, faPercentage, faConciergeBell,faMugHot, faThumbsUp,faArrowLeft,faUser,faSync } from '@fortawesome/free-solid-svg-icons'
-import { Menu,Row,Col,Button } from 'antd';
+import {  faUtensils, faStar, faPercentage, faConciergeBell,faMugHot, faThumbsUp,faLongArrowAltLeft,faShoppingBasket,faShoppingCart } from '@fortawesome/free-solid-svg-icons'
+import { Menu,Row,Col,Button,Modal } from 'antd';
 import { connect } from 'react-redux'
 import { Link } from "react-router-dom";
-import { restoreCart } from '../../action/cart';
-import './Header.scss'
+import NumberFormat from 'react-number-format';
+import ViewBasket from '../../pages/Basket/ViewBasket'
+import './Header.css'
 
 
 class TopBar extends Component {
     state = {
+        visible: false,
         current: 'popular',
       };
     
@@ -22,86 +24,123 @@ class TopBar extends Component {
     restoreCartRequest = () =>{
         this.props.restoreMyCart();
     }
+
+
+    showModal = () => {
+        this.setState({
+            visible: true,
+        });
+    };
+
+    handleOk = e => {
+        this.setState({
+            visible: false,
+        });
+    };
+
+    handleCancel = e => {
+        this.setState({
+            visible: false,
+        });
+    };
     render() {
         return (
-            <Row>
-                <Col span={2}>
+            <Row className="bg-light h-100" type="flex" justify="start">
+                
+                <Col style={{width:'10.4%'}} className="text-center bg-white">
                     <Link to="/">
-                        <Button className="arrow-button" style={{fontSize: '20px'}}>
-                            <FontAwesomeIcon icon={faArrowLeft} />
+                        <Button className="back-button opensan-20-bold">
+                            <FontAwesomeIcon icon={faLongArrowAltLeft} />
+                            <span className="back-button-title">Trở về</span>
                         </Button>
                     </Link>
                 </Col>
-                <Col span={19}>
+                <Col span={17} style={{width:'72.6%'}} className="menu-border">
                     <Menu onClick={this.handleClick} selectedKeys={[this.state.current]} mode="horizontal" inlineIndent='50'>
                         <Menu.Item key="popular" className="menu-item">
                         
                                 <Link to="/menu/popular">
                                     <FontAwesomeIcon icon={faStar}/>
-                                    <span className="px-1">Popular</span></Link>
+                                    <span className="menu-title">Nổi bật</span></Link>
                     
                         </Menu.Item>
                         <Menu.Item key="promotion" className="menu-item">
                     
                                 <Link to="/menu/promotion">
                                     <FontAwesomeIcon icon={faPercentage} />
-                                    <span className="px-1">Promotion</span></Link>
+                                    <span className="menu-title">Khuyến mãi</span></Link>
                         
                         </Menu.Item>
                         <Menu.Item key="meal" className="menu-item">
                     
                                 <Link to="/menu/meal">
                                     <FontAwesomeIcon icon={faConciergeBell} />
-                                    <span className="px-1">Meal</span></Link>
+                                    <span className="menu-title">Đồ ăn</span></Link>
                         
                         </Menu.Item>
                         <Menu.Item key="drink" className="menu-item">
                         
                                 <Link to="/menu/drink">
                                     <FontAwesomeIcon icon={faMugHot} />
-                                    <span className="px-1">Drink</span></Link>
+                                    <span className="menu-title">Đồ uống</span></Link>
                         
                         </Menu.Item>
                         <Menu.Item key="combo" className="menu-item">
                             
                             <Link to="/menu/combo">
                                 <FontAwesomeIcon icon={faThumbsUp} />
-                                <span className="px-1">Combo</span></Link>
+                                <span className="menu-title">Combo</span></Link>
                         
                         </Menu.Item>
                         <Menu.Item key="restaurant" className="menu-item">
                             
                             <Link to="/menu/restaurant">
                                 <FontAwesomeIcon icon={faUtensils} />
-                                <span className="px-1">Restaurant</span></Link>
+                                <span className="menu-title">Nhà hàng</span></Link>
                         
                         </Menu.Item>
                     </Menu>
                 </Col>
-                <Col span={3}>
-                    <Row>
-                        <Col span={12}>
-                            <Button className="user-button">
-                                <FontAwesomeIcon icon={faUser} />
-                            </Button>
-                        </Col>
-                        <Col span={12} className="p-0 text-right">
-                            <Button className="cancel-button" onClick={()=>{this.restoreCartRequest()}}>
-                                <FontAwesomeIcon icon={faSync} /><span className="px-1">Cancel</span>
-                            </Button>
-                        </Col>
-                    </Row>
+                <Col style={{width:'17%'}} className="h-100">
+                    {this.props.items.length > 0? <div className="cart-header">
+                        <a onClick={this.showModal}><FontAwesomeIcon icon={faShoppingBasket} style={{fontSize: '23px'}}/>
+                        <span className="px-3">Xem giỏ hàng của bạn</span></a>
+                    </div> :
+                     <div className="empty-cart">
+                        <FontAwesomeIcon icon={faShoppingBasket} style={{fontSize: '23px'}}/>
+                        <span className="px-3">Chưa có món ăn</span>
+                    </div> }
+                   
                 </Col>
+
+                <Modal
+                    visible={this.state.visible}
+                    onOk={this.handleOk}
+                    onCancel={this.handleCancel}
+                    closable
+                    width="100%"
+                    footer={null}
+                    bodyStyle={{padding: 0, height: '100%'}}
+                    centered
+                    className="view-basket-modal"
+                >
+                    <ViewBasket total={this.props.pricetotal} origin={this.props.originPrice}/>
+                </Modal>
+                
             </Row>
         )
     }
 }
 
-const mapDispatchToProps= (dispatch)=>{
+const mapStateToProps = (state)=>{
     return{
-        restoreMyCart: ()=>{
-            dispatch(restoreCart())
-        }
+        items: state.cart.addedItems,
+        pricetotal: state.cart.total,
+        originPrice: state.cart.originPrice
     }
 }
-export default connect(null,mapDispatchToProps)(TopBar);
+
+
+
+
+export default connect(mapStateToProps,null)(TopBar);

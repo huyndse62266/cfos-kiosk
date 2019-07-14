@@ -25,3 +25,9 @@ export const RESTORE_CART = "RESTORE_CART";
 export const UPDATE_CART = "UPDATE_CART";
 
 export const FIND_CART = "FIND_CART";
+
+export const ADD_ORDER = "ADD_ORDER"
+
+export const INC_OPTION = "INC_OPTION";
+
+export const DEC_OPTION = "DEC_OPTION";

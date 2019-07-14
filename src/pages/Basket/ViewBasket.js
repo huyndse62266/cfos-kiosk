@@ -1,9 +1,11 @@
 import React, { Component } from "react";
-import {Row,Col} from 'antd';
+import {Row,Col,Button} from 'antd';
 import ScrollArea from 'react-scrollbar';
-
 import { connect } from 'react-redux'
+import { Link } from "react-router-dom";
+import NumberFormat from 'react-number-format';
 import BasketItem  from "../../components/Cart/ViewBasket/BasketItem";
+import './ViewBasket.scss'
 
 class ViewBasket extends Component {
   constructor(props) {
@@ -30,7 +32,7 @@ class ViewBasket extends Component {
           this.props.items.map((food, index) => {
             
             return (
-                <Col span={4} className="px-3 py-2">
+                <Col span={6} className="px-3 py-2">
                     <BasketItem key={index} food={food} index={index} cartQuantity={food.cartQuantity}/>
                 </Col>)
                 
@@ -43,18 +45,52 @@ class ViewBasket extends Component {
           </Row>
       )
     return (
-      <div className="container-fluid"> 
-        <ScrollArea speed={0.8}
-            verticalScrollbarStyle={{display:'none'}}
-            className="area"
-            contentClassName="content"
-            horizontal={false} style={{height: '750px'}}>
-          <Row>
-            {addedItems}
-          </Row>
-        </ScrollArea>
-        
-      </div>
+      <Row>
+        <Col span={20} className="scroll-basket-item-wrapper">
+          <ScrollArea speed={0.8}
+              verticalScrollbarStyle={{display:'none'}}
+              className="area"
+              contentClassName="content"
+              horizontal={false} style={{height: '750px'}}>
+            <Row>
+              {addedItems}
+            </Row>
+          </ScrollArea>
+        </Col>
+        <Col span={4}>
+          <div className="overview-basket-wrapper">
+            <Row>
+              <Col span={6}></Col>
+              <Col span={18}>
+                <span className="basket-title">Giỏ của bạn <br/><small>(8 món)</small></span>
+              </Col>
+            </Row>
+            <div className="cal-price-wrapper">
+              <Row>
+                <Col span={12}>Tạm tính:</Col>
+                <Col span={12} className="text-right font-weight-bold"><NumberFormat value={this.props.origin} displayType={'text'} thousandSeparator={','} /> đ</Col>
+              </Row>
+              <Row>
+                <Col span={12}>Khuyến mãi:</Col>
+                <Col span={12} className="text-right font-weight-bold">-<NumberFormat value={this.props.origin-this.props.pricetotal} displayType={'text'} thousandSeparator={','} /> đ</Col>
+              </Row>
+            </div>
+            <div className="total-price-wrapper">
+              <Row>
+                <span className="total-price-title">Tổng tiền: </span>
+              </Row>
+              <Row>
+                <span className="total-price-detail"><NumberFormat value={this.props.pricetotal} displayType={'text'} thousandSeparator={','} /> đ</span>
+              </Row>
+            </div>
+            <div className="button-purchase-wrapper">
+              <Button className="button-purchase-view-basket">
+                <Link to="/payment">Thanh toán</Link>  
+              </Button>
+            </div>
+          </div>
+        </Col>
+      </Row>
     );
   }
 }

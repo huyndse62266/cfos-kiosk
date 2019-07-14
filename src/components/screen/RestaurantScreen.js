@@ -1,59 +1,77 @@
 import React, { Component } from 'react'
-import StoreMenu from '../Food/StoreMenu'
-import { actFetchStoreCategoriesRequest } from '../../action/store'
+import { Row, Col } from 'antd';
 import { connect } from 'react-redux';
 import PreviewCart from '../Cart/PreviewCart/PreviewCart'
-import { Row, Col } from 'antd';
-
+import StoreMenu from '../Food/StoreMenu'
+import apiCaller from '../../utils/ApiCaller'
 class RestaurantScreen extends Component {
-    componentDidMount(){
-        this.props.fetchAllStore('1');
+    constructor(){
+        super();
+        this.state ={
+            stores : []
+        }
+       
     }
+
+    componentWillMount(){
+        apiCaller(`stores/1`,'GET',null).then(res => {
+            this.setState({
+                stores: res.data
+            })           
+        })
+    }
+
 
     render() {
-        var { stores } = this.props;
         return (
-            <div className="w-100"> 
-                <Row>
-                    <Col span={20}>
-                        {this.showAllCategory(stores)}
-                    </Col>
-                    <Col span={4} >
-                        <Row  className="w-100">
-                            <Col span={20} offset={2} style={{position:'fixed',width:'15%', right:0}}>
-                                <PreviewCart />
-                            </Col>
-                        </Row>
-                    </Col>
-                </Row>
+            // <div className="w-100"> 
+            //     <Row>
+            //         <Col span={20}>
+            //             {this.state.stores.map((store, index) => {
+            //                 return (<StoreMenu key={index} storeInfo={store} index={index}/>)
+            //             })}
+            //         </Col>
+            //         <Col span={4} >
+            //             <Row  className="w-100">
+            //                 <Col span={20} offset={2} style={{position:'fixed',width:'15%', right:0}}>
+            //                     <PreviewCart />
+            //                 </Col>
+            //             </Row>
+            //         </Col>
+            //     </Row>
                 
-            </div>
+            // </div>
+            <Row className="py-5" type="flex" justify="start">
+                {this.props.items.length > 0 ?
+                <div> 
+                    <Col style={{width: '83%'}}>
+                        {this.state.stores.map((store,index) =>{
+                             return (<StoreMenu key={index} storeInfo={store} index={index}/>)
+                        })}
+                    </Col>
+                    <Col style={{width: '17%', position:'fixed', top: '6%', right: 0}}>
+                        <PreviewCart />
+                    </Col>
+                </div>:
+                    <Col span={24}>
+                        {this.state.stores.map((store,index) =>{
+                            return (<StoreMenu key={index} storeInfo={store} index={index}/>)
+                        })}
+                    </Col>
+                }
+                
+            </Row>
         )
     }
-    
-    showAllCategory(stores){
-        var result = null;
-        if(stores.length > 0){
-            result = stores.map((store, index) => {
-                return (<StoreMenu key={index} storeInfo={store} index={index}/>)
-            })
-        }
-        return result;
-    }
+
 }
 
 
-const mapStateToProps = state => {
-    return {
-        stores: state.stores
+const mapStateToProps = (state)=>{
+    return{
+        items: state.cart.addedItems,
     }
 }
 
-const mapDispatchToProps = (dispatch, props) => {
-    return {
-        fetchAllStore : (id) => {
-            dispatch(actFetchStoreCategoriesRequest(id));
-        }
-    }
-}
-export default connect(mapStateToProps, mapDispatchToProps)(RestaurantScreen);
+export default connect(mapStateToProps,null)(RestaurantScreen);
+
