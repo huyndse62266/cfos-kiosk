@@ -85,7 +85,7 @@ class StoreMenu extends Component {
             <div>
                 {!this.props.items.length > 0 ?<Row type="flex" justify="start">
                 <Col className="text-center h-100" style={{ width: '10.4%'}}>
-                    <div style={{marginTop:'40%'}}>
+                    <div style={{marginTop:'10%'}}>
                         <h4 className="opensan-28-extrabold">{storeInfo.storeName}</h4>
                         {this.buttonMore()}
                         {this.buttonMoreDetail(storeInfo.categoryVMList)}
@@ -97,7 +97,6 @@ class StoreMenu extends Component {
                     <Row type="flex" justify="start">
                         {this.state.foodFilter.length > 0 ? foodFilter.map((food, index) => {
                             if(index < 5){
-                                console.log(food)
                                 return (
                                     <Col style={{width:'20%'}} className="px-4">
                                         <FoodItem key={index} food={food} index={index}/>

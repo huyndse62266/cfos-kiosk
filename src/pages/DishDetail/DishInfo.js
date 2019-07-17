@@ -83,6 +83,13 @@ class DishInfo extends Component {
     ToggleClick = () => {
         this.setState({ show: !this.state.show });
     }
+
+    restoreOption = ()=>{
+        this.setState({
+            optionList: [],
+            totalPrice: this.props.foodDetail.price * this.state.clicks * ((100-this.props.foodDetail.promotion)/100)
+        })
+    }
     
     componentWillMount(){
         
@@ -111,12 +118,6 @@ class DishInfo extends Component {
     }
 
 
-    renderFoodOptionItem = (foodOption)=>{
-        return <div>
-            
-        </div>
-    }
-
     render() {
         var {cartQuantity,foodDetail} = this.props;
         var {foodOptions,storeVM} = foodDetail;
@@ -133,7 +134,7 @@ class DishInfo extends Component {
                             horizontal={false} style={{height: '630px'}}>
                         <Row className="d-flex flex-column pr-3">
                             {foodDetail.imageVMS ? foodDetail.imageVMS.map((imageURL,index) => {
-                                return <Col span={24}>    
+                                return <Col span={24} className="py-3">    
                                     <img src={imageURL.image} className="image-info" alt="Cinque Terre"/>
                                 </Col>
                             }):<div/>}                   
@@ -228,7 +229,7 @@ class DishInfo extends Component {
                                         {}   
                                         </Row>  
                                         <Row className="py-3 px-4 float-right">
-                                            <Button style={{backgroundColor: '#D2D2D2'}} >
+                                            <Button style={{backgroundColor: '#D2D2D2'}} onClick={()=>{this.restoreOption()}} >
                                                 <FontAwesomeIcon icon={faSyncAlt}/><span className="pl-2">Đặt về mặc định</span>
                                             </Button>
                                         </Row>

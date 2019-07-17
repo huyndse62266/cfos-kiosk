@@ -1,7 +1,7 @@
 import React, { Component }  from 'react'
 import { Modal, Button,Row,Col,Avatar } from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faMapMarkerAlt,faCartPlus } from '@fortawesome/free-solid-svg-icons'
+import { faStoreAlt } from '@fortawesome/free-solid-svg-icons'
 import DishDetail from '../../../pages/DishDetail/DishDetail'
 import {findCart} from '../../../action/cart'
 import { connect } from 'react-redux'
@@ -40,8 +40,8 @@ class ImageButton extends Component {
                 <Row className="food-header">
                     <Col span={19}>
                         <Row className="store-info">
-                            <Col span={4}  className="location-icon"><FontAwesomeIcon icon={faMapMarkerAlt}/></Col>
-                            <Col span={20} ><span className="restaurant-title d-inline-block text-truncate">{food.storeName}</span></Col>
+                            <Col span={3}  className="location-icon"><FontAwesomeIcon icon={faStoreAlt}/></Col>
+                            <Col span={20} ><p className="restaurant-title d-inline-block text-truncate">{food.storeName}</p></Col>
                         </Row>
                     </Col>
                     <Col span={5}>
@@ -61,6 +61,7 @@ class ImageButton extends Component {
                     bodyStyle={{padding:0, height: '850px'}}
                     footer={null}
                     centered
+                    className="view-info-modal"
                     >
                         
                     <DishDetail food={food} foodCart={item} cartQuantity={item!==undefined?item.cartQuantity:0} selected = {'1'} type={'add'}/>

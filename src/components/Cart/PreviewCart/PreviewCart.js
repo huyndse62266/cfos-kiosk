@@ -54,7 +54,7 @@ class PreviewCart extends Component {
                     verticalScrollbarStyle={{display:'none'}}
                     className="area"
                     contentClassName="content"
-                    horizontal={false} style={{height: '70%'}}>
+                    horizontal={false} style={{height: '78%'}}>
                     <Row className="py-2">
                         {addedItems}
                     </Row>

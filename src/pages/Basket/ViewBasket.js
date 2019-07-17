@@ -62,7 +62,7 @@ class ViewBasket extends Component {
             <Row>
               <Col span={6}></Col>
               <Col span={18}>
-                <span className="basket-title">Giỏ của bạn <br/><small>(8 món)</small></span>
+                <span className="basket-title">Giỏ của bạn <br/><small>({this.props.items.length} món)</small></span>
               </Col>
             </Row>
             <div className="cal-price-wrapper">

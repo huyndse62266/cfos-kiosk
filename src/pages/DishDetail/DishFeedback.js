@@ -26,26 +26,28 @@ export default class DishFeedback extends Component {
         this.setState({ show: !this.state.show });
     }
     render() {
-        var {food} = this.props;    
-        var {feedbackVMS} = food;
+        var {foodDetail} = this.props;    
+        var {feedbackVMS} = foodDetail;
         return (
             <Row type="flex" justify="start">
                 <Col span={8} className="info-feedback-container">
                     <div className="feedback-info">
-                        <h3><FontAwesomeIcon icon={faStaro} className="avarage-star-icon"/>{food.rate}</h3>
+                        <h3><FontAwesomeIcon icon={faStaro} className="avarage-star-icon"/>{foodDetail.rate}</h3>
                         <h6 className="rate-count">Trên tổng 35 đánh giá</h6>
                         <Rating               
                             emptySymbol="fa fa-star-o fa-2x"
                             fullSymbol="fa fa-star fa-2x"
-                            initialRating={food.rate}
+                            initialRating={foodDetail.rate}
                             readonly
                             className="star-rate-style"/>
-                        <h6 className="number-feedback"><FontAwesomeIcon icon={faCommentDots}/> 15 ý kiến</h6>
+                        <h6 className="number-feedback"><FontAwesomeIcon icon={faCommentDots}/> 
+                            {this.props.foodDetail.feedbackVMS ? <span className="px-2">{this.props.foodDetail.feedbackVMS.length} ý kiến</span> : <span className="px-2">Không có ý kiến</span>}
+                        </h6>
                     </div>
                     <div className="food-info">
-                        <h5 className="food-name">{food.foodName}</h5>
+                        <h5 className="food-name">{foodDetail.foodName}</h5>
                         <h6 className="store-name"><FontAwesomeIcon icon={faMapMarkerAlt}/> Quán Dì Mai</h6>
-                        <h6 className="food-price"><NumberFormat value={food.price} displayType={'text'} thousandSeparator={','}/> đ</h6>
+                        <h6 className="food-price"><NumberFormat value={foodDetail.price} displayType={'text'} thousandSeparator={','}/> đ</h6>
                     </div>
                     <div className="food-court-info">
                         <h6 className="food-court-title">
@@ -57,7 +59,7 @@ export default class DishFeedback extends Component {
                 </Col>        
                 <Col span={16} className="feedback-container">
                     <Row>
-                        <h6>Đánh giá (15)</h6>
+                        <h6>Đánh giá ({this.props.foodDetail.feedbackVMS ? <span>{this.props.foodDetail.feedbackVMS.length}</span> : <span>0</span>})</h6>
                     </Row>
                     <Row>
                         {!feedbackVMS ? <span></span> : feedbackVMS.map((feedback, index) => <Row className="feedback-wrapper" type="flex" justify="start">

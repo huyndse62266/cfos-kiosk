@@ -27,8 +27,8 @@ class PaymentType extends Component {
         }
     }
     
-    checkoutClick = (cart,total) =>{
-        
+    checkoutClick = (cart,total,orginPrice ) =>{
+        console.log(orginPrice)
         if(cart.length > 0){
             var orderDetail = cart.map((cartItem) =>{
                 
@@ -37,13 +37,13 @@ class PaymentType extends Component {
                     orderDetailFoodOption: cartItem.optionList,
                     quantity: cartItem.cartQuantity,
                     storeID: cartItem.storeId,
-                    originalPrice: cartItem.price,
                     totalPrice: cartItem.price * cartItem.cartQuantity * cartItem.promotion,
                 }
             })
             var order ={
                 "customerId": null,
                 "orderDetails": orderDetail,
+                "originalPrice": orginPrice,
                 "totalOrder": total
             }
             apiCaller(`orders/orders/submit-order`,'POST',JSON.stringify(order)).then(res =>{
@@ -63,7 +63,7 @@ class PaymentType extends Component {
     }
  
     render() {
-        var {items,pricetotal} = this.props;
+        var {items,pricetotal,orginPrice } = this.props;
         const {isEmpty,isError,orderID} = this.state;
         if(!isEmpty) {
             return <Redirect to={{pathname: "/complete"}}/>
@@ -124,7 +124,7 @@ class PaymentType extends Component {
                     </Col>
                 </Row>
                
-                <button type="button" className="btn payment-type-wrapper bg-white w-100" onClick={()=>{this.checkoutClick(items,pricetotal)}}>
+                <button type="button" className="btn payment-type-wrapper bg-white w-100" onClick={()=>{this.checkoutClick(items,pricetotal,orginPrice)}}>
                     <Row type="flex" justify="start">
                         <Col span={6} className="money-type">
                             <FontAwesomeIcon icon={faMoneyBillAlt}/>
@@ -179,6 +179,7 @@ const mapStateToProps = (state)=>{
     return{
         items: state.cart.addedItems,
         pricetotal: state.cart.total,
+        orginPrice : state.cart.originPrice
     }
 }
 const mapDispatchToProps= (dispatch)=>{

@@ -36,7 +36,7 @@ export default class DishDetail extends Component {
                     } cartQuantity={this.props.cartQuantity}/>
                 </TabPane>
                 <TabPane tab={<div className="feedback-tab-button"><FontAwesomeIcon icon={faCommentDots} className="icon-tab"/>Phản hồi</div>} key="2"  size="large">
-                   <DishFeedback food={this.state.food}/>
+                   <DishFeedback foodDetail={this.state.food}/>
                 </TabPane>              
             </Tabs>
         )

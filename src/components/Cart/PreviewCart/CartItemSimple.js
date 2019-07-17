@@ -41,7 +41,7 @@ class CartItemSimple extends Component {
                     </Row>
                     <img src={food.foodImage} className="img" alt="Cinque Terre"/>
                     <Row className="food-info-cart">
-                        <div className="font-weight-bold" style={{fontSize: '18p'}}>
+                        <div className="font-weight-bold">
                             {food.foodName}
                         </div>
                         <p className="font-weight-bold"><NumberFormat value={food.price} displayType={'text'} thousandSeparator={','}/>  đ</p>

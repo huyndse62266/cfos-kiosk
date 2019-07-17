@@ -4,7 +4,7 @@
 .ant-modal-close{
   right: -80px;
 }
-.ant-modal-close-x{
+.view-info-modal .ant-modal-close-x{
     border-radius: 30px;
     font-size: 30px !important;
     background-color: white;
@@ -20,17 +20,27 @@
   background-color: white;
   border-radius: 5px;
   margin-right: 5%;
-  padding: 0.5% 0%
+  // padding: 0.5% 0%
 }
 .location-icon{
   color:black;
   font-size: 15px;
   text-align: center
 }
-
+.location-icon .anticon{
+  vertical-align: 0
+}
+.store-info .restaurant-title{
+  font-size: 16px;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: bold;
+  padding: 0px 0px;
+  max-width: 100%;
+  margin-bottom: -2%
+}
 @media all and (max-width: 1920px) {
   .restaurant-title{
-      font-size: 22px;
+      font-size: 16px;
       font-family: 'Open Sans', sans-serif;
       font-weight: bold;
       padding: 0px 0px;

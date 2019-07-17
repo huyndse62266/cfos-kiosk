@@ -15,7 +15,7 @@ const cart = (state = initState,action) => {
         addedItem.optionList = action.optionList;
         let exist_item = state.addedItems.find(item => item.foodId === food.foodId)
         if(exist_item){
-            addedItem.cartQuantity += 1;
+            exist_item.cartQuantity += 1;
             return{
                 ...state,
                 total: state.total  + addedItem.price*(100-addedItem.promotion)/100,
@@ -64,7 +64,7 @@ const cart = (state = initState,action) => {
         let addedItem = state.addedItems.find(item => item.foodId === id)
         addedItem.cartQuantity += 1;
         let newTotal = state.total + addedItem.price*(100-addedItem.promotion)/100
-        let newOrigin =  state.total + addedItem.price
+        let newOrigin =  state.originPrice + addedItem.price
         return{
             ...state,
             total: newTotal,
@@ -76,12 +76,14 @@ const cart = (state = initState,action) => {
         let addedItem = state.addedItems.find(item => item.foodId === id)
         if(addedItem.cartQuantity === 1){
             let totalOption = 0
-            addedItem.optionList.map(option => {
-                totalOption += option.optionPrice * option.quantity;
-            })
+            if(addedItem.optionList){
+                addedItem.optionList.map(option => {
+                    totalOption += option.optionPrice * option.quantity;
+                })
+            }  
             let newItems = state.addedItems.filter(item => item.foodId !== id)
             let newTotal = state.total - (addedItem.price+totalOption)*(100-addedItem.promotion)/100
-            let newOrigin =  state.total - (addedItem.price+totalOption)
+            let newOrigin =  state.originPrice - (addedItem.price+totalOption)
             return {
                 ...state,
                 addedItems: newItems,
@@ -92,7 +94,7 @@ const cart = (state = initState,action) => {
         }else{
             addedItem.cartQuantity -= 1
             let newTotal = state.total - addedItem.price*(100-addedItem.promotion)/100;
-            let newOrigin = state.total - addedItem.price
+            let newOrigin = state.originPrice - addedItem.price
             return{
                 ...state,
                 addedItems: state.addedItems,

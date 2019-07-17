@@ -36,7 +36,7 @@ class CompleteOrder extends Component {
                         copyStyles
                 />
                 <div style={{display:'none'}}>
-                    <ReceiptTemplate items={this.props.items} totalPrice={this.props.pricetotal} orderNumber={this.props.orderNumber} ref={el => (this.componentRef = el)} /> 
+                    <ReceiptTemplate items={this.props.items} totalPrice={this.props.pricetotal} originPrice={this.props.originPrice} orderNumber={this.props.orderNumber} ref={el => (this.componentRef = el)} /> 
                 </div>
                 <Row className="warning-wrapper">
                     <Col span={4}>
@@ -96,6 +96,7 @@ const mapStateToProps = (state)=>{
     return{
         items: state.cart.addedItems,
         pricetotal: state.cart.total,
+        originPrice: state.cart.originPrice,
         orderNumber: state.orders.orderNumber
     }
 }

@@ -42,6 +42,7 @@ class FoodItem extends Component {
 
     render() {
         var { food, item } = this.props;
+        console.log(food)
         return (
             <div>
                
@@ -54,12 +55,12 @@ class FoodItem extends Component {
                 <Row className="pb-2" type="flex" justify="space-around" align="middle">
                     <Col span={16} className="text-left">
                         <p className="mb-0 opensan-20-bold"><NumberFormat value={food.price} displayType={'text'} thousandSeparator={','}/> đ</p>                        
-                        <span style={{color:'orange'}} onClick={()=>{this.showModal(food.foodId)}}><Rating               
+                        <span onClick={()=>{this.showModal(food.foodId)}}><Rating               
                                 emptySymbol="fa fa-star-o fa-2x"
                                 fullSymbol="fa fa-star fa-2x"
                                 initialRating={food.rate}
                                 readonly
-                                style={{fontSize:'7px', color:'orange'}}
+                                style={{fontSize:'7px', color: '#FFA200'}}
                         /></span>
 
                     </Col>
@@ -102,7 +103,7 @@ const mapStateToProps = (state)=>{
 const mapDispatchToProps= (dispatch)=>{
     return{
         addToCart: (food)=>{
-            dispatch(addToCart(food,1))
+            dispatch(addToCart(food,parseInt(1),null))
         },
         findCart: (id) => {
             dispatch(findCart(id))

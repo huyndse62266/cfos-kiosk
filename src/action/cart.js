@@ -4,13 +4,12 @@ import callApi from '../utils/ApiCaller';
 
 
 
-export const addToCart = (food,quantity,optionList,totalPrice) =>{
+export const addToCart = (food,quantity,optionList) =>{
     return {
         type: Types.ADD_TO_CART,
         food,
         quantity,
-        optionList,
-        totalPrice
+        optionList
     }
 }
 

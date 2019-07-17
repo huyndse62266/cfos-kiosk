@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import { Row, Col } from 'antd';
-import $ from 'jquery'
+import NumberFormat from 'react-number-format'; 
 export default class ReceiptTemplate extends Component {
 
     render() {
-        var {items, totalPrice, orderNumber} = this.props;
+        var {items, totalPrice,originPrice, orderNumber} = this.props;
+        console.log(items)
         var count = 0;
         return (
             <div>
@@ -23,7 +24,7 @@ export default class ReceiptTemplate extends Component {
                     <h3>Phiếu thanh toán</h3>
                 </Row>
                 <Row>
-                <h6 className="px-4 py-2">Order ID: {this.props.orderNumber}</h6>
+                <h6 className="px-4 py-2">Số thứ tự đơn hàng: {orderNumber}</h6>
                 </Row>
                 <table>
                     <thead>
@@ -49,11 +50,15 @@ export default class ReceiptTemplate extends Component {
                 <Row type="flex" justify="end" className="py-4">
                     <Col span={16} style={{textAlign:'right'}}>
                         <h6>Tổng SL:  </h6>
+                        <h6>Tạm tính:  </h6>
+                        <h6>Khuyến mãi:  </h6>
                         <h6>Tổng tiền:</h6>  
                     </Col>  
                     <Col span={8} className="text-right px-3">
-                        <h6>{count} </h6>
-                        <h6>{totalPrice}</h6> 
+                        <h6><NumberFormat value={count} displayType={'text'} thousandSeparator={','} /></h6>
+                        <h6><NumberFormat value={originPrice} displayType={'text'} thousandSeparator={','} /></h6>
+                        <h6><NumberFormat value={originPrice - totalPrice} displayType={'text'} thousandSeparator={','} /></h6>
+                        <h6><NumberFormat value={totalPrice} displayType={'text'} thousandSeparator={','} /></h6> 
                     </Col>  
                 </Row>
             
