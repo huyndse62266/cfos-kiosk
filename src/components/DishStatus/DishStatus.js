@@ -36,13 +36,13 @@ export default class DishStatus extends Component {
                     </Row>                  
                 </Col>               
                 <Col span={8} className="dish-status text-right">
-                    {orderDetail.oderDetailStatus==='WAITING'?<h4 className="status-waiting">Cooking ...</h4>:<Row type="flex" className="w-100">
+                    {orderDetail.oderDetailStatus==='READY'?<Row type="flex" className="w-100">
                         <Col span={20}>
                             <span className="status-finish p-0">Hoàn thành</span><br/>
                             <span className="status-finish-description">Đang chờ lấy</span>
                         </Col>
                         <Col span={4} className="done-icon"><FontAwesomeIcon icon={faUtensils}/></Col>
-                    </Row>}
+                    </Row>:<h4 className="status-waiting">Cooking ...</h4>}
                     
                 </Col>
             </Row>

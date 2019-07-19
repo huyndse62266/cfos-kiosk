@@ -89,8 +89,10 @@ class StoreMenu extends Component {
                         <h4 className="opensan-28-extrabold">{storeInfo.storeName}</h4>
                         {this.buttonMore()}
                         {this.buttonMoreDetail(storeInfo.categoryVMList)}
+                        <Col span={14} offset={5}>
+                            <button type="button" className="btn opensan-16-semibold bg-light mt-3 w-100" onClick={this.checkIsExpand}>{this.state.isExpand === true ? <div>Thu gọn <FontAwesomeIcon icon={faAngleUp} /></div> : <div>Xem thêm <FontAwesomeIcon icon={faAngleDown} /></div> } </button>
+                        </Col>
                         
-                        <button type="button" className="btn opensan-16-semibold bg-light" onClick={this.checkIsExpand}>{this.state.isExpand === true ? <div>Thu gọn <FontAwesomeIcon icon={faAngleUp} /></div> : <div>Xem thêm <FontAwesomeIcon icon={faAngleDown} /></div> } </button>
                     </div>
                 </Col>
                 <Col span={21} className="d-flex flex-column" style={{margin:'auto', textAlign: 'center', width: '89.6%'}}>
