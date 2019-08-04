@@ -4,12 +4,14 @@ import callApi from '../utils/ApiCaller';
 
 
 
-export const addToCart = (food,quantity,optionList) =>{
+export const addToCart = (food,quantity,optionList,priceSize,choosePriceSize) =>{
     return {
         type: Types.ADD_TO_CART,
         food,
         quantity,
-        optionList
+        optionList,
+        priceSize,
+        choosePriceSize
     }
 }
 
@@ -47,12 +49,14 @@ export const restoreCart = () =>{
     }
 }
 
-export const updateItemCart = (id,quantity,optionList) =>{
+export const updateItemCart = (id,quantity,optionList,priceSize, choosePriceSize) =>{
     return{
         type: Types.UPDATE_ITEM_CART,
         id,
         quantity,
-        optionList
+        optionList,
+        priceSize,
+        choosePriceSize
     }
 }
 

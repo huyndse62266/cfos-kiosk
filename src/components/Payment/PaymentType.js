@@ -14,16 +14,12 @@ import aeonlogo from '../../images/aeon-logo.png';
 import apiCaller from '../../utils/ApiCaller'
 import './Payment.css'
 
-
-const onClose = e => {
-    console.log(e, 'I was closed.');
-};
 class PaymentType extends Component {
     constructor(props){
         super(props);
         this.state ={
             orderID: 0,
-            isEmpty: true,
+            isDone: true,
         }
     }
     
@@ -49,7 +45,7 @@ class PaymentType extends Component {
             apiCaller(`orders/orders/submit-order`,'POST',JSON.stringify(order)).then(res =>{
                 this.setState({
                     orderID: res.data,
-                    isEmpty: false
+                    isDone: false
                 });
                 this.props.addOrder(res.data)
                 // this.props.restoreMyCart()  
@@ -64,9 +60,9 @@ class PaymentType extends Component {
  
     render() {
         var {items,pricetotal,orginPrice } = this.props;
-        const {isEmpty,isError,orderID} = this.state;
-        if(!isEmpty) {
-            return <Redirect to={{pathname: "/complete"}}/>
+        const {isDone,isError,orderID} = this.state;
+        if(!isDone) {
+            return <Redirect to={{pathname: "/print"}}/>
         }
         return (
             <div>
@@ -82,7 +78,7 @@ class PaymentType extends Component {
                         <FontAwesomeIcon icon={faShoppingBasket}/> <NumberFormat value={this.props.pricetotal} displayType={'text'} thousandSeparator={','} />  đ
                     </Col>
                 </Row>
-                <Row className="payment-type-wrapper"  type="flex" justify="start">
+                {/* <Row className="payment-type-wrapper"  type="flex" justify="start">
                     <Col span={6} className="icon-type">
                         <FontAwesomeIcon icon={faCreditCard}/>
                     </Col>
@@ -105,7 +101,7 @@ class PaymentType extends Component {
                             
                         </Row>
                     </Col>
-                </Row>
+                </Row> */}
                 <Row className="payment-type-wrapper" type="flex" justify="start">
                     <Col span={6} className="icon-type">
                         <FontAwesomeIcon icon={faAddressCard}/>

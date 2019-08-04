@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
-import {Col, Row, Button, Icon} from 'antd';
+import {Col, Row, Icon} from 'antd';
 import { connect } from 'react-redux'
 import { Link } from "react-router-dom";
-import ReactToPrint from 'react-to-print';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheckCircle, } from '@fortawesome/free-regular-svg-icons'
-import ReceiptTemplate from '../../components/Receipt/ReceiptTemplate'
-import {restoreCart} from '../../action/cart'
+
 import './Order.css'
-import {ReactComponent as cartCheckSVG } from '../../icons/cartCheck.svg'
+
+import completeCart from '../../images/Finish payment illustration.png'
 import {ReactComponent as LongArrowLeft } from '../../icons/LongArrowLeft.svg'
 import {ReactComponent as alertsvg } from '../../icons/alert.svg'
 class CompleteOrder extends Component {
@@ -24,20 +24,10 @@ class CompleteOrder extends Component {
         this.setState({
             orderNumber: this.props.orderNumber
         })
-        document.getElementById("button-printer").click();
     }
     render() {
         return (
-            <div className="order-config-container">
-                <ReactToPrint
-                        trigger={() => <div style={{display:'none'}}><Button id="button-printer"></Button></div>}
-                        content={() => this.componentRef}
-                        onAfterPrint={() => this.props.restoreMyCart()}
-                        copyStyles
-                />
-                <div style={{display:'none'}}>
-                    <ReceiptTemplate items={this.props.items} totalPrice={this.props.pricetotal} originPrice={this.props.originPrice} orderNumber={this.props.orderNumber} ref={el => (this.componentRef = el)} /> 
-                </div>
+            <div className="complete-order-container">
                 <Row className="warning-wrapper">
                     <Col span={4}>
                         <div className="warning-icon-wrapper">
@@ -56,11 +46,11 @@ class CompleteOrder extends Component {
                 </Row>
                 <Row>
                     <div className="py-2 text-center">
-                        <Icon component={cartCheckSVG} style={{fontSize : '125px'}} />;
+                        <img src={completeCart} className="comple-cart-img"/>;
                     </div>
                 </Row>
-                <Row>
-                    <Col span={4} offset={10}>
+                <Row type="flex" justify="center">
+                    <Col span={5}>
                         <div className="display-order-number">
                             <span className="order-id-text py-0">Mã đơn hàng: {this.props.orderNumber}</span>
                         </div>
@@ -74,13 +64,13 @@ class CompleteOrder extends Component {
                     </Col>
                 </Row>
                 <Row>
-                    <Col span={4} offset={10}>
+                    <Col span={6} offset={9}>
                         <div className="back-home-button-wrapper">
-                            <Link to="/menu">
+                            <Link to="/">
                                 <button type="button" className="btn button-custom">
-                                    <Row>
-                                        <Col span={8}><Icon component={LongArrowLeft} style={{fontSize : '30px', padding:'0% 10%'}} /></Col>
-                                        <Col span={16} className="py-1"><span className>Trở về trang chủ</span></Col>
+                                    <Row type="flex" justify="center"> 
+                                        <Col span={4} className="long-back-arrow-icon"><Icon component={LongArrowLeft} /></Col>
+                                        <Col span={20} className="opensan-32-semibold pt-1"><span>Trở về trang chủ</span></Col>
                                     </Row>
                                 </button>
                             </Link>                       
@@ -94,19 +84,9 @@ class CompleteOrder extends Component {
 }
 const mapStateToProps = (state)=>{
     return{
-        items: state.cart.addedItems,
-        pricetotal: state.cart.total,
-        originPrice: state.cart.originPrice,
         orderNumber: state.orders.orderNumber
     }
 }
-const mapDispatchToProps= (dispatch)=>{
-    return{
-        restoreMyCart: ()=>{
-            dispatch(restoreCart())
-        }
-    }
-}
 
 
-export default connect(mapStateToProps,mapDispatchToProps)(CompleteOrder);
+export default connect(mapStateToProps,null)(CompleteOrder);

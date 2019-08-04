@@ -1,7 +1,7 @@
 import React, { Component }  from 'react'
-import { Modal, Button,Row,Col,Avatar } from 'antd';
+import { Modal, Button,Row,Col } from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faStoreAlt } from '@fortawesome/free-solid-svg-icons'
+import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons'
 import DishDetail from '../../../pages/DishDetail/DishDetail'
 import {findCart} from '../../../action/cart'
 import { connect } from 'react-redux'
@@ -40,7 +40,7 @@ class ImageButton extends Component {
                 <Row className="food-header">
                     <Col span={19}>
                         <Row className="store-info">
-                            <Col span={3}  className="location-icon"><FontAwesomeIcon icon={faStoreAlt}/></Col>
+                            <Col span={3}  className="location-icon"><FontAwesomeIcon icon={faMapMarkerAlt}/></Col>
                             <Col span={20} ><p className="restaurant-title d-inline-block text-truncate">{food.storeName}</p></Col>
                         </Row>
                     </Col>
@@ -48,9 +48,9 @@ class ImageButton extends Component {
                         {food.promotion > 0 ? <div className="promotion-tag-wrapper"><span>-{food.promotion }%</span></div>:<div className="promotion-tag-wrapper d-none"><span>-{food.promotion }%</span></div> }
                     </Col>
                 </Row>
-                <Button onClick={()=>{this.showModal(food.foodId)}} className="p-0" style={{height: '175px',width:'100%'}}>
-                    <img src={food.foodImage} alt="Cinque Terre" style={{height:"100%", width: '100%'}}/>
-                </Button>
+                <button type="button"  onClick={()=>{this.showModal(food.foodId)}} className="btn p-0" style={{height: '175px',width:'100%',borderRadius: '8px'}}>
+                    <img src={food.foodImage} alt="Cinque Terre" style={{borderRadius: '8px'}}/>
+                </button>
 
                 <Modal
                     visible={this.state.visible}

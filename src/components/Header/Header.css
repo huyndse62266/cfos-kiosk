@@ -24,27 +24,33 @@
 
 .back-button{
     color: black;
-    width: 75%;
-    height: 100%;
-    padding: 10% 0%;
-    border: 0
+    width: 90%;
+    height: 70%;
+    /* padding: 10% 0%; */
+    border: 2px solid #D2D2D2;
+    border-radius: 10px;
+    font-size: 24px;
+    margin-top: 8%;;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold
 }
 
 .back-button-title{
     padding: 0% 5%;
-    text-decoration: underline
 }
 .empty-cart{
     margin-top: 5%;
-    height: 75%;
-    width: 98%;
+    height: 80%;
+    width: 92%;
     text-align: center;
     background-color: white;
-    font-size: 18px;
-    padding: 5% 0%;
-    border-radius: 5px;
+    
+    padding: 3% 0%;
+    border-radius: 10px;
+    border: 1px solid #D2D2D2;
+    font-size: 22px;
     font-weight: 700;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+    font-family: 'Open Sans', sans-serif;
 }
 .cart-header{
     height: 100%;
@@ -64,10 +70,11 @@
 .ant-menu-item-selected a{
     color:white !important;
 }
-.ant-menu-submenu-selected{
+.ant-menu-horizontal > .ant-menu-item:hover, .ant-menu-horizontal > .ant-menu-submenu:hover, .ant-menu-horizontal > .ant-menu-item-active, .ant-menu-horizontal > .ant-menu-submenu-active, .ant-menu-horizontal > .ant-menu-item-open, .ant-menu-horizontal > .ant-menu-submenu-open, .ant-menu-horizontal > .ant-menu-item-selected, .ant-menu-horizontal > .ant-menu-submenu-selected{
     border-bottom: 2px solid #FF331C !important;
     color:white !important
 }
+
 .menu-icon{
     padding-left: 14%
 }
@@ -88,6 +95,32 @@
 .view-basket-modal .ant-modal-close {
     right: 3% !important;
     top: 5%
+}
+
+.empty-basket-icon{
+    font-size: 25px;
+}
+.basket-icon-topbar{
+    font-size: 30px;
+}
+.expand-icon{
+    font-size: 26px;
+    margin-left: 45%
+}
+.number-dishes-wrapper-topbar{
+    background-color: #FF331C;
+    border-radius: 30px;
+    width: 25px;
+    height: 25px;
+    padding: 3% 0%;
+    text-align: center;
+    z-index: 20;
+    margin-left: 50%;
+    bottom: 30%;
+    color: #FFF;
+    font-weight: bold;
+    font-size: 18px;
+    position: absolute;
 }
 @media all and (max-width: 1920px) {
     

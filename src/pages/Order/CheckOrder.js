@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
-import { Row,Col,Button,message } from 'antd';
+import { Row,Col,Button,message, Icon } from 'antd';
 import { Link } from "react-router-dom"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLongArrowAltLeft, faLongArrowAltRight, faSearch, faBackspace, faFileInvoiceDollar} from '@fortawesome/free-solid-svg-icons'
 import './Order.css'
 import apiCaller from '../../utils/ApiCaller';
 import DishStatus from '../../components/DishStatus/DishStatus'
-
+import {ReactComponent as Checkstatusicon } from '../../icons/Checkstatusicon.svg'
+import Noorderillustration from '../../images/Noorderillustration.png'
 
 class CheckOrder extends Component {
 
@@ -56,24 +57,34 @@ class CheckOrder extends Component {
         var {order} = this.state
         var {orderDetailReponseVMList} = order;
         return (
-            <Row className="check-order-container h-100">
-                <Col span={12} offset={3} className="h-100">
+            <Row className="check-order-container">
+                <Col span={15} offset={1} className="h-100 display-order-status-wrapper">
                     <Row>
                         <Col span={4}>
                             <Button className="back-home-button" onClick={()=>{this.goBackPage()}}>
-                                <FontAwesomeIcon icon={faLongArrowAltLeft} /><span className="px-2">Trở về</span>
+                                <FontAwesomeIcon icon={faLongArrowAltLeft} /><span className="px-2 opensan-24-bold">Trở về</span>
                             </Button>
                         </Col>
                         <Col span={6}>
                             <Link to="/menu">
                                 <Button className="move-menu-button">
-                                    <span className="px-2">Đặt món ăn</span><FontAwesomeIcon icon={faLongArrowAltRight} />
+                                    <span className="px-2 opensan-24-bold">Đặt món ăn</span><FontAwesomeIcon icon={faLongArrowAltRight} />
                                 </Button>
                             </Link>
                         </Col>
                     </Row>
-                    <Row className="py-2"><h3 className="text-left p-0">Trạng thái đơn hàng của bạn</h3></Row>
-                    {!orderDetailReponseVMList ? <div/> : 
+                    <Row className="py-2"><Icon component={Checkstatusicon} className="check-status-icon-order-page"/><span className="opensan-32-bold">Trạng thái đơn hàng của bạn</span></Row>
+                    {!orderDetailReponseVMList ? 
+                        <div className="no-order">
+                            {/* <Icon component={FollowIcon} className="follow-icon"/> */}
+                            <img src={Noorderillustration} className="follow-img"/>
+                            <p className="opensan-32-semibold text-center mb-0">Theo dõi đơn hàng</p>
+                            <Row>
+                                <Col span={8} offset={8}>
+                                    <span className="input-follow-title">Điền mã đơn hàng của bạn để xem tráng thái của món ăn </span>
+                                </Col>
+                            </Row>
+                        </div> : 
                         <Row className="order-status-wrapper px-4 ">
                         <h4 className="order-number-title"> <FontAwesomeIcon icon={faFileInvoiceDollar}/> Đơn hàng: {order.orderNumber} <span style={{color:'gray'}}>({orderDetailReponseVMList.length} món)</span></h4>
                         {!orderDetailReponseVMList ? <div/> : 
@@ -82,17 +93,18 @@ class CheckOrder extends Component {
                    
                     
                 </Col>
-                <Col span={6} className="px-3 bg-light ml-5 h-100">
-                    <div className="px-5">
+                <Col span={7} className=" ml-2 h-100">
+                    <div className="px-5 number-pad">
                         <Row className="display-number-border py-5">
                             <Col type="flex">
                                 <p className="title-input-order-number-1">Điền <span style={{color:'red'}}>mã đơn hàng</span> của bạn</p>
                                 <p className="title-input-order-number-2">để xem trạng thái của món ăn</p>
-                                <Row className="display-number-panel">
+                                <Row className="display-number-panel" type="flex" justify="space-around" align="middle">
                                     {/* <Col span={4} className="my-auto"><FontAwesomeIcon icon={faSearch}/></Col> */}
                                     {/* <Col span={24}> </Col>*/}
                                     <Col span={6} className="icon-search"><FontAwesomeIcon icon={faSearch}/></Col>
-                                    <Col span={11} className="display-number" style={{padding: '5% 0%'}}><h2>{this.state.number}</h2></Col>
+                                    <Col span={6} className="display-number opensan-36-extrabold">{this.state.number}</Col>
+                                    <Col span={6}></Col>
                                 </Row>
                             </Col>
                         </Row>

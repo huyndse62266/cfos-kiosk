@@ -62,7 +62,7 @@ class StoreMenu extends Component {
     }
 
     findByCategory = (id) =>{
-        console.log(id  )
+        console.log(id)
         var { foods} = this.state;
         let a = foods.filter(food => food.storeCategoryId === id)
         console.log(a)
@@ -81,17 +81,21 @@ class StoreMenu extends Component {
     render() {
         var { storeInfo } = this.props;
         var { foods, foodFilter} = this.state;
+        console.log(storeInfo)
         return (
             <div>
                 {!this.props.items.length > 0 ?<Row type="flex" justify="start">
                 <Col className="text-center h-100" style={{ width: '10.4%'}}>
                     <div style={{marginTop:'10%'}}>
+                        {/* <img src={category.image} className="image-category"/> */}
                         <h4 className="opensan-28-extrabold">{storeInfo.storeName}</h4>
                         {this.buttonMore()}
                         {this.buttonMoreDetail(storeInfo.categoryVMList)}
-                        <Col span={14} offset={5}>
-                            <button type="button" className="btn opensan-16-semibold bg-light mt-3 w-100" onClick={this.checkIsExpand}>{this.state.isExpand === true ? <div>Thu gọn <FontAwesomeIcon icon={faAngleUp} /></div> : <div>Xem thêm <FontAwesomeIcon icon={faAngleDown} /></div> } </button>
-                        </Col>
+                        <Row>
+                            <Col span={16} offset={4}>
+                                <button type="button" className="btn opensan-16-semibold bg-light mt-3 w-100" onClick={this.checkIsExpand}>{this.state.isExpand === true ? <div>Thu gọn <FontAwesomeIcon icon={faAngleUp} /></div> : <div>Xem thêm <FontAwesomeIcon icon={faAngleDown} /></div> } </button>
+                            </Col>
+                        </Row>
                         
                     </div>
                 </Col>
@@ -107,7 +111,7 @@ class StoreMenu extends Component {
                             }
                             
                         }):<span></span>}
-                    </Row>
+                    </Row>  
                     <span id="more">
                         <Row type="flex" justify="start">
                             {this.state.isExpand ? foodFilter.map((food, index) => {
@@ -124,16 +128,19 @@ class StoreMenu extends Component {
                 </Col>
             </Row>:
             <Row type="flex" justify="start">
-                <Col className="text-center h-100" style={{margin:'auto', textAlign: 'center', width: '10.4%'}}>
-                    <div style={{marginTop:'40%'}}>
+                <Col span={3} className="text-center h-100" >
+                    <div style={{marginTop:'10%'}}>
                         <h4 className="opensan-28-extrabold">{storeInfo.storeName}</h4>
                         {this.buttonMore()}
                         {this.buttonMoreDetail(storeInfo.categoryVMList)}
-                        
-                        <button type="button" className="btn opensan-16-semibold bg-light" onClick={this.checkIsExpand}>{this.state.isExpand === true ? <div>Thu gọn <FontAwesomeIcon icon={faAngleUp} /></div> : <div>Xem thêm <FontAwesomeIcon icon={faAngleDown} /></div> } </button>
+                        <Row>
+                            <Col span={16} offset={4}>
+                                <button type="button" className="btn opensan-16-semibold bg-light mt-3 w-100" onClick={this.checkIsExpand}>{this.state.isExpand === true ? <div>Thu gọn <FontAwesomeIcon icon={faAngleUp} /></div> : <div>Xem thêm <FontAwesomeIcon icon={faAngleDown} /></div> } </button>
+                            </Col>      
+                        </Row>                  
                     </div>
                 </Col>
-                <Col span={21} className="d-flex flex-column" style={{margin:'auto', textAlign: 'center', width: '89.6%'}}>
+                <Col span={21} className="d-flex flex-column">
                     <Row type="flex" justify="start">
                         {this.state.foodFilter.length > 0 ? foodFilter.map((food, index) => {
                             if(index < 4){

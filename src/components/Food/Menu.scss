@@ -30,6 +30,26 @@
     max-width: 95%;
     padding-top: 2%
 }
+.image-category{
+    width: 100px;
+    height: 100px;
+    margin-bottom: 5%
+}
+
+.category-wrapper{
+    text-align: center;
+    height: 100%;
+    background-color: #FFF;
+    margin: auto;
+    width: 10.4%;
+    
+}
+.list-food-wrapper{
+    text-align: center;
+    width: 89.6%;
+    background-color: #F6F6F6;
+    // border-bottom: 0.25px solid #D2D2D2
+}
 @media all and (max-width: 1920px) {
     .restaurant-title{
         font-size: 15px;

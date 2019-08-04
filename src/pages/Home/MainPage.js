@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
-import {Row,Col,Button} from 'antd'
+import {Row,Col, Icon} from 'antd'
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch, faDrumstickBite, faLongArrowAltRight } from '@fortawesome/free-solid-svg-icons'
+import {ReactComponent as Checkstatusicon } from '../../icons/Checkstatusicon.svg'
+
 import 'antd/dist/antd.css';
 
 
@@ -20,7 +22,7 @@ export default class MainPage extends Component {
   
                 <Link to="/check-order">
                   <button type="button" className="btn button-check">
-                    <FontAwesomeIcon icon={faSearch}/><span className="px-3">Kiểm tra tình trạng order</span>
+                    <Icon component={Checkstatusicon} className="check-status-icon"/><span className="check-status-title-button">Kiểm tra tình trạng món ăn</span>
                   </button>
                 </Link>
               </Col>

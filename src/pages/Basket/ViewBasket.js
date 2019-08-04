@@ -1,11 +1,12 @@
 import React, { Component } from "react";
-import {Row,Col,Button} from 'antd';
+import {Row,Col,Button, Icon} from 'antd';
 import ScrollArea from 'react-scrollbar';
 import { connect } from 'react-redux'
 import { Link } from "react-router-dom";
 import NumberFormat from 'react-number-format';
 import BasketItem  from "../../components/Cart/ViewBasket/BasketItem";
-import './ViewBasket.scss'
+import './ViewBasket.css'
+import {ReactComponent as Basketicon } from '../../icons/Basketicon.svg'
 
 class ViewBasket extends Component {
   constructor(props) {
@@ -40,12 +41,12 @@ class ViewBasket extends Component {
       ):(
           <Row type="flex" justify="space-around" align="middle" style={{height:'800px', width: '100%'}}>
               <Col span={24} className="text-center" >
-                <h1>Cart Empty</h1>
+                <h1>Giỏ hàng hiện tại rỗng</h1>
               </Col>
           </Row>
       )
     return (
-      <Row>
+      <Row className="view-basket-container">
         <Col span={20} className="scroll-basket-item-wrapper">
           <ScrollArea speed={0.8}
               verticalScrollbarStyle={{display:'none'}}
@@ -60,7 +61,12 @@ class ViewBasket extends Component {
         <Col span={4}>
           <div className="overview-basket-wrapper">
             <Row>
-              <Col span={6}></Col>
+              <Col span={6}>   
+                <div className="number-dishes-wrapper">
+                {this.props.items.length} 
+                </div>
+                <Icon component={Basketicon} className="basket-icon"/>
+              </Col>
               <Col span={18}>
                 <span className="basket-title">Giỏ của bạn <br/><small>({this.props.items.length} món)</small></span>
               </Col>

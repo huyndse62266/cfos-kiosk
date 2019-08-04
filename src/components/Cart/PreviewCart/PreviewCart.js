@@ -1,15 +1,12 @@
 import React, { Component }  from 'react'
-import { Modal, Button, Row,Col } from 'antd';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faShoppingCart, faAngleLeft } from '@fortawesome/free-solid-svg-icons'
+import { Button, Row,Col } from 'antd';
 import { connect } from 'react-redux'
 import ScrollArea from 'react-scrollbar';
 import NumberFormat from 'react-number-format';
 import { Link} from "react-router-dom";
 import CartItemSimple from './CartItemSimple'
-import ViewBasket from '../../../pages/Basket/ViewBasket'
 
-import './PreviewCart.scss'
+import './PreviewCart.css'
 
 class PreviewCart extends Component {
     state = {

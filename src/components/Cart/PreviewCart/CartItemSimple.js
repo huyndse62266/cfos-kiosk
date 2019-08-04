@@ -5,7 +5,8 @@ import { faTrashAlt,faMapMarkerAlt, faMinus, faPlus } from '@fortawesome/free-so
 import NumberFormat from 'react-number-format'; 
 import { connect } from 'react-redux'
 import { removeCart,addQuantity,subQuantity } from '../../../action/cart';
-import './PreviewCart.scss'
+
+import './PreviewCart.css'
 class CartItemSimple extends Component {
     constructor(props) {
         super(props);
@@ -28,18 +29,20 @@ class CartItemSimple extends Component {
         this.setState({ show: !this.state.show });
     }
     render() {
-        var {food, type} = this.props;
+        var {food} = this.props;
         return (
-            <div className="border-custom mb-4">
+            <div className="mb-4">
                 <Row className="img-button-wrapper">
                     <Row>
                         <Col span={24} className="text-right px-2">
-                            {!type ? <Button className="trash-button" onClick={()=>{this.removeItem(food.foodId)}}>
-                            <FontAwesomeIcon icon={faTrashAlt} />
-                        </Button> : <span></span>}
+                            <button type="button" className="btn trash-button" onClick={()=>{this.removeItem(food.foodId)}}>
+                                <FontAwesomeIcon icon={faTrashAlt} />
+                            </button>
                         </Col>
                     </Row>
-                    <img src={food.foodImage} className="img" alt="Cinque Terre"/>
+                    <div className="img-wrapper-display-name">
+                        <img src={food.foodImage} className="img" alt="Cinque Terre"/>
+                    </div>
                     <Row className="food-info-cart">
                         <div className="font-weight-bold">
                             {food.foodName}
@@ -47,22 +50,22 @@ class CartItemSimple extends Component {
                         <p className="font-weight-bold"><NumberFormat value={food.price} displayType={'text'} thousandSeparator={','}/>  đ</p>
                     </Row>
                 </Row>
-                <Row className="pt-3 pb-2">
-                    <Col span={3} className="text-center">
+                <Row className="pt-3" type="flex" justify="space-around" align="middle">
+                    <Col span={1} className="text-center">
                         <FontAwesomeIcon icon={faMapMarkerAlt}/>
                     </Col>
-                    <Col span={11}>
-                        <span style={{fontSize: '11px'}}>{food.storeName}</span>
+                    <Col span={14}>
+                        <span className="store-name-cart-item pl-1">{food.storeName}</span>
                     </Col>
-                    <Col span={10}>
-                        <Row className="w-100">
+                    <Col span={9} className="h-100">
+                        <Row className="w-100 h-100">
                             <Col span={6}>
-                                <button type="button" className="btn btn-dec " onClick={()=>{this.DecreaseItem(food.foodId)}} >
-                                    <FontAwesomeIcon icon={faMinus} />
+                                <button type="button" className="btn btn-dec" onClick={()=>{this.DecreaseItem(food.foodId)}} >
+                                    <FontAwesomeIcon icon={faMinus} className="btn-dec-icon" />
                                 </button>
                             </Col>
-                            <Col span={10} className="h-75 " >
-                                <div className="display-quantity-1" style={{paddingBottom: '3px'}}>
+                            <Col span={10} className="h-100">
+                                <div className="display-quantity-1 opensan-18-bold">
                                     { this.state.show ? <span>{ food.cartQuantity }</span> : '' }
                                 </div>
                             </Col>

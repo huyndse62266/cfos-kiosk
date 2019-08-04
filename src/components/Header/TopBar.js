@@ -1,11 +1,15 @@
 import React, { Component } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {  faUtensils, faStar, faPercentage, faConciergeBell,faMugHot, faThumbsUp,faLongArrowAltLeft,faShoppingBasket,faShoppingCart } from '@fortawesome/free-solid-svg-icons'
-import { Menu,Row,Col,Button,Modal } from 'antd';
+import {  faUtensils, faStar, faPercentage, faConciergeBell,faMugHot, faThumbsUp,faShoppingBasket } from '@fortawesome/free-solid-svg-icons'
+import { Menu,Row,Col,Button,Modal,Icon } from 'antd';
 import { connect } from 'react-redux'
 import { Link } from "react-router-dom";
-import NumberFormat from 'react-number-format';
+
 import ViewBasket from '../../pages/Basket/ViewBasket'
+import {ReactComponent as ExpandBasketSVG } from '../../icons/expandBasket.svg'
+import {ReactComponent as LongArrowLeft } from '../../icons/LongArrowLeft.svg'
+import {ReactComponent as Basketicon } from '../../icons/Basketicon.svg'
+
 import './Header.css'
 
 
@@ -49,8 +53,8 @@ class TopBar extends Component {
                 
                 <Col style={{width:'10.4%'}} className="text-center bg-white">
                     <Link to="/">
-                        <Button className="back-button opensan-20-bold">
-                            <FontAwesomeIcon icon={faLongArrowAltLeft} />
+                        <Button className="back-button">
+                            <Icon component={LongArrowLeft} />
                             <span className="back-button-title">Trở về</span>
                         </Button>
                     </Link>
@@ -102,12 +106,27 @@ class TopBar extends Component {
                     </Menu>
                 </Col>
                 <Col style={{width:'17%'}} className="h-100">
-                    {this.props.items.length > 0? <div className="cart-header">
-                        <a onClick={this.showModal}><FontAwesomeIcon icon={faShoppingBasket} style={{fontSize: '23px'}}/>
-                        <span className="px-3">Xem giỏ hàng của bạn</span></a>
-                    </div> :
+                    {this.props.items.length > 0? <Row className="cart-header">
+                        <a onClick={this.showModal}>
+                        <Row type="flex" justify="space-around" align="middle">
+                            <Col span={2} offset={2}>
+                                <Row type="flex" justify="space-around" align="middle" className="number-dishes-wrapper-topbar">
+                                    <Col>
+                                        {this.props.items.length}
+                                    </Col>
+                                </Row>    
+                                <Icon component={Basketicon} className="basket-icon-topbar"/>
+                                
+                            </Col>
+                            <Col span={4}><Icon component={ExpandBasketSVG} className="expand-icon"/></Col>
+                            <Col span={16}><u className="px-3 opensan-18-bold ">Xem giỏ của bạn</u></Col>
+                        </Row>
+                        
+                        
+                        </a>
+                    </Row> :
                      <div className="empty-cart">
-                        <FontAwesomeIcon icon={faShoppingBasket} style={{fontSize: '23px'}}/>
+                        <Icon component={Basketicon} className="empty-basket-icon"/>
                         <span className="px-3">Chưa có món ăn</span>
                     </div> }
                    

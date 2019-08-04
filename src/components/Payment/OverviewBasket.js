@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
-import {Row,Col} from 'antd'
+import {Row,Col, Icon} from 'antd'
 import ScrollArea from 'react-scrollbar';
 import { connect } from 'react-redux'
 import NumberFormat from 'react-number-format'; 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faShoppingBasket } from '@fortawesome/free-solid-svg-icons'
+import { faCog } from '@fortawesome/free-solid-svg-icons'
 import Cart from '../Cart/CheckoutCart/Cart'
 import './Payment.css'
+import {ReactComponent as Basketicon } from '../../icons/Basketicon.svg'
+import {ReactComponent as Editdishicon } from '../../icons/Editdishicon.svg'
 class OverviewBasket extends Component {
     
     render() {
@@ -20,8 +22,11 @@ class OverviewBasket extends Component {
         return (
             <div className="px-4 py-0 bg-light h-100">
                 <Row className="overview-basket-title" type="flex" justify="start">
-                    <Col span={4} className="basket-icon-wrapper">
-                        <FontAwesomeIcon icon={faShoppingBasket} style={{fontSize: '40px'}}/>     
+                    <Col span={4}>
+                        <div className="number-dishes-wrapper">
+                        {this.props.items.length} 
+                        </div>
+                        <Icon component={Basketicon} className="basket-icon"/>     
                     </Col>
                     <Col span={20}>
                         <p className="your-basket-title">Giỏ của bạn</p>
@@ -45,7 +50,7 @@ class OverviewBasket extends Component {
                 <Row>
                     <Col span={12} offset={6}>
                         <button type="button" className="btn edit-button">
-                            Chỉnh sửa
+                            <FontAwesomeIcon icon={faCog}/><span className="px-2">Chỉnh sửa</span>
                         </button>
                     </Col>
                 </Row> 

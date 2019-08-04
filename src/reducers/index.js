@@ -4,7 +4,6 @@ import categories from './categories'
 import cart from './cart'
 import stores from './stores'
 import orders from './orders'
-import options from './options'
 
 const appReducers = combineReducers({
     foods,
@@ -12,7 +11,6 @@ const appReducers = combineReducers({
     stores,
     cart,
     orders,
-    options
 });
 
 export default appReducers;

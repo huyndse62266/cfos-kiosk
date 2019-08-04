@@ -22,7 +22,7 @@ export default class Cart extends Component {
                     </Row>
                 </Col>
                 <Col span={16} className="cart-item-info-wrapper" type="flex" justify="start">
-                    <h6 className="store-name"><FontAwesomeIcon icon={faMapMarkedAlt}/>{food.storeName}</h6>
+                    <h6 className="store-name"><FontAwesomeIcon icon={faMapMarkedAlt}/> {food.storeName}</h6>
                     <h5 className="food-name">{food.foodName}</h5>
                     <h6 className="option-name">Không hành, không cay</h6>
                 </Col>

@@ -36,7 +36,7 @@ export default class ReceiptTemplate extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {items.map((item,index) =>{
+                        {items > 0 ? items.map((item,index) =>{
                             count += item.cartQuantity;
                             return <tr>
                             <td><h6 style={{fontSize:'10px'}}>{item.foodName}</h6></td>
@@ -44,7 +44,7 @@ export default class ReceiptTemplate extends Component {
                             <td><h6 style={{fontSize:'10px'}}>{item.price}</h6></td>
                             <td><h6 style={{fontSize:'10px'}}>{item.cartQuantity * item.price}</h6></td>
                             </tr>
-                        })}
+                        }):<span/>}
                     </tbody>
                 </table>
                 <Row type="flex" justify="end" className="py-4">

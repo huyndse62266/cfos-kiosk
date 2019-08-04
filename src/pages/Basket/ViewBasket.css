@@ -39,3 +39,26 @@
     font-size: 150%;
     border-radius: 10px;
 }
+
+.basket-icon{
+    font-size: 350%;
+    margin-top: 20%;
+}
+
+.number-dishes-wrapper{
+    background-color: #FF331C;
+    border-radius: 30px;
+    width: 30px;
+    padding: 3% 0%;
+    text-align: center;
+    z-index: 20;
+    margin-left: 35%;
+    margin-top: 20%;
+    color: #FFF;
+    font-weight: bold;
+    font-size: 18px;
+    position: absolute;
+}
+.view-basket-container{
+    background-color: #F5F5F5
+}

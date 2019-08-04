@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-import { faStar  as faStaro} from '@fortawesome/free-regular-svg-icons'
-import { Avatar, Button, Row, Col,Modal  } from 'antd';
+import { Row, Col,Modal  } from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { connect } from 'react-redux'
@@ -42,7 +41,6 @@ class FoodItem extends Component {
 
     render() {
         var { food, item } = this.props;
-        console.log(food)
         return (
             <div>
                

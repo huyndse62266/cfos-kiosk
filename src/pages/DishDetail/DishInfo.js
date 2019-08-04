@@ -1,14 +1,13 @@
 import React, { Component } from 'react'
-import { Button,Row,Col, message } from 'antd';
+import { Row,Col, message } from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTag, faMinus, faPlus, faSyncAlt,faMapMarkerAlt, faCar, faCartPlus } from '@fortawesome/free-solid-svg-icons'
+import { faTag, faMinus, faPlus,faMapMarkerAlt, faCartPlus } from '@fortawesome/free-solid-svg-icons'
 import ScrollArea from 'react-scrollbar';
 import Rating from 'react-rating'
 import NumberFormat from 'react-number-format';
 import { connect } from 'react-redux'
-import { addToCart, updateItemCart, findCart } from '../../action/cart';
-import Foodingredients from '../../components/DishDetail/Foodingredients'
-import MoreOption from '../../components/DishDetail/MoreOption'
+import { addToCart, updateItemCart } from '../../action/cart';
+import OptionCount from '../../components/FoodOption/OptionCount'
 
 import 'antd/dist/antd.css';
 import './DishInfo.css'
@@ -22,7 +21,10 @@ class DishInfo extends Component {
           show: true,
           totalPrice: 0,
           food: undefined,
-          optionList: []
+          optionList: [],
+          isRestore: false,
+          choosePriceSize: 0,
+          priceSize: 0,
         };
         this.handleFoodOption = this.handleFoodOption.bind(this);
     }
@@ -30,69 +32,188 @@ class DishInfo extends Component {
     handleFoodOption(option,quantity){
         let index = -1;
         index = this.state.optionList.findIndex(optionObject => optionObject.foId === option.foId);
+       
         if(index !== -1){
-            var data = [...this.state.optionList];
-            var oldQuantity = data[index].quantity;
-            if(quantity !== 0){
-                data[index].quantity = quantity;
+            if(this.props.cartQuantity > 0){
+                var data = [...this.state.optionList];
+                var oldQuantity = data[index].quantity;
+                if(quantity !== 0){
+                    data[index].quantity = quantity;
+                }else{
+                    data = data.filter(optionObject => optionObject.foId !== option.foId)
+                }
+                
+                this.setState({
+                    optionList: data,
+                    totalPrice: this.state.totalPrice + option.optionPrice*(quantity-oldQuantity)*this.state.clicks*((100-this.props.foodDetail.promotion)/100)
+                })
             }else{
-                data.pop(data[index]);
+                var data = [...this.state.optionList];    
+                var oldQuantity = data[index].quantity;          
+                if(quantity !== 0){
+                    data[index].quantity = quantity;
+                }else{
+                    data = data.filter(optionObject => optionObject.foId !== option.foId)
+                }
+                
+                if(this.state.clicks > 0 ){
+                    this.setState({
+                        optionList: data,
+                        totalPrice: this.state.totalPrice + option.optionPrice*(quantity-oldQuantity)*this.state.clicks*((100-this.props.foodDetail.promotion)/100)
+                    })
+                }else{
+                    if(quantity-oldQuantity > 0){
+                        this.setState({
+                            optionList: data,
+                        })
+                    }else{
+                        this.setState({
+                            optionList: data,
+                        })
+                    }        
+                }
             }
-            this.setState({
-                optionList: data,
-                totalPrice: this.state.totalPrice + option.optionPrice*(quantity-oldQuantity)*((100-this.props.foodDetail.promotion)/100)
-            })
         }else{
             option.quantity = parseInt(quantity);
             let newOptionList = this.state.optionList;
             newOptionList.push(option);
-            this.setState({
-                optionList: newOptionList,
-                totalPrice: this.state.totalPrice + option.optionPrice*((100-this.props.foodDetail.promotion)/100)
-            })
+            if(this.state.clicks === 0){
+                this.setState({
+                    optionList: newOptionList,
+                })
+            }else{
+                this.setState({
+                    optionList: newOptionList,
+                    totalPrice: this.state.totalPrice + option.optionPrice*this.state.clicks*((100-this.props.foodDetail.promotion)/100)
+                })
+            }
+            
         }
         
     }
 
     
     IncrementItem = () => {
+        let optionPrice = 0;
+        if(this.state.optionList){
+            this.state.optionList.map(option => {
+                if(option.count === true){
+                    optionPrice += option.optionPrice * parseInt(option.quantity);
+                }
+            })
+        }
         this.setState({ 
             clicks: this.state.clicks + 1,
-            totalPrice: this.state.totalPrice + this.props.foodDetail.price*((100-this.props.foodDetail.promotion)/100)
+            totalPrice: this.state.totalPrice + ((this.props.foodDetail.price +optionPrice +this.state.priceSize)*((100-this.props.foodDetail.promotion)/100))
         });
 
     }
     DecreaseItem = () => {
         if(this.state.clicks > 0){
+            let optionPrice = 0;
+            if(this.state.optionList){
+                this.state.optionList.map(option => {
+                    optionPrice += option.optionPrice * option.quantity;
+                })
+            }
             this.setState({ 
                 clicks: this.state.clicks - 1,
-                totalPrice: this.state.totalPrice - this.props.foodDetail.price*((100-this.props.foodDetail.promotion)/100)
+                totalPrice: this.state.totalPrice - (this.props.foodDetail.price+optionPrice+this.state.priceSize)*((100-this.props.foodDetail.promotion)/100)
             })
         };
     }
-    addtoCartRequest = (food,quantity,optionList) => {
+    addtoCartRequest = (food,quantity,optionList, priceSize,choosePriceSize) => {
         if(quantity > 0){
-            this.props.addtoCart(food,quantity,optionList);
+            this.props.addtoCart(food,quantity,optionList,priceSize,choosePriceSize);
         }else{
             message.error('Vui lòng chọn số lượng');
         }
     }
-    updateItemCartRequest = (id,cart,optionList) => {
-        this.props.updateCart(id,cart,optionList);
+    updateItemCartRequest = (id,cart,optionList,priceSize, choosePriceSize) => {
+        this.props.updateCart(id,cart,optionList,priceSize, choosePriceSize);
     }
     ToggleClick = () => {
         this.setState({ show: !this.state.show });
     }
 
+    stickOption = (option) => {
+        let index = -1;
+        index = this.state.optionList.findIndex(optionObject => optionObject.foodOptionParent === option.foodOptionParent);
+        if(index !== -1){
+            var data = [...this.state.optionList];
+            data.pop(data[index]);
+            option.quantity = 0;
+            data.push(option)
+            this.setState({
+                optionList: data,
+            })
+        }else{
+            let newOptionList = this.state.optionList;
+            option.quantity = 0;
+            newOptionList.push(option);
+            this.setState({
+                optionList: newOptionList,
+            })
+        }
+    }
+    
+    changeOptionPrice = (option, priceSize) =>{
+        let index = -1;
+        index = this.state.optionList.findIndex(optionObject => optionObject.foodOptionParent === option.foodOptionParent);
+        if(index !== -1){
+            var data = [...this.state.optionList];
+            var oldPriceSize = data[index].optionPrice;
+            data.pop(data[index]);
+            option.quantity = 0;
+            data.push(option)
+            if(this.state.clicks > 0){
+                this.setState({
+                    optionList: data,
+                    choosePriceSize: option.optionPrice,
+                    priceSize: priceSize,
+                    totalPrice: this.state.totalPrice + priceSize*((100-this.props.foodDetail.promotion)/100)*this.state.clicks
+                })
+            }else{
+                this.setState({
+                    optionList: data,
+                    choosePriceSize: option.optionPrice,
+                    priceSize: priceSize
+                })
+            }
+            
+        }else{
+            let newOptionList = this.state.optionList;
+            option.quantity = 0;
+            newOptionList.push(option);
+            if(this.state.clicks > 0){
+                this.setState({
+                    optionList: newOptionList,
+                    choosePriceSize: option.optionPrice,
+                    priceSize: priceSize,
+                    totalPrice: this.state.totalPrice + priceSize*((100-this.props.foodDetail.promotion)/100)*this.state.clicks 
+                })
+            }else{
+                this.setState({
+                    optionList: newOptionList,
+                    choosePriceSize: option.optionPrice,
+                    priceSize: priceSize,
+                })
+            }
+            
+        }
+    }
+
     restoreOption = ()=>{
         this.setState({
             optionList: [],
-            totalPrice: this.props.foodDetail.price * this.state.clicks * ((100-this.props.foodDetail.promotion)/100)
+            totalPrice: this.props.foodDetail.price * this.state.clicks * ((100-this.props.foodDetail.promotion)/100),
+            isRestore: true
         })
     }
+
+
     
     componentWillMount(){
-        
         if(this.props.cartQuantity !== 0){
             if(this.props.foodCart.optionList){
                 let totalOption  = 0;
@@ -101,7 +222,10 @@ class DishInfo extends Component {
                 })
                 this.setState({
                     clicks: this.props.cartQuantity,
-                    totalPrice: (this.props.foodCart.cartQuantity * this.props.foodCart.price + totalOption) *((100-this.props.foodCart.promotion)/100)
+                    priceSize: this.props.foodCart.priceSize,
+                    choosePriceSize: this.props.foodCart.choosePriceSize,
+                    optionList: this.props.foodCart.optionList,
+                    totalPrice:(this.props.foodCart.cartQuantity * (this.props.foodCart.price + totalOption + this.props.foodCart.priceSize)) *(100-this.props.foodCart.promotion)/100
                 })
             }else{
                 this.setState({
@@ -109,19 +233,119 @@ class DishInfo extends Component {
                     totalPrice: (this.props.foodCart.cartQuantity * this.props.foodCart.price)*((100-this.props.foodCart.promotion)/100)
                 })
             }
-            
         }else{
             this.setState({
                 clicks: 0
             })
         }
+
     }
 
+    componentWillReceiveProps({foodDetail}){
+        if(this.props.foodCart.choosePriceSize){
+            this.setState({
+                choosePriceSize: this.props.foodCart.choosePriceSize
+            })
+        }else if(foodDetail){
+            foodDetail.foodOptions.map(foodOption => {
+                foodOption.foodOptionVMS.map(foodOptionVMSDetail =>
+                    {
+                        if(foodOptionVMSDetail.foName === "Vừa"){
+                            this.setState({
+                                choosePriceSize: foodOptionVMSDetail.optionPrice
+                            })
+                        }    
+                    }
+                )
+            })
+        }
+        
+    }
+    componentDidUpdate(){
+        if(this.props.foodCart.optionList){
+            this.props.foodCart.optionList.map(optionChoosen => 
+               {
+                   if(optionChoosen.count === false && optionChoosen.selectMore === false){
+                        document.getElementById(optionChoosen.foId).checked = true
+                   }
+               }
+            
+            )
+        }
+    }
+
+
+
+    rendeSize = (foodOption, index) =>{
+        if(foodOption.foodOptionNameParent === 'Kích cỡ' || foodOption.foodOptionNameParent === 'Size'  ){
+            return <div key={index}>
+            <Row>
+                <h6 className="option-title">{foodOption.foodOptionNameParent}</h6>
+            </Row>
+            <Row className="mb-3">
+                <form className="form cf">
+                    <section className="plan cf">
+                        {foodOption.foodOptionVMS.map((foodOptionVMSDetail, index) => 
+                        <Col span={8} key={index}>
+                            <input type="radio" name="radio1" id={foodOptionVMSDetail.foId} value={foodOptionVMSDetail.foId} onChange={ () => this.changeOptionPrice(foodOptionVMSDetail, foodOptionVMSDetail.optionPrice-this.state.choosePriceSize)} />
+                            <label className="check-box-label size-label" htmlFor={foodOptionVMSDetail.foId}>
+                                {this.renderLabel(foodOptionVMSDetail)}
+                            </label>
+                        </Col>)
+                        }
+                    </section>
+                </form>
+            </Row>
+        </div>
+        }
+    }
+    renderLabel(foodOptionVMSDetail){
+        if((foodOptionVMSDetail.optionPrice-this.state.choosePriceSize) !== 0){
+            return  <span>
+            {foodOptionVMSDetail.foName}<br/>
+            <span className="price-size"><NumberFormat value={foodOptionVMSDetail.optionPrice-this.state.choosePriceSize} displayType={'text'} thousandSeparator={','}/> đ</span></span>
+        }else{
+            return <span className="choose-price-label">{foodOptionVMSDetail.foName}</span>
+        }
+    }
+
+    renderOption = (foodOption, index) =>{
+        if(foodOption.count === true){
+            return <div key={index}>
+            <Row>
+                <h6 className="option-title">{foodOption.foodOptionNameParent}</h6>
+            </Row>
+            <Row className="px-4 mb-3">
+                {this.props.foodCart ?foodOption.foodOptionVMS ? foodOption.foodOptionVMS.map((foodOptionVMSDetail)=>
+                <OptionCount Restore={this.state.isRestore} foodOption={foodOptionVMSDetail} optionQuatity={this.props.foodCart.optionList} IncrementOption={this.handleFoodOption} DecreaseOption={this.handleFoodOption}/>) : <div/>:
+                foodOption.foodOptionVMS ? foodOption.foodOptionVMS.map((foodOptionVMSDetail)=>
+                <OptionCount Restore={this.state.isRestore} foodOption={foodOptionVMSDetail} IncrementOption={this.handleFoodOption}/>) : <div/> }
+            
+            </Row>
+        </div>
+        }else if(foodOption.selectMore === false && foodOption.count === false && foodOption.foodOptionNameParent !== 'Kích cỡ' && foodOption.foodOptionNameParent !== 'Size'){
+            return <div key={index}>
+            <Row>
+                <h6 className="option-title">{foodOption.foodOptionNameParent}</h6>
+            </Row>
+            <Row className="mb-3">
+                <form className="form cf">
+                    <section className ="plan cf">
+                        {foodOption.foodOptionVMS.map((foodOptionVMSDetail, index) => 
+                        <Col span={8} key={index}>
+                            <input type="radio" name="radio1" id={foodOptionVMSDetail.foId} value={foodOptionVMSDetail.foId} onChange={ () => this.stickOption(foodOptionVMSDetail)} /><label className="check-box-label" htmlFor={foodOptionVMSDetail.foId}>{foodOptionVMSDetail.foName}</label>
+                        </Col>)
+                        }
+                    </section>
+                </form>
+            </Row>
+        </div>
+        }
+    }
 
     render() {
         var {cartQuantity,foodDetail} = this.props;
         var {foodOptions,storeVM} = foodDetail;
-        console.log(this.props.foodDetail.storeVM)
         return (
             <div className="info-feedback-container">
                 <Row type="flex" justify="start">
@@ -134,7 +358,7 @@ class DishInfo extends Component {
                             horizontal={false} style={{height: '630px'}}>
                         <Row className="d-flex flex-column pr-3">
                             {foodDetail.imageVMS ? foodDetail.imageVMS.map((imageURL,index) => {
-                                return <Col span={24} className="py-3">    
+                                return <Col span={24} className="py-3" key={index}>    
                                     <img src={imageURL.image} className="image-info" alt="Cinque Terre"/>
                                 </Col>
                             }):<div/>}                   
@@ -148,16 +372,17 @@ class DishInfo extends Component {
                             <Col span={12} className="px-3">
                                 {/* thông tin cửa hàng */}
                                 <Row>
-                                    <Col span={3} offset={1}>
+                                    <Col span={2} offset={1}>
                                         <FontAwesomeIcon icon={faMapMarkerAlt}/>
                                     </Col>
-                                    <Col span={20}>
-                                        {/* <span>{this.props.food.storeName}</span> */}
+                                    <Col span={21}>
+                                        {/* {storeVM.storeName?<span>{storeVM.storeName}</span>:<span/>} */}
+                                        <span className="opensan-16-semibold">Nhà hàng nàng gánh</span>
                                     </Col>
                                 </Row>
                                 {/* tên món ăn */}
-                                <Row className="food-name-info">
-                                    <h4 className="text-left">{foodDetail.foodName}</h4>
+                                <Row className="pt-1" >
+                                    <h4 className="opensan-24-extrabold text-left">{foodDetail.foodName}</h4>
                                 </Row>
                                 {/* đánh giá */}
                                 <Row  >
@@ -174,7 +399,7 @@ class DishInfo extends Component {
                                     <h5 className="font-weight-bold"> <NumberFormat value={foodDetail.price} displayType={'text'} thousandSeparator={','}/> đ</h5>
                                 </Row>
                                 {/* ghi chú */}
-                                <Row className="border-top border-bottom py-2">
+                                <Row className="py-2">
                                     <span className="text-left" style={{fontSize: '18px',fontWeight: 'bold'}}>{foodDetail.foodDescription}</span>
                                 </Row>
                                 {/* thẻ giảm giá */}
@@ -187,8 +412,11 @@ class DishInfo extends Component {
                                     </Col>                                   
                                 </Row>:<span/>} 
                                {/* chọn số lượng */}
-                                <Row className="pt-2">
-                                    <h5>Số lượng</h5>
+                               {foodOptions?<div>{foodOptions.map((foodOption, index) =>
+                                    this.rendeSize(foodOption,index)
+                                    )} </div>:<div/>}
+                                <Row className="pt-2 mb-2">
+                                    <h6 className="opensan-22-bold">Số lượng</h6>
                                 </Row>
                                 <Row>
                                     <Col span={8}>
@@ -218,23 +446,10 @@ class DishInfo extends Component {
                                     {/* <Row>
                                         <Foodingredients/>
                                     </Row> */}
-                                    <h4>Tùy chọn món ăn</h4>
-                                    {foodOptions?<div>{foodOptions.map((foodOption) =>
-                                    <div>
-                                        <Row>
-                                            <h6 className="px-3 py-2">{foodOption.foodOptionNameParent}</h6>
-                                        </Row>
-                                        <Row className="px-4">
-                                            {this.props.foodCart ?foodOption.foodOptionVMS ? foodOption.foodOptionVMS.map((foodOptionVMSDetail)=><MoreOption foodOption={foodOptionVMSDetail} optionQuatity={this.props.foodCart.optionList} IncrementOption={this.handleFoodOption} DecreaseOption={this.handleFoodOption}/>) : <div/>:foodOption.foodOptionVMS ? foodOption.foodOptionVMS.map((foodOptionVMSDetail)=><MoreOption foodOption={foodOptionVMSDetail} IncrementOption={this.handleFoodOption}/>) : <div/> }
-                                        {}   
-                                        </Row>  
-                                        <Row className="py-3 px-4 float-right">
-                                            <Button style={{backgroundColor: '#D2D2D2'}} onClick={()=>{this.restoreOption()}} >
-                                                <FontAwesomeIcon icon={faSyncAlt}/><span className="pl-2">Đặt về mặc định</span>
-                                            </Button>
-                                        </Row>
-                                    </div> )} </div>:<div/>}
-          
+                                    {foodOptions?<div>{foodOptions.map((foodOption, index) =>
+                                    this.renderOption(foodOption,index)
+                                    )} </div>:<div/>}
+
                                 </ScrollArea>
                                 
                             </Col>
@@ -248,10 +463,10 @@ class DishInfo extends Component {
                             </Col>
                             <Col span={8} className="h-100" offset={1}>
                                 {cartQuantity === 0 ? 
-                                <button type="button" className="btn cart-button" onClick={()=>{this.addtoCartRequest(this.props.foodCart,this.state.clicks, this.state.optionList)}}>
+                                <button type="button" className="btn cart-button" onClick={()=>{this.addtoCartRequest(this.props.foodCart,this.state.clicks, this.state.optionList, this.state.priceSize, this.state.choosePriceSize)}}>
                                     <FontAwesomeIcon icon={faCartPlus} className="cart-plus-icon"/> Thêm vào giỏ
                                 </button> :
-                                <button type="button" className="btn cart-button" onClick={()=>{this.updateItemCartRequest(foodDetail.foodId,this.state.clicks,this.state.optionList)}}>
+                                <button type="button" className="btn cart-button" onClick={()=>{this.updateItemCartRequest(foodDetail.foodId,this.state.clicks,this.state.optionList,this.state.priceSize,this.state.choosePriceSize)}}>
                                     <FontAwesomeIcon icon={faCartPlus} className="cart-plus-icon"/> Cập nhật giỏ
                                 </button> }
                                 
@@ -274,11 +489,11 @@ const mapStateToProps = (state)=>{
 
 const mapDispatchToProps = (dispatch)=>{
     return{
-        addtoCart: (food,quantity,optionList)=>{
-            dispatch(addToCart(food,quantity,optionList))
+        addtoCart: (food,quantity,optionList,priceSize, choosePriceSize)=>{
+            dispatch(addToCart(food,quantity,optionList,priceSize,choosePriceSize))
         },
-        updateCart: (id,quantity,optionList)=>{
-            dispatch(updateItemCart(id,quantity,optionList))
+        updateCart: (id,quantity,optionList,priceSize, choosePriceSize)=>{
+            dispatch(updateItemCart(id,quantity,optionList,priceSize, choosePriceSize))
         }
         
     }
