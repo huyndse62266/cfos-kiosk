@@ -6,19 +6,21 @@
     color: #2CC200 !important;
     font-size: 24px !important;
     font-weight: bold !important;
+    font-family: 'Open Sans', sans-serif;
     width: 100%;
     font-family: 'Roboto';
 }
 .status-finish-description{
-    font-size: 18px;
-    font-weight: bold !important;
+    font-size: 16px;
+    font-weight: 500 !important;
+    font-family: 'Open Sans', sans-serif;
+    color: #353535;
     width: 100%;
     font-family: 'Roboto';
 
 }
 .done-icon{
-    color:#2CC200 !important;
-    font-size: 25px;
+    font-size: 50px;
 }
 
 .status-waiting{
@@ -72,8 +74,10 @@ img{
     padding: 2% 3%;
     border: 1px solid #D2D2D2;
     border-radius: 7px;
+    color:#212121;
     font-size: 16px;
     font-family: 'Open Sans', sans-serif;
+    font-weight: 500
 }
 
 .dish-status-promotion{
@@ -92,6 +96,6 @@ img{
 }
 
 .img-dish-status-wrapper{
-    height: 130px;
+    height: 140px;
     
 }

@@ -7,6 +7,7 @@ import './Order.css'
 import apiCaller from '../../utils/ApiCaller';
 import DishStatus from '../../components/DishStatus/DishStatus'
 import {ReactComponent as Checkstatusicon } from '../../icons/Checkstatusicon.svg'
+import {ReactComponent as BillIcon } from '../../icons/BillIcon.svg'
 import Noorderillustration from '../../images/Noorderillustration.png'
 
 class CheckOrder extends Component {
@@ -53,12 +54,14 @@ class CheckOrder extends Component {
         })
     }
 
+    
+
     render() {
         var {order} = this.state
         var {orderDetailReponseVMList} = order;
         return (
             <Row className="check-order-container">
-                <Col span={15} offset={1} className="h-100 display-order-status-wrapper">
+                <Col span={14} className="h-100 display-order-status-wrapper">
                     <Row>
                         <Col span={4}>
                             <Button className="back-home-button" onClick={()=>{this.goBackPage()}}>
@@ -73,7 +76,8 @@ class CheckOrder extends Component {
                             </Link>
                         </Col>
                     </Row>
-                    <Row className="py-2"><Icon component={Checkstatusicon} className="check-status-icon-order-page"/><span className="opensan-32-bold">Trạng thái đơn hàng của bạn</span></Row>
+                    <Row className="py-2"><Icon component={Checkstatusicon} className="check-status-icon-order-page"/><span className="opensan-32-bold">Trạng thái đơn hàng của bạn</span>
+                    </Row>
                     {!orderDetailReponseVMList ? 
                         <div className="no-order">
                             {/* <Icon component={FollowIcon} className="follow-icon"/> */}
@@ -85,11 +89,14 @@ class CheckOrder extends Component {
                                 </Col>
                             </Row>
                         </div> : 
-                        <Row className="order-status-wrapper px-4 ">
-                        <h4 className="order-number-title"> <FontAwesomeIcon icon={faFileInvoiceDollar}/> Đơn hàng: {order.orderNumber} <span style={{color:'gray'}}>({orderDetailReponseVMList.length} món)</span></h4>
+                        <div className="order-status-wrapper px-4 ">
+                        <Row type="flex" justify="space-around" align="middle">
+                            <Col span={1} className="text-left"><Icon component={BillIcon} className="bill-icon-check-order"/></Col>
+                            <Col className="order-number-title" span={23}>Đơn hàng: {order.orderNumber} <span style={{color:'gray'}}>({orderDetailReponseVMList.length} món)</span></Col>
+                        </Row>
                         {!orderDetailReponseVMList ? <div/> : 
                         orderDetailReponseVMList.map((orderDetail, index) => <DishStatus orderDetail={orderDetail}/> ) }
-                    </Row> }
+                    </div> }
                    
                     
                 </Col>

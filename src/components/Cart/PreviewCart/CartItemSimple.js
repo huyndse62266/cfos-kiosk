@@ -41,17 +41,17 @@ class CartItemSimple extends Component {
                             </button>
                         </Col>
                     </Row>
-                    <div className="img-wrapper-display-name">
-                        <img src={food.foodImage} className="img" alt="Cinque Terre"/>
+                    <div className="img-wrapper-display-name"> 
+                        <img src={food.foodImage} className="img" alt="Image Not Found"/>
                     </div>
                     <Row className="food-info-cart">
-                        <div className="font-weight-bold">
+                        <div className="opensan-20-extrabold">
                             {food.foodName}
                         </div>
-                        <p className="font-weight-bold"><NumberFormat value={food.price} displayType={'text'} thousandSeparator={','}/>  đ</p>
+                        <span className="opensan-18-semibold"><NumberFormat value={food.price} displayType={'text'} thousandSeparator={','}/>  đ</span>
                     </Row>
                 </Row>
-                <Row className="pt-3" type="flex" justify="space-around" align="middle">
+                <Row  type="flex" justify="space-around" align="middle">
                     <Col span={1} className="text-center">
                         <FontAwesomeIcon icon={faMapMarkerAlt}/>
                     </Col>
@@ -59,15 +59,15 @@ class CartItemSimple extends Component {
                         <span className="store-name-cart-item pl-1">{food.storeName}</span>
                     </Col>
                     <Col span={9} className="h-100">
-                        <Row className="w-100 h-100">
+                        <Row className="dec-inc-cart-item-simple" type="flex" justify="start">
                             <Col span={6}>
                                 <button type="button" className="btn btn-dec" onClick={()=>{this.DecreaseItem(food.foodId)}} >
                                     <FontAwesomeIcon icon={faMinus} className="btn-dec-icon" />
                                 </button>
                             </Col>
-                            <Col span={10} className="h-100">
+                            <Col span={12} className="h-100">
                                 <div className="display-quantity-1 opensan-18-bold">
-                                    { this.state.show ? <span>{ food.cartQuantity }</span> : '' }
+                                    <span className="text-center">{ this.state.show ? <span>{ food.cartQuantity }</span> : '' }</span>
                                 </div>
                             </Col>
                             <Col span={6}>

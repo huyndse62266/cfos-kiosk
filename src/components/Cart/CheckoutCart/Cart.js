@@ -17,7 +17,7 @@ export default class Cart extends Component {
                             </div>
                         </Row>
                         <Row className="img-style-wrapper">
-                            <img src={food.foodImage} className="img-style" alt="Cinque Terre"/>
+                            <img src={food.foodImage} className="img-style" alt="Image Not Found"/>
                         </Row>  
                     </Row>
                 </Col>

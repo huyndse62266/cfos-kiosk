@@ -60,48 +60,31 @@ class TopBar extends Component {
                     </Link>
                 </Col>
                 <Col span={17} style={{width:'72.6%'}} className="menu-border">
-                    <Menu onClick={this.handleClick} selectedKeys={[this.state.current]} mode="horizontal" inlineIndent='50'>
-                        <Menu.Item key="popular" className="menu-item">
-                        
-                                <Link to="/menu/popular">
-                                    <FontAwesomeIcon icon={faStar}/>
-                                    <span className="menu-title">Nổi bật</span></Link>
-                    
+                    <Menu onClick={this.handleClick} selectedKeys={[this.state.current]} mode="horizontal" inlineIndent='50' className="menu-wrapper">
+                        <Menu.Item key="popular" className="menu-item-1">
+                            <Link to="/menu/popular" className="menu-item-wrapper">   
+                                <span className="menu-title"><FontAwesomeIcon icon={faStar} className="menu-icon"/> Nổi bật</span></Link>
                         </Menu.Item>
                         <Menu.Item key="promotion" className="menu-item">
-                    
-                                <Link to="/menu/promotion">
-                                    <FontAwesomeIcon icon={faPercentage} />
-                                    <span className="menu-title">Khuyến mãi</span></Link>
-                        
+                                <Link to="/menu/promotion" className="menu-item-wrapper">
+                                    <span className="menu-title"><FontAwesomeIcon icon={faPercentage} className="menu-icon"/>Khuyến mãi</span></Link>   
                         </Menu.Item>
-                        <Menu.Item key="meal" className="menu-item">
-                    
-                                <Link to="/menu/meal">
-                                    <FontAwesomeIcon icon={faConciergeBell} />
-                                    <span className="menu-title">Đồ ăn</span></Link>
-                        
+                        <Menu.Item key="meal" className="menu-item">                 
+                                <Link to="/menu/meal" className="menu-item-wrapper">
+                                    <span className="menu-title"><FontAwesomeIcon icon={faConciergeBell} className="menu-icon" />Đồ ăn</span></Link>       
                         </Menu.Item>
-                        <Menu.Item key="drink" className="menu-item">
-                        
-                                <Link to="/menu/drink">
-                                    <FontAwesomeIcon icon={faMugHot} />
-                                    <span className="menu-title">Đồ uống</span></Link>
-                        
+                        <Menu.Item key="drink" className="menu-item">        
+                                <Link to="/menu/drink" className="menu-item-wrapper">        
+                                    <span className="menu-title"><FontAwesomeIcon icon={faMugHot} className="menu-icon"/>Đồ uống</span></Link>                     
                         </Menu.Item>
-                        <Menu.Item key="combo" className="menu-item">
-                            
-                            <Link to="/menu/combo">
-                                <FontAwesomeIcon icon={faThumbsUp} />
-                                <span className="menu-title">Combo</span></Link>
-                        
+                        <Menu.Item key="combo" className="menu-item">                           
+                            <Link to="/menu/combo" className="menu-item-wrapper">
+                                
+                                <span className="menu-title"><FontAwesomeIcon icon={faThumbsUp} className="menu-icon"/>Combo</span></Link>                        
                         </Menu.Item>
-                        <Menu.Item key="restaurant" className="menu-item">
-                            
-                            <Link to="/menu/restaurant">
-                                <FontAwesomeIcon icon={faUtensils} />
-                                <span className="menu-title">Nhà hàng</span></Link>
-                        
+                        <Menu.Item key="restaurant" className="menu-item">                     
+                            <Link to="/menu/restaurant" className="menu-item-wrapper">                            
+                                <span className="menu-title"><FontAwesomeIcon icon={faUtensils} className="menu-icon"/>Nhà hàng</span></Link>                       
                         </Menu.Item>
                     </Menu>
                 </Col>

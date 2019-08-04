@@ -205,7 +205,9 @@
     color: #AAAAAA;
   }
 .display-order-status-wrapper{
-  padding-top: 5%
+  padding-top: 5%;
+  margin-left: 5%;
+  margin-right: 5%;
 }
 .number-pad{
   padding-top: 10%;
@@ -215,4 +217,7 @@
 
 .comple-cart-img{
   width: 25%;
+}
+.bill-icon-check-order{
+  font-size: 40px;
 }

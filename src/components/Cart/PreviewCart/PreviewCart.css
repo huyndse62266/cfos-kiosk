@@ -2,25 +2,25 @@
 .purchase-button-1{
     width: 100%;
     height: 60px;
-    background-color: #10239e;
+    background-color: #2657BE;
     color: white;
     font-weight: bold;
     font-size: 18px;
     border-radius: 7px
 }
 .img-button-wrapper{
-    height: 155px;
+    height: 180px;
 }
 
 .img-wrapper-display-name{
     width: 100%;
     height: 160px;
     margin-top: -15%;
-    z-index: 30
+    z-index: 30;
+    background-image: linear-gradient(white,black);
 }
 .img{
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
+    border-radius: 5px;
     width: 100%;
     height: 100%;
     margin-top: -15%;
@@ -32,36 +32,43 @@
 
 .food-info-cart{
     z-index: 50;
-    bottom: 30%;
+    bottom: 43%;
     color:white;
-    padding-left: 5%
+    padding: 5% 0% 4% 5%;
+    background-image: linear-gradient(transparent, black);
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px
 }
 .btn-dec{
     width: 30px;
     height: 30px;
-    background-color: #ff7a45;
+    background-color: transparent;
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
     font-size: 15px;
+    padding: 30% 5%;
     color:white
 }
 .btn-dec-icon{
-    margin-bottom: 50%
+    margin-bottom: 50%;
+
 }
 .btn-inc{
     width: 30px;
     height: 30px;
-    background-color: #ff7a45;
+    background-color: transparent;
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
     font-size: 15px;
-    padding: 0% 6%;
+    padding: 0% 3%;
+    margin-left: -10%;
     color:white
 }
 .display-quantity-1{
     color:white;
-    background-color: #ff7a45;
-    height: 95%;
+    background-color: transparent;
+    width: 100%;
+    height: 100%;
     padding: 4% 0%;
     text-align: center
 }
@@ -74,6 +81,13 @@
     font-size: 16;
     font-family: 'Open Sans', sans-serif;
     font-weight: 500;
+}
+
+.dec-inc-cart-item-simple{
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(to right, #FF381D , #FF5E25); 
+    border-radius: 7px;
 }
 @media all and (max-width: 1920px) {
     

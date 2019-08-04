@@ -359,7 +359,7 @@ class DishInfo extends Component {
                         <Row className="d-flex flex-column pr-3">
                             {foodDetail.imageVMS ? foodDetail.imageVMS.map((imageURL,index) => {
                                 return <Col span={24} className="py-3" key={index}>    
-                                    <img src={imageURL.image} className="image-info" alt="Cinque Terre"/>
+                                    <img src={imageURL.image} className="image-info" alt="Image Not Found"/>
                                 </Col>
                             }):<div/>}                   
                         </Row>

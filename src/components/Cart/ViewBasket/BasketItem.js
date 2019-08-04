@@ -95,7 +95,7 @@ class BasketItem extends Component {
                         
                     </Row>
                             
-                    <img src={food.foodImage} alt="Cinque Terre" className="image-basket"/>
+                    <img src={food.foodImage} alt="Image Not Found" className="image-basket"/>
                     <Row className="food-name-basket"><h6 className="font-weight-bold text-left text-truncate">{food.foodName}</h6></Row>
                 </Row>               
                 <Row type="flex" justify="space-around" align="middle" className="edit-basket"> 
