@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import { Row,Col, message } from 'antd';
+import { Row,Col, message,Button } from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTag, faMinus, faPlus,faMapMarkerAlt, faCartPlus } from '@fortawesome/free-solid-svg-icons'
+import { faTag, faMinus, faPlus,faMapMarkerAlt, faCartPlus,faSyncAlt } from '@fortawesome/free-solid-svg-icons'
 import ScrollArea from 'react-scrollbar';
 import Rating from 'react-rating'
 import NumberFormat from 'react-number-format';
@@ -449,7 +449,11 @@ class DishInfo extends Component {
                                     {foodOptions?<div>{foodOptions.map((foodOption, index) =>
                                     this.renderOption(foodOption,index)
                                     )} </div>:<div/>}
-
+                                    <Row className="py-3 px-4 float-right">
+                                        <Button style={{backgroundColor: '#D2D2D2'}} >
+                                            <FontAwesomeIcon icon={faSyncAlt}/><span className="pl-2">Đặt về mặc định</span>
+                                        </Button>
+                                    </Row>
                                 </ScrollArea>
                                 
                             </Col>
