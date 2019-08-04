@@ -30,6 +30,7 @@ class CartItemSimple extends Component {
     }
     render() {
         var {food} = this.props;
+        console.log(food)
         return (
             <div className="mb-4">
                 <Row className="img-button-wrapper">
