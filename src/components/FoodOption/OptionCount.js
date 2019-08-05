@@ -48,8 +48,12 @@ export default class MoreOption extends Component {
     }
     render() {
         var {foodOption} = this.props
+        if(this.props.isResetDefault === true){
+            this.state.clicks = 0
+            this.props.changeDefaultStatus(false)
+        }
         return (
-            <Row className=" border-bottom py-1">
+            <Row className=" border-bottom py-2">
                 <Col span={16}>
                     <div className="row font-weight-bold">
                         {foodOption.foName}
@@ -66,7 +70,6 @@ export default class MoreOption extends Component {
                         </div>
                         <button  type="button" className="btn bg-white mr-2" style={{backgroundColor: '#D2D2D2'}} onClick={this.IncrementOption} ><FontAwesomeIcon icon={faPlus} /></button>
                     </div>
-                   
                 </Col>
             </Row>
         )

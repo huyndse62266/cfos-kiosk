@@ -20,7 +20,7 @@ class OverviewBasket extends Component {
                 </Col>)})
  
         return (
-            <div className="px-4 py-0 bg-light h-100">
+            <div className="overview-basket-container">
                 <Row className="overview-basket-title" type="flex" justify="start">
                     <Col span={4}>
                         <div className="number-dishes-wrapper">
@@ -37,18 +37,18 @@ class OverviewBasket extends Component {
                     verticalScrollbarStyle={{display:'none'}}
                     className="area"
                     contentClassName="content"
-                    horizontal={false} style={{height: '70%'}}>
+                    horizontal={false} style={{height: '73%'}}>
                     <Row>
                         {addedItems}
                     </Row>
-                </ScrollArea>:<Row style={{height:'100%'}} type="flex" justify="space-around" align="middle">
+                </ScrollArea>:<Row style={{height:'73%'}} type="flex" justify="space-around" align="middle">
                     <Col span={24} className="text-center">
                         <h1>Empty</h1>
                     </Col>
                 </Row>}
                 
-                <Row>
-                    <Col span={12} offset={6}>
+                <Row type="flex" justify="space-around" align="middle" className="bg-white">
+                    <Col span={16} >
                         <button type="button" className="btn edit-button">
                             <FontAwesomeIcon icon={faCog}/><span className="px-2">Chỉnh sửa</span>
                         </button>

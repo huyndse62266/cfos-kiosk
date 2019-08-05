@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import {Row,Col} from 'antd'
+import {Row,Col, Icon} from 'antd'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMapMarkedAlt } from '@fortawesome/free-solid-svg-icons'
+import {ReactComponent as StoreIcon } from '../../../icons/Store.svg'
 import './Cart.css'
 export default class Cart extends Component {
     render() {
@@ -16,15 +17,18 @@ export default class Cart extends Component {
                                 x{food.cartQuantity}
                             </div>
                         </Row>
-                        <Row className="img-style-wrapper">
+                        <Row>
                             <img src={food.foodImage} className="img-style" alt="Image Not Found"/>
                         </Row>  
                     </Row>
                 </Col>
                 <Col span={16} className="cart-item-info-wrapper" type="flex" justify="start">
-                    <h6 className="store-name"><FontAwesomeIcon icon={faMapMarkedAlt}/> {food.storeName}</h6>
-                    <h5 className="food-name">{food.foodName}</h5>
-                    <h6 className="option-name">Không hành, không cay</h6>
+                    <Row>
+                        <Col span={3}><Icon component={StoreIcon} style={{fontSize:'25px'}}/></Col>
+                        <Col span={21}><span className="store-name">{food.storeName}</span></Col>
+                    </Row>
+                    <Row className="food-name">{food.foodName}</Row>
+                    <Row className="option-name">Mặc định</Row>
                 </Col>
             </Row>
         )

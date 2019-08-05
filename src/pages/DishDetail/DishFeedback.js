@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import NumberFormat from 'react-number-format';
 import { faMapMarkerAlt, faStoreAlt} from '@fortawesome/free-solid-svg-icons'
 import { faStar  as faStaro, faCommentDots} from '@fortawesome/free-regular-svg-icons'
+import NoFeedbackImg from '../../images/Review empty illustration.png'
 import './DishInfo.css'
 
 export default class DishFeedback extends Component {
@@ -24,11 +25,12 @@ export default class DishFeedback extends Component {
     ToggleClick = () => {
         this.setState({ show: !this.state.show });
     }
+
     render() {
         var {foodDetail} = this.props;    
         var {feedbackVMS} = foodDetail;
         return (
-            <Row type="flex" justify="start">
+            <Row type="flex" justify="start" className="h-100">
                 <Col span={8} className="info-feedback-container">
                     <div className="feedback-info">
                         <h3><FontAwesomeIcon icon={faStaro} className="avarage-star-icon"/>{foodDetail.rate}</h3>
@@ -57,23 +59,58 @@ export default class DishFeedback extends Component {
                     </div>
                 </Col>        
                 <Col span={16} className="feedback-container">
-                    <Row>
-                        <h6>Đánh giá ({this.props.foodDetail.feedbackVMS ? <span>{this.props.foodDetail.feedbackVMS.length}</span> : <span>0</span>})</h6>
-                    </Row>
-                    <Row>
-                        {!feedbackVMS ? <span></span> : feedbackVMS.map((feedback, index) => <Row className="feedback-wrapper" type="flex" justify="start">
-                            <Col className="icon-wrapper"><FontAwesomeIcon icon={faCommentDots}/></Col>
-                            <Col className="feedback-content"><Rating               
-                                emptySymbol="fa fa-star-o fa-2x"
-                                fullSymbol="fa fa-star fa-2x"
-                                initialRating={feedback.rate}
-                                readonly
-                                style={{fontSize:'8px',color:'orange'}}/>
-                            <h6 className="py-1">{feedback.fbContent} </h6></Col>
-                        </Row> )}
+                    
+                    <Row className="w-100 h-100">
+                        {!feedbackVMS.length > 0 ? <div className="w-100">
+                            <Row className="text-center">
+                                <img src={NoFeedbackImg} className="no-feedback-img"/>
+                            </Row>
+                            <Row type="flex" justify="center" className="pt-4">
+                                <Col span={13} className="text-center">
+                                    <span className="opensan-32-semibold ">Chưa có đánh giá</span><br/>
+                                    <span className="comment-press-meal">Chia sẽ cảm nhận của bạn về món ăn (Trên ứng dụng Press Meal)</span>
+                                </Col>
+                            </Row>
+                        </div> : <div>
+                            <Row>
+                                <h6>Đánh giá ({this.props.foodDetail.feedbackVMS ? <span>{this.props.foodDetail.feedbackVMS.length}</span> : <span>0</span>})</h6>
+                            </Row>
+                           {feedbackVMS.map((feedback, index) => 
+                                <Row className="feedback-wrapper" type="flex" justify="start">
+                                    <Col className="icon-wrapper"><FontAwesomeIcon icon={faCommentDots}/></Col>
+                                    <Col className="feedback-content"><Rating               
+                                        emptySymbol="fa fa-star-o fa-2x"
+                                        fullSymbol="fa fa-star fa-2x"
+                                        initialRating={feedback.rate}
+                                        readonly
+                                        style={{fontSize:'8px',color:'orange'}}/>
+                                    <h6 className="py-1">{feedback.fbContent} </h6>
+                                    </Col>
+                            </Row>) }
+                        </div>}
                     </Row>
                 </Col>        
             </Row>
         )
     }
 }
+
+
+{/* <div>
+                            
+                            <Row>
+                                <h6>Đánh giá ({this.props.foodDetail.feedbackVMS ? <span>{this.props.foodDetail.feedbackVMS.length}</span> : <span>0</span>})</h6>
+                            </Row>
+                            feedbackVMS.map((feedback, index) => 
+                            <Row className="feedback-wrapper" type="flex" justify="start">
+                                <Col className="icon-wrapper"><FontAwesomeIcon icon={faCommentDots}/></Col>
+                                <Col className="feedback-content"><Rating               
+                                    emptySymbol="fa fa-star-o fa-2x"
+                                    fullSymbol="fa fa-star fa-2x"
+                                    initialRating={feedback.rate}
+                                    readonly
+                                    style={{fontSize:'8px',color:'orange'}}/>
+                                <h6 className="py-1">{feedback.fbContent} </h6>
+                                </Col>
+                            </Row> 
+                        </div> */}

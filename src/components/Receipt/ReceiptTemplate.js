@@ -26,27 +26,29 @@ export default class ReceiptTemplate extends Component {
                 <Row>
                 <h6 className="px-4 py-2">Số thứ tự đơn hàng: {orderNumber}</h6>
                 </Row>
-                <table>
-                    <thead>
-                        <tr>
-                            <th><h6 style={{fontSize:'10px'}}>Tên</h6> </th>
-                            <th><h6 style={{fontSize:'10px'}}>Số lượng</h6> </th>
-                            <th><h6 style={{fontSize:'10px'}}>Đơn giá</h6> </th>
-                            <th><h6 style={{fontSize:'10px'}}>Thành tiền</h6> </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {items > 0 ? items.map((item,index) =>{
-                            count += item.cartQuantity;
-                            return <tr>
-                            <td><h6 style={{fontSize:'10px'}}>{item.foodName}</h6></td>
-                            <td className="text-center"><h6 style={{fontSize:'10px'}}>{item.cartQuantity}</h6></td>
-                            <td><h6 style={{fontSize:'10px'}}>{item.price}</h6></td>
-                            <td><h6 style={{fontSize:'10px'}}>{item.cartQuantity * item.price}</h6></td>
+                <Row className="px-3">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th><h6 style={{fontSize:'10px'}}>Tên</h6> </th>
+                                <th><h6 style={{fontSize:'10px'}}>Số lượng</h6> </th>
+                                <th><h6 style={{fontSize:'10px'}}>Đơn giá</h6> </th>
+                                <th><h6 style={{fontSize:'10px'}}>Thành tiền</h6> </th>
                             </tr>
-                        }):<span/>}
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            {items.length > 0 ? items.map((item,index) =>{
+                                count += item.cartQuantity;
+                                return <tr key={index}>
+                                <td><h6 style={{fontSize:'10px'}}>{item.foodName}</h6></td>
+                                <td className="text-center"><h6 style={{fontSize:'10px'}}>{item.cartQuantity}</h6></td>
+                                <td><h6 style={{fontSize:'10px'}}>{item.price}</h6></td>
+                                <td><h6 style={{fontSize:'10px'}}>{item.cartQuantity * item.price}</h6></td>
+                                </tr>
+                            }):<tr></tr>}
+                        </tbody>
+                    </table>
+                </Row>
                 <Row type="flex" justify="end" className="py-4">
                     <Col span={16} style={{textAlign:'right'}}>
                         <h6>Tổng SL:  </h6>

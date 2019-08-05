@@ -211,7 +211,32 @@ class DishInfo extends Component {
         })
     }
 
+    // handleResetDefaut(foodDetail){
+    //     this.setState({
+    //         totalPrice: 0,
+    //         clicks: 0,
+    //         isResetDefaule: true
+    //     })
+    //     if(foodDetail.foodOptions){
+    //         foodDetail.foodOptions.map((option, index) => {
+    //             if(option.foodOptionVMS !== null){
+    //                 option.foodOptionVMS.map((optionVMS) => {
+    //                     optionVMS.quantity = 0;
+    //                 })
+    //             }
+    //         })
+    //     }
 
+    //     this.state.optionList.map((option)=>{
+    //         option.quantity =0
+    //     })
+    // }
+
+    changeResetDefaultStatus(status){
+        this.setState({
+            isResetDefaule: status
+        })
+    }
     
     componentWillMount(){
         if(this.props.cartQuantity !== 0){
@@ -317,7 +342,7 @@ class DishInfo extends Component {
             </Row>
             <Row className="px-4 mb-3">
                 {this.props.foodCart ?foodOption.foodOptionVMS ? foodOption.foodOptionVMS.map((foodOptionVMSDetail)=>
-                <OptionCount Restore={this.state.isRestore} foodOption={foodOptionVMSDetail} optionQuatity={this.props.foodCart.optionList} IncrementOption={this.handleFoodOption} DecreaseOption={this.handleFoodOption}/>) : <div/>:
+                <OptionCount Restore={this.state.isRestore} foodOption={foodOptionVMSDetail} optionQuatity={this.props.foodCart.optionList} IncrementOption={this.handleFoodOption} DecreaseOption={this.handleFoodOption} isResetDefault = {this.state.isResetDefaule} changeDefaultStatus = {this.changeResetDefaultStatus} />) : <div/>:
                 foodOption.foodOptionVMS ? foodOption.foodOptionVMS.map((foodOptionVMSDetail)=>
                 <OptionCount Restore={this.state.isRestore} foodOption={foodOptionVMSDetail} IncrementOption={this.handleFoodOption}/>) : <div/> }
             

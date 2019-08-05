@@ -1,5 +1,6 @@
-.container-custom{
-    padding-top: 5%;
+.membership-payment-container{
+    height: 100vh;
+    background-color: #F6F6F6
 }
 .banner{
     background-color: #4A4A4A;
@@ -52,27 +53,32 @@
     padding-left: 2%
 }
 .back-page-wrapper{
-    padding: 3% 5%
+    padding: 3% 4%
 }
 .arrow-button{
-    font-size: 28px;
-    padding: 5% 20%;
+    padding: 5% 10%;
     border-radius: 10px;
+    width: 100%;
     border: 1px solid gray
 }
 .payment-process{
-    text-align: center;
     padding: 6% 0%;
-    font-size: 24px;
-    font-family: 'Open Sans', sans-serif;
-    font-weight: 600;
+    color: #212121
 }
 .cancel-membership-button{
     width: 100%;
-    font-size: 24px;
-    font-family: 'Open Sans', sans-serif;
-    display: flex;
-    justify-content: center; /* align horizontal */
-    align-items: center;
-    margin-top: 60%;
+    margin-top: 30%;
+    color: #212121;
+    background-color: #F5F5F5;
+}
+
+.arrow-icon-choose-payment{
+    font-size: 40px
+}
+
+.back-arrow-icon-membership{
+    font-size: 40px
+}
+.card-swipe-img{
+    width: 35%
 }

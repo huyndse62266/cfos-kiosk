@@ -7,7 +7,7 @@ import ReceiptTemplate from '../../components/Receipt/ReceiptTemplate';
 import {restoreCart} from '../../action/cart';
 import {ReactComponent as PrintIcon } from '../../icons/Print icon.svg';
 import {ReactComponent as LongArrowLeft } from '../../icons/LongArrowLeft.svg';
-import printImage from '../../images/Card input illustration.png';
+import printImage from '../../images/Receipt print illustration.png';
 import './Printer.css'
 
 class PrintProcess extends Component {
@@ -25,7 +25,6 @@ class PrintProcess extends Component {
     }
 
     restoreCart = ()=>{
-        this.props.restoreMyCart();
         this.setState({
             isDone: true
         })
