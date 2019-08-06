@@ -25,8 +25,11 @@ class DishInfo extends Component {
           isRestore: false,
           choosePriceSize: 0,
           priceSize: 0,
+          isResetDefault: false,      
         };
         this.handleFoodOption = this.handleFoodOption.bind(this);
+        this.handleResetDefaut = this.handleResetDefaut.bind(this);
+        this.changeResetDefaultStatus = this.changeResetDefaultStatus.bind(this);
     }
 
     handleFoodOption(option,quantity){
@@ -211,30 +214,28 @@ class DishInfo extends Component {
         })
     }
 
-    // handleResetDefaut(foodDetail){
-    //     this.setState({
-    //         totalPrice: 0,
-    //         clicks: 0,
-    //         isResetDefaule: true
-    //     })
-    //     if(foodDetail.foodOptions){
-    //         foodDetail.foodOptions.map((option, index) => {
-    //             if(option.foodOptionVMS !== null){
-    //                 option.foodOptionVMS.map((optionVMS) => {
-    //                     optionVMS.quantity = 0;
-    //                 })
-    //             }
-    //         })
-    //     }
+    handleResetDefaut(foodDetail){
+        this.setState({
+            totalPrice: 0,
+            clicks: 0,
+            isResetDefaule: true
+        })
+        foodDetail.foodOptions.map((option, index) => {
+            if(option.foodOptionVMS !== null){
+                option.foodOptionVMS.map((optionVMS) => {
+                    optionVMS.quantity = 0;
+                })
+            }
+        })
 
-    //     this.state.optionList.map((option)=>{
-    //         option.quantity =0
-    //     })
-    // }
+        this.state.optionList.map((option)=>{
+            option.quantity =0
+        })
+    }
 
     changeResetDefaultStatus(status){
         this.setState({
-            isResetDefaule: status
+            isResetDefault: status
         })
     }
     
@@ -272,6 +273,7 @@ class DishInfo extends Component {
                 choosePriceSize: this.props.foodCart.choosePriceSize
             })
         }else if(foodDetail){
+
             foodDetail.foodOptions.map(foodOption => {
                 foodOption.foodOptionVMS.map(foodOptionVMSDetail =>
                     {
@@ -344,7 +346,7 @@ class DishInfo extends Component {
                 {this.props.foodCart ?foodOption.foodOptionVMS ? foodOption.foodOptionVMS.map((foodOptionVMSDetail)=>
                 <OptionCount Restore={this.state.isRestore} foodOption={foodOptionVMSDetail} optionQuatity={this.props.foodCart.optionList} IncrementOption={this.handleFoodOption} DecreaseOption={this.handleFoodOption} isResetDefault = {this.state.isResetDefaule} changeDefaultStatus = {this.changeResetDefaultStatus} />) : <div/>:
                 foodOption.foodOptionVMS ? foodOption.foodOptionVMS.map((foodOptionVMSDetail)=>
-                <OptionCount Restore={this.state.isRestore} foodOption={foodOptionVMSDetail} IncrementOption={this.handleFoodOption}/>) : <div/> }
+                <OptionCount Restore={this.state.isRestore} foodOption={foodOptionVMSDetail} IncrementOption={this.handleFoodOption} isResetDefault = {this.state.isResetDefaule} changeDefaultStatus = {this.changeResetDefaultStatus} />) : <div/> }
             
             </Row>
         </div>
@@ -475,7 +477,7 @@ class DishInfo extends Component {
                                     this.renderOption(foodOption,index)
                                     )} </div>:<div/>}
                                     <Row className="py-3 px-4 float-right">
-                                        <Button style={{backgroundColor: '#D2D2D2'}} >
+                                        <Button style={{backgroundColor: '#D2D2D2'}} onClick={() => this.handleResetDefaut(this.props.foodDetail)}>
                                             <FontAwesomeIcon icon={faSyncAlt}/><span className="pl-2">Đặt về mặc định</span>
                                         </Button>
                                     </Row>

@@ -1,16 +1,26 @@
 import React, { Component } from 'react'
-import {Row,Col, Icon, message} from 'antd'
+import {Row,Col, Icon, Button,Modal, message} from 'antd'
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom'
 import './Payment.css'
+import { addOrder} from '../../action/orders'
 import {ReactComponent as LongArrowLeft } from '../../icons/LongArrowLeft.svg'
-import {ReactComponent as PriceCart } from '../../icons/PriceCart.svg'
+// import {ReactComponent as PriceCart } from '../../icons/PriceCart.svg'
 import {ReactComponent as Purchaseicon } from '../../icons/Purchase icon.svg'
 import cardSwiperImg from '../../images/Card input illustration.png'
-export default class MembershipPayment extends Component {
+import apiCaller from '../../utils/ApiCaller'
+import ConfirmPaymentModal from '../../components/Payment/Confirm/ConfirmPaymentModal'
+
+class MembershipPayment extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            IDCard: ''
+            IDCard: '',
+            loading: false,
+            visible: false,
+            user: '',
+            isDone: false
         };
         this.handleChange = this.handleChange.bind(this)
     }
@@ -23,10 +33,86 @@ export default class MembershipPayment extends Component {
         // console.log(event.target.value)
         
         if(event.target.value.length == 10){
-            message.info('This is a normal message');
+            console.log(event.target.value)
+            apiCaller(`customer/info?cardId=${event.target.value}`,'GET',null).then(res => {
+                console.log(res.data)
+                this.setState({
+                    user: res.data,
+                })
+            })
+            event.target.value= ''
+            document.getElementById('modal-btn').click();
         }
-      }
+    }
+    showModal = () => {
+        this.setState({
+          visible: true,
+        });
+    };
+    
+    handleOk = () => {
+        this.setState({ loading: true });
+        setTimeout(() => {
+          this.setState({ loading: false, visible: false });
+        }, 3000);
+    };
+    
+    handleCancel = () => {
+        this.setState({ visible: false });
+    };
+    renderButton(loading){
+
+        if(this.state.user.walletAmount - this.props.pricetotal < 0){
+            return(<Button key="submit" type="primary" loading={loading} onClick={this.handleOk} disabled >
+            Submit
+        </Button>)
+        }else{
+            var {items,pricetotal,orginPrice } = this.props;
+            return (<Button key="submit" type="primary" loading={loading} onClick={this.handleOk} onClick={()=>{this.checkoutClick(items,pricetotal,orginPrice, this.state.user.customerId)}} >
+            Submit
+        </Button>)
+        }
+    }
+
+    checkoutClick = (cart,total,orginPrice, username ) =>{
+        if(cart.length > 0){
+            var orderDetail = cart.map((cartItem) =>{
+                
+                return{
+                    foodId: cartItem.foodId,
+                    orderDetailFoodOption: cartItem.optionList,
+                    quantity: cartItem.cartQuantity,
+                    storeID: cartItem.storeId,
+                    totalPrice: cartItem.price * cartItem.cartQuantity * cartItem.promotion,
+                }
+            })
+            var order ={
+                "customerId": username,
+                "orderDetails": orderDetail,
+                "originalPrice": orginPrice,
+                "totalOrder": total
+            }
+            apiCaller(`orders/orders/submit-order`,'POST',JSON.stringify(order)).then(res =>{
+                this.setState({
+                    orderID: res.data,
+                    isDone: true
+                });
+                this.props.addOrder(res.data)
+                // this.props.restoreMyCart()  
+            }).catch(error => {
+                console.log(error)
+                // if(error){
+                //     message.error(error.response.data.message)
+                // }              
+            })
+        }
+
+    }
     render() {
+        const { visible, loading, isDone } = this.state;
+        if(isDone) {
+            return <Redirect to={{pathname: "/print"}}/>
+        }
         return (
             <div className="membership-payment-container">
                 <Row className="payment-process" type="flex" justify="center">
@@ -62,7 +148,45 @@ export default class MembershipPayment extends Component {
                         </button>
                     </Col>
                 </Row>
+                <button type="btn" id="modal-btn" type="primary" onClick={this.showModal} className="display-hidden">
+                    Open Modal with customized footer
+                </button>
+                <Modal
+                    visible={visible}
+                    title="Xác nhận thanh toán"
+                    onOk={this.handleOk}
+                    onCancel={this.handleCancel}
+                    width="30%"
+                    centered 
+                    footer={[
+                        <Button key="back" onClick={this.handleCancel}>
+                        Return
+                        </Button>,
+                        this.renderButton(loading)
+                        ,
+                    ]}
+                    >
+                        <ConfirmPaymentModal totalPrice={this.props.pricetotal} user={this.state.user}/>    
+                </Modal>
             </div>
         )
     }
 }
+const mapStateToProps = (state)=>{
+    return{
+        items: state.cart.addedItems,
+        pricetotal: state.cart.total,
+        orginPrice : state.cart.originPrice
+    }
+}
+
+const mapDispatchToProps= (dispatch)=>{
+    return{
+        addOrder: (id)=>{
+            dispatch(addOrder(id))
+        }
+    }
+}
+
+
+export default connect(mapStateToProps,mapDispatchToProps)(MembershipPayment);

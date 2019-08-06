@@ -15,7 +15,8 @@ class PrintProcess extends Component {
     constructor(props){
         super(props);
         this.state= {
-            isDone: false
+            isDone: false,
+            orderNumber: 0
         }
        
     }
@@ -25,9 +26,20 @@ class PrintProcess extends Component {
     }
 
     restoreCart = ()=>{
-        this.setState({
-            isDone: true
-        })
+
+        // this.setState({
+        //     isDone: true
+        // })
+        setTimeout(
+            function() {
+                this.setState({
+                    isDone: true
+                });
+            }
+            .bind(this),
+            6000
+        );
+        this.props.restoreMyCart()
     }
     render() {
         if(this.state.isDone){
@@ -75,6 +87,7 @@ const mapStateToProps = (state)=>{
         items: state.cart.addedItems,
         pricetotal: state.cart.total,
         originPrice: state.cart.originPrice,
+        orderNumber: state.orders.orderNumber
     }
 }
 const mapDispatchToProps= (dispatch)=>{

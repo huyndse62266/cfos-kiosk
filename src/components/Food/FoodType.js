@@ -33,6 +33,7 @@ class FoodType extends Component {
             })
         }else{ 
             apiCaller(`category/${this.props.category.categoryId}/foods`,'GET',null).then(res => {
+                console.log(res.data)
                 this.setState({
                     foods: res.data
                 })
@@ -51,8 +52,9 @@ class FoodType extends Component {
 
 
     render() {
-        var { category } = this.props;
+        var { category,categoryLength, index} = this.props;
         var { foods } = this.state;
+        console.log(category)
         return (
             <div>
 
@@ -91,7 +93,8 @@ class FoodType extends Component {
                             }): <span></span>}
                         </Row>
                     </span>
-                    <hr style={{width: '95%'}}/>
+                    { categoryLength-1 !== index ? <hr style={{width: '95%'}}/>:<span/>}
+                    
                 </Col>
             </Row>
             :
@@ -127,7 +130,7 @@ class FoodType extends Component {
                             }): <span></span>}
                         </Row>
                     </span>
-                    
+                    { categoryLength-1 !== index ? <hr style={{width: '95%'}}/>:<span/>}
                 </Col>
             </Row>}
             </div>

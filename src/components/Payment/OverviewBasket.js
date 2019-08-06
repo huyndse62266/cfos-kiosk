@@ -1,16 +1,44 @@
 import React, { Component } from 'react'
-import {Row,Col, Icon} from 'antd'
+import {Row,Col, Icon,Modal} from 'antd'
 import ScrollArea from 'react-scrollbar';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import NumberFormat from 'react-number-format'; 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCog } from '@fortawesome/free-solid-svg-icons'
 import Cart from '../Cart/CheckoutCart/Cart'
+import ViewBasket from '../../pages/Basket/ViewBasket'
 import './Payment.css'
 import {ReactComponent as Basketicon } from '../../icons/Basketicon.svg'
 import {ReactComponent as Editdishicon } from '../../icons/Editdishicon.svg'
 class OverviewBasket extends Component {
+    state = {
+        visible: false,
+        current: 'popular',
+      };
     
+   
+    handleClick = e => {
+        this.setState({
+            current: e.key,
+        });
+    };
+    showModal = () => {
+        this.setState({
+            visible: true,
+        });
+    };
+
+    handleOk = e => {
+        this.setState({
+            visible: false,
+        });
+    };
+
+    handleCancel = e => {
+        this.setState({
+            visible: false,
+        });
+    };
     render() {
         let addedItems =  this.props.items.map((food, index) => {
             
@@ -49,11 +77,24 @@ class OverviewBasket extends Component {
                 
                 <Row type="flex" justify="space-around" align="middle" className="bg-white">
                     <Col span={16} >
-                        <button type="button" className="btn edit-button">
+                        <button type="button" className="btn edit-button" onClick={this.showModal}>
                             <FontAwesomeIcon icon={faCog}/><span className="px-2">Chỉnh sửa</span>
                         </button>
                     </Col>
                 </Row> 
+                <Modal
+                    visible={this.state.visible}
+                    onOk={this.handleOk}
+                    onCancel={this.handleCancel}
+                    closable
+                    width="100%"
+                    footer={null}
+                    bodyStyle={{padding: 0, height: '100%'}}
+                    centered
+                    className="view-basket-modal"
+                >
+                    <ViewBasket total={this.props.pricetotal} origin={this.props.originPrice}/>
+                </Modal>
 
             </div>
         )
@@ -64,6 +105,7 @@ const mapStateToProps = (state)=>{
     return{
         items: state.cart.addedItems,
         pricetotal: state.cart.total,
+        originPrice: state.cart.originPrice
     }
   }
   

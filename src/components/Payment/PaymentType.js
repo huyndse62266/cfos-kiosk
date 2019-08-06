@@ -23,7 +23,7 @@ class PaymentType extends Component {
         super(props);
         this.state ={
             orderID: 0,
-            isDone: true,
+            isDone: false,
         }
     }
     
@@ -49,7 +49,7 @@ class PaymentType extends Component {
             apiCaller(`orders/orders/submit-order`,'POST',JSON.stringify(order)).then(res =>{
                 this.setState({
                     orderID: res.data,
-                    isDone: false
+                    isDone: true
                 });
                 this.props.addOrder(res.data)
                 // this.props.restoreMyCart()  
@@ -65,7 +65,7 @@ class PaymentType extends Component {
     render() {
         var {items,pricetotal,orginPrice } = this.props;
         const {isDone,isError,orderID} = this.state;
-        if(!isDone) {
+        if(isDone) {
             return <Redirect to={{pathname: "/print"}}/>
         }
         return (

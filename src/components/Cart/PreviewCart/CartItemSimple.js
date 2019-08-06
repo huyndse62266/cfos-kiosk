@@ -45,10 +45,10 @@ class CartItemSimple extends Component {
                         <img src={food.foodImage} className="img" alt="Image Not Found"/>
                     </div>
                     <Row className="food-info-cart">
-                        <div className="opensan-20-extrabold">
+                        <div className="opensan-20-extrabold d-inline-block text-truncate text-truncate-width">
                             {food.foodName}
                         </div>
-                        <span className="opensan-18-semibold"><NumberFormat value={food.price} displayType={'text'} thousandSeparator={','}/>  đ</span>
+                        <div className="opensan-18-semibold"><NumberFormat value={food.price} displayType={'text'} thousandSeparator={','}/>  đ</div>
                     </Row>
                 </Row>
                 <Row  type="flex" justify="space-around" align="middle">

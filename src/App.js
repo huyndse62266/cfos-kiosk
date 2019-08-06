@@ -8,6 +8,7 @@ import MenuPage from './pages/Menu/MenuPage'
 import CompleteOrder from './pages/Order/CompleteOrder'
 import MembershipPayment from './pages/Payment/MembershipPayment'
 import PrintPage from './pages/Printer/PrintProcess'
+import ConfirmMembershipPayment from './pages/Payment/ConfirmMembershipPayment'
 function App() {
   return (
     <Router>
@@ -21,7 +22,7 @@ function App() {
         <Route path="/print" exact component={PrintPage}></Route> 
       </Switch>
     </Router>
-
+  // <ConfirmMembershipPayment/>
   // <ReceiptTemplate/>
     // <MembershipPayment/>
   );

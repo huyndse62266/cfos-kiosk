@@ -24,24 +24,8 @@ class RestaurantScreen extends Component {
 
     render() {
         return (
-            // <div className="w-100"> 
-            //     <Row>
-            //         <Col span={20}>
-            //             {this.state.stores.map((store, index) => {
-            //                 return (<StoreMenu key={index} storeInfo={store} index={index}/>)
-            //             })}
-            //         </Col>
-            //         <Col span={4} >
-            //             <Row  className="w-100">
-            //                 <Col span={20} offset={2} style={{position:'fixed',width:'15%', right:0}}>
-            //                     <PreviewCart />
-            //                 </Col>
-            //             </Row>
-            //         </Col>
-            //     </Row>
-                
-            // </div>
-            <Row className="py-5" type="flex" justify="start">
+ 
+            <Row className="pt-5" type="flex" justify="start">
                 {this.props.items.length > 0 ?
                 <div> 
                     <Col style={{width: '83%'}}>

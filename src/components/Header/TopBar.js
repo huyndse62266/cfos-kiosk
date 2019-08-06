@@ -25,10 +25,6 @@ class TopBar extends Component {
             current: e.key,
         });
     };
-    restoreCartRequest = () =>{
-        this.props.restoreMyCart();
-    }
-
 
     showModal = () => {
         this.setState({
@@ -82,7 +78,7 @@ class TopBar extends Component {
                                 
                                 <span className="menu-title"><FontAwesomeIcon icon={faThumbsUp} className="menu-icon"/>Combo</span></Link>                        
                         </Menu.Item>
-                        <Menu.Item key="restaurant" className="menu-item">                     
+                        <Menu.Item key="restaurant" className="menu-item-1">                     
                             <Link to="/menu/restaurant" className="menu-item-wrapper">                            
                                 <span className="menu-title"><FontAwesomeIcon icon={faUtensils} className="menu-icon"/>Nhà hàng</span></Link>                       
                         </Menu.Item>

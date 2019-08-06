@@ -71,7 +71,6 @@
 }
 .ant-menu-horizontal > .ant-menu-item:hover, .ant-menu-horizontal > .ant-menu-submenu:hover, .ant-menu-horizontal > .ant-menu-item-active, .ant-menu-horizontal > .ant-menu-submenu-active, .ant-menu-horizontal > .ant-menu-item-open, .ant-menu-horizontal > .ant-menu-submenu-open, .ant-menu-horizontal > .ant-menu-item-selected, .ant-menu-horizontal > .ant-menu-submenu-selected{
     border-bottom: 2px solid #fff !important;
-    border-bottom-width: 50% !important;
 }
 
 .menu-icon{
@@ -135,6 +134,7 @@
 .menu-item-wrapper{
     padding: 5% 0%
 }
+
 @media all and (max-width: 1920px) {
     
     .menu-item{
@@ -153,7 +153,9 @@
         color: #000000;
         text-align: center;
         border: 10px;
+        border-radius: 5px;
     }
+    
 }
 
 @media all and (max-width: 1440px) {
