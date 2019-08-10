@@ -1,5 +1,5 @@
 import React, { Component }  from 'react'
-import { Button, Row,Col } from 'antd';
+import { Row,Col } from 'antd';
 import { connect } from 'react-redux'
 import ScrollArea from 'react-scrollbar';
 import NumberFormat from 'react-number-format';
@@ -58,8 +58,11 @@ class PreviewCart extends Component {
                 </ScrollArea>
                 <Row className="py-4">
                     <Col span={18} offset={3}>
-                        <Link to="/payment"><Button  className="purchase-button-1">Thanh toán</Button></Link>
-
+                        <Link to="/payment">
+                            <button type="button"  className="btn purchase-button-1">
+                                Thanh toán
+                            </button>
+                        </Link>
                     </Col>   
                 </Row>
                 <Row>

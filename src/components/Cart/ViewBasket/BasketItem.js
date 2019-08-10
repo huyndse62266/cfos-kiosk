@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import { Button, Row, Col, Modal,Icon  } from 'antd';
+import { Row, Col, Modal,Icon  } from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTrash, faMinus, faPlus, faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons'
+import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons'
 import { connect } from 'react-redux'
 import NumberFormat from 'react-number-format';
 import { addQuantity,subQuantity, removeCart } from '../../../action/cart';
@@ -74,9 +74,26 @@ class BasketItem extends Component {
         }
     }
 
-
+    renderFoodOptionName = (FoodOptionList) =>{
+        let OptionString = "";
+        FoodOptionList.map((FoodOption) =>{
+            if(OptionString.indexOf(FoodOption.parentName) !== -1){
+                OptionString +=  FoodOption.foName + ", "
+            }else{
+                if(FoodOption.count === true && FoodOption.selectMore === false){
+                    OptionString +=  FoodOption.foName + ", "
+                }else{
+                    OptionString += FoodOption.parentName + ": " + FoodOption.foName + ", "
+                }
+                
+            }
+            
+        })
+        return OptionString.slice(0,OptionString.length-2)
+    }
     render() {
         var {food,cartQuantity} = this.props;
+        console.log()
         return (
             <div className="basket-item-wrapper">
                 
@@ -84,9 +101,10 @@ class BasketItem extends Component {
                 <Row className="info-basket"> 
                     <Row className="basket-header">
                         <Col span={19}>
-                            <Row className="store-info">
-                                <Col span={4}  className="location-icon"><FontAwesomeIcon icon={faMapMarkerAlt}/></Col>
-                                <Col span={20} ><span className="restaurant-title d-inline-block text-truncate">{food.storeName}</span></Col>
+                            <div className="background-header"></div>
+                            <Row className="store-info" type="flex" justify="space-around" align="middle" >
+                                <Col span={4}><div className="store-icon-wrapper"><img src={food.storeIcon} className="store-icon" alt="Image Not Found"/></div></Col>
+                                <Col span={20} ><p className="restaurant-title d-inline-block text-truncate text-left">{food.storeName}</p></Col>
                             </Row>
                         </Col>
                         <Col span={5}>
@@ -94,8 +112,10 @@ class BasketItem extends Component {
                         </Col>
                         
                     </Row>
-                            
-                    <img src={food.foodImage} alt="Image Not Found" className="image-basket"/>
+                    <div className="bg-info img-wrapper-basket-item">
+                        <img src={food.foodImage} alt="Image Not Found" className="image-basket"/>
+                    </div>       
+                    
                     <Row className="food-name-basket"><h6 className="font-weight-bold text-left text-truncate">{food.foodName}</h6></Row>
                 </Row>               
                 <Row type="flex" justify="space-around" align="middle" className="edit-basket"> 
@@ -121,9 +141,13 @@ class BasketItem extends Component {
                         </Row>
                     </Col>
                 </Row>
-                <div className="customer-wrapper opensan-16-semibold">
+                {food.optionList?food.optionList.length > 0 ?<div className="customer-wrapper opensan-16-semibold d-inline-block text-truncate">
+                    {this.renderFoodOptionName(food.optionList)}
+                </div>:<div className="customer-wrapper opensan-16-semibold">
                     Mặc định   
-                </div>
+                </div>:<div className="customer-wrapper opensan-16-semibold">
+                    Mặc định   
+                </div>}
                 <Row className="px-2 pt-4" type="flex" justify="start">
                         <Col span={18}>
                             <div className="pb-2 w-100">

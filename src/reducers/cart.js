@@ -26,19 +26,16 @@ const cart = (state = initState,action) => {
             if(action.priceSize !== undefined){
                 priceSize = action.priceSize
             }
-            
-            if(exist_item.priceSize === undefined){
-                exist_item.priceSize = 0
+            if(exist_item.priceSize !== undefined){
+                priceSize = exist_item.priceSize
             }
-            console.log(exist_item.price)
-            console.log(totalOption)
-            console.log(exist_item.priceSize)
-            console.log(exist_item.price + totalOption + exist_item.priceSize)
-            console.log( (exist_item.price + totalOption + exist_item.priceSize)*(100-addedItem.promotion)/100)
+           
             exist_item.cartQuantity += 1;
+            exist_item.totalPrice +=  (totalOption + priceSize + exist_item.price*(100-addedItem.promotion)/100);
+            exist_item.totalPriceOrigin +=  (totalOption + priceSize + exist_item.price);
             return{
                 ...state,
-                total: state.total  + (exist_item.price + totalOption + exist_item.priceSize)*(100-addedItem.promotion)/100,
+                total: state.total  + totalOption + priceSize + exist_item.price*(100-addedItem.promotion)/100,
                 originPrice: state.originPrice  + (exist_item.price + totalOption)
             }
         }else{
@@ -57,7 +54,9 @@ const cart = (state = initState,action) => {
             if(action.priceSize !== undefined){
                 priceSize = action.priceSize
             }
-            let newTotal = state.total + (addedItem.price + totalOption + priceSize) * quantity * (100-addedItem.promotion)/100 
+            addedItem.totalPrice = (addedItem.price* ((100-addedItem.promotion)/100) + totalOption + priceSize) * quantity;
+            addedItem.totalPriceOrigin = (addedItem.price + totalOption + priceSize) * quantity;
+            let newTotal = state.total + (addedItem.price* ((100-addedItem.promotion)/100) + totalOption + priceSize) * quantity  
             let newOrigin = state.originPrice + (addedItem.price + totalOption + priceSize) *quantity
             return{
                 ...state,
@@ -75,10 +74,9 @@ const cart = (state = initState,action) => {
             itemToRemove.optionList.map(option => {
                 totalOption += option.optionPrice * option.quantity;
             })
-        }
-        
+        } 
         let newItems = state.addedItems.filter(item => item.foodId !== id)
-        let newTotal = state.total - (itemToRemove.price  + totalOption) * itemToRemove.cartQuantity * (100-itemToRemove.promotion)/100;
+        let newTotal = state.total - (itemToRemove.price* ((100-itemToRemove.promotion)/100)  + totalOption) * itemToRemove.cartQuantity ;
         let newOrigin = state.originPrice - (itemToRemove.price + totalOption) * itemToRemove.cartQuantity
         return {
             ...state,
@@ -101,8 +99,10 @@ const cart = (state = initState,action) => {
             priceSize = addedItem.priceSize
         }
         addedItem.cartQuantity += 1;
-        let newTotal = state.total + (addedItem.price+totalOption+priceSize)*(100-addedItem.promotion)/100
-        let newOrigin =  state.originPrice + (addedItem.price+totalOption+priceSize)
+        addedItem.totalPrice += (addedItem.price* ((100-addedItem.promotion)/100) + totalOption + priceSize) ;
+        addedItem.totalPriceOrigin += (addedItem.price + totalOption + priceSize);
+        let newTotal = state.total + (addedItem.price*((100-addedItem.promotion)/100)+totalOption+priceSize)
+        let newOrigin =  state.originPrice + (addedItem.price + totalOption + priceSize)
         return{
             ...state,
             total: newTotal,
@@ -125,7 +125,7 @@ const cart = (state = initState,action) => {
         }
         if(addedItem.cartQuantity === 1){
             let newItems = state.addedItems.filter(item => item.foodId !== id)
-            let newTotal = state.total - (addedItem.price+totalOption+priceSize)*(100-addedItem.promotion)/100
+            let newTotal = state.total - (addedItem.price*((100-addedItem.promotion)/100)+totalOption+priceSize)
             let newOrigin =  state.originPrice - (addedItem.price+totalOption+priceSize)
             return {
                 ...state,
@@ -135,8 +135,10 @@ const cart = (state = initState,action) => {
             }
         }else{
             addedItem.cartQuantity -= 1
-            let newTotal = state.total - (addedItem.price+totalOption+priceSize)*(100-addedItem.promotion)/100;
-            let newOrigin = state.originPrice - (addedItem.price+totalOption+priceSize)
+            addedItem.totalPrice -= (addedItem.price* ((100-addedItem.promotion)/100) + totalOption + priceSize) ;
+            addedItem.totalPriceOrigin -= (addedItem.price + totalOption + priceSize);
+            let newTotal = state.total - (addedItem.price*((100-addedItem.promotion)/100)+totalOption + priceSize);
+            let newOrigin = state.originPrice - (addedItem.price + totalOption + priceSize)
             return{
                 ...state,
                 addedItems: state.addedItems,
@@ -147,7 +149,6 @@ const cart = (state = initState,action) => {
     }
     if(action.type === Types.UPDATE_ITEM_CART){
         let addedItem = state.addedItems.find(item => item.foodId === id)
-        console.log(addedItem)
         let oldQuantity = addedItem.cartQuantity
         if(addedItem){
             if(quantity === 0){
@@ -155,8 +156,7 @@ const cart = (state = initState,action) => {
                 addedItem.optionList.map(option => {
                     totalOption += option.optionPrice * option.quantity;
                 })
-                console.log((addedItem.price + totalOption+addedItem.priceSize) * oldQuantity * (100-addedItem.promotion)/100)
-                let newTotal = state.total - (addedItem.price + totalOption+addedItem.priceSize) * oldQuantity * (100-addedItem.promotion)/100;
+                let newTotal = state.total - (addedItem.price*((100-addedItem.promotion)/100) + totalOption+addedItem.priceSize) * oldQuantity ;
                 let newOrigin = state.originPrice - (addedItem.price + totalOption+addedItem.priceSize)* oldQuantity;
                 let newItems = state.addedItems.filter(item => item.foodId !== id)
                 return{
@@ -167,32 +167,33 @@ const cart = (state = initState,action) => {
                 }   
             }else{
                 let totalOption  = 0;
-                let oldOptionListPrice = 0; 
-                addedItem.cartQuantity = quantity;
-                if(addedItem.optionList){
-                    addedItem.optionList.map(option => {
-                        oldOptionListPrice += option.optionPrice * option.quantity;
-                    })
-                }
-                addedItem.optionList = action.optionList;
-                addedItem.choosePriceSize = action.choosePriceSize;
-                addedItem.priceSize = action.priceSize;
-               
+                let oldPriceSize = addedItem.priceSize
                 if(action.optionList){
                     action.optionList.map(option => {
                         totalOption += option.optionPrice * option.quantity;
                     })
                 }
+                
                 let newTotal = 0
                 let newOrigin = 0
-                if(totalOption -oldOptionListPrice === 0){
-                    newTotal= state.total + (addedItem.price  + totalOption  + addedItem.priceSize)* (quantity - oldQuantity)*(100-addedItem.promotion)/100;
-                    newOrigin  = state.total + (addedItem.price  + totalOption  + addedItem.priceSize)* (quantity - oldQuantity);
-                }else{
-                    newTotal = state.total + (addedItem.price  + totalOption -oldOptionListPrice + addedItem.priceSize)* (quantity - oldQuantity)*(100-addedItem.promotion)/100;
-                    newOrigin = state.total + (addedItem.price  + totalOption -oldOptionListPrice + addedItem.priceSize   )* (quantity - oldQuantity);
-                }
-                
+                let addPriceSize = action.priceSize+addedItem.priceSize;
+                console.log('==============')
+                console.log("addedItem.priceSize : "+addedItem.priceSize)
+                console.log("action.priceSize : "+action.priceSize)
+                console.log("addPriceSize : "+addPriceSize)
+                console.log('Final Price: '+(addedItem.price * ((100-addedItem.promotion)/100)  + totalOption + addPriceSize)* quantity)
+                let addPrice = (addedItem.price * ((100-addedItem.promotion)/100)  + totalOption + addPriceSize)* quantity - addedItem.totalPrice 
+                let addPriceOrigin = (addedItem.price  + totalOption + addPriceSize) * quantity - addedItem.totalPriceOrigin
+                console.log('addPrice ' +addPrice) 
+                console.log('addPriceOrigin '+addPriceOrigin) 
+                addedItem.cartQuantity = quantity;
+                addedItem.optionList = action.optionList;
+                addedItem.choosePriceSize = action.choosePriceSize;
+                addedItem.priceSize = addedItem.priceSize+action.priceSize;
+                addedItem.totalPrice = addedItem.totalPrice + addPrice
+                addedItem.totalPriceOrigin = addedItem.totalPriceOrigin + addPriceOrigin
+                newTotal = state.total + addPrice;
+                newOrigin = state.originPrice + addPriceOrigin;      
                 return{
                     ...state,
                     total: newTotal,
@@ -203,16 +204,6 @@ const cart = (state = initState,action) => {
             
             
     }
-    // if(action.type === Types.CHECKOUT){
-    //     let newCart = state.addedItems.filter(item => item.foodId === 0)
-    //     return{
-    //        ...state,
-    //        addedItems: newCart,
-    //        total: 0,
-    //        originPrice: 0,
-    //        orderID: action.id
-    //     }
-    // }
     if(action.type === Types.RESTORE_CART){
         let newCart = state.addedItems.filter(item => item.foodId === 0)
         return{

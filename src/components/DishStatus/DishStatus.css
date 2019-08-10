@@ -23,6 +23,30 @@
     font-size: 50px;
 }
 
+.cancel-close-icon{
+    font-size: 50px;
+    color:red
+}
+
+.cancel-status-title{
+    color: red !important;
+    font-size: 24px !important;
+    font-weight: bold !important;
+    font-family: 'Open Sans', sans-serif;
+    width: 100%;
+    font-family: 'Roboto';
+}
+
+.cancel-description{
+    font-size: 16px;
+    font-weight: 500 !important;
+    font-family: 'Open Sans', sans-serif;
+    color: #353535;
+    width: 100%;
+    font-family: 'Roboto';
+
+}
+
 .status-waiting{
     color: #FFA200 !important;
     font-size: 28px !important;

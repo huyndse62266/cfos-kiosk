@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import FoodItem from './FoodItem'
 import apiCaller from '../../utils/ApiCaller'
-import {Col, Row,Button} from 'antd'
+import {Col, Row} from 'antd'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleUp,faAngleDown } from '@fortawesome/free-solid-svg-icons'
 import { connect } from 'react-redux';
@@ -33,7 +33,6 @@ class FoodType extends Component {
             })
         }else{ 
             apiCaller(`category/${this.props.category.categoryId}/foods`,'GET',null).then(res => {
-                console.log(res.data)
                 this.setState({
                     foods: res.data
                 })
@@ -54,7 +53,6 @@ class FoodType extends Component {
     render() {
         var { category,categoryLength, index} = this.props;
         var { foods } = this.state;
-        console.log(category)
         return (
             <div>
 
@@ -63,7 +61,7 @@ class FoodType extends Component {
             <Row type="flex" justify="start">
                 <Col className="category-wrapper">
                     <div>
-                        <img src={category.image} className="image-category"/>
+                        <img src={category.image} className="image-category" alt="Not Found"/>
                         <h4 className="opensan-28-extrabold">{category.categoryName}</h4>
                         <button type="button" className="btn opensan-16-semibold bg-light" onClick={this.checkIsExpand}>{this.state.isExpand === true ? <div>Thu gọn <FontAwesomeIcon icon={faAngleUp} /></div> : <div>Xem thêm <FontAwesomeIcon icon={faAngleDown} /></div> } </button>
                     </div>

@@ -2,12 +2,16 @@ import React, { Component } from 'react'
 import { Row,Col,Button,message, Icon } from 'antd';
 import { Link } from "react-router-dom"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import ScrollArea from 'react-scrollbar';
 import { faLongArrowAltLeft, faLongArrowAltRight, faSearch, faBackspace, faFileInvoiceDollar} from '@fortawesome/free-solid-svg-icons'
 import './Order.css'
 import apiCaller from '../../utils/ApiCaller';
 import DishStatus from '../../components/DishStatus/DishStatus'
 import {ReactComponent as Checkstatusicon } from '../../icons/Checkstatusicon.svg'
 import {ReactComponent as BillIcon } from '../../icons/BillIcon.svg'
+import {ReactComponent as LongArrowLeft } from '../../icons/LongArrowLeft.svg'
+import {ReactComponent as LongArrowRight } from '../../icons/LongArrowRight.svg'
+import {ReactComponent as FoodDrinkIcon } from '../../icons/FoodDrinkIcon.svg'
 import Noorderillustration from '../../images/Noorderillustration.png'
 
 class CheckOrder extends Component {
@@ -45,13 +49,18 @@ class CheckOrder extends Component {
     };
 
     onCheck = () =>{
-        apiCaller(`orders/search-order?orderNumber=${this.state.number}`,'GET',null).then(res =>{
-            this.setState({
-                order: res.data
+        if(this.state.number.length > 0){
+            apiCaller(`orders/search-order?orderNumber=${this.state.number}`,'GET',null).then(res =>{
+                this.setState({
+                    order: res.data
+                })
+            }).catch(error =>{
+                message.error(error.response.data.message)
             })
-        }).catch(error =>{
-            message.error(error.response.data.message)
-        })
+        }else{
+            message.error("Vui lòng nhập mã đơn hàng")
+        }
+        
     }
 
     
@@ -64,15 +73,22 @@ class CheckOrder extends Component {
                 <Col span={14} className="h-100 display-order-status-wrapper">
                     <Row>
                         <Col span={4}>
-                            <Button className="back-home-button" onClick={()=>{this.goBackPage()}}>
-                                <FontAwesomeIcon icon={faLongArrowAltLeft} /><span className="px-2 opensan-24-bold">Trở về</span>
-                            </Button>
+                            <button type="btn" className="btn back-home-button" onClick={()=>{this.goBackPage()}}>
+                                <Row type="flex" justify="space-around" align="middle">
+                                        <Col span={8}><Icon component={LongArrowLeft}  className="arrow-icon-check-order"/></Col>
+                                        <Col span={16}><span className="opensan-24-bold">Trở về</span></Col>
+                                    </Row>
+                            </button>
                         </Col>
                         <Col span={6}>
                             <Link to="/menu">
-                                <Button className="move-menu-button">
-                                    <span className="px-2 opensan-24-bold">Đặt món ăn</span><FontAwesomeIcon icon={faLongArrowAltRight} />
-                                </Button>
+                                <button type="btn" className="btn move-menu-button">
+                                    <Row type="flex" justify="space-around" align="middle">
+                                        <Col span={5}><Icon component={FoodDrinkIcon} className="dish-icon"/></Col>
+                                        <Col span={14}><span className="opensan-24-bold">Đặt món ăn</span></Col>
+                                        <Col span={5}><Icon component={LongArrowRight} className="arrow-icon-check-order"/></Col>
+                                    </Row>
+                                </button>
                             </Link>
                         </Col>
                     </Row>
@@ -94,13 +110,20 @@ class CheckOrder extends Component {
                             <Col span={1} className="text-left"><Icon component={BillIcon} className="bill-icon-check-order"/></Col>
                             <Col className="order-number-title" span={23}>Đơn hàng: {order.orderNumber} <span style={{color:'gray'}}>({orderDetailReponseVMList.length} món)</span></Col>
                         </Row>
-                        {!orderDetailReponseVMList ? <div/> : 
-                        orderDetailReponseVMList.map((orderDetail, index) => <DishStatus orderDetail={orderDetail}/> ) }
+                        <ScrollArea speed={0.8}
+                            verticalScrollbarStyle={{display:'none'}}
+                            className="area"
+                            contentClassName="content"
+                            horizontal={false} style={{height: '88%'}}>
+                            {!orderDetailReponseVMList ? <div/> : 
+                            orderDetailReponseVMList.map((orderDetail, index) => <DishStatus orderDetail={orderDetail} key={index}/>) }
+                        </ScrollArea>
+                        
                     </div> }
                    
                     
                 </Col>
-                <Col span={7} className=" ml-2 h-100">
+                <Col span={7} className="numberpad-wrapper">
                     <div className="px-5 number-pad">
                         <Row className="display-number-border py-5">
                             <Col type="flex">

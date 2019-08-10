@@ -1,15 +1,30 @@
 import React, { Component } from 'react'
 import {Row,Col, Icon} from 'antd'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faMapMarkedAlt } from '@fortawesome/free-solid-svg-icons'
 import {ReactComponent as StoreIcon } from '../../../icons/Store.svg'
 import './Cart.css'
 export default class Cart extends Component {
+    renderFoodOptionName = (FoodOptionList) =>{
+        let OptionString = "";
+        FoodOptionList.map((FoodOption) =>{
+            if(OptionString.indexOf(FoodOption.parentName) !== -1){
+                OptionString +=  FoodOption.foName + ", "
+            }else{
+                if(FoodOption.count === true && FoodOption.selectMore === false){
+                    OptionString +=  FoodOption.foName + ", "
+                }else{
+                    OptionString += FoodOption.parentName + ": " + FoodOption.foName + ", "
+                }
+                
+            }
+            
+        })
+        return OptionString.slice(0,OptionString.length-2)
+    }
     render() {
-        var {food, type} = this.props;
+        var {food} = this.props;
         console.log(food)
         return (
-            <Row className="h-100 cart-checkout-container">
+            <Row className="h-100 cart-checkout-container" type="flex" justify="space-around" align="middle">
                 <Col span={8} className="h-100">
                     <Row>
                         <Row className="display-quantity-checkout-wrapper">
@@ -18,7 +33,7 @@ export default class Cart extends Component {
                             </div>
                         </Row>
                         <Row>
-                            <img src={food.foodImage} className="img-style" alt="Image Not Found"/>
+                            <img src={food.foodImage} className="img-style" alt="Not Found"/>
                         </Row>  
                     </Row>
                 </Col>
@@ -28,7 +43,7 @@ export default class Cart extends Component {
                         <Col span={21}><span className="store-name">{food.storeName}</span></Col>
                     </Row>
                     <Row className="food-name">{food.foodName}</Row>
-                    <Row className="option-name">Mặc định</Row>
+                    <Row className="option-name">{food.optionList ?this.renderFoodOptionName(food.optionList):<span>Mặc định</span>}</Row>
                 </Col>
             </Row>
         )

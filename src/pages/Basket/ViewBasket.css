@@ -1,5 +1,5 @@
 .scroll-basket-item-wrapper{
-    padding: 4% 4%;
+    padding: 2% 4%;
 }
 .overview-basket-wrapper{
     padding: 50% 10% 0% 0%;
@@ -14,7 +14,7 @@
     font-weight: 500
 }
 .total-price-wrapper{
-    border-top: 1px solid;
+    border-top: 1px solid #DCDCDC;
     padding: 5% 0%
 }
 .total-price-title{
@@ -27,24 +27,31 @@
 }
 .button-purchase-wrapper{
     width: 100%;
-    padding: 0% 6%;
+    padding: 5% 6%;
 }
 .button-purchase-view-basket{
     width: 100%;
     height: 100%;
     padding: 7% 0%;
-    background-color: #003a8c;
+    background-color: #2657BE;
     color:white;
     font-weight: bold;
     font-size: 150%;
     border-radius: 10px;
+    box-shadow: 11px 11px 32px -8px rgba(38,87,190,1);
 }
 
 .basket-icon{
     font-size: 350%;
     margin-top: 20%;
 }
-
+.price-cart-view-basket{
+    font-size: 180%;
+}
+.zoomout-icon{
+    width: 25%;
+    height: 50%;
+}
 .number-dishes-wrapper{
     background-color: #FF331C;
     border-radius: 30px;

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Row, Col} from 'antd';
+import { Row, Col } from 'antd';
 import { connect } from 'react-redux'
 import FoodType from '../Food/FoodType'
 import PreviewCart from '../Cart/PreviewCart/PreviewCart'
@@ -17,7 +17,7 @@ import apiCaller from '../../utils/ApiCaller'
     }
 
     componentWillMount(){
-        apiCaller(`categories/`,'GET',null).then(res => {
+        apiCaller(`fc/categories?fcId=1`,'GET',null).then(res => {
             this.setState({
                 categories: res.data
             })

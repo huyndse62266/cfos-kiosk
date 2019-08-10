@@ -16,7 +16,7 @@ class ComboScreen extends Component {
     }
 
     componentWillMount(){
-        apiCaller(`categories/parent?name=Com bo`,'GET',null).then(res => {
+        apiCaller(`categories/parent?name=Com bo&fcId=1`,'GET',null).then(res => {
             this.setState({
                 categories: res.data
             })      

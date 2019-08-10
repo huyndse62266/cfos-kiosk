@@ -11,6 +11,7 @@ import OptionCount from '../../components/FoodOption/OptionCount'
 
 import 'antd/dist/antd.css';
 import './DishInfo.css'
+import { array } from 'prop-types';
 
 
 class DishInfo extends Component {
@@ -48,7 +49,7 @@ class DishInfo extends Component {
                 
                 this.setState({
                     optionList: data,
-                    totalPrice: this.state.totalPrice + option.optionPrice*(quantity-oldQuantity)*this.state.clicks*((100-this.props.foodDetail.promotion)/100)
+                    totalPrice: this.state.totalPrice + option.optionPrice*(quantity-oldQuantity)*this.state.clicks
                 })
             }else{
                 var data = [...this.state.optionList];    
@@ -62,7 +63,7 @@ class DishInfo extends Component {
                 if(this.state.clicks > 0 ){
                     this.setState({
                         optionList: data,
-                        totalPrice: this.state.totalPrice + option.optionPrice*(quantity-oldQuantity)*this.state.clicks*((100-this.props.foodDetail.promotion)/100)
+                        totalPrice: this.state.totalPrice + option.optionPrice*(quantity-oldQuantity)*this.state.clicks
                     })
                 }else{
                     if(quantity-oldQuantity > 0){
@@ -87,7 +88,7 @@ class DishInfo extends Component {
             }else{
                 this.setState({
                     optionList: newOptionList,
-                    totalPrice: this.state.totalPrice + option.optionPrice*this.state.clicks*((100-this.props.foodDetail.promotion)/100)
+                    totalPrice: this.state.totalPrice + option.optionPrice*this.state.clicks
                 })
             }
             
@@ -107,7 +108,7 @@ class DishInfo extends Component {
         }
         this.setState({ 
             clicks: this.state.clicks + 1,
-            totalPrice: this.state.totalPrice + ((this.props.foodDetail.price +optionPrice +this.state.priceSize)*((100-this.props.foodDetail.promotion)/100))
+            totalPrice: this.state.totalPrice + (this.props.foodDetail.price*((100-this.props.foodDetail.promotion)/100) +optionPrice +this.state.priceSize)
         });
 
     }
@@ -121,7 +122,7 @@ class DishInfo extends Component {
             }
             this.setState({ 
                 clicks: this.state.clicks - 1,
-                totalPrice: this.state.totalPrice - (this.props.foodDetail.price+optionPrice+this.state.priceSize)*((100-this.props.foodDetail.promotion)/100)
+                totalPrice: this.state.totalPrice - (this.props.foodDetail.price*((100-this.props.foodDetail.promotion)/100)+optionPrice+this.state.priceSize)
             })
         };
     }
@@ -166,7 +167,7 @@ class DishInfo extends Component {
         if(index !== -1){
             var data = [...this.state.optionList];
             var oldPriceSize = data[index].optionPrice;
-            data.pop(data[index]);
+            data.splice(index,1);
             option.quantity = 0;
             data.push(option)
             if(this.state.clicks > 0){
@@ -174,7 +175,7 @@ class DishInfo extends Component {
                     optionList: data,
                     choosePriceSize: option.optionPrice,
                     priceSize: priceSize,
-                    totalPrice: this.state.totalPrice + priceSize*((100-this.props.foodDetail.promotion)/100)*this.state.clicks
+                    totalPrice: this.state.totalPrice + priceSize*this.state.clicks
                 })
             }else{
                 this.setState({
@@ -193,7 +194,7 @@ class DishInfo extends Component {
                     optionList: newOptionList,
                     choosePriceSize: option.optionPrice,
                     priceSize: priceSize,
-                    totalPrice: this.state.totalPrice + priceSize*((100-this.props.foodDetail.promotion)/100)*this.state.clicks 
+                    totalPrice: this.state.totalPrice + priceSize*this.state.clicks 
                 })
             }else{
                 this.setState({
@@ -240,23 +241,25 @@ class DishInfo extends Component {
     }
     
     componentWillMount(){
+        
         if(this.props.cartQuantity !== 0){
-            if(this.props.foodCart.optionList){
+            var {foodCart} = this.props
+            if(foodCart.optionList){
                 let totalOption  = 0;
-                this.props.foodCart.optionList.map(option => {
+                foodCart.optionList.map(option => {
                     totalOption += option.optionPrice * option.quantity;
                 })
                 this.setState({
                     clicks: this.props.cartQuantity,
-                    priceSize: this.props.foodCart.priceSize,
-                    choosePriceSize: this.props.foodCart.choosePriceSize,
-                    optionList: this.props.foodCart.optionList,
-                    totalPrice:(this.props.foodCart.cartQuantity * (this.props.foodCart.price + totalOption + this.props.foodCart.priceSize)) *(100-this.props.foodCart.promotion)/100
+                    priceSize: foodCart.priceSize,
+                    choosePriceSize: foodCart.choosePriceSize,
+                    optionList: foodCart.optionList,
+                    totalPrice:(foodCart.cartQuantity * (foodCart.price*((100-foodCart.promotion)/100) + totalOption + foodCart.priceSize)) 
                 })
             }else{
                 this.setState({
                     clicks: this.props.cartQuantity,
-                    totalPrice: (this.props.foodCart.cartQuantity * this.props.foodCart.price)*((100-this.props.foodCart.promotion)/100)
+                    totalPrice: (foodCart.cartQuantity * foodCart.price)*((100-foodCart.promotion)/100)
                 })
             }
         }else{
@@ -292,7 +295,7 @@ class DishInfo extends Component {
         if(this.props.foodCart.optionList){
             this.props.foodCart.optionList.map(optionChoosen => 
                {
-                   if(optionChoosen.count === false && optionChoosen.selectMore === false){
+                   if(optionChoosen.count === false && optionChoosen.selectMore === false && optionChoosen.parentName !== "Kích cỡ" && optionChoosen.parentName !== "Size"){
                         document.getElementById(optionChoosen.foId).checked = true
                    }
                }
@@ -343,10 +346,10 @@ class DishInfo extends Component {
                 <h6 className="option-title">{foodOption.foodOptionNameParent}</h6>
             </Row>
             <Row className="px-4 mb-3">
-                {this.props.foodCart ?foodOption.foodOptionVMS ? foodOption.foodOptionVMS.map((foodOptionVMSDetail)=>
-                <OptionCount Restore={this.state.isRestore} foodOption={foodOptionVMSDetail} optionQuatity={this.props.foodCart.optionList} IncrementOption={this.handleFoodOption} DecreaseOption={this.handleFoodOption} isResetDefault = {this.state.isResetDefaule} changeDefaultStatus = {this.changeResetDefaultStatus} />) : <div/>:
-                foodOption.foodOptionVMS ? foodOption.foodOptionVMS.map((foodOptionVMSDetail)=>
-                <OptionCount Restore={this.state.isRestore} foodOption={foodOptionVMSDetail} IncrementOption={this.handleFoodOption} isResetDefault = {this.state.isResetDefaule} changeDefaultStatus = {this.changeResetDefaultStatus} />) : <div/> }
+                {this.props.foodCart ?foodOption.foodOptionVMS ? foodOption.foodOptionVMS.map((foodOptionVMSDetail, index)=>
+                <OptionCount Restore={this.state.isRestore} foodOption={foodOptionVMSDetail} optionQuatity={this.props.foodCart.optionList} IncrementOption={this.handleFoodOption} DecreaseOption={this.handleFoodOption} isResetDefault = {this.state.isResetDefaule} changeDefaultStatus = {this.changeResetDefaultStatus} key={`i`+index} />) : <div/>:
+                foodOption.foodOptionVMS ? foodOption.foodOptionVMS.map((foodOptionVMSDetail, index)=>
+                <OptionCount Restore={this.state.isRestore} foodOption={foodOptionVMSDetail} IncrementOption={this.handleFoodOption} isResetDefault = {this.state.isResetDefaule} changeDefaultStatus = {this.changeResetDefaultStatus} key={`u`+index}/>) : <div/> }
             
             </Row>
         </div>
@@ -469,23 +472,20 @@ class DishInfo extends Component {
                                 verticalScrollbarStyle={{display:'none'}}
                                 className="area"
                                 contentClassName="content"
-                                horizontal={false} style={{height: '650px'}}>
-                                    {/* <Row>
-                                        <Foodingredients/>
-                                    </Row> */}
+                                horizontal={false} style={{height: '610px'}}>
                                     {foodOptions?<div>{foodOptions.map((foodOption, index) =>
                                     this.renderOption(foodOption,index)
-                                    )} </div>:<div/>}
-                                    <Row className="py-3 px-4 float-right">
-                                        <Button style={{backgroundColor: '#D2D2D2'}} onClick={() => this.handleResetDefaut(this.props.foodDetail)}>
-                                            <FontAwesomeIcon icon={faSyncAlt}/><span className="pl-2">Đặt về mặc định</span>
-                                        </Button>
-                                    </Row>
+                                    )}{foodOptions.length > 0 ? <Row className="py-3 px-4 float-right">
+                                    <Button style={{backgroundColor: '#D2D2D2'}} onClick={() => this.handleResetDefaut(this.props.foodDetail)}>
+                                        <FontAwesomeIcon icon={faSyncAlt}/><span className="pl-2">Đặt về mặc định</span>
+                                    </Button>
+                                </Row>: <div></div>}</div>:<div/>}
+                                    
                                 </ScrollArea>
                                 
                             </Col>
                         </Row>
-                        <Row type="flex" justify="end" className="h-100">
+                        <Row type="flex" justify="end" className="h-100 py-4">
                             <Col span={14} className="px-2 h-100">
                                 <Row type="flex" justify="end" className="total-price-dish-info">
                                     <Col span={8}> <h3 className="font-weight-bold text-right"><small>Tạm tính:</small></h3></Col>

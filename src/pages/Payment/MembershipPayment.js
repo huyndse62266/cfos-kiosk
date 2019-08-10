@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {Row,Col, Icon, Button,Modal, message} from 'antd'
+import {Row,Col, Icon,Modal, message} from 'antd'
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom'
 import './Payment.css'
@@ -20,7 +20,8 @@ class MembershipPayment extends Component {
             loading: false,
             visible: false,
             user: '',
-            isDone: false
+            isDone: false,
+             isFound: false
         };
         this.handleChange = this.handleChange.bind(this)
     }
@@ -30,17 +31,33 @@ class MembershipPayment extends Component {
     }
 
     handleChange(event) {
-        // console.log(event.target.value)
-        
-        if(event.target.value.length == 10){
-            console.log(event.target.value)
+        console.log('1')
+        if(event.target.value.length === 10){
             apiCaller(`customer/info?cardId=${event.target.value}`,'GET',null).then(res => {
-                console.log(res.data)
+                console.log(res)
                 this.setState({
                     user: res.data,
+                    isFound: true
+                },()=>{
+                    this.showConfirm()
                 })
+            }).catch(error => {
+                if(error){
+                    this.setState({
+                        user: '',
+                        isFound: false
+                    })
+                    message.error('Thẻ không tồn tại')
+                }          
             })
             event.target.value= ''
+            
+        }
+    }
+
+    showConfirm(){
+        if(this.state.isFound === true){
+            console.log(this.state.user)
             document.getElementById('modal-btn').click();
         }
     }
@@ -63,14 +80,14 @@ class MembershipPayment extends Component {
     renderButton(loading){
 
         if(this.state.user.walletAmount - this.props.pricetotal < 0){
-            return(<Button key="submit" type="primary" loading={loading} onClick={this.handleOk} disabled >
-            Submit
-        </Button>)
+            return(<button  type="button" className="btn submit-btn-modal" key="submit" loading={loading} onClick={this.handleOk} disabled>
+            Xác nhận và thanh toán
+          </button>)
         }else{
             var {items,pricetotal,orginPrice } = this.props;
-            return (<Button key="submit" type="primary" loading={loading} onClick={this.handleOk} onClick={()=>{this.checkoutClick(items,pricetotal,orginPrice, this.state.user.customerId)}} >
-            Submit
-        </Button>)
+            return (<button  type="button" className="btn submit-btn-modal" key="submit"  loading={loading} onClick={this.handleOk}>
+            Xác nhận và thanh toán
+          </button>)
         }
     }
 
@@ -98,9 +115,7 @@ class MembershipPayment extends Component {
                     isDone: true
                 });
                 this.props.addOrder(res.data)
-                // this.props.restoreMyCart()  
             }).catch(error => {
-                console.log(error)
                 // if(error){
                 //     message.error(error.response.data.message)
                 // }              
@@ -113,6 +128,8 @@ class MembershipPayment extends Component {
         if(isDone) {
             return <Redirect to={{pathname: "/print"}}/>
         }
+        
+
         return (
             <div className="membership-payment-container">
                 <Row className="payment-process" type="flex" justify="center">
@@ -148,20 +165,20 @@ class MembershipPayment extends Component {
                         </button>
                     </Col>
                 </Row>
-                <button type="btn" id="modal-btn" type="primary" onClick={this.showModal} className="display-hidden">
+                <button type="btn" id="modal-btn" type="primary" onClick={this.showModal} className="d-none">
                     Open Modal with customized footer
                 </button>
                 <Modal
                     visible={visible}
-                    title="Xác nhận thanh toán"
                     onOk={this.handleOk}
                     onCancel={this.handleCancel}
                     width="30%"
                     centered 
+                    className="payment-membership-modal"
                     footer={[
-                        <Button key="back" onClick={this.handleCancel}>
-                        Return
-                        </Button>,
+                        <button type="btn" className="btn cancel-btn-modal" key="back" onClick={this.handleCancel}>
+                          Hủy
+                        </button>,
                         this.renderButton(loading)
                         ,
                     ]}

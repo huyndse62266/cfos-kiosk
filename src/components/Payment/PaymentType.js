@@ -28,16 +28,15 @@ class PaymentType extends Component {
     }
     
     checkoutClick = (cart,total,orginPrice ) =>{
-        console.log(orginPrice)
         if(cart.length > 0){
             var orderDetail = cart.map((cartItem) =>{
-                
+            
                 return{
                     foodId: cartItem.foodId,
                     orderDetailFoodOption: cartItem.optionList,
                     quantity: cartItem.cartQuantity,
                     storeID: cartItem.storeId,
-                    totalPrice: cartItem.price * cartItem.cartQuantity * cartItem.promotion,
+                    totalPrice: cartItem.totalPrice,
                 }
             })
             var order ={
@@ -50,9 +49,9 @@ class PaymentType extends Component {
                 this.setState({
                     orderID: res.data,
                     isDone: true
-                });
-                this.props.addOrder(res.data)
-                // this.props.restoreMyCart()  
+                },()=>{
+                    this.props.addOrder(res.data)
+                });           
             }).catch(error => {
                 if(error){
                     message.error(error.response.data.message)
@@ -64,7 +63,7 @@ class PaymentType extends Component {
  
     render() {
         var {items,pricetotal,orginPrice } = this.props;
-        const {isDone,isError,orderID} = this.state;
+        const {isDone} = this.state;
         if(isDone) {
             return <Redirect to={{pathname: "/print"}}/>
         }
@@ -132,38 +131,6 @@ class PaymentType extends Component {
                         </Col>
                     </Row>
                 </button>
-                
-                {/* <Row className="my-3">
-                    <Col span={16} offset={2} >
-                        <div className="payment-type-wrapper">
-                            <Row>
-                                <h3>Membership</h3>
-                            </Row>
-                            <Row>
-                                <Col span={6} className="px-3">
-                                    <Button  className="card-button bg-warning">
-                                        <span className="py-3 h-100">Card</span>
-                                    </Button>
-                                </Col>
-                            </Row>
-                            <Row>
-                                <h6 className="py-2">Lorem ipsum dolor sit amet, consectetuer adipisicing elit. Aenea commodo ligula eget dolor. Aenea massa. Cum sociis natoque </h6>
-                            </Row>
-                        </div>
-                    </Col>
-                </Row>
-                <Row className="my-3">
-                    <Col span={16} offset={2}>
-                        <Button  className="cash-button" onClick={()=>{this.checkoutClick(items,pricetotal)}}>
-                            <div><h3 >On Cash</h3>
-                            <h6>Lorem ipsum dolor sit amet, consectetuer adipisicing elit. Aenea<br/> commodo ligula eget dolor. Aenea massa. Cum sociis natoque </h6></div>
-                        </Button>
-
-                        <div style={{display:'none'}}>
-                            <ReceiptTemplate items={items} totalPrice={pricetotal} orderID={orderID} ref={el => (this.componentRef = el)} /> 
-                        </div>
-                    </Col>
-                </Row> */}
             </div>
         )
     }

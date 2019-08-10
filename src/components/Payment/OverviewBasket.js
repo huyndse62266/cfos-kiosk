@@ -9,7 +9,7 @@ import Cart from '../Cart/CheckoutCart/Cart'
 import ViewBasket from '../../pages/Basket/ViewBasket'
 import './Payment.css'
 import {ReactComponent as Basketicon } from '../../icons/Basketicon.svg'
-import {ReactComponent as Editdishicon } from '../../icons/Editdishicon.svg'
+import {ReactComponent as Editdishicon } from '../../icons/Edit dish icon.svg'
 class OverviewBasket extends Component {
     state = {
         visible: false,
@@ -41,9 +41,8 @@ class OverviewBasket extends Component {
     };
     render() {
         let addedItems =  this.props.items.map((food, index) => {
-            
             return (
-                <Col span={24} className="px-2 py-1">
+                <Col span={24} className="px-2 py-1" key={index }>
                     <Cart key={index} food={food} index={index} cartQuantity={food.cartQuantity} type={'done'}/>
                 </Col>)})
  
@@ -78,7 +77,15 @@ class OverviewBasket extends Component {
                 <Row type="flex" justify="space-around" align="middle" className="bg-white">
                     <Col span={16} >
                         <button type="button" className="btn edit-button" onClick={this.showModal}>
-                            <FontAwesomeIcon icon={faCog}/><span className="px-2">Chỉnh sửa</span>
+                        <Row type="flex" justify="space-around" align="middle">
+                            <Col span={6} className="text-right">
+                                <Icon component={Editdishicon} className="edit-dish-icon"/>
+                            </Col>
+                            <Col span={16} className="text-left">
+                            CHỈNH SỬA MÓN
+                            </Col>
+                        </Row>
+                         
                         </button>
                     </Col>
                 </Row> 

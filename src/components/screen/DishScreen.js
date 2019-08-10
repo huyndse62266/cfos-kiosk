@@ -16,7 +16,7 @@ class DishScreen extends Component {
     }
 
     componentWillMount(){
-        apiCaller(`categories/parent?name=Đồ ăn`,'GET',null).then(res => {
+        apiCaller(`categories/parent?name=Đồ ăn&fcId=1`,'GET',null).then(res => {
             this.setState({
                 categories: res.data
             })      
@@ -25,20 +25,6 @@ class DishScreen extends Component {
 
     render() {
         return (
-            // <Row className="py-5">
-            //     <Col span={20}>
-            //         {this.state.categories.map((category,index) =>{
-            //             return (<FoodType key={index} category={category} index={index} type={'dishes'}/>)
-            //         })}
-            //     </Col>
-            //     <Col span={4} >
-            //         <Row  className="w-100">
-            //             <Col span={20} offset={2} style={{position:'fixed',width:'15%', right:0}}>
-            //                 <PreviewCart />
-            //             </Col>
-            //         </Row>
-            //     </Col>
-            // </Row>
             <Row className="pt-5" type="flex" justify="start">
                 {this.props.items.length > 0 ?
                 <div> 

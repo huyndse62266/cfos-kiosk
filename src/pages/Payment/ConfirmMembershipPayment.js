@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import {Row,Col,Button,Modal}  from 'antd'
 import ConfirmPaymentModal from '../../components/Payment/Confirm/ConfirmPaymentModal'
+import './Payment.css'
 export default class ConfirmMembershipPayment extends Component {
         state = {
         loading: false,
@@ -32,18 +33,17 @@ export default class ConfirmMembershipPayment extends Component {
                 </Button>
                     <Modal
                     visible={visible}
-                    title="Xác nhận thanh toán"
                     onOk={this.handleOk}
                     onCancel={this.handleCancel}
                     width="30%"
                     centered 
                     footer={[
-                        <Button key="back" onClick={this.handleCancel}>
-                        Return
-                        </Button>,
-                        <Button key="submit" type="primary" loading={loading} onClick={this.handleOk}>
-                        Submit
-                        </Button>,
+                        <button type="btn" className="btn cancel-btn-modal" key="back" onClick={this.handleCancel}>
+                          Hủy
+                        </button>,
+                        <button  type="btn" className="btn submit-btn-modal" key="submit" type="primary" loading={loading} onClick={this.handleOk}>
+                          Xác nhận và thanh toán
+                        </button>,
                     ]}
                     >
                         <ConfirmPaymentModal/>    

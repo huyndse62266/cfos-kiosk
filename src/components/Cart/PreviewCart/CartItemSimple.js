@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
-import {Col,Row,Button} from 'antd'
+import {Col,Row,Icon} from 'antd'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashAlt,faMapMarkerAlt, faMinus, faPlus } from '@fortawesome/free-solid-svg-icons'
 import NumberFormat from 'react-number-format'; 
 import { connect } from 'react-redux'
 import { removeCart,addQuantity,subQuantity } from '../../../action/cart';
+import {ReactComponent as Store } from '../../../icons/Store.svg'
 
 import './PreviewCart.css'
 class CartItemSimple extends Component {
@@ -30,7 +31,6 @@ class CartItemSimple extends Component {
     }
     render() {
         var {food} = this.props;
-        console.log(food)
         return (
             <div className="mb-4">
                 <Row className="img-button-wrapper">
@@ -52,10 +52,10 @@ class CartItemSimple extends Component {
                     </Row>
                 </Row>
                 <Row  type="flex" justify="space-around" align="middle">
-                    <Col span={1} className="text-center">
-                        <FontAwesomeIcon icon={faMapMarkerAlt}/>
+                    <Col span={2} className="text-center">
+                        <Icon component={Store} className="store-location-icon"/>
                     </Col>
-                    <Col span={14}>
+                    <Col span={13}>
                         <span className="store-name-cart-item pl-1">{food.storeName}</span>
                     </Col>
                     <Col span={9} className="h-100">

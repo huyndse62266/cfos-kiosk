@@ -62,10 +62,8 @@ class StoreMenu extends Component {
     }
 
     findByCategory = (id) =>{
-        console.log(id)
         var { foods} = this.state;
         let a = foods.filter(food => food.storeCategoryId === id)
-        console.log(a)
         this.setState({
             foodFilter: a
         })
@@ -81,14 +79,14 @@ class StoreMenu extends Component {
     render() {
         var { storeInfo,categoryLength, index } = this.props;
         var { foods, foodFilter} = this.state;
-        console.log(storeInfo)
+        
         return (
             <div>
                 {!this.props.items.length > 0 ?
                 <Row type="flex" justify="start">
                     <Col className="text-center h-100" style={{ width: '10.4%'}}>
                         <div style={{marginTop:'10%'}}>
-                            {/* <img src={category.image} className="image-category"/> */}
+                            <img src={storeInfo.storeIcon} className="image-category"/>
                             <h4 className="opensan-28-extrabold">{storeInfo.storeName}</h4>
                             {this.buttonMore()}
                             {this.buttonMoreDetail(storeInfo.categoryVMList)}
@@ -132,6 +130,7 @@ class StoreMenu extends Component {
                     <Col span={3} className="text-center h-100" >
                         <div style={{marginTop:'10%'}}>
                             <h4 className="opensan-28-extrabold">{storeInfo.storeName}</h4>
+                            <img src={storeInfo.storeIcon} className="image-category"/>
                             {this.buttonMore()}
                             {this.buttonMoreDetail(storeInfo.categoryVMList)}
                             <Row>

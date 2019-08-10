@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {  faUtensils, faStar, faPercentage, faConciergeBell,faMugHot, faThumbsUp,faShoppingBasket } from '@fortawesome/free-solid-svg-icons'
+import {  faUtensils, faStar, faPercentage, faConciergeBell,faMugHot, faThumbsUp } from '@fortawesome/free-solid-svg-icons'
 import { Menu,Row,Col,Button,Modal,Icon } from 'antd';
 import { connect } from 'react-redux'
 import { Link } from "react-router-dom";
@@ -121,8 +121,9 @@ class TopBar extends Component {
                     bodyStyle={{padding: 0, height: '100%'}}
                     centered
                     className="view-basket-modal"
+                
                 >
-                    <ViewBasket total={this.props.pricetotal} origin={this.props.originPrice}/>
+                    <ViewBasket total={this.props.pricetotal} origin={this.props.originPrice}>fffff</ViewBasket>
                 </Modal>
                 
             </Row>

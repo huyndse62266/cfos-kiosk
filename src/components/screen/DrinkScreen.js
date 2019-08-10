@@ -14,7 +14,7 @@ class DrinkScreen extends Component {
        
     }
     componentWillMount(){
-        apiCaller(`categories/parent?name=Đồ uống`,'GET',null).then(res => {
+        apiCaller(`categories/parent?name=Đồ uống&fcId=1`,'GET',null).then(res => {
             this.setState({
                 categories: res.data
             })      

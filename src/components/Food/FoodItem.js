@@ -52,7 +52,7 @@ class FoodItem extends Component {
                 </Row>
                 <Row className="pb-2" type="flex" justify="space-around" align="middle">
                     <Col span={16} className="text-left">
-                        <p className="mb-0 opensan-20-bold"><NumberFormat value={food.price} displayType={'text'} thousandSeparator={','}/> đ</p>                        
+                        <p className="mb-0 food-name-menu"><NumberFormat value={food.price} displayType={'text'} thousandSeparator={','}/> <u>đ</u></p>                        
                         <span onClick={()=>{this.showModal(food.foodId)}}><Rating               
                                 emptySymbol="fa fa-star-o fa-2x"
                                 fullSymbol="fa fa-star fa-2x"

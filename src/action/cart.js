@@ -1,8 +1,4 @@
 import * as Types from '../constants/ActionTypes';
-import callApi from '../utils/ApiCaller';
-
-
-
 
 export const addToCart = (food,quantity,optionList,priceSize,choosePriceSize) =>{
     return {

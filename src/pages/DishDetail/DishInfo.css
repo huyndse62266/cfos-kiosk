@@ -79,16 +79,16 @@
     padding: 5% 8%;
     border-radius: 8px;
     color:white;
-    background-color: #096dd9;
+    background-color: #2657BE;
     font-weight: bold;
+    box-shadow: 11px 11px 32px -8px #2657BE;
 }
 .cart-plus-icon{
     font-size: 30px;
     margin-right: 5%
 }
 .info-feedback-container{
-    padding-left: 2%;
-    padding-top: 2%
+    padding: 2% 0% 2% 2%;
 }
 .feedback-info{
     padding: 2% 0%
@@ -294,4 +294,8 @@
     font-size: 24px;
     font-family: 'Open Sans', sans-serif;
     color: #AAAAAA
+}
+
+.ant-tabs-ink-bar{
+    background-color:#EB2C17;
 }

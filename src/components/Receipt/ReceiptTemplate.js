@@ -5,16 +5,15 @@ export default class ReceiptTemplate extends Component {
 
     render() {
         var {items, totalPrice,originPrice, orderNumber} = this.props;
-        console.log(items)
         var count = 0;
         return (
             <div>
                 <Row className="text-center">
-                    <h3 style={{fontFamily: 'Times New Roman'}}>Food House</h3>
+                    <span className="opensan-18-semibold">Food House</span>
                 </Row>
                 <Row >
                 <Col span={22} offset={1}>
-                    <h6 style={{ fontSize: "12px", fontWeight: 'bold',fontFamily: 'Times New Roman' }}>
+                    <h6 className="opensan-16-semibold">
                         Address: Đường D1, Khu Công Nghệ Cao, Phường Tân Phú, Quận 9, Hồ
                     Chí Minh 715650
                     </h6>
@@ -63,7 +62,6 @@ export default class ReceiptTemplate extends Component {
                         <h6><NumberFormat value={totalPrice} displayType={'text'} thousandSeparator={','} /></h6> 
                     </Col>  
                 </Row>
-            
           </div>
         )
     }

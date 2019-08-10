@@ -6,7 +6,8 @@
     color: white;
     font-weight: bold;
     font-size: 18px;
-    border-radius: 7px
+    border-radius: 7px;
+    box-shadow: 11px 11px 32px -8px #2657BE;
 }
 .img-button-wrapper{
     height: 180px;
@@ -78,9 +79,10 @@
     background-color: #fff;
 }
 .store-name-cart-item{
-    font-size: 16;
+    font-size: 16px;
     font-family: 'Open Sans', sans-serif;
     font-weight: 500;
+    color: #212121
 }
 
 .dec-inc-cart-item-simple{
@@ -88,6 +90,9 @@
     height: 100%;
     background-image: linear-gradient(to right, #FF381D , #FF5E25); 
     border-radius: 7px;
+}
+.store-location-icon{
+    font-size: 180%;
 }
 @media all and (max-width: 1920px) {
     

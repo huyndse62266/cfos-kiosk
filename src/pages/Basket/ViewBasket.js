@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {Row,Col,Button, Icon} from 'antd';
+import {Row,Col, Icon} from 'antd';
 import ScrollArea from 'react-scrollbar';
 import { connect } from 'react-redux'
 import { Link } from "react-router-dom";
@@ -7,6 +7,7 @@ import NumberFormat from 'react-number-format';
 import BasketItem  from "../../components/Cart/ViewBasket/BasketItem";
 import './ViewBasket.css'
 import {ReactComponent as Basketicon } from '../../icons/Basketicon.svg'
+import {ReactComponent as PriceCartWhite }  from '../../icons/PriceCartWhite.svg'
 
 class ViewBasket extends Component {
   constructor(props) {
@@ -25,7 +26,9 @@ class ViewBasket extends Component {
   ToggleClick = () => {
     this.setState({ show: !this.state.show });
   };
-
+  componentDidMount(){
+    document.getElementsByClassName('ant-modal-close-x')[0].innerHTML = "Thu gọn <img src=\"https://firebasestorage.googleapis.com/v0/b/cfos-captone.appspot.com/o/images%2FZoom%20out%20basket.svg?alt=media&token=6be687c2-6efe-4ffe-b182-1170619fb920\" class=\"zoomout-icon\" />"
+}
   render() {
       let addedItems =  this.props.items.length ?
       (
@@ -33,7 +36,7 @@ class ViewBasket extends Component {
           this.props.items.map((food, index) => {
             
             return (
-                <Col span={6} className="px-3 py-2">
+                <Col span={6} className="px-3 py-1" key={index}>
                     <BasketItem key={index} food={food} index={index} cartQuantity={food.cartQuantity}/>
                 </Col>)
                 
@@ -52,7 +55,7 @@ class ViewBasket extends Component {
               verticalScrollbarStyle={{display:'none'}}
               className="area"
               contentClassName="content"
-              horizontal={false} style={{height: '750px'}}>
+              horizontal={false} style={{height: '975px'}}>
             <Row>
               {addedItems}
             </Row>
@@ -65,7 +68,7 @@ class ViewBasket extends Component {
                 <div className="number-dishes-wrapper">
                 {this.props.items.length} 
                 </div>
-                <Icon component={Basketicon} className="basket-icon"/>
+                <Icon component={Basketicon} className="basket-icon"/>  
               </Col>
               <Col span={18}>
                 <span className="basket-title">Giỏ của bạn <br/><small>({this.props.items.length} món)</small></span>
@@ -90,9 +93,14 @@ class ViewBasket extends Component {
               </Row>
             </div>
             <div className="button-purchase-wrapper">
-              <Button className="button-purchase-view-basket">
-                <Link to="/payment">Thanh toán</Link>  
-              </Button>
+                <Link to="/payment">
+                  <button type="button" className="btn button-purchase-view-basket">
+                    <Row type="flex" justify="space-around" align="middle">
+                      <Col span={8} className="text-right"><Icon component={PriceCartWhite} className="price-cart-view-basket"/></Col>
+                      <Col span={16} className="text-left px-2">Thanh toán</Col>
+                    </Row>
+                  </button>
+                </Link>  
             </div>
           </div>
         </Col>

@@ -112,10 +112,10 @@
     font-weight: bold;
     color: white;
     background-color: #2657BE;
-    padding: 8% 0%;
+    padding: 6% 4% 5% 0% ;
     border-radius: 8px;
-    margin-top: 15%
-    
+    margin-top: 15%;
+    box-shadow: 11px 11px 32px -8px rgba(38,87,190,1);
 }
 
 .choose-payment-container{
@@ -151,4 +151,8 @@
     color: #000000;
     margin-bottom: 5%;
     padding: 3% 0%
+}
+
+.edit-dish-icon{
+    font-size: 40px;
 }

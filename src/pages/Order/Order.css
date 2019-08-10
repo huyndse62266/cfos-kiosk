@@ -32,26 +32,35 @@
 
 .back-home-button{
   height: 100%;
-  width: 100%;
+  width: 90%;
   font-size: 24px;
-  padding: 4% 0%;
+  /* padding: 4% 0%; */
   border-radius: 10px;
   border: 2px solid #D2D2D2;
+  background-color: #F6F6F6
 }
 .move-menu-button{
   height: 100%;
-  width: 90%;
-  font-size: 24px;
-  padding: 3% 0%;
+  width: 100%;
+  padding: 2.5% 2%;
   margin-left: 10%;
   border-radius: 10px;
-  background-color: #FF331C;
+  background-image: linear-gradient(to right, #FF331C , #FF6126); 
+  box-shadow: 0px 10px 44px -13px #FF6126;
   color:white
 }
+
+.dish-icon{
+  font-size: 35px;
+}
+.arrow-icon-check-order{
+  font-size: 40px;
+}
 .order-status-wrapper{
+    height: 80%;
     border: 1px solid;
     border-radius: 10px;
-
+    background-color: #FFFFFF
 }
 .check-order-container{
     height: 100vh;
@@ -85,7 +94,7 @@
   }
   .number-div{
     width: 100%;
-    height: 110px;
+    height: 11vh;
     font-size: 32px;
     font-weight: 500;
     font-family: 'Roboto';
@@ -94,7 +103,7 @@
   }
   .search-numberpad-button{
     width: 100%;
-    height: 110px;
+    height: 11vh;
     font-size: 25px;
     border-radius: 10px;
     background-color: #D2D2D2;
@@ -220,4 +229,10 @@
 }
 .bill-icon-check-order{
   font-size: 40px;
+}
+
+.numberpad-wrapper{
+  box-shadow: 0px 0px 39px -18px rgba(0,0,0,0.75);
+  margin-left: 1%;
+  height: 100%;
 }

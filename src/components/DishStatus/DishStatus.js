@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faMapMarkerAlt,faUtensils} from '@fortawesome/free-solid-svg-icons'
 import {Row,Col,Icon} from 'antd'
 import {ReactComponent as Store } from '../../icons/Store.svg'
 import {ReactComponent as StatusDone } from '../../icons/StatusDone.svg'
 import {ReactComponent as StatusCooking } from '../../icons/StatusCooking.svg'
+import {ReactComponent as StatusCancel } from '../../icons/Dish fail icon.svg'
 import './DishStatus.css'
 
 export default class DishStatus extends Component {
@@ -19,8 +18,6 @@ export default class DishStatus extends Component {
     renderFoodOptionName = (FoodOptionList) =>{
         let OptionString = "";
         FoodOptionList.map((FoodOption) =>{
-            // console.log(OptionString.indexOf(FoodOption.parentName));
-            // OptionString += FoodOption.parentName + " : " + FoodOption.foName + ", "
             if(OptionString.indexOf(FoodOption.parentName) !== -1){
                 OptionString +=  FoodOption.foName + ", "
             }else{
@@ -30,9 +27,41 @@ export default class DishStatus extends Component {
         })
         return OptionString.slice(0,OptionString.length-2)
     }
+    renderStatus = (status) =>{
+        console.log(status)
+        if(status === "READY"){
+            return (
+                <Row type="flex" justify="space-around" align="middle"className="w-100">
+                    <Col span={20}>
+                        <span className="status-finish p-0">Hoàn thành</span><br/>
+                        <span className="status-finish-description">Đang chờ lấy</span>
+                    </Col>
+                    <Col span={4} className="done-icon"><Icon component={StatusDone}/></Col>
+                </Row>
+            )
+        }else if(status === "CANCELLED"){
+            return(
+                <Row type="flex" justify="space-around" align="middle"className="w-100">
+                    <Col span={20}>
+                        <span className="cancel-status-title p-0">Hủy bỏ</span><br/>
+                        {/* <span className="cancel-description">Món ăn bị hủy</span> */}
+                    </Col>
+                    <Col span={4} className="cancel-close-icon"><Icon component={StatusCancel}/></Col>
+                </Row>
+            )
+        }else{
+            return(
+                <Row type="flex" justify="space-around" align="middle"className="w-100">
+                    <Col span={20}>
+                        <span className="status-waiting">Cooking</span>
+                    </Col>
+                    <Col span={4} className="done-icon"><Icon component={StatusCooking}/></Col>
+                </Row>
+            )
+        }
+    }
     render() {
         var {orderDetail} = this.props;
-        console.log(orderDetail.orderDetailFoodOption)
         return (
 
             <Row className="dish-detai-wrapper" type="flex" justify="start">
@@ -46,7 +75,7 @@ export default class DishStatus extends Component {
                         -{orderDetail.foodVM.promotion}%
                     </span>:<span></span>}
                     <div className="w-100 h-100">
-                        <img src={orderDetail.foodVM.imageVMS[0].image} className="image-order-detail" alt="Image Not Found"/>
+                        <img src={orderDetail.foodVM.imageVMS[0].image} className="image-order-detail" alt="Not Found"/>
                     </div>
                     
                 </Col>
@@ -66,18 +95,7 @@ export default class DishStatus extends Component {
                     </Row>                  
                 </Col>               
                 <Col span={8} className="dish-status text-right">
-                    {orderDetail.oderDetailStatus==='READY'?<Row type="flex" justify="space-around" align="middle"className="w-100">
-                        <Col span={20}>
-                            <span className="status-finish p-0">Hoàn thành</span><br/>
-                            <span className="status-finish-description">Đang chờ lấy</span>
-                        </Col>
-                        <Col span={4} className="done-icon"><Icon component={StatusDone}/></Col>
-                    </Row>:<Row type="flex" justify="space-around" align="middle"className="w-100">
-                        <Col span={20}>
-                            <span className="status-waiting">Cooking</span>
-                        </Col>
-                        <Col span={4} className="done-icon"><Icon component={StatusCooking}/></Col>
-                    </Row>}
+                    {this.renderStatus(orderDetail.oderDetailStatus)}
                     
                 </Col>
             </Row>

@@ -1,7 +1,5 @@
 import React, { Component }  from 'react'
-import { Modal, Button,Row,Col } from 'antd';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons'
+import { Modal,Row,Col } from 'antd';
 import DishDetail from '../../../pages/DishDetail/DishDetail'
 import {findCart} from '../../../action/cart'
 import { connect } from 'react-redux'
@@ -39,17 +37,22 @@ class ImageButton extends Component {
             <div>
                 <Row className="food-header">
                     <Col span={19}>
-                        <Row className="store-info">
-                            <Col span={3}  className="location-icon"><FontAwesomeIcon icon={faMapMarkerAlt}/></Col>
-                            <Col span={20} ><p className="restaurant-title d-inline-block text-truncate">{food.storeName}</p></Col>
+                        <div className="background-header"></div>
+                        <Row className="store-info" type="flex" justify="space-around" align="middle" >
+                            <Col span={4}><div className="store-icon-wrapper"><img src={food.storeIcon} className="store-icon"/></div></Col>
+                            <Col span={20} ><p className="restaurant-title d-inline-block text-truncate text-left">{food.storeName}</p></Col>
                         </Row>
+                        
                     </Col>
                     <Col span={5}>
                         {food.promotion > 0 ? <div className="promotion-tag-wrapper"><span>-{food.promotion }%</span></div>:<div className="promotion-tag-wrapper d-none"><span>-{food.promotion }%</span></div> }
                     </Col>
                 </Row>
+                {/* <Row  className="background-header">
+                    
+                </Row> */}
                 <button type="button"  onClick={()=>{this.showModal(food.foodId)}} className="btn p-0" style={{height: '175px',width:'100%',borderRadius: '8px'}}>
-                    <img src={food.foodImage} alt="Image Not Found" style={{borderRadius: '8px'}}/>
+                    <img src={food.foodImage} alt="Not Found" style={{borderRadius: '8px'}}/>
                 </button>
 
                 <Modal
