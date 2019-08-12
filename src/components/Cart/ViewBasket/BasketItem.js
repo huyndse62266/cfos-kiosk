@@ -5,7 +5,7 @@ import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons'
 import { connect } from 'react-redux'
 import NumberFormat from 'react-number-format';
 import { addQuantity,subQuantity, removeCart } from '../../../action/cart';
-import DishDetail from '../../../pages/DishDetail/DishDetail'
+import DishDetail from '../../../pages/DishDetail/DishTab/DishDetailTab'
 import {ReactComponent as RecycleBinicon } from '../../../icons/RecycleBinicon.svg'
 import './BasketItem.css'
 class BasketItem extends Component {

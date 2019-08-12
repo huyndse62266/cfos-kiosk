@@ -68,10 +68,13 @@ class MembershipPayment extends Component {
     };
     
     handleOk = () => {
+        var {items,pricetotal,orginPrice } = this.props;
+        
         this.setState({ loading: true });
         setTimeout(() => {
           this.setState({ loading: false, visible: false });
         }, 3000);
+        this.checkoutClick(items,pricetotal,orginPrice, this.state.user.customerId)
     };
     
     handleCancel = () => {
@@ -91,7 +94,8 @@ class MembershipPayment extends Component {
         }
     }
 
-    checkoutClick = (cart,total,orginPrice, username ) =>{
+    checkoutClick = (cart,total,orginPrice, customerId ) =>{
+        console.log(total)
         if(cart.length > 0){
             var orderDetail = cart.map((cartItem) =>{
                 
@@ -100,11 +104,11 @@ class MembershipPayment extends Component {
                     orderDetailFoodOption: cartItem.optionList,
                     quantity: cartItem.cartQuantity,
                     storeID: cartItem.storeId,
-                    totalPrice: cartItem.price * cartItem.cartQuantity * cartItem.promotion,
+                    totalPrice: cartItem.totalPrice,
                 }
             })
             var order ={
-                "customerId": username,
+                "customerId": customerId    ,
                 "orderDetails": orderDetail,
                 "originalPrice": orginPrice,
                 "totalOrder": total

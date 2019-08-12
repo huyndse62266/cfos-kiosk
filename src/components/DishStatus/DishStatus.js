@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {Row,Col,Icon} from 'antd'
-import {ReactComponent as Store } from '../../icons/Store.svg'
+import {ReactComponent as StoreLocation } from '../../icons/Store Location icon.svg'
 import {ReactComponent as StatusDone } from '../../icons/StatusDone.svg'
 import {ReactComponent as StatusCooking } from '../../icons/StatusCooking.svg'
 import {ReactComponent as StatusCancel } from '../../icons/Dish fail icon.svg'
@@ -39,7 +39,7 @@ export default class DishStatus extends Component {
                     <Col span={4} className="done-icon"><Icon component={StatusDone}/></Col>
                 </Row>
             )
-        }else if(status === "CANCELLED"){
+        }else if(status === "CANCELLED" || status === "GUEST_CANCEL"){
             return(
                 <Row type="flex" justify="space-around" align="middle"className="w-100">
                     <Col span={20}>
@@ -81,7 +81,7 @@ export default class DishStatus extends Component {
                 </Col>
                 <Col span={8} className="text-left my-auto" offset={1}>
                     <Row type="flex" justify="space-around" align="middle">
-                        <Col span={2} style={{fontSize:'30px'}}><Icon component={Store}/></Col>
+                        <Col span={2} style={{fontSize:'30px'}}><Icon component={StoreLocation}/></Col>
                         <Col span={16}><i className="opensan-18-bold text-left">{orderDetail.storeVM.storeName}</i></Col>
                         <Col span={6}></Col>
                     </Row>

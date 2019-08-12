@@ -5,7 +5,7 @@ import { faTrashAlt,faMapMarkerAlt, faMinus, faPlus } from '@fortawesome/free-so
 import NumberFormat from 'react-number-format'; 
 import { connect } from 'react-redux'
 import { removeCart,addQuantity,subQuantity } from '../../../action/cart';
-import {ReactComponent as Store } from '../../../icons/Store.svg'
+import {ReactComponent as StoreLocation } from '../../../icons/Store Location icon.svg'
 
 import './PreviewCart.css'
 class CartItemSimple extends Component {
@@ -53,7 +53,7 @@ class CartItemSimple extends Component {
                 </Row>
                 <Row  type="flex" justify="space-around" align="middle">
                     <Col span={2} className="text-center">
-                        <Icon component={Store} className="store-location-icon"/>
+                        <Icon component={StoreLocation} className="store-location-icon"/>
                     </Col>
                     <Col span={13}>
                         <span className="store-name-cart-item pl-1">{food.storeName}</span>

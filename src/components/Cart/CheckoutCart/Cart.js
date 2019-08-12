@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {Row,Col, Icon} from 'antd'
-import {ReactComponent as StoreIcon } from '../../../icons/Store.svg'
+import {ReactComponent as StoreLocation } from '../../../icons/Store Location icon.svg'
 import './Cart.css'
 export default class Cart extends Component {
     renderFoodOptionName = (FoodOptionList) =>{
@@ -39,7 +39,7 @@ export default class Cart extends Component {
                 </Col>
                 <Col span={16} className="cart-item-info-wrapper" type="flex" justify="start">
                     <Row>
-                        <Col span={3}><Icon component={StoreIcon} style={{fontSize:'25px'}}/></Col>
+                        <Col span={3}><Icon component={StoreLocation} style={{fontSize:'25px'}}/></Col>
                         <Col span={21}><span className="store-name">{food.storeName}</span></Col>
                     </Row>
                     <Row className="food-name">{food.foodName}</Row>

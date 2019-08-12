@@ -7,7 +7,7 @@ import Rating from 'react-rating'
 import NumberFormat from 'react-number-format';
 import { addToCart, findCart } from '../../action/cart';
 import ImageButton from './FoodItemComponent/ImageButton'
-import DishDetail from '../../pages/DishDetail/DishDetail'
+import DishDetail from '../../pages/DishDetail/DishTab/DishDetailTab'
 import 'antd/dist/antd.css';
 import './Menu.scss'
 

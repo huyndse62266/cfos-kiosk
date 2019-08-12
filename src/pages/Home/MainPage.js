@@ -8,8 +8,6 @@ import {ReactComponent as LongArrowRight } from '../../icons/LongArrowRight.svg'
 import {ReactComponent as Logo } from '../../images/logo.svg'
 import apiCaller from '../../utils/ApiCaller';
 import 'antd/dist/antd.css';
-
-
 import './Main.css'
 export default class MainPage extends Component {
   constructor(props) {
@@ -46,7 +44,7 @@ export default class MainPage extends Component {
                     <img src={this.state.banner} className="banner-img"/>
                   </div>
               </Carousel> */}
-              <Carousel autoplay>
+              <Carousel autoplay className="carousel-wrapper">
                 {banner.length > 0 ? banner.map((image, index) =>{
                   return(
                     <div key={index}>

@@ -1,17 +1,19 @@
 import React, { Component } from 'react'
-import { Row,Col, message,Button } from 'antd';
+import { Row,Col, message,Button,Icon } from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTag, faMinus, faPlus,faMapMarkerAlt, faCartPlus,faSyncAlt } from '@fortawesome/free-solid-svg-icons'
 import ScrollArea from 'react-scrollbar';
 import Rating from 'react-rating'
 import NumberFormat from 'react-number-format';
 import { connect } from 'react-redux'
-import { addToCart, updateItemCart } from '../../action/cart';
-import OptionCount from '../../components/FoodOption/OptionCount'
-
+import { addToCart, updateItemCart } from '../../../action/cart';
+import {ReactComponent as StoreLocation } from '../../../icons/Store Location icon.svg'
+import {ReactComponent as PromotionTagIcon } from '../../../icons/Promotion Tag Icon.svg'
+import {ReactComponent as ResetIcon } from '../../../icons/Reset icon.svg'
+import OptionCount from '../../../components/FoodOption/OptionCount'
 import 'antd/dist/antd.css';
 import './DishInfo.css'
-import { array } from 'prop-types';
+
 
 
 class DishInfo extends Component {
@@ -295,8 +297,8 @@ class DishInfo extends Component {
         if(this.props.foodCart.optionList){
             this.props.foodCart.optionList.map(optionChoosen => 
                {
-                   if(optionChoosen.count === false && optionChoosen.selectMore === false && optionChoosen.parentName !== "Kích cỡ" && optionChoosen.parentName !== "Size"){
-                        document.getElementById(optionChoosen.foId).checked = true
+                   if(optionChoosen.count === false && optionChoosen.selectMore === false){
+                        document.getElementById(optionChoosen.foId).click();
                    }
                }
             
@@ -376,6 +378,9 @@ class DishInfo extends Component {
     render() {
         var {cartQuantity,foodDetail} = this.props;
         var {foodOptions,storeVM} = foodDetail;
+        console.log(this.props.foodDetail)
+        console.log(this.props.foodCart)
+
         return (
             <div className="info-feedback-container">
                 <Row type="flex" justify="start">
@@ -388,7 +393,7 @@ class DishInfo extends Component {
                             horizontal={false} style={{height: '630px'}}>
                         <Row className="d-flex flex-column pr-3">
                             {foodDetail.imageVMS ? foodDetail.imageVMS.map((imageURL,index) => {
-                                return <Col span={24} className="py-3" key={index}>    
+                                return <Col span={24} className="pb-4" key={index}>    
                                     <img src={imageURL.image} className="image-info" alt="Image Not Found"/>
                                 </Col>
                             }):<div/>}                   
@@ -401,13 +406,12 @@ class DishInfo extends Component {
                             {/* chi tiết món  */}
                             <Col span={12} className="px-3">
                                 {/* thông tin cửa hàng */}
-                                <Row>
-                                    <Col span={2} offset={1}>
-                                        <FontAwesomeIcon icon={faMapMarkerAlt}/>
+                                <Row type="flex" justify="space-around" align="middle">
+                                    <Col span={2}>
+                                        <Icon component={StoreLocation} className="store-location-icon-feedback"/>
                                     </Col>
-                                    <Col span={21}>
-                                        {/* {storeVM.storeName?<span>{storeVM.storeName}</span>:<span/>} */}
-                                        <span className="opensan-16-semibold">Nhà hàng nàng gánh</span>
+                                    <Col span={22}className="store-name-info">
+                                        {this.props.foodCart.storeName}
                                     </Col>
                                 </Row>
                                 {/* tên món ăn */}
@@ -430,17 +434,19 @@ class DishInfo extends Component {
                                 </Row>
                                 {/* ghi chú */}
                                 <Row className="py-2">
-                                    <span className="text-left" style={{fontSize: '18px',fontWeight: 'bold'}}>{foodDetail.foodDescription}</span>
+                                    <span className="text-left" className="food-description">{foodDetail.foodDescription}</span>
                                 </Row>
                                 {/* thẻ giảm giá */}
-                                {foodDetail.promotion > 0? <Row className="pt-3 pb-1">
-                                    <Col span={2}>
-                                        <FontAwesomeIcon icon={faTag} style={{color: 'green',fontSize:'24px'}} />
-                                    </Col>
-                                    <Col span={22}>
-                                        <h5 className="text-left px-3">{foodDetail.promotion}% Giảm giá toàn menu</h5>
-                                    </Col>                                   
-                                </Row>:<span/>} 
+                                {foodDetail.promotion > 0? 
+                                    <Row type="flex" justify="space-around" align="middle">
+                                        <Col span={2}>
+                                            <Icon component={PromotionTagIcon} className="promotion-icon"/>
+                                        </Col>
+                                        <Col span={22}>
+                                            <span className="text-left opensan-20-semibold pl-3">{foodDetail.promotion}% Giảm giá toàn menu</span>
+                                        </Col>
+                                    </Row>
+                                   :<span/>} 
                                {/* chọn số lượng */}
                                {foodOptions?<div>{foodOptions.map((foodOption, index) =>
                                     this.rendeSize(foodOption,index)
@@ -476,9 +482,12 @@ class DishInfo extends Component {
                                     {foodOptions?<div>{foodOptions.map((foodOption, index) =>
                                     this.renderOption(foodOption,index)
                                     )}{foodOptions.length > 0 ? <Row className="py-3 px-4 float-right">
-                                    <Button style={{backgroundColor: '#D2D2D2'}} onClick={() => this.handleResetDefaut(this.props.foodDetail)}>
-                                        <FontAwesomeIcon icon={faSyncAlt}/><span className="pl-2">Đặt về mặc định</span>
-                                    </Button>
+                                    <button type="btn" className="btn restore-btn" onClick={() => this.handleResetDefaut(this.props.foodDetail)}>
+                                        <Row type="flex" justify="space-around" align="middle">
+                                            <Col span={4}><Icon component={ResetIcon} className="reset-icon"/> </Col>
+                                            <Col span={19} className="opensan-16-semibold pl-1 pr-4">Khôi phục mặc định</Col>
+                                        </Row>
+                                    </button>
                                 </Row>: <div></div>}</div>:<div/>}
                                     
                                 </ScrollArea>

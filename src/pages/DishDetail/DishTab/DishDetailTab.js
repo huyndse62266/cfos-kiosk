@@ -1,17 +1,18 @@
 import React, { Component } from 'react'
-import { Tabs } from 'antd';
+import { Tabs} from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUtensils } from '@fortawesome/free-solid-svg-icons'
 import { faCommentDots } from '@fortawesome/free-regular-svg-icons'
-import './DishInfo.css'
-import apiCaller from '../../utils/ApiCaller'
-import DishInfo from './DishInfo'
-import DishFeedback from './DishFeedback'
+import './DishDetailTab.css'
+import apiCaller from '../../../utils/ApiCaller'
+import DishInfo from '../DishInfo/DishInfo'
+import DishFeedback from  '../DishFeedback/DishFeedback'
+
 const { TabPane } = Tabs;
 
 
 
-export default class DishDetail extends Component {
+export default class DishDetailTab extends Component {
 
     constructor(){
         super();
@@ -37,7 +38,7 @@ export default class DishDetail extends Component {
                 </TabPane>
                 <TabPane tab={<div className="tab-button"><FontAwesomeIcon icon={faCommentDots} className="icon-tab"/>Phản hồi</div>} key="2"  size="large">
                    <DishFeedback foodDetail={this.state.food}/>
-                </TabPane>              
+                </TabPane>   
             </Tabs>
         )
     }

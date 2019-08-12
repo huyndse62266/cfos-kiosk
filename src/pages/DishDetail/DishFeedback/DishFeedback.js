@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
-import { Row,Col } from 'antd';
+import { Row,Col,Icon } from 'antd';
 import Rating from 'react-rating'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import NumberFormat from 'react-number-format';
-import { faMapMarkerAlt, faStoreAlt} from '@fortawesome/free-solid-svg-icons'
 import { faStar  as faStaro, faCommentDots} from '@fortawesome/free-regular-svg-icons'
-import NoFeedbackImg from '../../images/Review empty illustration.png'
-import './DishInfo.css'
+import {ReactComponent as StoreIcon } from '../../../icons/StoreIcon.svg'
+import {ReactComponent as StoreLocation } from '../../../icons/Store Location icon.svg'
+import {ReactComponent as CommentIcon } from '../../../icons/Comment icon.svg'
+import NoFeedbackImg from '../../../images/Review empty illustration.png'
+import './DishFeedback.css'
 
 export default class DishFeedback extends Component {
     constructor(props) {
@@ -41,21 +43,34 @@ export default class DishFeedback extends Component {
                             initialRating={foodDetail.rate}
                             readonly
                             className="star-rate-style"/>
-                        <h6 className="number-feedback"><FontAwesomeIcon icon={faCommentDots}/> 
+                        <h6 className="number-feedback"><FontAwesomeIcon icon={faCommentDots} className="number-feedback-icon"/> 
                             {this.props.foodDetail.feedbackVMS ? <span className="px-2">{this.props.foodDetail.feedbackVMS.length} ý kiến</span> : <span className="px-2">Không có ý kiến</span>}
                         </h6>
                     </div>
                     <div className="food-info">
-                        <h5 className="food-name">{foodDetail.foodName}</h5>
-                        <h6 className="store-name"><FontAwesomeIcon icon={faMapMarkerAlt}/> Quán Dì Mai</h6>
-                        <h6 className="food-price"><NumberFormat value={foodDetail.price} displayType={'text'} thousandSeparator={','}/> đ</h6>
+                        <h5 className="opensan-24-bold mb-0 py-1">{foodDetail.foodName}</h5>
+                        <Row type="flex" justify="space-around" align="middle" className="py-1">
+                            <Col span={2}><Icon component={StoreLocation}  className="store-location-icon-feedback"/></Col>
+                            <Col span={22}>
+                                <h6 className="store-name-info mb-0">
+                                    {foodDetail.storeVM.storeName}
+                                </h6>
+                            </Col>
+                        </Row>
+                        
+                        <h6 className="food-price py-1"><NumberFormat value={foodDetail.price} displayType={'text'} thousandSeparator={','}/> <u>đ</u></h6>
                     </div>
                     <div className="food-court-info">
-                        <h6 className="food-court-title">
-                            <FontAwesomeIcon icon={faStoreAlt}/> Khu ẩm thực
-                        </h6>
-                        <h5 className="food-court-name">Aeon CitiMart Gò Vấp</h5>
-                        <h6 className="food-court-address">672 Quang Trung, Phường 11, Gò Vấp</h6>
+                        <Row type="flex" justify="space-around" align="middle">
+                            <Col span={2}><Icon component={StoreIcon} className="food-court-icon"/></Col>
+                            <Col span={22}>
+                                <h6 className="opensan-16-semibold mb-0">
+                                    Khu ẩm thực
+                                </h6>
+                            </Col>
+                        </Row>
+                        <h5 className="opensan-24-bold">{foodDetail.foodCourtVM.fcName}</h5>
+                        <h6 className="food-court-address">{foodDetail.foodCourtVM.fcLocation}</h6>
                     </div>
                 </Col>        
                 <Col span={16} className="feedback-container">
@@ -76,9 +91,9 @@ export default class DishFeedback extends Component {
                                 <h6>Đánh giá ({this.props.foodDetail.feedbackVMS ? <span>{this.props.foodDetail.feedbackVMS.length}</span> : <span>0</span>})</h6>
                             </Row>
                            {feedbackVMS.map((feedback, index) => 
-                                <Row className="feedback-wrapper" type="flex" justify="start">
-                                    <Col className="icon-wrapper"><FontAwesomeIcon icon={faCommentDots}/></Col>
-                                    <Col className="feedback-content"><Rating               
+                                <Row className="feedback-wrapper" type="flex" justify="center" align="top">
+                                    <Col className="icon-wrapper" span={2}><Icon component={CommentIcon} className="comment-icon"/></Col>
+                                    <Col className="feedback-content" span={22}><Rating               
                                         emptySymbol="fa fa-star-o fa-2x"
                                         fullSymbol="fa fa-star fa-2x"
                                         initialRating={feedback.rate}

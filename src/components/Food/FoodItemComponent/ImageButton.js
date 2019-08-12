@@ -1,6 +1,6 @@
 import React, { Component }  from 'react'
 import { Modal,Row,Col } from 'antd';
-import DishDetail from '../../../pages/DishDetail/DishDetail'
+import DishDetail from '../../../pages/DishDetail/DishTab/DishDetailTab'
 import {findCart} from '../../../action/cart'
 import { connect } from 'react-redux'
 import './ImageButton.scss'
