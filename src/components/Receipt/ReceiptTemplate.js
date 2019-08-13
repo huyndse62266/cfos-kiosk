@@ -11,16 +11,14 @@ export default class ReceiptTemplate extends Component {
                 <Row className="text-center">
                     <span className="opensan-18-semibold">Food House</span>
                 </Row>
-                <Row >
-                <Col span={22} offset={1}>
-                    <h6 className="opensan-16-semibold">
+                <Row className="px-2">
+                    <span className="bill-address">
                         Address: Đường D1, Khu Công Nghệ Cao, Phường Tân Phú, Quận 9, Hồ
                     Chí Minh 715650
-                    </h6>
-                </Col>
+                    </span>
                 </Row>
-                <Row className="text-center">
-                    <h3>Phiếu thanh toán</h3>
+                <Row className="text-center py-2">
+                    <h6>Phiếu thanh toán</h6>
                 </Row>
                 <Row>
                 <h6 className="px-4 py-2">Số thứ tự đơn hàng: {orderNumber}</h6>
@@ -29,20 +27,20 @@ export default class ReceiptTemplate extends Component {
                     <table>
                         <thead>
                             <tr>
-                                <th><h6 style={{fontSize:'10px'}}>Tên</h6> </th>
-                                <th><h6 style={{fontSize:'10px'}}>Số lượng</h6> </th>
-                                <th><h6 style={{fontSize:'10px'}}>Đơn giá</h6> </th>
-                                <th><h6 style={{fontSize:'10px'}}>Thành tiền</h6> </th>
+                                <th><h6 style={{fontSize:'11px'}}>Tên</h6> </th>
+                                <th><h6 style={{fontSize:'11px'}}>Số lượng</h6> </th>
+                                <th><h6 style={{fontSize:'11px'}}>Đơn giá</h6> </th>
+                                <th><h6 style={{fontSize:'11px'}}>Thành tiền</h6> </th>
                             </tr>
                         </thead>
                         <tbody>
                             {items.length > 0 ? items.map((item,index) =>{
                                 count += item.cartQuantity;
                                 return <tr key={index}>
-                                <td><h6 style={{fontSize:'10px'}}>{item.foodName}</h6></td>
-                                <td className="text-center"><h6 style={{fontSize:'10px'}}>{item.cartQuantity}</h6></td>
-                                <td><h6 style={{fontSize:'10px'}}>{item.price}</h6></td>
-                                <td><h6 style={{fontSize:'10px'}}>{item.cartQuantity * item.price}</h6></td>
+                                <td><h6 style={{fontSize:'11px'}}>{item.foodName}</h6></td>
+                                <td className="text-center"><h6 style={{fontSize:'11px'}}>{item.cartQuantity}</h6></td>
+                                <td><h6 style={{fontSize:'11px'}}>{item.price}</h6></td>
+                                <td><h6 style={{fontSize:'11px'}}>{item.cartQuantity * item.price}</h6></td>
                                 </tr>
                             }):<tr></tr>}
                         </tbody>

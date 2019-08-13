@@ -142,7 +142,8 @@
 }
 
 .restore-btn{
-    background-color: #F6F6F6
+    background-color: #F6F6F6;
+    display: none;
 }
 
 .reset-icon{
