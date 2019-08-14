@@ -57,21 +57,10 @@ class BasketItem extends Component {
     }
     calculatePrice = () => {
         const {food} = this.props
-        let totalOption  = 0;
-        if(food.optionList !== null){
-            food.optionList.map(option => {
-                totalOption += option.optionPrice * option.quantity;
-            })
-            this.setState({
-                discountPrice: (food.price+totalOption+food.priceSize)*food.cartQuantity*(100-food.promotion)/100,
-                originPrice: (food.price+totalOption+food.priceSize)*food.cartQuantity
-            })
-        }else{
-            this.setState({
-                discountPrice: (food.price)*food.cartQuantity*(100-food.promotion)/100,
-                originPrice: (food.price)*food.cartQuantity
-            })
-        }
+        this.setState({
+            discountPrice: food.totalPrice,
+            originPrice: food.totalPriceOrigin
+        })
     }
 
     renderFoodOptionName = (FoodOptionList) =>{
@@ -93,7 +82,6 @@ class BasketItem extends Component {
     }
     render() {
         var {food,cartQuantity} = this.props;
-        console.log()
         return (
             <div className="basket-item-wrapper">
                 

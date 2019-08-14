@@ -101,30 +101,41 @@ class DishInfo extends Component {
     
     IncrementItem = () => {
         let optionPrice = 0;
+        console.log(this.state.optionList)
         if(this.state.optionList){
             this.state.optionList.map(option => {
                 if(option.count === true){
+                    console.log(optionPrice)
                     optionPrice += option.optionPrice * parseInt(option.quantity);
+                }else{
+                    console.log(optionPrice)
+                    optionPrice += option.optionPrice
                 }
             })
         }
+        console.log(optionPrice)
         this.setState({ 
             clicks: this.state.clicks + 1,
-            totalPrice: this.state.totalPrice + (this.props.foodDetail.price*((100-this.props.foodDetail.promotion)/100) +optionPrice +this.state.priceSize)
+            totalPrice: this.state.totalPrice + (this.props.foodDetail.price*((100-this.props.foodDetail.promotion)/100) +optionPrice )
         });
 
     }
     DecreaseItem = () => {
+        console.log(this.state.optionList)
         if(this.state.clicks > 0){
             let optionPrice = 0;
             if(this.state.optionList){
                 this.state.optionList.map(option => {
-                    optionPrice += option.optionPrice * option.quantity;
+                    if(option.count === true){
+                        optionPrice += option.optionPrice * parseInt(option.quantity);
+                    }else{
+                        optionPrice += option.optionPrice
+                    }
                 })
             }
             this.setState({ 
                 clicks: this.state.clicks - 1,
-                totalPrice: this.state.totalPrice - (this.props.foodDetail.price*((100-this.props.foodDetail.promotion)/100)+optionPrice+this.state.priceSize)
+                totalPrice: this.state.totalPrice - (this.props.foodDetail.price*((100-this.props.foodDetail.promotion)/100)+optionPrice)
             })
         };
     }
@@ -168,7 +179,6 @@ class DishInfo extends Component {
         index = this.state.optionList.findIndex(optionObject => optionObject.foodOptionParent === option.foodOptionParent);
         if(index !== -1){
             var data = [...this.state.optionList];
-            var oldPriceSize = data[index].optionPrice;
             data.splice(index,1);
             option.quantity = 0;
             data.push(option)
@@ -378,9 +388,6 @@ class DishInfo extends Component {
     render() {
         var {cartQuantity,foodDetail} = this.props;
         var {foodOptions,storeVM} = foodDetail;
-        console.log(this.props.foodDetail)
-        console.log(this.props.foodCart)
-
         return (
             <div className="info-feedback-container">
                 <Row type="flex" justify="start">

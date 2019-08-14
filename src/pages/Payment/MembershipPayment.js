@@ -31,10 +31,8 @@ class MembershipPayment extends Component {
     }
 
     handleChange(event) {
-        console.log('1')
         if(event.target.value.length === 10){
             apiCaller(`customer/info?cardId=${event.target.value}`,'GET',null).then(res => {
-                console.log(res)
                 this.setState({
                     user: res.data,
                     isFound: true
@@ -57,7 +55,6 @@ class MembershipPayment extends Component {
 
     showConfirm(){
         if(this.state.isFound === true){
-            console.log(this.state.user)
             document.getElementById('modal-btn').click();
         }
     }
@@ -95,7 +92,6 @@ class MembershipPayment extends Component {
     }
 
     checkoutClick = (cart,total,orginPrice, customerId ) =>{
-        console.log(total)
         if(cart.length > 0){
             var orderDetail = cart.map((cartItem) =>{
                 

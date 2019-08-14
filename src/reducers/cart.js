@@ -172,20 +172,12 @@ const cart = (state = initState,action) => {
                     action.optionList.map(option => {
                         totalOption += option.optionPrice * option.quantity;
                     })
-                }
-                
+                }               
                 let newTotal = 0
                 let newOrigin = 0
                 let addPriceSize = action.priceSize+addedItem.priceSize;
-                console.log('==============')
-                console.log("addedItem.priceSize : "+addedItem.priceSize)
-                console.log("action.priceSize : "+action.priceSize)
-                console.log("addPriceSize : "+addPriceSize)
-                console.log('Final Price: '+(addedItem.price * ((100-addedItem.promotion)/100)  + totalOption + addPriceSize)* quantity)
                 let addPrice = (addedItem.price * ((100-addedItem.promotion)/100)  + totalOption + addPriceSize)* quantity - addedItem.totalPrice 
-                let addPriceOrigin = (addedItem.price  + totalOption + addPriceSize) * quantity - addedItem.totalPriceOrigin
-                console.log('addPrice ' +addPrice) 
-                console.log('addPriceOrigin '+addPriceOrigin) 
+                let addPriceOrigin = (addedItem.price  + totalOption + addPriceSize) * quantity - addedItem.totalPriceOrigin 
                 addedItem.cartQuantity = quantity;
                 addedItem.optionList = action.optionList;
                 addedItem.choosePriceSize = action.choosePriceSize;

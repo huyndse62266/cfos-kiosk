@@ -7,7 +7,6 @@ import './PaymentModal.css'
 export default class ConfirmPaymentModal extends Component {
     render() {
         var {user} = this.props
-        console.log(user)
         return (
             <div className="confirm-payment-modal-wrapper">
                 <Row type="flex" justify="space-around" align="middle">

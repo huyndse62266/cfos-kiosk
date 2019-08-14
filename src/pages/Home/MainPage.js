@@ -19,7 +19,6 @@ export default class MainPage extends Component {
 
   componentWillMount(){
     apiCaller(`get-banner?fcId=1`,'GET',null).then(res => {
-      console.log(res.data.image)
         this.setState({
             banner: res.data.image
         })     
@@ -28,7 +27,6 @@ export default class MainPage extends Component {
 
     render() {
       var {banner} = this.state
-      console.log(banner)
         return (
 
           <div>

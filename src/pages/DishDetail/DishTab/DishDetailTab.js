@@ -23,7 +23,6 @@ export default class DishDetailTab extends Component {
     }
     componentWillMount(){
         apiCaller(`foods/${this.props.food.foodId}`,'GET',null).then(res => {
-            console.log(res.data)
             this.setState({
                 food: res.data
             })

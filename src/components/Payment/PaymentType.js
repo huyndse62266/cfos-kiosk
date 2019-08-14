@@ -86,7 +86,7 @@ class PaymentType extends Component {
                         <NumberFormat value={this.props.pricetotal} displayType={'text'} thousandSeparator={','} />  <u>đ</u>
                     </Col>
                 </Row>
-                <Row className="payment-type-wrapper" type="flex" justify="space-around" align="middle">
+                {/* <Row className="payment-type-wrapper" type="flex" justify="space-around" align="middle">
                     <Col span={6} className="icon-type text-left">
                         <Icon component={Globalcardicon}/>
                     </Col>
@@ -100,7 +100,7 @@ class PaymentType extends Component {
                             <img src={napasLogo} className="payment-card-img"/>
                         </Row>
                     </Col>
-                </Row>
+                </Row> */}
                 <Link to="/payment/membership">
                     <button type="button" className=" btn membership-btn">
                         <Row className="" type="flex" justify="space-around" align="middle">

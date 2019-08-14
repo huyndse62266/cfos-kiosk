@@ -28,7 +28,6 @@ export default class DishStatus extends Component {
         return OptionString.slice(0,OptionString.length-2)
     }
     renderStatus = (status) =>{
-        console.log(status)
         if(status === "READY"){
             return (
                 <Row type="flex" justify="space-around" align="middle"className="w-100">
