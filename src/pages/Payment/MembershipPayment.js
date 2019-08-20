@@ -37,16 +37,24 @@ class MembershipPayment extends Component {
                     user: res.data,
                     isFound: true
                 },()=>{
+                    if(this.state.user.walletAmount - this.props.pricetotal < 0){
+                        message.error("Thẻ không đủ thanh toán")
+                    }
                     this.showConfirm()
                 })
             }).catch(error => {
-                if(error){
-                    this.setState({
-                        user: '',
-                        isFound: false
-                    })
-                    message.error('Thẻ không tồn tại')
-                }          
+                
+                if(error.response.status === 400){
+                    console.log('dasddsadasd')
+                    message.error("Thẻ của bạn không thể sử dụng")
+                }
+                if(error.response.status === 404){
+                    message.error("Thẻ của bạn chưa được đăng kí")
+                }
+                this.setState({
+                    user: '',
+                    isFound: false
+                })     
             })
             event.target.value= ''
             
@@ -80,7 +88,7 @@ class MembershipPayment extends Component {
     renderButton(loading){
 
         if(this.state.user.walletAmount - this.props.pricetotal < 0){
-            return(<button  type="button" className="btn submit-btn-modal" key="submit" loading={loading} onClick={this.handleOk} disabled>
+            return(<button  type="button" className="btn submit-disable-btn-modal" key="submit" loading={loading} onClick={this.handleOk} disabled>
             Xác nhận và thanh toán
           </button>)
         }else{

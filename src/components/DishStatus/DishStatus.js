@@ -52,7 +52,7 @@ export default class DishStatus extends Component {
             return(
                 <Row type="flex" justify="space-around" align="middle"className="w-100">
                     <Col span={20}>
-                        <span className="status-waiting">Cooking</span>
+                        <span className="status-waiting">Đang nấu</span>
                     </Col>
                     <Col span={4} className="done-icon"><Icon component={StatusCooking}/></Col>
                 </Row>

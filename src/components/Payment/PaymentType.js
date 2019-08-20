@@ -53,7 +53,7 @@ class PaymentType extends Component {
                     this.props.addOrder(res.data)
                 });           
             }).catch(error => {
-                if(error){
+                if(error.response.status === 400){
                     message.error(error.response.data.message)
                 }              
             })

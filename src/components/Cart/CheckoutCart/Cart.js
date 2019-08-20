@@ -23,7 +23,7 @@ export default class Cart extends Component {
     render() {
         var {food} = this.props;
         return (
-            <Row className="h-100 cart-checkout-container" type="flex" justify="space-around" align="middle">
+            <Row className="h-100 cart-checkout-container pb-2" type="flex" justify="space-around" align="middle">
                 <Col span={8} className="h-100">
                     <Row>
                         <Row className="display-quantity-checkout-wrapper">

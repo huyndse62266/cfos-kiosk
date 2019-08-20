@@ -57,7 +57,46 @@ class FoodType extends Component {
             <div>
 
             
-            {!this.props.items.length > 0 ? 
+           
+            <Row type="flex" justify="space-around" align="middle">
+                <Col span={3}className="text-center h-100 bg-white" style={{margin:'auto', textAlign: 'center'}}>
+                    <div>
+                        <h4 className="opensan-28-extrabold">{category.categoryName}</h4>
+                        {foods ? foods.length > 4 ? <button type="button" className="btn opensan-16-semibold bg-light" onClick={this.checkIsExpand}>{this.state.isExpand === true ? <div>Thu gọn <FontAwesomeIcon icon={faAngleUp} /></div> : <div>Xem thêm <FontAwesomeIcon icon={faAngleDown} /></div> } </button>:<div/> : <div/>}
+                    </div>
+                </Col>
+                
+                <Col span={21} className="d-flex flex-column bg-light">
+                    <Row type="flex" justify="start">
+                     
+                        {foods ? foods.map((food, index) => {
+                            if(index < 4)
+                                return (
+                                    <Col span={6} className="px-4" key={index}>
+                                        <FoodItem food={food}/>
+                                    </Col> 
+                                )
+                            }) : <span></span>}
+                    </Row>
+                    <span id="more">
+                        <Row type="flex" justify="start">
+                            {this.state.isExpand ? foods.map((food, index) => {
+                            if(index > 3)
+                                return (
+                                    <Col span={6} className="px-4">
+                                        <FoodItem key={index} food={food} index={index}/>
+                                    </Col> 
+                                )
+                            }): <span></span>}
+                        </Row>
+                    </span>
+                    { categoryLength-1 !== index ? <hr style={{width: '95%'}}/>:<span/>}
+                </Col>
+            </Row>
+
+
+            
+            {/* {!this.props.items.length > 0 ? 
             <Row type="flex" justify="start">
                 <Col className="category-wrapper">
                     <div>
@@ -131,7 +170,7 @@ class FoodType extends Component {
                     </span>
                     { categoryLength-1 !== index ? <hr style={{width: '95%'}}/>:<span/>}
                 </Col>
-            </Row>}
+            </Row>} */}
             </div>
         )
     }

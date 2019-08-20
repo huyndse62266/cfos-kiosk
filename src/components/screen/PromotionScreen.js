@@ -29,7 +29,6 @@ import apiCaller from '../../utils/ApiCaller'
     render() {
         return(
             <Row className="pt-5" type="flex" justify="start">
-                {this.props.items.length > 0 ?
                 <div> 
                     <Col style={{width: '83%'}}>
                         {this.state.categories.map((category,index) =>{
@@ -39,14 +38,28 @@ import apiCaller from '../../utils/ApiCaller'
                     <Col style={{width: '17%', position:'fixed', top: '6%', right: 0}}>
                         <PreviewCart />
                     </Col>
-                </div>:
-                <Col span={24}>
-                    {this.state.categories.map((category,index) =>{
-                        return (<FoodType key={index} category={category} index={index} categoryLength={this.state.categories.length} type={'promotion'}  />)
-                    })}
-                </Col>
-                }
-         </Row>
+                </div>
+            </Row>
+
+            // <Row className="pt-5" type="flex" justify="start">
+            // {this.props.items.length > 0 ?
+            // <div> 
+            //     <Col style={{width: '83%'}}>
+            //         {this.state.categories.map((category,index) =>{
+            //             return (<FoodType key={index} category={category} index={index} categoryLength={this.state.categories.length} type={'promotion'}/>)
+            //         })}
+            //     </Col>
+            //     <Col style={{width: '17%', position:'fixed', top: '6%', right: 0}}>
+            //         <PreviewCart />
+            //     </Col>
+            // </div>:
+            // <Col span={24}>
+            //     {this.state.categories.map((category,index) =>{
+            //         return (<FoodType key={index} category={category} index={index} categoryLength={this.state.categories.length} type={'promotion'}  />)
+            //     })}
+            // </Col>
+            // }
+            // </Row>
         )
         
     }

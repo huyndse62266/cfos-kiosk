@@ -45,6 +45,6 @@
     right: 15px;
 }
 .cart-checkout-container{
-    padding: 0% 2%;
+    padding: 0% 2% 5% 2% !important;
     border-bottom: 1px solid lightgray
 }

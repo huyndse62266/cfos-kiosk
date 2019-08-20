@@ -53,7 +53,7 @@ export default class DishFeedback extends Component {
                             <Col span={2}><Icon component={StoreLocation}  className="store-location-icon-feedback"/></Col>
                             <Col span={22}>
                                 <h6 className="store-name-info mb-0">
-                                    {foodDetail.storeVM.storeName}
+                                    {foodDetail.storeName}
                                 </h6>
                             </Col>
                         </Row>

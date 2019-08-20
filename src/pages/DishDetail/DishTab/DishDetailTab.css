@@ -22,7 +22,7 @@
     font-family: 'Open Sans', sans-serif;
     font-size: 24px;
     background-color: #FFFFFF;
-    color: #000000;
+    color: #212121;
     padding: 2% 0;
     display: flex;
     justify-content: center; /* align horizontal */
@@ -57,11 +57,16 @@
 }
 
 .ant-tabs-tab{
-    padding: 1% 1% !important;
+    padding: 0.7% 1% !important;
     height: 100% !important;
 }
 
 .icon-tab{
     font-size: 30px;
-    margin-right: 2%;
+}
+.ant-tabs-bar{
+    margin: 0 !important
+}
+.ant-tabs-tab-active svg path{
+    fill: #EB2C17
 }

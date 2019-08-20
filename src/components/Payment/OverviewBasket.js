@@ -39,10 +39,16 @@ class OverviewBasket extends Component {
             visible: false,
         });
     };
+    
+    hideModalInPayment = ()=>{
+        this.setState({
+            visible: false
+        })
+    }
     render() {
         let addedItems =  this.props.items.map((food, index) => {
             return (
-                <Col span={24} className="px-2 py-1" key={index }>
+                <Col span={24} className="px-2" key={index }>
                     <Cart key={index} food={food} index={index} cartQuantity={food.cartQuantity} type={'done'}/>
                 </Col>)})
  
@@ -100,7 +106,7 @@ class OverviewBasket extends Component {
                     centered
                     className="view-basket-modal"
                 >
-                    <ViewBasket total={this.props.pricetotal} origin={this.props.originPrice}/>
+                    <ViewBasket total={this.props.pricetotal} isInPayment={true} hideModal={this.hideModalInPayment} origin={this.props.originPrice}/>
                 </Modal>
 
             </div>

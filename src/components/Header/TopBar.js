@@ -9,7 +9,12 @@ import ViewBasket from '../../pages/Basket/ViewBasket'
 import {ReactComponent as ExpandBasketSVG } from '../../icons/expandBasket.svg'
 import {ReactComponent as LongArrowLeft } from '../../icons/LongArrowLeft.svg'
 import {ReactComponent as Basketicon } from '../../icons/Basketicon.svg'
-
+import {ReactComponent as PopularIcon } from '../../icons/Popular icon.svg'
+import {ReactComponent as SaleIcon } from '../../icons/Sale icon.svg'
+import {ReactComponent as DishIcon } from '../../icons/Dish icon-1.svg'
+import {ReactComponent as DrinkIcon } from '../../icons/Drink icon.svg'
+import {ReactComponent as ComboIcon } from '../../icons/Comboicon.svg'
+import {ReactComponent as StoreIcon } from '../../icons/StoreIcon.svg'
 import './Header.css'
 
 
@@ -58,29 +63,53 @@ class TopBar extends Component {
                 <Col span={17} style={{width:'72.6%'}} className="menu-border">
                     <Menu onClick={this.handleClick} selectedKeys={[this.state.current]} mode="horizontal" inlineIndent='50' className="menu-wrapper">
                         <Menu.Item key="popular" className="menu-item-1">
-                            <Link to="/menu/popular" className="menu-item-wrapper">   
-                                <span className="menu-title"><FontAwesomeIcon icon={faStar} className="menu-icon"/> Nổi bật</span></Link>
+                            <Link to="/menu/popular" className="menu-item-wrapper">
+                                <Row className="menu-title" type="flex" justify="center">
+                                    <Col span={4} className="test-1"><Icon component={PopularIcon} className="menu-icon"/></Col>    
+                                    <Col span={12} >Nổi bật</Col>    
+                                </Row>   
+                              </Link>
                         </Menu.Item>
                         <Menu.Item key="promotion" className="menu-item">
                                 <Link to="/menu/promotion" className="menu-item-wrapper">
-                                    <span className="menu-title"><FontAwesomeIcon icon={faPercentage} className="menu-icon"/>Khuyến mãi</span></Link>   
+                                    <Row className="menu-title" type="flex" justify="center">
+                                        <Col span={5}><Icon component={SaleIcon} className="menu-icon"/></Col>    
+                                        <Col span={17} >Khuyến mãi</Col>    
+                                    </Row>   
+                                    {/* <span className="menu-title"><FontAwesomeIcon icon={faPercentage} className="menu-icon"/>Khuyến mãi</span>  */}
+                                </Link>  
                         </Menu.Item>
                         <Menu.Item key="meal" className="menu-item">                 
                                 <Link to="/menu/meal" className="menu-item-wrapper">
-                                    <span className="menu-title"><FontAwesomeIcon icon={faConciergeBell} className="menu-icon" />Đồ ăn</span></Link>       
+                                    <Row className="menu-title" type="flex" justify="center">
+                                        <Col span={3}><Icon component={DishIcon} className="menu-icon"/></Col>    
+                                        <Col span={12} >Đồ ăn</Col>    
+                                    </Row>   
+                                </Link>       
                         </Menu.Item>
                         <Menu.Item key="drink" className="menu-item">        
                                 <Link to="/menu/drink" className="menu-item-wrapper">        
-                                    <span className="menu-title"><FontAwesomeIcon icon={faMugHot} className="menu-icon"/>Đồ uống</span></Link>                     
+                                    <Row className="menu-title" type="flex" justify="center">
+                                        <Col span={4}><Icon component={DrinkIcon} className="menu-icon"/></Col>    
+                                        <Col span={12} >Đồ uống</Col>    
+                                    </Row>  
+                                </Link>                     
                         </Menu.Item>
                         <Menu.Item key="combo" className="menu-item">                           
                             <Link to="/menu/combo" className="menu-item-wrapper">
-                                
-                                <span className="menu-title"><FontAwesomeIcon icon={faThumbsUp} className="menu-icon"/>Combo</span></Link>                        
+                                <Row className="menu-title" type="flex" justify="center">
+                                    <Col span={4}><Icon component={ComboIcon} className="menu-icon"/></Col>    
+                                    <Col span={12} >Combo</Col>    
+                                </Row>   
+                            </Link>                        
                         </Menu.Item>
                         <Menu.Item key="restaurant" className="menu-item-1">                     
                             <Link to="/menu/restaurant" className="menu-item-wrapper">                            
-                                <span className="menu-title"><FontAwesomeIcon icon={faUtensils} className="menu-icon"/>Nhà hàng</span></Link>                       
+                                <Row className="menu-title" type="flex" justify="center">
+                                    <Col span={5}><Icon component={StoreIcon} className="menu-icon"/></Col>    
+                                    <Col span={12} >Nhà hàng</Col>    
+                                </Row>  
+                            </Link>                       
                         </Menu.Item>
                     </Menu>
                 </Col>
@@ -105,8 +134,10 @@ class TopBar extends Component {
                         </a>
                     </Row> :
                      <div className="empty-cart">
-                        <Icon component={Basketicon} className="empty-basket-icon"/>
-                        <span className="px-3">Chưa có món ăn</span>
+                        <Row type="flex" justify="space-around" align="middle" className="px-3">
+                            <Col span={1}><Icon component={Basketicon} className="empty-basket-icon"/></Col>
+                            <Col span={20}> <span className="px-3">Chưa có món ăn</span></Col>
+                        </Row>
                     </div> }
                    
                 </Col>

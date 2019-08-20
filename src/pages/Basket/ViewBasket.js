@@ -17,6 +17,10 @@ class ViewBasket extends Component {
       show: true
     };
   }
+
+  hideModal = () =>{
+    this.props.hideModal();
+  }
   IncrementItem = () => {
     this.setState({ clicks: this.state.clicks + 1 });
   };
@@ -93,14 +97,19 @@ class ViewBasket extends Component {
               </Row>
             </div>
             <div className="button-purchase-wrapper">
-                <Link to="/payment">
+              {this.props.isInPayment === true ?<button type="button" className="btn button-purchase-view-basket" onClick={this.hideModal}>
+                    <Row type="flex" justify="space-around" align="middle">
+                      <Col span={8} className="text-right"><Icon component={PriceCartWhite} className="price-cart-view-basket"/></Col>
+                      <Col span={16} className="text-left px-2">Thanh toán</Col>
+                    </Row>
+                  </button> :<Link to="/payment">
                   <button type="button" className="btn button-purchase-view-basket">
                     <Row type="flex" justify="space-around" align="middle">
                       <Col span={8} className="text-right"><Icon component={PriceCartWhite} className="price-cart-view-basket"/></Col>
                       <Col span={16} className="text-left px-2">Thanh toán</Col>
                     </Row>
                   </button>
-                </Link>  
+                </Link>}
             </div>
           </div>
         </Col>

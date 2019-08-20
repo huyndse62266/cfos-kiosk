@@ -55,7 +55,7 @@ class CheckOrder extends Component {
                     order: res.data
                 })
             }).catch(error =>{
-                message.error(error.response.data.message)
+                message.error("Đơn hàng này không có trong hôm nay")
             })
         }else{
             message.error("Vui lòng nhập mã đơn hàng")

@@ -98,22 +98,40 @@ class DishInfo extends Component {
         
     }
 
+    handelSelectMore = (e,option) => {
+        if(e.target.value === true){
+            let newOptionList = this.state.optionList;
+            newOptionList.push(option)
+            this.setState({
+                optionList: newOptionList
+            })
+        }else{
+            let index = -1;
+            index = this.state.optionList.findIndex(optionObject => optionObject.foId === option.foId);
+            if(index  != -1){
+                let newOptionList = this.state.optionList;
+                newOptionList.splice(index,1);
+                this.setState({
+                    optionList: newOptionList
+                })
+            }
+        }
+
+      }
+    
+
     
     IncrementItem = () => {
         let optionPrice = 0;
-        console.log(this.state.optionList)
         if(this.state.optionList){
             this.state.optionList.map(option => {
                 if(option.count === true){
-                    console.log(optionPrice)
                     optionPrice += option.optionPrice * parseInt(option.quantity);
                 }else{
-                    console.log(optionPrice)
                     optionPrice += option.optionPrice
                 }
             })
         }
-        console.log(optionPrice)
         this.setState({ 
             clicks: this.state.clicks + 1,
             totalPrice: this.state.totalPrice + (this.props.foodDetail.price*((100-this.props.foodDetail.promotion)/100) +optionPrice )
@@ -159,14 +177,12 @@ class DishInfo extends Component {
         if(index !== -1){
             var data = [...this.state.optionList];
             data.pop(data[index]);
-            option.quantity = 0;
             data.push(option)
             this.setState({
                 optionList: data,
             })
         }else{
             let newOptionList = this.state.optionList;
-            option.quantity = 0;
             newOptionList.push(option);
             this.setState({
                 optionList: newOptionList,
@@ -180,7 +196,6 @@ class DishInfo extends Component {
         if(index !== -1){
             var data = [...this.state.optionList];
             data.splice(index,1);
-            option.quantity = 0;
             data.push(option)
             if(this.state.clicks > 0){
                 this.setState({
@@ -199,7 +214,6 @@ class DishInfo extends Component {
             
         }else{
             let newOptionList = this.state.optionList;
-            option.quantity = 0;
             newOptionList.push(option);
             if(this.state.clicks > 0){
                 this.setState({
@@ -383,6 +397,24 @@ class DishInfo extends Component {
             </Row>
         </div>
         }
+        else if(foodOption.selectMore === true){
+            return <div key={index}>
+            <Row>
+                <h6 className="option-title">{foodOption.foodOptionNameParent}</h6>
+            </Row>
+            <Row className="mb-3">
+                <form className="form cf">
+                    <section className ="plan cf">
+                        {foodOption.foodOptionVMS.map((foodOptionVMSDetail, index) => 
+                        <Col span={8} key={index}>
+                            <input type="checkbox" name="checkbox-input" id={foodOptionVMSDetail.foId} value={foodOptionVMSDetail.foId} onChange={(e) => {this.handelSelectMore({target: {name: e.target.value,value: e.target.checked}},foodOptionVMSDetail )}} /><label className="check-box-label" htmlFor={foodOptionVMSDetail.foId}>{foodOptionVMSDetail.foName}</label>
+                        </Col>)
+                        }
+                    </section>
+                </form>
+            </Row>
+        </div>
+        }
     }
 
     render() {
@@ -445,7 +477,7 @@ class DishInfo extends Component {
                                 </Row>
                                 {/* thẻ giảm giá */}
                                 {foodDetail.promotion > 0? 
-                                    <Row type="flex" justify="space-around" align="middle">
+                                    <Row type="flex" justify="space-around" align="middle" className="py-3">
                                         <Col span={2}>
                                             <Icon component={PromotionTagIcon} className="promotion-icon"/>
                                         </Col>

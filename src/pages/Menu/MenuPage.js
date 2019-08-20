@@ -8,6 +8,7 @@ import DishScreen from '../../components/screen/DishScreen';
 import DrinkScreen from '../../components/screen/DrinkScreen';
 import RestaurantScreen from '../../components/screen/RestaurantScreen';
 import ComboScreen from '../../components/screen/ComboScreen';
+import './MenuPage.css'
 const { Header, Content } = Layout;
 export default class MenuPage extends Component {
     
@@ -18,7 +19,7 @@ export default class MenuPage extends Component {
                 <Header style={{padding: 0, backgroundColor: 'white', position: 'fixed', zIndex: 50, width: '100%', lineHeight: 0}}>
                    <TopBar/>
                 </Header>
-                <Content style={{backgroundColor:'white'}} className="pt-3">
+                <Content className="content-container">
                     <Switch>
                         <Route exact path={match.path}  component={({history}) => <PopularScreen history={history}/>}></Route>
                         <Route  path={match.path + '/popular'} component={({history}) => <PopularScreen history={history}/>}></Route>

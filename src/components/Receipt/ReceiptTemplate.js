@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Row, Col } from 'antd';
 import NumberFormat from 'react-number-format'; 
+import './Receipt.css'
 export default class ReceiptTemplate extends Component {
 
     render() {
@@ -9,12 +10,11 @@ export default class ReceiptTemplate extends Component {
         return (
             <div>
                 <Row className="text-center">
-                    <span className="opensan-18-semibold">Food House</span>
+                    <span className="opensan-18-semibold">Press Meal</span>
                 </Row>
                 <Row className="px-2">
                     <span className="bill-address">
-                        Address: Đường D1, Khu Công Nghệ Cao, Phường Tân Phú, Quận 9, Hồ
-                    Chí Minh 715650
+                        330 Trần Hưng Đạo, Phường Nguyễn Cư Trinh, Quận 1, Tp. HCM.
                     </span>
                 </Row>
                 <Row className="text-center py-2">
@@ -40,13 +40,13 @@ export default class ReceiptTemplate extends Component {
                                 <td><h6 style={{fontSize:'11px'}}>{item.foodName}</h6></td>
                                 <td className="text-center"><h6 style={{fontSize:'11px'}}>{item.cartQuantity}</h6></td>
                                 <td><h6 style={{fontSize:'11px'}}>{item.price}</h6></td>
-                                <td><h6 style={{fontSize:'11px'}}>{item.cartQuantity * item.price}</h6></td>
+                                <td><h6 style={{fontSize:'11px'}}>{item.totalPriceOrigin}</h6></td>
                                 </tr>
                             }):<tr></tr>}
                         </tbody>
                     </table>
                 </Row>
-                <Row type="flex" justify="end" className="py-4">
+                <Row type="flex" justify="end" className="py-4" className="border-footer-bill">
                     <Col span={16} style={{textAlign:'right'}}>
                         <h6>Tổng SL:  </h6>
                         <h6>Tạm tính:  </h6>
@@ -60,6 +60,10 @@ export default class ReceiptTemplate extends Component {
                         <h6><NumberFormat value={totalPrice} displayType={'text'} thousandSeparator={','} /></h6> 
                     </Col>  
                 </Row>
+                <Row className="text-center">
+                    Chúc quý khách ngon miệng
+                </Row>
+                
           </div>
         )
     }

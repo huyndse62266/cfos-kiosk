@@ -19,6 +19,11 @@
     margin-top: -15%;
     z-index: 30;
     background-image: linear-gradient(white,black);
+    padding: 0 !important
+}
+
+.img-preview-cart{
+    margin-top: -1%
 }
 .img{
     border-radius: 5px;
@@ -93,6 +98,12 @@
 }
 .store-location-icon{
     font-size: 180%;
+}
+
+.food-name-cart-btn{
+    background: none;
+    padding: 0 !important;
+    border: 0 !important;
 }
 @media all and (max-width: 1920px) {
     

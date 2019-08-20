@@ -41,13 +41,13 @@ class CartItemSimple extends Component {
                             </button>
                         </Col>
                     </Row>
-                    <div className="img-wrapper-display-name"> 
-                        <img src={food.foodImage} className="img" alt="Image Not Found"/>
-                    </div>
+                    <button type="button" className="img-wrapper-display-name"> 
+                        <img src={food.foodImage} className="img" alt="Image Not Found" className="img-preview-cart"/>
+                    </button>
                     <Row className="food-info-cart">
-                        <div className="opensan-20-extrabold d-inline-block text-truncate text-truncate-width">
+                        <button type="button" className="opensan-20-extrabold d-inline-block text-truncate text-truncate-width food-name-cart-btn">
                             {food.foodName}
-                        </div>
+                        </button>
                         <div className="opensan-18-semibold"><NumberFormat value={food.price} displayType={'text'} thousandSeparator={','}/>  đ</div>
                     </Row>
                 </Row>

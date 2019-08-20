@@ -30,7 +30,6 @@ class PopularScreen extends Component {
         return (
             
             <Row className="pt-5" type="flex" justify="start">
-                {this.props.items.length > 0 ?
                 <div> 
                     <Col style={{width: '83%'}}>
                         {this.state.categories.map((category,index) =>{
@@ -40,15 +39,29 @@ class PopularScreen extends Component {
                     <Col style={{width: '17%', position:'fixed', top: '6%', right: 0}}>
                         <PreviewCart />
                     </Col>
-                </div>:
-                <Col span={24}>
-                    {this.state.categories.map((category,index) =>{
-                        return (<FoodType key={index} category={category} index={index} type={'popular'} categoryLength={this.state.categories.length}/>)
-                    })}
-                </Col>
-                }
-               
+                </div>    
             </Row>
+
+            // <Row className="pt-5" type="flex" justify="start">
+            // {this.props.items.length > 0 ?
+            // <div> 
+            //     <Col style={{width: '83%'}}>
+            //         {this.state.categories.map((category,index) =>{
+            //             return (<FoodType key={index} category={category} index={index} type={'popular'} categoryLength={this.state.categories.length}/>)
+            //         })}
+            //     </Col>
+            //     <Col style={{width: '17%', position:'fixed', top: '6%', right: 0}}>
+            //         <PreviewCart />
+            //     </Col>
+            // </div>:
+            // <Col span={24}>
+            //     {this.state.categories.map((category,index) =>{
+            //         return (<FoodType key={index} category={category} index={index} type={'popular'} categoryLength={this.state.categories.length}/>)
+            //     })}
+            // </Col>
+            // }
+
+            // </Row>
         )
     }
 }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Tabs} from 'antd';
+import { Tabs,Row,Col, Icon} from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUtensils } from '@fortawesome/free-solid-svg-icons'
 import { faCommentDots } from '@fortawesome/free-regular-svg-icons'
@@ -7,7 +7,8 @@ import './DishDetailTab.css'
 import apiCaller from '../../../utils/ApiCaller'
 import DishInfo from '../DishInfo/DishInfo'
 import DishFeedback from  '../DishFeedback/DishFeedback'
-
+import {ReactComponent as Dishicon } from '../../../icons/Dish icon.svg'
+import {ReactComponent as Commenticon } from '../../../icons/Comment icon.svg'
 const { TabPane } = Tabs;
 
 
@@ -32,10 +33,17 @@ export default class DishDetailTab extends Component {
         var {selected} = this.props;
         return (
             <Tabs defaultActiveKey={selected} size={'default'} style={{width: '100%'}}>
-                <TabPane tab={<div className="tab-button"><FontAwesomeIcon icon={faUtensils} className="icon-tab"/>Chi tiết món ăn </div>} key="1" size="large">
+                <TabPane tab={
+                <Row type="flex" justify="space-around" align="middle" className="tab-button text-center">
+                    <Col span={1}><Icon component={Dishicon} className="icon-tab"/></Col>
+                    <Col span={9}>Chi tiết món ăn </Col>
+                </Row>} key="1" size="large">
                     <DishInfo foodDetail={this.state.food} foodCart={this.props.foodCart?this.props.foodCart:this.props.food} cartQuantity={this.props.cartQuantity}/>
                 </TabPane>
-                <TabPane tab={<div className="tab-button"><FontAwesomeIcon icon={faCommentDots} className="icon-tab"/>Phản hồi</div>} key="2"  size="large">
+                <TabPane tab={<Row type="flex" justify="space-around" align="middle" className="tab-button text-center">
+                    <Col span={1}><Icon component={Commenticon} className="icon-tab"/></Col>
+                    <Col span={6}>Đánh giá</Col>
+                </Row>} key="2"  size="large">
                    <DishFeedback foodDetail={this.state.food}/>
                 </TabPane>   
             </Tabs>
