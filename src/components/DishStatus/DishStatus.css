@@ -101,7 +101,16 @@ img{
     color:#212121;
     font-size: 16px;
     font-family: 'Open Sans', sans-serif;
-    font-weight: 500
+    font-weight: 500;
+    word-wrap: break-word;
+    height: 62px;
+  
+    max-width: 98%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* number of lines to show */
+    -webkit-box-orient: vertical;
 }
 
 .dish-status-promotion{

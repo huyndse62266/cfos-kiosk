@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
-import {Col,Row,Icon} from 'antd'
+import {Col,Row,Icon,Modal} from 'antd'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTrashAlt,faMapMarkerAlt, faMinus, faPlus } from '@fortawesome/free-solid-svg-icons'
+import { faTrashAlt, faMinus, faPlus } from '@fortawesome/free-solid-svg-icons'
 import NumberFormat from 'react-number-format'; 
 import { connect } from 'react-redux'
-import { removeCart,addQuantity,subQuantity } from '../../../action/cart';
+import { removeCart,addQuantity,subQuantity, findCart } from '../../../action/cart';
 import {ReactComponent as StoreLocation } from '../../../icons/Store Location icon.svg'
+import DishDetail from '../../../pages/DishDetail/DishTab/DishDetailTab'
 
 import './PreviewCart.css'
 class CartItemSimple extends Component {
@@ -13,9 +14,23 @@ class CartItemSimple extends Component {
         super(props);
         this.state = {
            clicks: this.props.food.cartQuantity,
-          show: true
+          show: true,
+          visible: false,
         };
     }
+
+
+    showModal = (id) => {
+        this.setState({
+            visible: true,
+        });
+        this.props.findCart(id);
+    };
+    handleCancel = e => {
+        this.setState({
+            visible: false,
+        });
+    };
     removeItem = (id) =>{
         this.props.removeItem(id);     
     }
@@ -30,7 +45,7 @@ class CartItemSimple extends Component {
         this.setState({ show: !this.state.show });
     }
     render() {
-        var {food} = this.props;
+        var {food, item} = this.props;
         return (
             <div className="mb-4">
                 <Row className="img-button-wrapper">
@@ -41,13 +56,13 @@ class CartItemSimple extends Component {
                             </button>
                         </Col>
                     </Row>
-                    <button type="button" className="img-wrapper-display-name"> 
-                        <img src={food.foodImage} className="img" alt="Image Not Found" className="img-preview-cart"/>
-                    </button>
+                    <div className="img-wrapper-display-name"> 
+                        <img src={food.foodImage} className="img" alt="Image Not Found" onClick={()=>{this.showModal(food.foodId)}} />
+                    </div>
                     <Row className="food-info-cart">
-                        <button type="button" className="opensan-20-extrabold d-inline-block text-truncate text-truncate-width food-name-cart-btn">
+                        <div className="opensan-20-extrabold d-inline-block text-truncate text-truncate-width" onClick={()=>{this.showModal(food.foodId)}}>
                             {food.foodName}
-                        </button>
+                        </div>
                         <div className="opensan-18-semibold"><NumberFormat value={food.price} displayType={'text'} thousandSeparator={','}/>  đ</div>
                     </Row>
                 </Row>
@@ -79,6 +94,20 @@ class CartItemSimple extends Component {
                     </Col>
   
                 </Row>
+                <Modal
+                    visible={this.state.visible}
+                    onOk={this.handleOk}
+                    onCancel={this.handleCancel}
+                    closable
+                    width="65%"
+                    bodyStyle={{padding:0, height: '850px'}}
+                    footer={null}
+                    centered
+                    className="view-info-modal"
+                    >
+                        
+                    <DishDetail food={food} foodCart={item} cartQuantity={item!==undefined?item.cartQuantity:0} selected = {'1'} type={'add'}/>
+                </Modal>
             </div>
         )
     }
@@ -93,7 +122,18 @@ const mapDispatchToProps = (dispatch)=>{
         },
         subQuantity:(id) =>{
             dispatch(subQuantity(id))
+        },
+        findCart: (id) => {
+            dispatch(findCart(id))
         }
     }
 }
-export default connect(null,mapDispatchToProps)(CartItemSimple)
+
+const mapStateToProps = (state)=>{
+    return{     
+        item: state.cart.findItem,
+    }
+}
+
+
+export default connect(mapStateToProps,mapDispatchToProps)(CartItemSimple)

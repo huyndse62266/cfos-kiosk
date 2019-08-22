@@ -44,7 +44,7 @@ export default class DishDetailTab extends Component {
                     <Col span={1}><Icon component={Commenticon} className="icon-tab"/></Col>
                     <Col span={6}>Đánh giá</Col>
                 </Row>} key="2"  size="large">
-                   <DishFeedback foodDetail={this.state.food}/>
+                   <DishFeedback foodDetail={this.state.food} foodCart={this.props.foodCart?this.props.foodCart:this.props.food} />
                 </TabPane>   
             </Tabs>
         )

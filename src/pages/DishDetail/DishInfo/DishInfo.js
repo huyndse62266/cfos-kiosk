@@ -250,7 +250,12 @@ class DishInfo extends Component {
         foodDetail.foodOptions.map((option, index) => {
             if(option.foodOptionVMS !== null){
                 option.foodOptionVMS.map((optionVMS) => {
-                    optionVMS.quantity = 0;
+                    if(optionVMS.count === 0){
+                        optionVMS.quantity = 0;
+                    }else if(optionVMS.selectMore === false && optionVMS.count === false){
+                        document.getElementById(optionVMS.foId).checked = false;
+                    }
+                        
                 })
             }
         })
@@ -389,7 +394,7 @@ class DishInfo extends Component {
                     <section className ="plan cf">
                         {foodOption.foodOptionVMS.map((foodOptionVMSDetail, index) => 
                         <Col span={8} key={index}>
-                            <input type="radio" name="radio1" id={foodOptionVMSDetail.foId} value={foodOptionVMSDetail.foId} onChange={ () => this.stickOption(foodOptionVMSDetail)} /><label className="check-box-label" htmlFor={foodOptionVMSDetail.foId}>{foodOptionVMSDetail.foName}</label>
+                            <input type="radio" name="radio1" id={foodOptionVMSDetail.foId} value={foodOptionVMSDetail.foId} onChange={ () => this.stickOption(foodOptionVMSDetail)} /><label className="radio-button-label" htmlFor={foodOptionVMSDetail.foId}>{foodOptionVMSDetail.foName}</label>
                         </Col>)
                         }
                     </section>
@@ -407,7 +412,8 @@ class DishInfo extends Component {
                     <section className ="plan cf">
                         {foodOption.foodOptionVMS.map((foodOptionVMSDetail, index) => 
                         <Col span={8} key={index}>
-                            <input type="checkbox" name="checkbox-input" id={foodOptionVMSDetail.foId} value={foodOptionVMSDetail.foId} onChange={(e) => {this.handelSelectMore({target: {name: e.target.value,value: e.target.checked}},foodOptionVMSDetail )}} /><label className="check-box-label" htmlFor={foodOptionVMSDetail.foId}>{foodOptionVMSDetail.foName}</label>
+                            <input type="checkbox" name="checkbox-input" id={foodOptionVMSDetail.foId} value={foodOptionVMSDetail.foId} onChange={(e) => {this.handelSelectMore({target: {name: e.target.value,value: e.target.checked}},foodOptionVMSDetail )}} />
+                            <label className="check-box-label" htmlFor={foodOptionVMSDetail.foId}><Row className="h-100" type="flex" justify="space-around" align="middle"><Col>{foodOptionVMSDetail.foName}</Col></Row></label>
                         </Col>)
                         }
                     </section>

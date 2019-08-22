@@ -184,19 +184,27 @@ const cart = (state = initState,action) => {
                 }   
             }else{
                 let totalOption  = 0;
-                let oldPriceSize = addedItem.priceSize
+                let priceSize =0;
+                if(addedItem.priceSize != undefined){
+                    priceSize = addedItem.priceSize
+                }
                 if(action.optionList){
                     action.optionList.map(option => {
                         if(option.count === true){
                             totalOption += option.optionPrice * option.quantity;
                         }
                     })
-                }               
+                }
+            
                 let newTotal = 0
                 let newOrigin = 0
-                let addPriceSize = action.priceSize+addedItem.priceSize;
+    
+                let addPriceSize = action.priceSize+priceSize;
                 let addPrice = (addedItem.price * ((100-addedItem.promotion)/100)  + totalOption + addPriceSize)* quantity - addedItem.totalPrice 
                 let addPriceOrigin = (addedItem.price  + totalOption + addPriceSize) * quantity - addedItem.totalPriceOrigin 
+                console.log(addPriceSize)
+                console.log(addPrice)
+                console.log(addPriceOrigin)
                 addedItem.cartQuantity = quantity;
                 addedItem.optionList = action.optionList;
                 addedItem.choosePriceSize = action.choosePriceSize;

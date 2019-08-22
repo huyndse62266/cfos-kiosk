@@ -52,7 +52,7 @@ class PreviewCart extends Component {
                     className="area"
                     contentClassName="content"
                     horizontal={false} style={{height: '78%'}}>
-                    <Row className="py-2">
+                    <Row className="pt-5 pb-2">
                         {addedItems}
                     </Row>
                 </ScrollArea>

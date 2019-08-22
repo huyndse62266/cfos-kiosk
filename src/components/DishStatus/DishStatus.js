@@ -38,7 +38,7 @@ export default class DishStatus extends Component {
                     <Col span={4} className="done-icon"><Icon component={StatusDone}/></Col>
                 </Row>
             )
-        }else if(status === "CANCELLED" || status === "GUEST_CANCEL"){
+        }else if(status === "CANCELLED" || status === "GUEST_CANCEL" || status === "REFUNDED"){
             return(
                 <Row type="flex" justify="space-around" align="middle"className="w-100">
                     <Col span={20}>
@@ -89,7 +89,7 @@ export default class DishStatus extends Component {
                     </Row>
                     <Row>
                         <Col>
-                            {orderDetail.orderDetailFoodOption.length > 0 ? <span className="food-option-check-order">{this.renderFoodOptionName(orderDetail.orderDetailFoodOption)}</span>:<span className="food-option-check-order">Tùy chọn: Mặc định</span> }
+                            {orderDetail.orderDetailFoodOption.length > 0 ? <div className="food-option-check-order">{this.renderFoodOptionName(orderDetail.orderDetailFoodOption)}</div>:<span className="food-option-check-order">Tùy chọn: Mặc định</span> }
                         </Col>
                     </Row>                  
                 </Col>               

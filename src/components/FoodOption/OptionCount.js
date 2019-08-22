@@ -10,7 +10,8 @@ export default class MoreOption extends Component {
         super(props);
         this.state = {
           clicks: 0,
-          show: true
+          show: true,
+          ResetDefault: this.props.isResetDefault
         };
     }
     IncrementOption = () => {
@@ -47,9 +48,10 @@ export default class MoreOption extends Component {
         
     }
     render() {
+        console.log(this.props.isResetDefault)
         var {foodOption} = this.props
-        if(this.props.isResetDefault === true){
-            this.state.clicks =0
+        if(this.state.ResetDefault === true){
+            this.state.clicks = 0
             this.props.changeDefaultStatus(false)
         }
         return (

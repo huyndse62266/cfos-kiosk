@@ -15,7 +15,8 @@ export default class DishFeedback extends Component {
         super(props);
         this.state = {
           clicks: 0,
-          show: true
+          show: true,
+          data: ''
         };
     }
     IncrementItem = () => {
@@ -28,9 +29,23 @@ export default class DishFeedback extends Component {
         this.setState({ show: !this.state.show });
     }
 
+    componentWillReceiveProps({foodDetail}){
+        if(foodDetail){
+            this.setState({
+                data: foodDetail
+            })
+        }
+        
+    }
+
     render() {
         var {foodDetail} = this.props;    
         var {feedbackVMS} = foodDetail;
+        // if(this.props.foodDetail.foodCourtVM){
+        //     console.log(this.props.foodDetail.foodCourtVM.fcName)
+        // }
+        console.log(this.state.data)
+        
         return (
             <Row type="flex" justify="start" className="h-100">
                 <Col span={8} className="info-feedback-container">
@@ -53,7 +68,7 @@ export default class DishFeedback extends Component {
                             <Col span={2}><Icon component={StoreLocation}  className="store-location-icon-feedback"/></Col>
                             <Col span={22}>
                                 <h6 className="store-name-info mb-0">
-                                    {foodDetail.storeName}
+                                    {this.state.data ? this.state.data.storeVM.storeName    : <div/>}
                                 </h6>
                             </Col>
                         </Row>
@@ -69,14 +84,14 @@ export default class DishFeedback extends Component {
                                 </h6>
                             </Col>
                         </Row>
-                        <h5 className="opensan-24-bold">{foodDetail.foodCourtVM.fcName}</h5>
-                        <h6 className="food-court-address">{foodDetail.foodCourtVM.fcLocation}</h6>
+                        <h5 className="opensan-24-bold">{this.state.data ? this.state.data.foodCourtVM.fcName: <div/>}</h5>
+                        <h6 className="food-court-address">{this.state.data ? this.state.data.foodCourtVM.fcLocation: <div/>}</h6>
                     </div>
                 </Col>        
                 <Col span={16} className="feedback-container">
                     
                     <Row className="w-100 h-100">
-                        {!feedbackVMS.length > 0 ? <div className="w-100">
+                        {this.state.data ? !feedbackVMS.length > 0 ? <div className="w-100">
                             <Row className="text-center">
                                 <img src={NoFeedbackImg} className="no-feedback-img"/>
                             </Row>
@@ -91,7 +106,7 @@ export default class DishFeedback extends Component {
                                 <h6>Đánh giá ({this.props.foodDetail.feedbackVMS ? <span>{this.props.foodDetail.feedbackVMS.length}</span> : <span>0</span>})</h6>
                             </Row>
                            {feedbackVMS.map((feedback, index) => 
-                                <Row className="feedback-wrapper" type="flex" justify="center" align="top">
+                                <Row className="feedback-wrapper" type="flex" justify="center" align="top" key={index}>
                                     <Col className="icon-wrapper" span={2}><Icon component={CommentIcon} className="comment-icon"/></Col>
                                     <Col className="feedback-content" span={22}><Rating               
                                         emptySymbol="fa fa-star-o fa-2x"
@@ -102,7 +117,7 @@ export default class DishFeedback extends Component {
                                     <h6 className="py-1">{feedback.fbContent} </h6>
                                     </Col>
                             </Row>) }
-                        </div>}
+                        </div>: <div/>}
                     </Row>
                 </Col>        
             </Row>

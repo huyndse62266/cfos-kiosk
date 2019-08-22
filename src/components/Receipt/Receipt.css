@@ -2,9 +2,24 @@
     font-size: 8px;
     font-family: 'Open Sans', sans-serif;
     font-weight: 700;
-    color: #212121
 }
 
 .border-footer-bill{
     border-bottom: 1px dashed #212121;
+}
+
+.bill-detail{
+    font-size: 10px;
+    font-weight: 700;
+    font-family: 'Open Sans', sans-serif;
+    
+}
+
+.bill-container{
+    color: #212121;
+    font-display: unset
+}
+
+.order-number-bill{
+    font-size: 20px;
 }

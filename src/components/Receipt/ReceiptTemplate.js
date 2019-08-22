@@ -8,7 +8,7 @@ export default class ReceiptTemplate extends Component {
         var {items, totalPrice,originPrice, orderNumber} = this.props;
         var count = 0;
         return (
-            <div>
+            <div className="bill-container">
                 <Row className="text-center">
                     <span className="opensan-18-semibold">Press Meal</span>
                 </Row>
@@ -21,30 +21,24 @@ export default class ReceiptTemplate extends Component {
                     <h6>Phiếu thanh toán</h6>
                 </Row>
                 <Row>
-                <h6 className="px-4 py-2">Số thứ tự đơn hàng: {orderNumber}</h6>
+                <h6 className="px-4 py-2">Số thứ tự đơn hàng: <span className="order-number-bill">{orderNumber}</span> </h6>
                 </Row>
-                <Row className="px-3">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th><h6 style={{fontSize:'11px'}}>Tên</h6> </th>
-                                <th><h6 style={{fontSize:'11px'}}>Số lượng</h6> </th>
-                                <th><h6 style={{fontSize:'11px'}}>Đơn giá</h6> </th>
-                                <th><h6 style={{fontSize:'11px'}}>Thành tiền</h6> </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {items.length > 0 ? items.map((item,index) =>{
+                <Row className="px-3 py-4">
+                    <Row className="bill-detail">
+                        <Col span={12}>Tên món ăn</Col>
+                        <Col span={2}>SL</Col>
+                        <Col span={4}>Đơn giá</Col>
+                        <Col span={6}>Thành tiền</Col>
+                    </Row>
+                    {items.length > 0 ? items.map((item,index) =>{
                                 count += item.cartQuantity;
-                                return <tr key={index}>
-                                <td><h6 style={{fontSize:'11px'}}>{item.foodName}</h6></td>
-                                <td className="text-center"><h6 style={{fontSize:'11px'}}>{item.cartQuantity}</h6></td>
-                                <td><h6 style={{fontSize:'11px'}}>{item.price}</h6></td>
-                                <td><h6 style={{fontSize:'11px'}}>{item.totalPriceOrigin}</h6></td>
-                                </tr>
+                                return <Row key={index} className="bill-detail">
+                                    <Col span={12}><span>{item.foodName}</span></Col>
+                                    <Col span={2}>{item.cartQuantity}</Col>
+                                    <Col span={4} className="text-right">{item.price}</Col>
+                                    <Col span={6} className="text-right">{item.totalPriceOrigin}</Col>    
+                                </Row>
                             }):<tr></tr>}
-                        </tbody>
-                    </table>
                 </Row>
                 <Row type="flex" justify="end" className="py-4" className="border-footer-bill">
                     <Col span={16} style={{textAlign:'right'}}>
@@ -61,7 +55,7 @@ export default class ReceiptTemplate extends Component {
                     </Col>  
                 </Row>
                 <Row className="text-center">
-                    Chúc quý khách ngon miệng
+                    <p>Chúc quý khách ngon miệng</p>
                 </Row>
                 
           </div>
