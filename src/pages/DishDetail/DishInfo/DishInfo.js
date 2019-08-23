@@ -35,6 +35,10 @@ class DishInfo extends Component {
         this.changeResetDefaultStatus = this.changeResetDefaultStatus.bind(this);
     }
 
+    hideModal = () =>{
+        this.props.hideModal();
+    }
+
     handleFoodOption(option,quantity){
         let index = -1;
         index = this.state.optionList.findIndex(optionObject => optionObject.foId === option.foId);
@@ -160,12 +164,14 @@ class DishInfo extends Component {
     addtoCartRequest = (food,quantity,optionList, priceSize,choosePriceSize) => {
         if(quantity > 0){
             this.props.addtoCart(food,quantity,optionList,priceSize,choosePriceSize);
+            this.hideModal()
         }else{
             message.error('Vui lòng chọn số lượng');
         }
     }
     updateItemCartRequest = (id,cart,optionList,priceSize, choosePriceSize) => {
         this.props.updateCart(id,cart,optionList,priceSize, choosePriceSize);
+        this.hideModal()
     }
     ToggleClick = () => {
         this.setState({ show: !this.state.show });

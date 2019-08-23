@@ -10,11 +10,11 @@ export default class ReceiptTemplate extends Component {
         return (
             <div className="bill-container">
                 <Row className="text-center">
-                    <span className="opensan-18-semibold">Press Meal</span>
+                    <span className="opensan-18-semibold">AEON CITIMART</span>
                 </Row>
                 <Row className="px-2">
                     <span className="bill-address">
-                        330 Trần Hưng Đạo, Phường Nguyễn Cư Trinh, Quận 1, Tp. HCM.
+                        672 Quang Trung, P. 11, Q. Gò Vấp, Ho Chi Minh City, Vietnam
                     </span>
                 </Row>
                 <Row className="text-center py-2">

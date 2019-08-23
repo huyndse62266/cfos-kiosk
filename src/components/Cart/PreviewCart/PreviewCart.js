@@ -1,11 +1,11 @@
 import React, { Component }  from 'react'
-import { Row,Col } from 'antd';
+import { Row,Col,Icon } from 'antd';
 import { connect } from 'react-redux'
 import ScrollArea from 'react-scrollbar';
 import NumberFormat from 'react-number-format';
 import { Link} from "react-router-dom";
 import CartItemSimple from './CartItemSimple'
-
+import {ReactComponent as PriceCartWhite } from '../../../icons/PriceCartWhite.svg'
 import './PreviewCart.css'
 
 class PreviewCart extends Component {
@@ -57,10 +57,13 @@ class PreviewCart extends Component {
                     </Row>
                 </ScrollArea>
                 <Row className="py-4">
-                    <Col span={18} offset={3}>
+                    <Col span={20} offset={2}>
                         <Link to="/payment">
                             <button type="button"  className="btn purchase-button-1">
-                                Thanh toán
+                                <Row type="flex" justify="space-around" align="middle">
+                                    <Col span={4} offset={2} className="text-right"><Icon component={PriceCartWhite} className="price-cart-view-basket"/></Col>
+                                    <Col span={16} className="text-left px-2">THANH TOÁN</Col>
+                                </Row>
                             </button>
                         </Link>
                     </Col>   

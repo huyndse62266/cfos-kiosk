@@ -29,6 +29,10 @@ export default class DishDetailTab extends Component {
             })
         })
     }
+
+    hideModalTab = () =>{
+        this.props.hideModalTab();
+    }
     render() {
         var {selected} = this.props;
         return (
@@ -38,7 +42,7 @@ export default class DishDetailTab extends Component {
                     <Col span={1}><Icon component={Dishicon} className="icon-tab"/></Col>
                     <Col span={9}>Chi tiết món ăn </Col>
                 </Row>} key="1" size="large">
-                    <DishInfo foodDetail={this.state.food} foodCart={this.props.foodCart?this.props.foodCart:this.props.food} cartQuantity={this.props.cartQuantity}/>
+                    <DishInfo foodDetail={this.state.food} foodCart={this.props.foodCart?this.props.foodCart:this.props.food} cartQuantity={this.props.cartQuantity} hideModal={this.hideModalTab}/>
                 </TabPane>
                 <TabPane tab={<Row type="flex" justify="space-around" align="middle" className="tab-button text-center">
                     <Col span={1}><Icon component={Commenticon} className="icon-tab"/></Col>

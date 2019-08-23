@@ -103,8 +103,6 @@ img{
     font-family: 'Open Sans', sans-serif;
     font-weight: 500;
     word-wrap: break-word;
-    height: 62px;
-  
     max-width: 98%;
     overflow: hidden;
     text-overflow: ellipsis;

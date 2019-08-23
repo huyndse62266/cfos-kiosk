@@ -28,6 +28,12 @@ class ImageButton extends Component {
         });
     };
 
+    hideModalInPayment = ()=>{
+        this.setState({
+            visible: false
+        })
+    }
+
     
 
     render() {
@@ -67,7 +73,7 @@ class ImageButton extends Component {
                     className="view-info-modal"
                     >
                         
-                    <DishDetail food={food} foodCart={item} cartQuantity={item!==undefined?item.cartQuantity:0} selected = {'1'} type={'add'}/>
+                    <DishDetail food={food} foodCart={item} cartQuantity={item!==undefined?item.cartQuantity:0} selected = {'1'} type={'add'} hideModalTab={this.hideModalInPayment}/>
                 </Modal>
                 
             </div>

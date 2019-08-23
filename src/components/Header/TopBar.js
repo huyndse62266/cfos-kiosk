@@ -91,7 +91,7 @@ class TopBar extends Component {
                                 <Link to="/menu/drink" className="menu-item-wrapper">        
                                     <Row className="menu-title" type="flex" justify="center">
                                         <Col span={4}><Icon component={DrinkIcon} className="menu-icon"/></Col>    
-                                        <Col span={12} >Đồ uống</Col>    
+                                        <Col span={12} >Giải khát</Col>    
                                     </Row>  
                                 </Link>                     
                         </Menu.Item>
