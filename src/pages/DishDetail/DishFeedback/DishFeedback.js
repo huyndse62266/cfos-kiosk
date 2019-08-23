@@ -41,10 +41,7 @@ export default class DishFeedback extends Component {
     render() {
         var {foodDetail} = this.props;    
         var {feedbackVMS} = foodDetail;
-        // if(this.props.foodDetail.foodCourtVM){
-        //     console.log(this.props.foodDetail.foodCourtVM.fcName)
-        // }
-        console.log(this.state.data)
+
         
         return (
             <Row type="flex" justify="start" className="h-100">

@@ -48,7 +48,6 @@ export default class MoreOption extends Component {
         
     }
     render() {
-        console.log(this.props.isResetDefault)
         var {foodOption} = this.props
         if(this.state.ResetDefault === true){
             this.state.clicks = 0

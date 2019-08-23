@@ -31,7 +31,7 @@ class DishInfo extends Component {
           isResetDefault: false,      
         };
         this.handleFoodOption = this.handleFoodOption.bind(this);
-        this.handleResetDefaut = this.handleResetDefaut.bind(this);
+        this.handleResetDefault = this.handleResetDefault.bind(this);
         this.changeResetDefaultStatus = this.changeResetDefaultStatus.bind(this);
     }
 
@@ -143,7 +143,6 @@ class DishInfo extends Component {
 
     }
     DecreaseItem = () => {
-        console.log(this.state.optionList)
         if(this.state.clicks > 0){
             let optionPrice = 0;
             if(this.state.optionList){
@@ -182,7 +181,7 @@ class DishInfo extends Component {
         index = this.state.optionList.findIndex(optionObject => optionObject.foodOptionParent === option.foodOptionParent);
         if(index !== -1){
             var data = [...this.state.optionList];
-            data.pop(data[index]);
+            data.splice(index,1);
             data.push(option)
             this.setState({
                 optionList: data,
@@ -247,7 +246,7 @@ class DishInfo extends Component {
         })
     }
 
-    handleResetDefaut(foodDetail){
+    handleResetDefault(foodDetail){
         this.setState({
             totalPrice: 0,
             clicks: 0,
@@ -259,7 +258,7 @@ class DishInfo extends Component {
                     if(optionVMS.count === 0){
                         optionVMS.quantity = 0;
                     }else if(optionVMS.selectMore === false && optionVMS.count === false){
-                        document.getElementById(optionVMS.foId).checked = false;
+                        // document.getElementById(optionVMS.foId).checked = false;
                     }
                         
                 })
@@ -278,32 +277,36 @@ class DishInfo extends Component {
     }
     
     componentWillMount(){
-        
-        if(this.props.cartQuantity !== 0){
-            var {foodCart} = this.props
-            if(foodCart.optionList){
-                let totalOption  = 0;
-                foodCart.optionList.map(option => {
-                    totalOption += option.optionPrice * option.quantity;
-                })
-                this.setState({
-                    clicks: this.props.cartQuantity,
-                    priceSize: foodCart.priceSize,
-                    choosePriceSize: foodCart.choosePriceSize,
-                    optionList: foodCart.optionList,
-                    totalPrice:(foodCart.cartQuantity * (foodCart.price*((100-foodCart.promotion)/100) + totalOption + foodCart.priceSize)) 
-                })
+        console.log(this.props.cartQuantity)
+        if(this.props.cartQuantity !== undefined){
+            if(this.props.cartQuantity !== 0){
+                var {foodCart} = this.props
+                if(foodCart.optionList){
+                    let totalOption  = 0;
+                    foodCart.optionList.map(option => {
+                        totalOption += option.optionPrice * option.quantity;
+                    })
+                    this.setState({
+                        clicks: this.props.cartQuantity,
+                        priceSize: foodCart.priceSize,
+                        choosePriceSize: foodCart.choosePriceSize,
+                        optionList: foodCart.optionList,
+                        totalPrice:(foodCart.cartQuantity * (foodCart.price*((100-foodCart.promotion)/100) + totalOption + foodCart.priceSize)) 
+                    })
+                }else{
+                    this.setState({
+                        clicks: this.props.cartQuantity,
+                        totalPrice: (foodCart.cartQuantity * foodCart.price)*((100-foodCart.promotion)/100)
+                    })
+                }
             }else{
+       
                 this.setState({
-                    clicks: this.props.cartQuantity,
-                    totalPrice: (foodCart.cartQuantity * foodCart.price)*((100-foodCart.promotion)/100)
+                    clicks: 0
                 })
             }
-        }else{
-            this.setState({
-                clicks: 0
-            })
         }
+        
 
     }
 
@@ -329,16 +332,16 @@ class DishInfo extends Component {
         
     }
     componentDidUpdate(){
-        if(this.props.foodCart.optionList){
-            this.props.foodCart.optionList.map(optionChoosen => 
-               {
-                   if(optionChoosen.count === false && optionChoosen.selectMore === false){
-                        document.getElementById(optionChoosen.foId).click();
-                   }
-               }
+        // if(this.props.foodCart.optionList){
+        //     this.props.foodCart.optionList.map(optionChoosen => 
+        //        {
+        //            if(optionChoosen.count === false && optionChoosen.selectMore === false){
+        //                 document.getElementById(optionChoosen.foId).click();
+        //            }
+        //        }
             
-            )
-        }
+        //     )
+        // }
     }
 
 
@@ -533,7 +536,7 @@ class DishInfo extends Component {
                                     {foodOptions?<div>{foodOptions.map((foodOption, index) =>
                                     this.renderOption(foodOption,index)
                                     )}{foodOptions.length > 0 ? <Row className="py-3 px-4 float-right">
-                                    <button type="btn" className="btn restore-btn" onClick={() => this.handleResetDefaut(this.props.foodDetail)}>
+                                    <button type="btn" className="btn restore-btn" onClick={() => this.handleResetDefault(this.props.foodDetail)}>
                                         <Row type="flex" justify="space-around" align="middle">
                                             <Col span={4}><Icon component={ResetIcon} className="reset-icon"/> </Col>
                                             <Col span={19} className="opensan-16-semibold pl-1 pr-4">Khôi phục mặc định</Col>

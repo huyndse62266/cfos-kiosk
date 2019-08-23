@@ -45,7 +45,6 @@ class MembershipPayment extends Component {
             }).catch(error => {
                 
                 if(error.response.status === 400){
-                    console.log('dasddsadasd')
                     message.error("Thẻ của bạn không thể sử dụng")
                 }
                 if(error.response.status === 404){

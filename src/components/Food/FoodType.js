@@ -61,6 +61,7 @@ class FoodType extends Component {
             <Row type="flex" justify="space-around" align="middle">
                 <Col span={3}className="text-center h-100 bg-white" style={{margin:'auto', textAlign: 'center'}}>
                     <div>
+                        <img src={category.image} className="image-category" alt="Not Found"/>
                         <h4 className="opensan-28-extrabold">{category.categoryName}</h4>
                         {foods ? foods.length > 4 ? <button type="button" className="btn opensan-16-semibold bg-light" onClick={this.checkIsExpand}>{this.state.isExpand === true ? <div>Thu gọn <FontAwesomeIcon icon={faAngleUp} /></div> : <div>Xem thêm <FontAwesomeIcon icon={faAngleDown} /></div> } </button>:<div/> : <div/>}
                     </div>
