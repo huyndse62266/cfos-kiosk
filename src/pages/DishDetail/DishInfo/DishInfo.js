@@ -206,14 +206,14 @@ class DishInfo extends Component {
                 this.setState({
                     optionList: data,
                     choosePriceSize: option.optionPrice,
-                    priceSize: priceSize,
+                    priceSize: option.optionPrice,
                     totalPrice: this.state.totalPrice + priceSize*this.state.clicks
                 })
             }else{
                 this.setState({
                     optionList: data,
                     choosePriceSize: option.optionPrice,
-                    priceSize: priceSize
+                    priceSize: option.optionPrice
                 })
             }
             
@@ -224,14 +224,14 @@ class DishInfo extends Component {
                 this.setState({
                     optionList: newOptionList,
                     choosePriceSize: option.optionPrice,
-                    priceSize: priceSize,
+                    priceSize: option.optionPrice,
                     totalPrice: this.state.totalPrice + priceSize*this.state.clicks 
                 })
             }else{
                 this.setState({
                     optionList: newOptionList,
                     choosePriceSize: option.optionPrice,
-                    priceSize: priceSize,
+                    priceSize: option.optionPrice,
                 })
             }
             
@@ -277,7 +277,6 @@ class DishInfo extends Component {
     }
     
     componentWillMount(){
-        console.log(this.props.cartQuantity)
         if(this.props.cartQuantity !== undefined){
             if(this.props.cartQuantity !== 0){
                 var {foodCart} = this.props
@@ -320,9 +319,10 @@ class DishInfo extends Component {
             foodDetail.foodOptions.map(foodOption => {
                 foodOption.foodOptionVMS.map(foodOptionVMSDetail =>
                     {
-                        if(foodOptionVMSDetail.foName === "Vừa"){
+                        if(foodOptionVMSDetail.foName === "Nhỏ" ||foodOptionVMSDetail.foName === "S" ){
                             this.setState({
-                                choosePriceSize: foodOptionVMSDetail.optionPrice
+                                choosePriceSize: foodOptionVMSDetail.optionPrice,
+                                priceSize: 0
                             })
                         }    
                     }

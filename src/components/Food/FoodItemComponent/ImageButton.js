@@ -10,7 +10,6 @@ class ImageButton extends Component {
     };
 
     showModal = (id) => {
-        console.log(id)
         this.setState({
             visible: true,
         });

@@ -15,7 +15,6 @@ class FoodItem extends Component {
     state = { visible: false };
 
     showModal = (id) => {
-        console.log(id)
         this.setState({
             visible: true,
         });

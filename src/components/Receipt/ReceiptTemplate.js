@@ -21,14 +21,14 @@ export default class ReceiptTemplate extends Component {
                     <h6>Phiếu thanh toán</h6>
                 </Row>
                 <Row>
-                <h6 className="px-4 py-2">Số thứ tự đơn hàng: <span className="order-number-bill">{orderNumber}</span> </h6>
+                <h6 className="px-4 py-2">Số đơn hàng: <span className="order-number-bill">{orderNumber}</span> </h6>
                 </Row>
                 <Row className="px-3 py-4">
                     <Row className="bill-detail">
                         <Col span={12}>Tên món ăn</Col>
                         <Col span={2}>SL</Col>
                         <Col span={4}>Đơn giá</Col>
-                        <Col span={6}>Thành tiền</Col>
+                        <Col span={6} className="text-right">Thành tiền</Col>
                     </Row>
                     {items.length > 0 ? items.map((item,index) =>{
                                 count += item.cartQuantity;

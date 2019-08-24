@@ -48,7 +48,6 @@ const cart = (state = initState,action) => {
             addedItem.cartQuantity = quantity;
             addedItem.priceSize = action.priceSize;
             addedItem.choosePriceSize = action.choosePriceSize;
-            
             if(action.optionList){
                 action.optionList.map(option => {
                     if(option.count === true){
@@ -185,8 +184,8 @@ const cart = (state = initState,action) => {
             }else{
                 let totalOption  = 0;
                 let priceSize =0;
-                if(addedItem.priceSize != undefined){
-                    priceSize = addedItem.priceSize
+                if(action.priceSize != undefined){
+                    priceSize = action.priceSize
                 }
                 if(action.optionList){
                     action.optionList.map(option => {
@@ -198,13 +197,13 @@ const cart = (state = initState,action) => {
             
                 let newTotal = 0
                 let newOrigin = 0
-    
-                let addPriceSize = action.priceSize+priceSize;
-                let addPrice = (addedItem.price * ((100-addedItem.promotion)/100)  + totalOption + addPriceSize)* quantity - addedItem.totalPrice 
-                let addPriceOrigin = (addedItem.price  + totalOption + addPriceSize) * quantity - addedItem.totalPriceOrigin 
+                let addPriceSize = 0;
+
+                let addPrice = (addedItem.price * ((100-addedItem.promotion)/100)  + totalOption + priceSize)* quantity - addedItem.totalPrice 
+                let addPriceOrigin = (addedItem.price  + totalOption + priceSize) * quantity - addedItem.totalPriceOrigin 
                 console.log(addPriceSize)
-                console.log(addPrice)
-                console.log(addPriceOrigin)
+                // console.log(addPrice)
+                // console.log(addPriceOrigin)
                 addedItem.cartQuantity = quantity;
                 addedItem.optionList = action.optionList;
                 addedItem.choosePriceSize = action.choosePriceSize;
