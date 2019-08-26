@@ -161,12 +161,20 @@ class DishInfo extends Component {
         };
     }
     addtoCartRequest = (food,quantity,optionList, priceSize,choosePriceSize) => {
+        console.log(this.state.optionList)
         if(quantity > 0){
             this.props.addtoCart(food,quantity,optionList,priceSize,choosePriceSize);
-            this.hideModal()
+            // let data = this.state.optionList;
+            // data.splice(0, data.length);
+            // this.setState({
+            //     optionList:data
+            // })
+            this.hideModal();
+            
         }else{
             message.error('Vui lòng chọn số lượng');
         }
+        
     }
     updateItemCartRequest = (id,cart,optionList,priceSize, choosePriceSize) => {
         this.props.updateCart(id,cart,optionList,priceSize, choosePriceSize);
@@ -331,22 +339,22 @@ class DishInfo extends Component {
         }
         
     }
-    componentDidUpdate(){
-        // if(this.props.foodCart.optionList){
-        //     this.props.foodCart.optionList.map(optionChoosen => 
-        //        {
-        //            if(optionChoosen.count === false && optionChoosen.selectMore === false){
-        //                 document.getElementById(optionChoosen.foId).click();
-        //            }
-        //        }
+    // componentDidUpdate(){
+    //     if(this.props.foodCart.optionList){
+    //         this.props.foodCart.optionList.map(optionChoosen => 
+    //            {
+    //                if(optionChoosen.count === false && optionChoosen.selectMore === false){
+    //                     document.getElementById(optionChoosen.foId).click();
+    //                }
+    //            }
             
-        //     )
-        // }
-    }
+    //         )
+    //     }
+    // }
 
 
 
-    rendeSize = (foodOption, index) =>{
+    rendeSize = (foodOption, index, foodId) =>{
         if(foodOption.foodOptionNameParent === 'Kích cỡ' || foodOption.foodOptionNameParent === 'Size'  ){
             return <div key={index}>
             <Row>
@@ -357,8 +365,8 @@ class DishInfo extends Component {
                     <section className="plan cf">
                         {foodOption.foodOptionVMS.map((foodOptionVMSDetail, index) => 
                         <Col span={8} key={index}>
-                            <input type="radio" name="radio1" id={foodOptionVMSDetail.foId} value={foodOptionVMSDetail.foId} onChange={ () => this.changeOptionPrice(foodOptionVMSDetail, foodOptionVMSDetail.optionPrice-this.state.choosePriceSize)} />
-                            <label className="check-box-label size-label" htmlFor={foodOptionVMSDetail.foId}>
+                            <input type="radio" name={`rd${foodId}`} id={`rd${foodId}-opt${foodOptionVMSDetail.foId}`} value={foodOptionVMSDetail.foId} onChange={ () => this.changeOptionPrice(foodOptionVMSDetail, foodOptionVMSDetail.optionPrice-this.state.choosePriceSize)} />
+                            <label className="check-box-label size-label" htmlFor={`rd${foodId}-opt${foodOptionVMSDetail.foId}`}>
                                 {this.renderLabel(foodOptionVMSDetail)}
                             </label>
                         </Col>)
@@ -379,7 +387,7 @@ class DishInfo extends Component {
         }
     }
 
-    renderOption = (foodOption, index) =>{
+    renderOption = (foodOption, index, foodId) =>{
         if(foodOption.count === true){
             return <div key={index}>
             <Row>
@@ -403,7 +411,8 @@ class DishInfo extends Component {
                     <section className ="plan cf">
                         {foodOption.foodOptionVMS.map((foodOptionVMSDetail, index) => 
                         <Col span={8} key={index}>
-                            <input type="radio" name="radio1" id={foodOptionVMSDetail.foId} value={foodOptionVMSDetail.foId} onChange={ () => this.stickOption(foodOptionVMSDetail)} /><label className="radio-button-label" htmlFor={foodOptionVMSDetail.foId}>{foodOptionVMSDetail.foName}</label>
+                            <input type="radio" name={`rd${foodId}`} id={`rd${foodId}-opt${foodOptionVMSDetail.foId}`} value={foodOptionVMSDetail.foId} onChange={ () => this.stickOption(foodOptionVMSDetail)} />
+                            <label className="radio-button-label" htmlFor={`rd${foodId}-opt${foodOptionVMSDetail.foId}`}>{foodOptionVMSDetail.foName}</label>
                         </Col>)
                         }
                     </section>
@@ -503,24 +512,24 @@ class DishInfo extends Component {
                                    :<span/>} 
                                {/* chọn số lượng */}
                                {foodOptions?<div>{foodOptions.map((foodOption, index) =>
-                                    this.rendeSize(foodOption,index)
+                                    this.rendeSize(foodOption,index, foodDetail.foodId)
                                     )} </div>:<div/>}
                                 <Row className="pt-2 mb-2">
                                     <h6 className="opensan-22-bold">Số lượng</h6>
                                 </Row>
                                 <Row>
-                                    <Col span={8}>
+                                    <Col span={9}>
                                         <Row className="quantity-button-wrapper">
                                             <Col span={8}>                                
-                                                <button type="button" className="btn bg-white" onClick={this.DecreaseItem} ><FontAwesomeIcon icon={faMinus} /></button> 
+                                                <button type="button" className="btn bg-white dec-inc-dish-info" onClick={this.DecreaseItem} ><FontAwesomeIcon icon={faMinus} /></button> 
                                             </Col>
                                             <Col span={8}>
                                                 <div className="display-quantity-div">
-                                                    { this.state.show ? <h2 style={{fontSize:'1rem'}}>{this.state.clicks }</h2> : '' }
+                                                    { this.state.show ? <span>{this.state.clicks }</span> : '' }
                                                 </div>
                                             </Col>
                                             <Col span={8}>
-                                                <button type="button" className="btn bg-white" onClick={this.IncrementItem} ><FontAwesomeIcon icon={faPlus} /></button>
+                                                <button type="button" className="btn bg-white dec-inc-dish-info" onClick={this.IncrementItem} ><FontAwesomeIcon icon={faPlus} /></button>
                                             </Col>
                                         </Row>
                                     </Col>
@@ -534,7 +543,7 @@ class DishInfo extends Component {
                                 contentClassName="content"
                                 horizontal={false} style={{height: '610px'}}>
                                     {foodOptions?<div>{foodOptions.map((foodOption, index) =>
-                                    this.renderOption(foodOption,index)
+                                    this.renderOption(foodOption,index, foodDetail.foodId)
                                     )}{foodOptions.length > 0 ? <Row className="py-3 px-4 float-right">
                                     <button type="btn" className="btn restore-btn" onClick={() => this.handleResetDefault(this.props.foodDetail)}>
                                         <Row type="flex" justify="space-around" align="middle">
