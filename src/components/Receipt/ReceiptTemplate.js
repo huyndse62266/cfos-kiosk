@@ -17,6 +17,7 @@ export default class ReceiptTemplate extends Component {
     render() {
         var {items, totalPrice,originPrice, orderNumber} = this.props;
         var count = 0;
+        console.log(orderNumber)
         return (
             <div className="bill-container">
                 <Row className="text-center">

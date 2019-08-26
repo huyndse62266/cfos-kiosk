@@ -22,14 +22,13 @@ class PrintProcess extends Component {
     }
 
     componentDidMount(){
-        document.getElementById("button-printer").click();
+        setTimeout(function(){
+            document.getElementById("button-printer").click();
+        }.bind(this),2000)
+        // document.getElementById("button-printer").click();
     }
 
     restoreCart = ()=>{
-
-        // this.setState({
-        //     isDone: true
-        // })
         setTimeout(
             function() {
                 this.setState({
@@ -37,7 +36,7 @@ class PrintProcess extends Component {
                 });
             }
             .bind(this),
-            6000
+            3000
         );
         this.props.restoreMyCart()
     }
@@ -68,16 +67,7 @@ class PrintProcess extends Component {
                         Vui lòng lấy <span className="hightlight-red">hóa đơn</span> và <span className="hightlight-red">thanh toán</span> tại quầy thu ngân để hoàn thành đặt món.
                     </Col>
                 </Row>
-                {/* <Row type="flex" justify="center" className="back-menu-print-wrapper">
-                    <Col span={4}>
-                        <button type="button" className="btn back-print-btn">
-                            <Row>
-                                <Col span={4} className="back-icon-print"><Icon component={LongArrowLeft}/></Col>
-                                <Col span={20} className="opensan-32-bold">Về trang chủ</Col>
-                            </Row>
-                        </button>
-                    </Col>
-                </Row> */}
+
             </div>
         )
     }
