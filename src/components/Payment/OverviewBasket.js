@@ -16,7 +16,6 @@ class OverviewBasket extends Component {
         current: 'popular',
       };
     
-   
     handleClick = e => {
         this.setState({
             current: e.key,

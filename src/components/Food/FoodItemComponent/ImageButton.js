@@ -58,7 +58,7 @@ class ImageButton extends Component {
                     
                 </Row> */}
                 <button type="button"  onClick={()=>{this.showModal(food.foodId)}} className="btn p-0" style={{height: '175px',width:'100%',borderRadius: '8px'}}>
-                    <img src={food.foodImage} alt="Not Found" style={{borderRadius: '8px'}}/>
+                    <img src={food.foodImage} alt="Image Not Found" style={{borderRadius: '8px'}}/>
                 </button>
 
                 <Modal

@@ -32,7 +32,7 @@ export default class Cart extends Component {
                             </div>
                         </Row>
                         <Row>
-                            <img src={food.foodImage} className="img-style" alt="Not Found"/>
+                            <img src={food.foodImage} className="img-style" alt="Image Not Found"/>
                         </Row>  
                     </Row>
                 </Col>

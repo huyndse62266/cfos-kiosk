@@ -1,10 +1,7 @@
 import React, { Component } from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {  faUtensils, faStar, faPercentage, faConciergeBell,faMugHot, faThumbsUp } from '@fortawesome/free-solid-svg-icons'
 import { Menu,Row,Col,Button,Modal,Icon } from 'antd';
 import { connect } from 'react-redux'
 import { Link } from "react-router-dom";
-
 import ViewBasket from '../../pages/Basket/ViewBasket'
 import {ReactComponent as ExpandBasketSVG } from '../../icons/expandBasket.svg'
 import {ReactComponent as LongArrowLeft } from '../../icons/LongArrowLeft.svg'

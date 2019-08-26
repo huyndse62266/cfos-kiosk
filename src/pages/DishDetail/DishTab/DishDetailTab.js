@@ -1,8 +1,5 @@
 import React, { Component } from 'react'
 import { Tabs,Row,Col, Icon} from 'antd';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUtensils } from '@fortawesome/free-solid-svg-icons'
-import { faCommentDots } from '@fortawesome/free-regular-svg-icons'
 import './DishDetailTab.css'
 import apiCaller from '../../../utils/ApiCaller'
 import DishInfo from '../DishInfo/DishInfo'

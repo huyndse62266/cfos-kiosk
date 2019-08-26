@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import { Row,Col, message,Button,Icon } from 'antd';
+import { Row,Col, message,Icon } from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTag, faMinus, faPlus,faMapMarkerAlt, faCartPlus,faSyncAlt } from '@fortawesome/free-solid-svg-icons'
+import { faMinus, faPlus, faCartPlus } from '@fortawesome/free-solid-svg-icons'
 import ScrollArea from 'react-scrollbar';
 import Rating from 'react-rating'
 import NumberFormat from 'react-number-format';
@@ -161,7 +161,6 @@ class DishInfo extends Component {
         };
     }
     addtoCartRequest = (food,quantity,optionList, priceSize,choosePriceSize) => {
-        console.log(this.state.optionList)
         if(quantity > 0){
             this.props.addtoCart(food,quantity,optionList,priceSize,choosePriceSize);
             // let data = this.state.optionList;
@@ -339,18 +338,20 @@ class DishInfo extends Component {
         }
         
     }
-    // componentDidUpdate(){
-    //     if(this.props.foodCart.optionList){
-    //         this.props.foodCart.optionList.map(optionChoosen => 
-    //            {
-    //                if(optionChoosen.count === false && optionChoosen.selectMore === false){
-    //                     document.getElementById(optionChoosen.foId).click();
-    //                }
-    //            }
+    componentDidUpdate(){
+
+        if(this.props.foodCart.optionList){
+            this.props.foodCart.optionList.map(optionChoosen => 
+               {
+                   if(optionChoosen.count === false && optionChoosen.selectMore === false){
+                       console.log(`rd${this.props.foodCart.foodId}-opt${optionChoosen.foId}`)
+                        document.getElementById(`rd${this.props.foodCart.foodId}-opt${optionChoosen.foId}`).click();
+                   }
+               }
             
-    //         )
-    //     }
-    // }
+            )
+        }
+    }
 
 
 

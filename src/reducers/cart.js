@@ -201,9 +201,6 @@ const cart = (state = initState,action) => {
 
                 let addPrice = (addedItem.price * ((100-addedItem.promotion)/100)  + totalOption + priceSize)* quantity - addedItem.totalPrice 
                 let addPriceOrigin = (addedItem.price  + totalOption + priceSize) * quantity - addedItem.totalPriceOrigin 
-                console.log(addPriceSize)
-                // console.log(addPrice)
-                // console.log(addPriceOrigin)
                 addedItem.cartQuantity = quantity;
                 addedItem.optionList = action.optionList;
                 addedItem.choosePriceSize = action.choosePriceSize;

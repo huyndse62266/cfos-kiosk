@@ -74,7 +74,7 @@ export default class DishStatus extends Component {
                         -{orderDetail.foodVM.promotion}%
                     </span>:<span></span>}
                     <div className="w-100 h-100">
-                        <img src={orderDetail.foodVM.imageVMS[0].image} className="image-order-detail" alt="Not Found"/>
+                        <img src={orderDetail.foodVM.imageVMS[0].image} className="image-order-detail" alt="Image Not Found"/>
                     </div>
                     
                 </Col>

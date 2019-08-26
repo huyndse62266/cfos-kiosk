@@ -3,6 +3,7 @@ import { Row, Col, Modal,Icon  } from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons'
 import { connect } from 'react-redux'
+import {findCart} from '../../../action/cart'
 import NumberFormat from 'react-number-format';
 import { addQuantity,subQuantity, removeCart } from '../../../action/cart';
 import DishDetail from '../../../pages/DishDetail/DishTab/DishDetailTab'
@@ -25,6 +26,12 @@ class BasketItem extends Component {
         visible: true,
         });
     };
+
+    hideModalInPayment = ()=>{
+        this.setState({
+            visible: false
+        })
+    }
 
     handleOk = e => {
         this.setState({
@@ -81,7 +88,7 @@ class BasketItem extends Component {
         return OptionString.slice(0,OptionString.length-2)
     }
     render() {
-        var {food,cartQuantity} = this.props;
+        var {food,cartQuantity, item} = this.props;
         return (
             <div className="basket-item-wrapper">
                 
@@ -159,7 +166,7 @@ class BasketItem extends Component {
                     centered
                     className="view-info-modal"
                     >
-                    <DishDetail food={food} cartQuantity={cartQuantity} selected = {'1'} type={'update'}/>
+                    <DishDetail food={food} foodCart={item} cartQuantity={item!==undefined?item.cartQuantity:0}  selected = {'1'} type={'update'} hideModalTab={this.hideModalInPayment}/>
                 </Modal>
             </div>
 
@@ -167,6 +174,11 @@ class BasketItem extends Component {
     }
 }
 
+const mapStateToProps = (state)=>{
+    return{     
+        item: state.cart.findItem,
+    }
+}
 
 const mapDispatchToProps = (dispatch)=>{
     return{
@@ -178,8 +190,11 @@ const mapDispatchToProps = (dispatch)=>{
         },
         subQuantity:(id) =>{
             dispatch(subQuantity(id))
+        },
+        findCart: (id) => {
+            dispatch(findCart(id))
         }
         
     }
 }
-export default connect(null,mapDispatchToProps)(BasketItem)
+export default connect(mapStateToProps,mapDispatchToProps)(BasketItem)

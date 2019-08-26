@@ -51,7 +51,7 @@ class StoreMenu extends Component {
             return categories.map((category, index) => {
                 return (
                     <Row>
-                        <Col span={14} offset={5}>
+                        <Col span={14} offset={5} key={index}>
                             <Button className="store-category opensan-20-bold" onClick={()=>{this.findByCategory(category.categoryId)}}>{category.categoryName}</Button>
                         </Col>
                     </Row>
@@ -102,7 +102,7 @@ class StoreMenu extends Component {
                             {this.state.foodFilter.length > 0 ? foodFilter.map((food, index) => {
                                 if(index < 4){
                                     return (
-                                        <Col span={6} className="px-4">
+                                        <Col span={6} className="px-4" key={index}>
                                             <FoodItem key={index} food={food} index={index}/>
                                         </Col> 
                                     )
@@ -115,7 +115,7 @@ class StoreMenu extends Component {
                                 {this.state.isExpand ? foodFilter.map((food, index) => {
                                 if(index > 3)
                                     return (
-                                        <Col span={6} className="px-4">
+                                        <Col span={6} className="px-4" key={index}>
                                             <FoodItem key={index} food={food} index={index}/>
                                         </Col> 
                                     )

@@ -4,24 +4,34 @@ import NumberFormat from 'react-number-format';
 import './Receipt.css'
 export default class ReceiptTemplate extends Component {
 
+    addOptionPrice(optionList){
+        let price = 0;
+        optionList.map(option =>{
+            if(option.quantity !== undefined){
+                price += option.optionPrice * option.quantity
+            }
+        })
+        return  "+" + price +" đ tùy chọn món ăn"
+    }
+
     render() {
         var {items, totalPrice,originPrice, orderNumber} = this.props;
         var count = 0;
         return (
             <div className="bill-container">
                 <Row className="text-center">
-                    <span className="opensan-18-semibold">AEON CITIMART</span>
+                    <h1 className="opensan-18-semibold">AEON CITIMART</h1>
                 </Row>
                 <Row className="px-2">
-                    <span className="bill-address">
+                    <h1 className="bill-address">
                         672 Quang Trung, P. 11, Q. Gò Vấp, Ho Chi Minh City, Vietnam
-                    </span>
+                    </h1>
                 </Row>
                 <Row className="text-center py-2">
                     <h6>Phiếu thanh toán</h6>
                 </Row>
                 <Row>
-                <h6 className="px-4 py-2">Số đơn hàng: <span className="order-number-bill">{orderNumber}</span> </h6>
+                <h6 className="text-center py-2">Số đơn hàng: <span className="order-number-bill">{orderNumber}</span> </h6>
                 </Row>
                 <Row className="px-3 py-4">
                     <Row className="bill-detail">
@@ -33,9 +43,9 @@ export default class ReceiptTemplate extends Component {
                     {items.length > 0 ? items.map((item,index) =>{
                                 count += item.cartQuantity;
                                 return <Row key={index} className="bill-detail">
-                                    <Col span={12}><span>{item.foodName}</span></Col>
+                                    <Col span={12}><span>{item.foodName}{item.optionList !==  null ? <div><p className="add-option-des">{this.addOptionPrice(item.optionList)}</p></div>: <div/>}</span></Col>
                                     <Col span={2}>{item.cartQuantity}</Col>
-                                    <Col span={4} className="text-right">{item.price}</Col>
+                                    <Col span={4} className="text-right">{item.totalPriceOrigin/item.cartQuantity}</Col>
                                     <Col span={6} className="text-right">{item.totalPriceOrigin}</Col>    
                                 </Row>
                             }):<tr></tr>}
