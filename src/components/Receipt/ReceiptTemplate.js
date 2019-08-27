@@ -14,8 +14,72 @@ export default class ReceiptTemplate extends Component {
         return  "+" + price +" đ tùy chọn món ăn"
     }
 
+    sortStore(a, b){
+        let comparison = 0;
+        if (a.storeId > b.storeId) {
+          comparison = 1;
+        } else if (a.storeId < b.storeId) {
+          comparison = -1;
+        }
+        return comparison;
+    }
+
+    printItemBill(items){
+        var tmp = [];
+        for(var i = 0; i< items.length; i++){
+            if(i === 0){
+                tmp.push(<div>
+                    <Row>
+                        <p className="pb-0 pt-1">Nhà hàng: {items[i].storeName}</p>
+                    </Row>
+                    <Row className="bill-detail">
+                        <Col span={12}>Tên món ăn</Col>
+                        <Col span={2}>SL</Col>
+                        <Col span={4}>Đơn giá</Col>
+                        <Col span={6} className="text-right">Thành tiền</Col>
+                    </Row>
+                    <Row  className="bill-detail">
+                        <Col span={12}><span>{items[i].foodName}{items[i].optionList !==  null ? <div><p className="add-option-des">{this.addOptionPrice(items[i].optionList)}</p></div>: <div/>}</span></Col>
+                        <Col span={2}>{items[i].cartQuantity}</Col>
+                        <Col span={4} className="text-right">{items[i].totalPriceOrigin/items[i].cartQuantity}</Col>
+                        <Col span={6} className="text-right">{items[i].totalPriceOrigin}</Col>    
+                    </Row>
+                </div>)
+            }else{
+                if(items[i].storeId === items[i-1].storeId){
+                    tmp.push(<Row  className="bill-detail">
+                        <Col span={12}><span>{items[i].foodName}{items[i].optionList !==  null ? <div><p className="add-option-des">{this.addOptionPrice(items[i].optionList)}</p></div>: <div/>}</span></Col>
+                        <Col span={2}>{items[i].cartQuantity}</Col>
+                        <Col span={4} className="text-right">{items[i].totalPriceOrigin/items[i].cartQuantity}</Col>
+                        <Col span={6} className="text-right">{items[i].totalPriceOrigin}</Col>    
+                    </Row>)
+                }else{
+                    tmp.push(<div>
+                        <Row>
+                            <p className="pb-0 pt-1">Nhà hàng: {items[i].storeName}</p>
+                        </Row>
+                        <Row className="bill-detail">
+                            <Col span={12}>Tên món ăn</Col>
+                            <Col span={2}>SL</Col>
+                            <Col span={4}>Đơn giá</Col>
+                            <Col span={6} className="text-right">Thành tiền</Col>
+                        </Row>
+                        <Row className="bill-detail">
+                            <Col span={12}><span>{items[i].foodName}{items[i].optionList !==  null ? <div><p className="add-option-des">{this.addOptionPrice(items[i].optionList)}</p></div>: <div/>}</span></Col>
+                            <Col span={2}>{items[i].cartQuantity}</Col>
+                            <Col span={4} className="text-right">{items[i].totalPriceOrigin/items[i].cartQuantity}</Col>
+                            <Col span={6} className="text-right">{items[i].totalPriceOrigin}</Col>    
+                        </Row>
+                    </div>)
+                }
+            }
+        }
+        return tmp
+    }
+
     render() {
         var {items, totalPrice,originPrice, orderNumber} = this.props;
+        var newItems = items.sort(this.sortStore)
         var count = 0;
         console.log(orderNumber)
         return (
@@ -35,21 +99,11 @@ export default class ReceiptTemplate extends Component {
                 <h6 className="text-center py-2">Số đơn hàng: <span className="order-number-bill">{orderNumber}</span> </h6>
                 </Row>
                 <Row className="px-3 py-4">
-                    <Row className="bill-detail">
-                        <Col span={12}>Tên món ăn</Col>
-                        <Col span={2}>SL</Col>
-                        <Col span={4}>Đơn giá</Col>
-                        <Col span={6} className="text-right">Thành tiền</Col>
-                    </Row>
-                    {items.length > 0 ? items.map((item,index) =>{
+                    
+                    {newItems.length > 0 ? newItems.map((item) =>{
                                 count += item.cartQuantity;
-                                return <Row key={index} className="bill-detail">
-                                    <Col span={12}><span>{item.foodName}{item.optionList !==  null ? <div><p className="add-option-des">{this.addOptionPrice(item.optionList)}</p></div>: <div/>}</span></Col>
-                                    <Col span={2}>{item.cartQuantity}</Col>
-                                    <Col span={4} className="text-right">{item.totalPriceOrigin/item.cartQuantity}</Col>
-                                    <Col span={6} className="text-right">{item.totalPriceOrigin}</Col>    
-                                </Row>
                             }):<tr></tr>}
+                    {this.printItemBill(newItems)}        
                 </Row>
                 <Row type="flex" justify="end" className="py-4" className="border-footer-bill">
                     <Col span={16} style={{textAlign:'right'}}>

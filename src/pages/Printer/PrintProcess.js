@@ -24,7 +24,7 @@ class PrintProcess extends Component {
     componentDidMount(){
         setTimeout(function(){
             document.getElementById("button-printer").click();
-        }.bind(this),2000)
+        }.bind(this),1000)
         // document.getElementById("button-printer").click();
     }
 
