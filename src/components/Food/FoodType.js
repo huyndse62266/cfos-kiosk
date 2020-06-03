@@ -58,7 +58,7 @@ class FoodType extends Component {
 
             
            
-            {/* <Row type="flex" justify="space-around" align="middle">
+            <Row type="flex" justify="space-around" align="middle">
                 <Col span={3}className="text-center h-100 bg-white" style={{margin:'auto', textAlign: 'center'}}>
                     <div>
                         <img src={category.image} className="image-category" alt="Not Found"/>
@@ -93,11 +93,11 @@ class FoodType extends Component {
                     </span>
                     { categoryLength-1 !== index ? <hr style={{width: '95%'}}/>:<span/>}
                 </Col>
-            </Row> */}
+            </Row>
 
 
             
-            {!this.props.items.length > 0 ? 
+            {/* {!this.props.items.length > 0 ? 
             <Row type="flex" justify="start">
                 <Col className="category-wrapper">
                     <div>
@@ -140,7 +140,6 @@ class FoodType extends Component {
             <Row type="flex" justify="space-around" align="middle">
                 <Col span={3}className="text-center h-100 bg-white" style={{margin:'auto', textAlign: 'center'}}>
                     <div>
-                        <img src={category.image} className="image-category" alt="Not Found"/>
                         <h4 className="opensan-28-extrabold">{category.categoryName}</h4>
                         {foods ? foods.length > 4 ? <button type="button" className="btn opensan-16-semibold bg-light" onClick={this.checkIsExpand}>{this.state.isExpand === true ? <div>Thu gọn <FontAwesomeIcon icon={faAngleUp} /></div> : <div>Xem thêm <FontAwesomeIcon icon={faAngleDown} /></div> } </button>:<div/> : <div/>}
                     </div>
@@ -172,7 +171,7 @@ class FoodType extends Component {
                     </span>
                     { categoryLength-1 !== index ? <hr style={{width: '95%'}}/>:<span/>}
                 </Col>
-            </Row>}
+            </Row>} */}
             </div>
         )
     }

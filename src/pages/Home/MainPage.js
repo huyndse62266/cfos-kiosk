@@ -57,7 +57,7 @@ export default class MainPage extends Component {
               </div>
             </Row>
             <Row>
-              <Col span={12} className="text-right p-5">
+              <Col span={12} className="text-right">
   
                 <Link to="/check-order">
                   <button type="button" className="btn button-check">
@@ -68,7 +68,7 @@ export default class MainPage extends Component {
                   </button>
                 </Link>
               </Col>
-              <Col span={12} className="text-left p-5">
+              <Col span={12} className="text-left">
                 <Link to="/menu">
                   <button type="button" className="btn button-order" >
                     <Row type="flex" justify="space-around" align="middle">

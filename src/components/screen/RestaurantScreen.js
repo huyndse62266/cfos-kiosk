@@ -25,38 +25,38 @@ class RestaurantScreen extends Component {
     render() {
         return (
  
-            // <Row className="pt-5" type="flex" justify="start">
-            //     <div> 
-            //         <Col style={{width: '83%'}}>
-            //             {this.state.stores.map((store,index) =>{
-            //                  return (<StoreMenu key={index} storeInfo={store} index={index}/>)
-            //             })}
-            //         </Col>
-            //         <Col style={{width: '17%', position:'fixed', top: '6%', right: 0}}>
-            //             <PreviewCart />
-            //         </Col>
-            //     </div>
-            // </Row>
             <Row className="pt-5" type="flex" justify="start">
-            {this.props.items.length > 0 ?
-            <div> 
-                <Col style={{width: '83%'}}>
-                    {this.state.stores.map((store,index) =>{
-                         return (<StoreMenu key={index} storeInfo={store} index={index}/>)
-                    })}
-                </Col>
-                <Col style={{width: '17%', position:'fixed', top: '6%', right: 0}}>
-                    <PreviewCart />
-                </Col>
-            </div>:
-                <Col span={24}>
-                    {this.state.stores.map((store,index) =>{
-                        return (<StoreMenu key={index} storeInfo={store} index={index}/>)
-                    })}
-                </Col>
-            }
+                <div> 
+                    <Col style={{width: '83%'}}>
+                        {this.state.stores.map((store,index) =>{
+                             return (<StoreMenu key={index} storeInfo={store} index={index}/>)
+                        })}
+                    </Col>
+                    <Col style={{width: '17%', position:'fixed', top: '6%', right: 0}}>
+                        <PreviewCart />
+                    </Col>
+                </div>
+            </Row>
+        //     <Row className="pt-5" type="flex" justify="start">
+        //     {this.props.items.length > 0 ?
+        //     <div> 
+        //         <Col style={{width: '83%'}}>
+        //             {this.state.stores.map((store,index) =>{
+        //                  return (<StoreMenu key={index} storeInfo={store} index={index}/>)
+        //             })}
+        //         </Col>
+        //         <Col style={{width: '17%', position:'fixed', top: '6%', right: 0}}>
+        //             <PreviewCart />
+        //         </Col>
+        //     </div>:
+        //         <Col span={24}>
+        //             {this.state.stores.map((store,index) =>{
+        //                 return (<StoreMenu key={index} storeInfo={store} index={index}/>)
+        //             })}
+        //         </Col>
+        //     }
             
-        </Row>
+        // </Row>
         )
     }
 

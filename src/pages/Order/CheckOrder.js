@@ -8,7 +8,7 @@ import './Order.css'
 import apiCaller from '../../utils/ApiCaller';
 import DishStatus from '../../components/DishStatus/DishStatus'
 import {ReactComponent as Checkstatusicon } from '../../icons/Checkstatusicon.svg'
-import {ReactComponent as BillIcon } from '../../icons/BillIcon.svg'
+import {ReactComponent as BillIcon } from '../../icons/BillICon.svg'
 import {ReactComponent as LongArrowLeft } from '../../icons/LongArrowLeft.svg'
 import {ReactComponent as LongArrowRight } from '../../icons/LongArrowRight.svg'
 import {ReactComponent as FoodDrinkIcon } from '../../icons/FoodDrinkIcon.svg'
